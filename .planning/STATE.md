@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-05-27)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** Phase 3 — Capture the OpenHands Run (next)
+**Current focus:** Phase 4 — Write Worked-Example Chapter
 
 ## Current Position
 
-Phase: 3 of 5 (Capture the OpenHands Run) — In progress
-Plan: 2 of 3 complete (03-02 OpenHands run captured, attempt 2). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
-Status: In progress — 03-01 (prompt strings) done; 03-02 (execute the run) done (attempt 2: 5 JSONL logs, error-and-fix in task3-parser.jsonl, calc verified 14/20/5); next: 03-03 (curate JSONL logs).
-Last activity: 2026-05-28 — Completed 03-02-PLAN.md attempt 2: 5 JSONL logs (146 events, 67 TerminalActions); genuine FsYacc error-and-fix in task3 (4 build failures, self-corrected); calculator produces 2+3*4=14, (2+3)*4=20, 10-3-2=5.
+Phase: 3 of 5 (Capture the OpenHands Run) — COMPLETE (3/3). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
+Plan: 3 of 3 complete (03-03 verify + commit captured artifacts). Next: Phase 4 (write worked-example chapter).
+Status: Phase 3 complete — captured/ committed with 5 JSONL logs, transcript, final-source (4 files), test-output (14/20/5), CAPTURE-MANIFEST; RUN-01/02/03 all verified from real evidence.
+Last activity: 2026-05-28 — Completed 03-03-PLAN.md: programmatic JSONL verification; error-and-fix confirmed in task3-parser.jsonl events 10–30; captured artifacts committed; oh-workdir/ stays gitignored.
 
-Progress: [████████░░] 40% (8/20 plans) — Phases 1-2 done, Phase 3 plans 1-2 done
+Progress: [█████████░] 45% (9/20 plans) — Phases 1-3 done, Phase 4 next
 
 ## Performance Metrics
 
@@ -72,6 +72,9 @@ Recent decisions affecting current work:
 - [03-02-attempt2]: Genuine error-and-fix captured in task3-parser.jsonl: 4 build failures (%start missing, %start <int> syntax invalid, same, LexBuffer.FromText non-existent) → self-corrected to build success
 - [03-02-attempt2]: Branch A taken — error-and-fix in task3, not task5; task5 passed all 3 cases cleanly on first build; task6-fix.txt not needed
 - [03-02-attempt2]: Agent wrote %left PLUS MINUS / %left STAR SLASH from the start — no precedence bug surfaced; associativity (10-3-2=5) was correct all along
+- [03-03]: OpenHands JSONL event structure is nested dicts: ev['action']['kind']=='TerminalAction', ev['observation']['kind']=='TerminalObservation', ev['observation']['content'][0]['text'] — plan assumed flat key-value pairs (adapted during execution)
+- [03-03]: Error-and-fix cycle confirmed programmatically at task3-parser.jsonl events 10–30 (4 build failures: FSY000, parse error x2, FS0039 LexBuffer.FromText) → autonomous self-correction to Build succeeded
+- [03-03]: captured/ committed with all Phase-4-ready artifacts; oh-workdir/ confirmed gitignored; Lexer.fsl/.fsproj documented as scaffolded via prompts (honest record for Phase 4 narration)
 
 ### Phase 2 ENVIRONMENT — verified during execution (2026-05-27), DIVERGES from the 02 plans
 
@@ -107,10 +110,10 @@ None yet.
 - [Phase 2 — RESOLVED by 02-01]: OpenHands version is SDK v1.21.0 / CLI 1.16.0 (not 1.7). ARM64 implicit — uv installed native Python 3.12.13.
 - [Phase 2 — RESOLVED by 02-02]: `--override-with-envs` confirmed REQUIRED; tool-call end-to-end proven (PING PASS + DOTNET PASS). Invocation shape confirmed working.
 - [Phase 2 — RESOLVED by 02-02]: dotnet bare path works in agent PTY; no absolute path needed. 02-VERIFICATION-EVIDENCE.md is the authoritative source.
-- [Phase 3]: 35B local model reliability over a long multi-step loop is empirical — task decomposition into ≥5 narrow tasks is the primary mitigation
+- [Phase 3 — COMPLETE]: All 3 plans done; captured/ committed; Phase 4 ready to start
 
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 03-02-PLAN.md (attempt 2) — 5 JSONL logs (task1-scaffold through task5-buildtest); genuine error-and-fix in task3-parser.jsonl; calculator verified 14/20/5. Next: 03-03-PLAN.md (curate JSONL logs: select representative events from the 5 keepers, strip large payloads, commit canonical subset).
+Stopped at: Completed 03-03-PLAN.md — Phase 3 complete. All captured artifacts committed to captured/. Phase 4 (write worked-example chapter) is next.
 Resume file: None
