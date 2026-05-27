@@ -1,19 +1,19 @@
-# FSharpAgent — Agentic AI Lab
+# OpenHands Agentic AI 튜토리얼
 
 ## What This Is
 
-A hands-on learning project for studying and practicing **agentic AI** by building an
-OpenHands-style coding agent **in F#**, powered by a local Qwen LLM. The agent works the way
-OpenHands does — it plans, writes code, tests, and runs, looping on feedback until a task is
-done. Learning proceeds through small F# console examples (each teaching one agentic concept),
-culminating in a capstone agent that autonomously creates a working **calculator using FsLex +
-FsYacc**. The audience is the author (self-directed learning).
+A **tutorial** that teaches **Agentic AI** using **OpenHands** as the worked example. The
+tutorial explains what agentic AI is and how an agentic system works, then walks the reader
+through OpenHands — running on a **local Qwen LLM** — creating a real project the OpenHands way:
+**plan → write → test → run**, iterating on feedback. The concrete example the tutorial builds
+is an **F# calculator using FsLex + FsYacc**. Written in Korean, published as an **mdBook** on
+GitHub Pages. The audience is developers learning agentic AI hands-on.
 
 ## Core Value
 
-By the end, the author understands agentic AI from the inside — having personally built the
-tool-calling, agent loop, file/shell operations, and memory — demonstrated by an F# agent that
-autonomously produces a working FsLex/FsYacc calculator.
+A reader can finish the tutorial understanding what agentic AI is — and, by following along,
+watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
+FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ## Requirements
 
@@ -23,70 +23,69 @@ autonomously produces a working FsLex/FsYacc calculator.
 
 ### Active
 
-- [ ] F# console program can call the local Qwen LLM and get a chat completion
-- [ ] Agent can invoke tools via native function calling (OpenAI-format tool_calls)
-- [ ] Agent runs an observe → think → act → repeat loop until a goal is met
-- [ ] Agent has file tools (read file, write file, list directory)
-- [ ] Agent has a shell tool (run a command, capture stdout/stderr/exit code)
-- [ ] Agent maintains conversation memory / manages context across loop iterations
-- [ ] Capstone agent autonomously creates an F# calculator project using FsLex + FsYacc
-- [ ] Capstone agent compiles the project (`dotnet build`), reads errors, and fixes them in a loop
-- [ ] Capstone agent verifies the calculator works (e.g., `2+3*4` evaluates to `14`)
-- [ ] Each agentic concept is introduced as its own small, runnable F# console example before the capstone
+- [ ] Tutorial explains agentic AI concepts (tool/function calling, agent loop, plan→test→run, memory/context) in accessible terms
+- [ ] Tutorial introduces OpenHands as the example agentic system and how its architecture maps to those concepts
+- [ ] Tutorial documents setup: installing/running OpenHands and connecting it to the local Qwen server (OpenAI-compatible endpoint)
+- [ ] Tutorial walks through OpenHands building the F# FsLex/FsYacc calculator end to end (plan → write → test → run)
+- [ ] Tutorial includes real captured OpenHands output (commands, iterations, errors-and-fixes) at the key steps
+- [ ] Tutorial shows the resulting calculator working (e.g., `2+3*4` → `14`) with the final F# source
+- [ ] Tutorial is structured as an mdBook (chapters, navigation) and builds cleanly
+- [ ] Tutorial is published to GitHub Pages
+- [ ] Tutorial is written in Korean (English for technical terms)
 
 ### Out of Scope
 
-- Running the real OpenHands (Python) tool as the working agent — OpenHands is a **reference
-  blueprint** for the plan→test→run lifecycle, not a dependency. (Author wants to build the
-  agent themselves, in F#, to learn the internals.)
-- Cloud/hosted LLM APIs — the project uses the existing local Qwen server only.
-- Web UI / GUI — console programs only.
-- Production hardening (auth, sandboxing beyond basic safety, deployment) — this is a learning lab.
-- Multi-agent orchestration — single agent is the scope for this milestone.
-- Languages other than F# for the agent itself.
+- Building our own agent from scratch in F# — superseded by the tutorial framing. OpenHands is
+  the agent being demonstrated, not something we re-implement.
+- Cloud/hosted LLM APIs — the tutorial uses the existing local Qwen server.
+- Teaching F# language fundamentals — F#/FsLex/FsYacc appear only as the example project OpenHands builds.
+- Contributing to or modifying OpenHands' source — we use it as-is.
+- Comprehensive coverage of every OpenHands feature — the tutorial focuses on the agentic concepts and the one worked example.
 
 ## Context
 
 - **Greenfield** project in `/Users/ohama/projs/OpenHandsTests` (fresh git repo).
-- **Local LLM server confirmed running and probed:**
+- **Deliverable is documentation (a tutorial), not an application.** Author has `mdbook` and
+  `pages` skills configured for building/publishing mdBooks to GitHub Pages.
+- **Local LLM server confirmed running and probed** (OpenHands will connect to this):
   - Endpoint: `http://127.0.0.1:8000/v1` (OpenAI-compatible)
   - Model id: `/Users/ohama/llm-system/models/qwen36-35b` (the author's "Qwen 3.6 35B")
   - Server: MLX-based on Apple GPU (system_fingerprint shows `macOS ... applegpu`)
   - Health endpoint `/health` returns `{"status":"ok"}`
   - **Native tool/function calling verified working**: a test request returned
-    `finish_reason: "tool_calls"` with a correct OpenAI-format tool_call.
-  - Prompt caching is present (`cached_tokens` in usage) — context reuse across turns is cheap.
-- **Performance note:** the 35B model on local hardware is slow per request (basic completion
-  took noticeable time; a tool-calling request timed out at 60s and succeeded at ~240s). Code,
-  examples, and any tests must use generous HTTP timeouts.
-- **OpenHands as reference:** https://github.com/OpenHands/OpenHands — studied for its agent
-  architecture (action/observation cycle, tools for file edits and shell, plan→test→run
-  project-creation workflow). We re-create those ideas in F#, not the Python code.
-- **FsLex / FsYacc:** F# lexer/parser generator tooling (the `FsLexYacc` NuGet package),
-  the classic medium for the capstone calculator (tokenize → parse → evaluate arithmetic).
+    `finish_reason: "tool_calls"` with a correct OpenAI-format tool_call — important, since
+    OpenHands relies on tool calling.
+  - Prompt caching present (`cached_tokens` in usage).
+- **Performance note:** the 35B model on local hardware is slow per request (a tool-calling
+  request timed out at 60s, succeeded at ~240s). OpenHands runs will be slow; the tutorial
+  should set expectations and use patient timeouts.
+- **OpenHands:** https://github.com/OpenHands/OpenHands — the agentic AI system the tutorial
+  teaches. Typically run via Docker/CLI; can target an OpenAI-compatible local model. Setup
+  details (Docker, model config pointing at the local endpoint) must be verified during research.
+- **FsLex / FsYacc:** F# lexer/parser generator tooling (`FsLexYacc` NuGet), the medium for the
+  example calculator OpenHands builds (tokenize → parse → evaluate arithmetic).
 
 ## Constraints
 
-- **Tech stack**: Agent and all examples written in F# (.NET) — the author is practicing F#.
-- **Tech stack**: Capstone calculator must use FsLex + FsYacc specifically (not hand-written parsing).
-- **LLM**: Local `qwen36-35b` via the existing MLX server at `http://127.0.0.1:8000/v1` only —
-  no cloud APIs.
-- **API shape**: OpenAI-compatible chat completions with native `tools` / `tool_calls`.
-- **Performance**: Local 35B inference is slow — design for long, single-request latencies
-  (generous timeouts, minimal unnecessary calls).
-- **Learning-first**: Build each agentic capability by hand to understand it; favor clarity
-  over abstraction or premature framework use.
+- **Output format**: Tutorial authored as an mdBook, published to GitHub Pages.
+- **Language**: Korean (English for technical terms).
+- **Agent**: OpenHands used as-is (not re-implemented), connected to the local Qwen server.
+- **LLM**: Local `qwen36-35b` via the MLX server at `http://127.0.0.1:8000/v1` — no cloud APIs.
+- **Example project**: F# calculator using FsLex + FsYacc specifically.
+- **Authenticity**: Key tutorial steps backed by real captured OpenHands runs, not invented output.
+- **Performance**: Local 35B inference is slow — tutorial and any live runs must tolerate long latencies.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Build the agent in F# ourselves rather than run real OpenHands | The author's goal is to learn agentic internals (tool calling, loop, file/shell, memory) by building them; F# is the practice language | — Pending |
-| OpenHands is a conceptual/workflow reference, not a runtime dependency | Want to emulate plan→test→run lifecycle without Python coupling | — Pending |
-| Capstone task = build a FsLex/FsYacc calculator | Concrete, verifiable goal ("2+3*4 = 14") that exercises file + shell tools and the iterate-on-errors loop | — Pending |
-| Learning shape = small examples first, then capstone | Each agentic concept gets an isolated, runnable example before integration | — Pending |
-| Use existing local MLX Qwen server (OpenAI-compatible, native tool calling) | Already installed, verified working with tool_calls; no new infra needed | — Pending |
-| Design for slow inference (generous timeouts) | 35B local inference observed to take tens of seconds to minutes per call | — Pending |
+| Pivot from "build an F# agent to learn" → "write a tutorial teaching agentic AI via OpenHands" | Author redirected: the deliverable is a tutorial, with OpenHands as the example agentic system | — Pending |
+| OpenHands is used as-is (the agent we demonstrate), not re-implemented | Tutorial teaches agentic AI by showing a real, working agent | — Pending |
+| Worked example = OpenHands building an F# FsLex/FsYacc calculator | Concrete, verifiable goal ("2+3*4 = 14") that shows the full plan→test→run loop | — Pending |
+| Format = mdBook → GitHub Pages | Author has mdbook/pages skills set up; good for a navigable published tutorial | — Pending (assumed) |
+| Language = Korean (English technical terms) | Author communicates in Korean | — Pending (assumed) |
+| Depth = conceptual explanation backed by real captured OpenHands runs | Real runs prove agentic AI works and make the tutorial trustworthy | — Pending (assumed) |
+| OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | — Pending |
 
 ---
-*Last updated: 2026-05-27 after initialization*
+*Last updated: 2026-05-27 after project pivot to tutorial framing*
