@@ -65,12 +65,12 @@ Plans:
   2. The run is decomposed into at least 5 scoped tasks (scaffold → lexer → parser → evaluator → integration), not a single mega-prompt
   3. The log contains at least one real error-and-fix cycle (a failed build or test followed by OpenHands correcting itself) that can be narrated in the tutorial
   4. The calculator binary in the sandbox correctly evaluates `2+3*4` to `14`, proving operator precedence works
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Design the task decomposition (write the 5+ scoped task strings for the OpenHands run)
-- [ ] 03-02: Execute the OpenHands run with tee logging; iterate if the run stalls or the model fails on a task
-- [ ] 03-03: Verify the captured run meets criteria (error-and-fix present, `2+3*4 → 14` confirmed, log is complete)
+- [ ] 03-01-PLAN.md — Design & write the 6 prompt strings (5 scoped build tasks + conditional fix); scaffold carries the known-good .fsproj; build-test requires 2+3*4/( 2+3)*4/10-3-2; %left never revealed (autonomous, fast)
+- [ ] 03-02-PLAN.md — Execute the run: 5 openhands --headless invocations sharing oh-workdir/calc, per-task tee'd JSONL, retry/adjust policy, drive a real error-and-fix, confirm 14/20/5 (SLOW, --yolo, empirical)
+- [ ] 03-03-PLAN.md — Verify captured run against all 4 criteria from real evidence; commit captured logs + transcript + final source snapshot + test output + manifest to tracked captured/; oh-workdir stays gitignored
 
 ### Phase 4: Worked-Example Chapter
 **Goal**: The core tutorial chapter walks the reader through the real run step by step, with concept callouts, the error-and-fix narration, final source, and verification output
