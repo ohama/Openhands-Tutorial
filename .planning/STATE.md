@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 1 of 5 (Scaffold & Concept Chapters)
-Plan: 3 of 4 in current phase
+Plan: 3 of 4 in current phase (01-01, 01-02, 01-03 done; 01-04 remaining)
 Status: In progress
-Last activity: 2026-05-27 — Completed 01-03-PLAN.md (2부 OpenHands architecture chapter: five ch02 files, mdbook build exits 0)
+Last activity: 2026-05-27 — Completed 01-02-PLAN.md (1부 concept chapters: overview.md agentic AI vs chatbot, concepts.md four vocabulary terms with 4부 forward pointers)
 
 Progress: [███░░░░░░░] 15% (3/20 plans)
 
@@ -47,6 +47,8 @@ Recent decisions affecting current work:
 - [Roadmap]: BOOK-01 and BOOK-02 placed in Phase 1 — mdBook scaffold and Korean language constraint apply from the very first chapter
 - [01-01]: mdbook installed via brew (0.5.3) — was not pre-installed; use /opt/homebrew/bin/mdbook in all subsequent plans
 - [01-01]: mdBook 0.5.x site-url goes into 404.html base href, not index.html asset paths — this is correct behavior for GitHub Pages project sites
+- [01-02]: Prose-only forward pointers to 4부 chapters — each vocabulary term ends with a "4부에서 볼 수 있습니다" sentence; no Markdown links to unwritten Phase 4 files
+- [01-02]: Only allowed cross-chapter Markdown link is overview.md → concepts.md (same directory, both files exist)
 - [01-03]: Prose-only forward references to 3부+ chapters — draft SUMMARY.md entries have no files; Markdown links produce dead links
 - [01-03]: ASCII art used for all ch02 architecture diagrams — zero preprocessor dependencies, builds cleanly with mdBook 0.5.3
 
@@ -64,5 +66,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 01-03-PLAN.md — 2부 OpenHands architecture chapter complete, mdbook build exits 0
+Stopped at: Completed 01-02-PLAN.md — 1부 concept chapters (overview.md + concepts.md) complete, mdbook build exits 0
 Resume file: None
