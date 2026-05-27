@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-05-27)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** Phase 1 — Scaffold & Concept Chapters
+**Current focus:** Phase 2 — Environment Setup & Verification (next)
 
 ## Current Position
 
-Phase: 1 of 5 (Scaffold & Concept Chapters)
-Plan: 3 of 4 in current phase (01-01, 01-02, 01-03 done; 01-04 remaining)
-Status: In progress
-Last activity: 2026-05-27 — Completed 01-02-PLAN.md (1부 concept chapters: overview.md agentic AI vs chatbot, concepts.md four vocabulary terms with 4부 forward pointers)
+Phase: 1 of 5 (Scaffold & Concept Chapters) — ✓ COMPLETE, goal verified 5/5
+Plan: 3 of 3 complete (01-01 scaffold, 01-02 concept+vocabulary, 01-03 architecture). NOTE: the roadmap originally sketched 4 plans; the planner collapsed them into 3 real plans (no 01-04).
+Status: Phase 1 complete and verified. Ready to plan Phase 2.
+Last activity: 2026-05-27 — Phase 1 verified (mdbook build green; 1부+2부 chapters written in Korean; CONCEPT-01/02/03, BOOK-01/02 satisfied)
 
-Progress: [███░░░░░░░] 15% (3/20 plans)
+Progress: [███░░░░░░░] 15% (3/20 plans) — Phase 1 of 5 done
 
 ## Performance Metrics
 
@@ -27,7 +27,7 @@ Progress: [███░░░░░░░] 15% (3/20 plans)
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-scaffold-and-concept-chapters | 3/4 | ~35 min | ~12 min |
+| 01-scaffold-and-concept-chapters | 3/3 ✓ | ~35 min | ~12 min |
 
 **Recent Trend:**
 - Last 5 plans: 01-01 (~15 min), 01-02 (partial/parallel), 01-03 (~4 min)
@@ -66,5 +66,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 01-02-PLAN.md — 1부 concept chapters (overview.md + concepts.md) complete, mdbook build exits 0
+Stopped at: Phase 1 complete and verified (5/5). mdBook scaffold + 1부/2부 chapters written in Korean, mdbook build exits 0. Next: /gsd:plan-phase 2 (Environment Setup & Verification — the capture gate).
 Resume file: None

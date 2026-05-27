@@ -10,9 +10,9 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Concepts
 
-- [ ] **CONCEPT-01**: Reader can explain what agentic AI is and how it differs from a reactive chatbot
-- [ ] **CONCEPT-02**: Tutorial defines the core vocabulary — tool/function calling, agent loop, plan→write→test→run, memory/context — each pointing forward to where it appears in the run
-- [ ] **CONCEPT-03**: Tutorial explains OpenHands V1 architecture (agent loop, EventLog action/observation, Docker sandbox, LiteLLM) and maps each component to an agentic concept
+- [x] **CONCEPT-01**: Reader can explain what agentic AI is and how it differs from a reactive chatbot
+- [x] **CONCEPT-02**: Tutorial defines the core vocabulary — tool/function calling, agent loop, plan→write→test→run, memory/context — each pointing forward to where it appears in the run
+- [x] **CONCEPT-03**: Tutorial explains OpenHands V1 architecture (agent loop, EventLog action/observation, Docker sandbox, LiteLLM) and maps each component to an agentic concept
 
 ### Setup
 
@@ -48,8 +48,8 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Tutorial artifact (mdBook)
 
-- [ ] **BOOK-01**: Tutorial is structured as an mdBook (SUMMARY.md, book.toml with `site-url` for project pages) and builds cleanly with `mdbook build`
-- [ ] **BOOK-02**: Tutorial is written in Korean (English for technical terms)
+- [x] **BOOK-01**: Tutorial is structured as an mdBook (SUMMARY.md, book.toml with `site-url` for project pages) and builds cleanly with `mdbook build`
+- [x] **BOOK-02**: Tutorial is written in Korean (English for technical terms)
 - [ ] **BOOK-03**: Tutorial is deployed to GitHub Pages via a GitHub Actions workflow (live published site)
 
 ## v2 Requirements
@@ -82,9 +82,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CONCEPT-01 | Phase 1 | Pending |
-| CONCEPT-02 | Phase 1 | Pending |
-| CONCEPT-03 | Phase 1 | Pending |
+| CONCEPT-01 | Phase 1 | Complete |
+| CONCEPT-02 | Phase 1 | Complete |
+| CONCEPT-03 | Phase 1 | Complete |
 | SETUP-01 | Phase 2 | Pending |
 | SETUP-02 | Phase 2 | Pending |
 | SETUP-03 | Phase 2 | Pending |
@@ -99,8 +99,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | VERIFY-02 | Phase 4 | Pending |
 | TROUBLE-01 | Phase 5 | Pending |
 | REPRO-01 | Phase 5 | Pending |
-| BOOK-01 | Phase 1 | Pending |
-| BOOK-02 | Phase 1 | Pending |
+| BOOK-01 | Phase 1 | Complete |
+| BOOK-02 | Phase 1 | Complete |
 | BOOK-03 | Phase 5 | Pending |
 
 **Coverage:**

@@ -12,7 +12,7 @@ This tutorial is built around a strict authoring dependency chain: run-independe
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Scaffold & Concept Chapters** - Initialize the mdBook and write the run-independent concept/architecture chapters
+- [x] **Phase 1: Scaffold & Concept Chapters** - Initialize the mdBook and write the run-independent concept/architecture chapters ✓
 - [ ] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate
 - [ ] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output
 - [ ] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run
@@ -33,9 +33,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold: book.toml, full SUMMARY.md (Phase-1 real paths + Phase 2-5 drafts), about.md, mdbook build green
-- [ ] 01-02-PLAN.md — Concept + vocabulary chapter (ch01): agentic AI vs reactive chatbot; four terms with prose forward pointers
-- [ ] 01-03-PLAN.md — OpenHands V1 architecture chapter (ch02, 5 files): step() loop, EventLog, DockerWorkspace, LiteLLM mapped to vocabulary
+- [x] 01-01-PLAN.md — Scaffold: book.toml, full SUMMARY.md (Phase-1 real paths + Phase 2-5 drafts), about.md, mdbook build green
+- [x] 01-02-PLAN.md — Concept + vocabulary chapter (ch01): agentic AI vs reactive chatbot; four terms with prose forward pointers
+- [x] 01-03-PLAN.md — OpenHands V1 architecture chapter (ch02, 5 files): step() loop, EventLog, DockerWorkspace, LiteLLM mapped to vocabulary
 
 ### Phase 2: Environment Setup & Verification
 **Goal**: The full stack is installed, configured, and smoke-tested so the OpenHands run can begin without configuration surprises
@@ -114,7 +114,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scaffold & Concept Chapters | 0/4 | Not started | - |
+| 1. Scaffold & Concept Chapters | 3/3 | ✓ Complete | 2026-05-27 |
 | 2. Environment Setup & Verification | 0/4 | Not started | - |
 | 3. Capture the OpenHands Run | 0/3 | Not started | - |
 | 4. Worked-Example Chapter | 0/5 | Not started | - |
