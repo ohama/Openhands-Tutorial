@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 1 of 5 (Scaffold & Concept Chapters) — ✓ COMPLETE, goal verified 5/5
-Plan: 3 of 3 complete (01-01 scaffold, 01-02 concept+vocabulary, 01-03 architecture). NOTE: the roadmap originally sketched 4 plans; the planner collapsed them into 3 real plans (no 01-04).
-Status: Phase 1 complete and verified. Ready to plan Phase 2.
-Last activity: 2026-05-27 — Phase 1 verified (mdbook build green; 1부+2부 chapters written in Korean; CONCEPT-01/02/03, BOOK-01/02 satisfied)
+Phase: 2 of 5 (Environment Setup & Verification) — In progress
+Plan: 1 of 5 complete in Phase 2 (02-01 base-stack preflight). Phase 1 remains ✓ COMPLETE (3/3).
+Status: In progress — 02-01 complete. Next: 02-02 (end-to-end headless agent tool-call verification).
+Last activity: 2026-05-27 — Completed 02-01-PLAN.md: base-stack preflight (openhands 1.16.0, qwen-local proxy confirmed)
 
-Progress: [███░░░░░░░] 15% (3/20 plans) — Phase 1 of 5 done
+Progress: [████░░░░░░] 20% (4/20 plans) — Phase 1 done + 02-01
 
 ## Performance Metrics
 
@@ -28,10 +28,11 @@ Progress: [███░░░░░░░] 15% (3/20 plans) — Phase 1 of 5 don
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-scaffold-and-concept-chapters | 3/3 ✓ | ~35 min | ~12 min |
+| 02-environment-setup-and-verification | 1/5 | ~4 min | ~4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~15 min), 01-02 (partial/parallel), 01-03 (~4 min)
-- Trend: Fast execution for content-writing plans
+- Last 5 plans: 01-01 (~15 min), 01-02 (partial/parallel), 01-03 (~4 min), 02-01 (~4 min)
+- Trend: Fast execution for preflight/evidence plans
 
 *Updated after each plan completion*
 
@@ -72,13 +73,14 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 2]: Exact model id string after `openai/` must be confirmed via `curl http://127.0.0.1:8000/v1/models` before configuring OpenHands
-- [Phase 2]: `agent_settings.json` config key names not confirmed (official reference 404'd during research — validate against running OpenHands 1.7)
-- [Phase 2]: OpenHands 1.7 ARM64 vs Rosetta status on Apple Silicon needs verification at setup time
+- [Phase 2 — RESOLVED by 02-01]: Model id confirmed: `qwen-local` (as returned by /v1/models). Use `LLM_MODEL=openai/qwen-local`, `LLM_BASE_URL=http://127.0.0.1:4000/v1`.
+- [Phase 2 — RESOLVED by 02-01]: OpenHands version is SDK v1.21.0 / CLI 1.16.0 (not 1.7). ARM64 implicit — uv installed native Python 3.12.13.
+- [Phase 2 — OPEN]: `--override-with-envs` correctness and tool-call end-to-end not yet proven — this is the focus of 02-02.
+- [Phase 2 — OPEN]: agent_settings.json key names still not confirmed from official docs — validate by running openhands headless in 02-02.
 - [Phase 3]: 35B local model reliability over a long multi-step loop is empirical — task decomposition into ≥5 narrow tasks is the primary mitigation
 
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Phase 1 complete and verified (5/5). mdBook scaffold + 1부/2부 chapters written in Korean, mdbook build exits 0. Next: /gsd:plan-phase 2 (Environment Setup & Verification — the capture gate).
+Stopped at: Completed 02-01-PLAN.md (base-stack preflight). openhands 1.16.0 + qwen-local proxy both confirmed. Next: 02-02 (headless end-to-end tool-call verification with LLM env vars).
 Resume file: None
