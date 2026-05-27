@@ -30,13 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The vocabulary chapter defines tool/function calling, the agent loop, plan→write→test→run, and memory/context — each with a forward pointer to where it appears in the run
   4. The OpenHands V1 architecture chapter maps the step() loop, EventLog, and DockerWorkspace to the agentic concepts from the vocabulary chapter
   5. All prose is written in Korean (English for technical terms such as "agent loop", "tool calling", "EventLog")
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Initialize mdBook (book.toml, SUMMARY.md skeleton, GitHub Pages site-url, Korean locale)
-- [ ] 01-02: Write concept chapter (what agentic AI is vs reactive chatbot)
-- [ ] 01-03: Write vocabulary chapter (tool calling, agent loop, plan→test→run, memory/context with forward pointers)
-- [ ] 01-04: Write OpenHands V1 architecture chapter (step() loop, EventLog, DockerWorkspace, concept mapping)
+- [ ] 01-01-PLAN.md — Scaffold: book.toml, full SUMMARY.md (Phase-1 real paths + Phase 2-5 drafts), about.md, mdbook build green
+- [ ] 01-02-PLAN.md — Concept + vocabulary chapter (ch01): agentic AI vs reactive chatbot; four terms with prose forward pointers
+- [ ] 01-03-PLAN.md — OpenHands V1 architecture chapter (ch02, 5 files): step() loop, EventLog, DockerWorkspace, LiteLLM mapped to vocabulary
 
 ### Phase 2: Environment Setup & Verification
 **Goal**: The full stack is installed, configured, and smoke-tested so the OpenHands run can begin without configuration surprises
