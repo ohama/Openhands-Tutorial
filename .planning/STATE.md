@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 2 of 5 (Environment Setup & Verification) — In progress
-Plan: 2 of 5 complete in Phase 2 (02-01 preflight + 02-02 end-to-end verification). Phase 1 remains ✓ COMPLETE (3/3).
-Status: In progress — 02-02 complete. Next: 02-03.
-Last activity: 2026-05-27 — Completed 02-02-PLAN.md: end-to-end headless tool-call verification (PING PASS + DOTNET PASS)
+Plan: 3 of 5 complete in Phase 2 (02-01 preflight + 02-02 end-to-end verification + 02-03 3부 chapters). Phase 1 remains ✓ COMPLETE (3/3).
+Status: In progress — 02-03 complete. Next: 02-04.
+Last activity: 2026-05-27 — Completed 02-03-PLAN.md: wrote 3부 setup chapters (installation/qwen-connection/first-run), wired SUMMARY.md, mdbook build green
 
-Progress: [█████░░░░░] 25% (5/20 plans) — Phase 1 done + 02-01 + 02-02
+Progress: [██████░░░░] 30% (6/20 plans) — Phase 1 done + 02-01 + 02-02 + 02-03
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: ~10 min
-- Total execution time: ~35 min
+- Total plans completed: 4
+- Average duration: ~8 min
+- Total execution time: ~38 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-scaffold-and-concept-chapters | 3/3 ✓ | ~35 min | ~12 min |
-| 02-environment-setup-and-verification | 2/5 | ~13 min | ~6.5 min |
+| 02-environment-setup-and-verification | 3/5 | ~16 min | ~5.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~15 min), 01-02 (partial/parallel), 01-03 (~4 min), 02-01 (~4 min), 02-02 (~9 min)
-- Trend: Fast execution for preflight/evidence plans
+- Last 5 plans: 01-03 (~4 min), 02-01 (~4 min), 02-02 (~9 min), 02-03 (~3 min)
+- Trend: Fast execution; 02-03 was pure writing from captured evidence
 
 *Updated after each plan completion*
 
@@ -56,6 +56,9 @@ Recent decisions affecting current work:
 - [02-02]: bare `dotnet` works in agent LocalWorkspace PTY (host PATH inherited); Phase 3/4 does NOT need /opt/homebrew/bin/dotnet prefix
 - [02-02]: OPENHANDS_SUPPRESS_BANNER=1 recommended when tee-ing JSONL to keep output clean
 - [02-02]: Observed headless run time 14-15s per tool-call cycle (plan warned ~240s+); qwen-local was fast during this session
+- [02-03]: Real timing documented in chapters (~14-15s/call from evidence); plan's "240s" figure was a worst-case estimate, not measured — chapters cite real evidence
+- [02-03]: dotnet PATH confirmed bare dotnet works; no /opt/homebrew/bin prefix needed in agent PTY
+- [02-03]: 3부 documentation complete; SUMMARY.md wired; 4부/5부 remain () drafts; mdbook build green
 
 ### Phase 2 ENVIRONMENT — verified during execution (2026-05-27), DIVERGES from the 02 plans
 
@@ -86,5 +89,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 02-02-PLAN.md (end-to-end headless verification). PING PASS + DOTNET PASS. 02-VERIFICATION-EVIDENCE.md written. Next: 02-03.
+Stopped at: Completed 02-03-PLAN.md (3부 setup chapters written from evidence). installation.md + qwen-connection.md + first-run.md created. SUMMARY.md wired. mdbook build green. Next: 02-04.
 Resume file: None
