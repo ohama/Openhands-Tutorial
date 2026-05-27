@@ -17,9 +17,9 @@
 
 # 3부: 환경 설정
 
-- [OpenHands 설치]()
-- [로컬 Qwen 서버 연결]()
-- [첫 실행 테스트]()
+- [OpenHands 설치](ch03-setup/installation.md)
+- [로컬 Qwen 서버 연결](ch03-setup/qwen-connection.md)
+- [첫 실행 테스트](ch03-setup/first-run.md)
 
 # 4부: OpenHands로 F# 계산기 만들기
 
