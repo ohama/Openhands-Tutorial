@@ -47,13 +47,14 @@ Plans:
   3. A custom sandbox Docker image is built with the .NET SDK installed; `dotnet --version` runs correctly from within an OpenHands sandbox session using that image
   4. The pre-run verification checklist passes: tool-call ping returns a response, `dotnet --version` in sandbox prints a version, Docker can reach the host LLM endpoint
   5. The setup chapter in the tutorial covers every step a reader must take, matching the verified configuration exactly
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 02-01: Install OpenHands 1.7 (uv, Docker Desktop requirements) and confirm `openhands serve` starts
-- [ ] 02-02: Configure LiteLLM (model string `openai/<id>`, host.docker.internal, timeout); confirm tool-call ping succeeds
-- [ ] 02-03: Build custom .NET sandbox image (Dockerfile + dotnet-install.sh); verify `dotnet --version` in sandbox
-- [ ] 02-04: Write setup chapter and pre-run verification checklist from verified steps
+- [ ] 02-01-PLAN.md — Install Docker Desktop (checkpoint) + uv Python 3.12 + OpenHands 1.7; confirm `openhands serve` UI loads (autonomous: false)
+- [ ] 02-02-PLAN.md — Write ~/.openhands/config.toml [llm]; preflight Checks 1-2; confirm working model string (double-slash/alias)
+- [ ] 02-03-PLAN.md — Build custom .NET sandbox image (Dockerfile + dotnet-install.sh); register [sandbox]; verify dotnet in bare image
+- [ ] 02-04-PLAN.md — Run full pre-run checklist: dotnet in real session (checkpoint) + tool-call ping + fallbacks; write evidence file (autonomous: false)
+- [ ] 02-05-PLAN.md — Write 3부 setup chapter (4 files) from verified evidence; convert SUMMARY drafts→real paths; mdbook build green
 
 ### Phase 3: Capture the OpenHands Run
 **Goal**: A real, complete OpenHands session that builds the F# FsLex/FsYacc calculator is captured to a log file
