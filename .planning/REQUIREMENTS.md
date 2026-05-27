@@ -82,32 +82,32 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CONCEPT-01 | TBD | Pending |
-| CONCEPT-02 | TBD | Pending |
-| CONCEPT-03 | TBD | Pending |
-| SETUP-01 | TBD | Pending |
-| SETUP-02 | TBD | Pending |
-| SETUP-03 | TBD | Pending |
-| SETUP-04 | TBD | Pending |
-| RUN-01 | TBD | Pending |
-| RUN-02 | TBD | Pending |
-| RUN-03 | TBD | Pending |
-| WALK-01 | TBD | Pending |
-| WALK-02 | TBD | Pending |
-| WALK-03 | TBD | Pending |
-| VERIFY-01 | TBD | Pending |
-| VERIFY-02 | TBD | Pending |
-| TROUBLE-01 | TBD | Pending |
-| REPRO-01 | TBD | Pending |
-| BOOK-01 | TBD | Pending |
-| BOOK-02 | TBD | Pending |
-| BOOK-03 | TBD | Pending |
+| CONCEPT-01 | Phase 1 | Pending |
+| CONCEPT-02 | Phase 1 | Pending |
+| CONCEPT-03 | Phase 1 | Pending |
+| SETUP-01 | Phase 2 | Pending |
+| SETUP-02 | Phase 2 | Pending |
+| SETUP-03 | Phase 2 | Pending |
+| SETUP-04 | Phase 2 | Pending |
+| RUN-01 | Phase 3 | Pending |
+| RUN-02 | Phase 3 | Pending |
+| RUN-03 | Phase 3 | Pending |
+| WALK-01 | Phase 4 | Pending |
+| WALK-02 | Phase 4 | Pending |
+| WALK-03 | Phase 4 | Pending |
+| VERIFY-01 | Phase 4 | Pending |
+| VERIFY-02 | Phase 4 | Pending |
+| TROUBLE-01 | Phase 5 | Pending |
+| REPRO-01 | Phase 5 | Pending |
+| BOOK-01 | Phase 1 | Pending |
+| BOOK-02 | Phase 1 | Pending |
+| BOOK-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 20 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 20 ⚠️
+- Mapped to phases: 20 (complete)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-27*
-*Last updated: 2026-05-27 after initial definition*
+*Last updated: 2026-05-27 — traceability populated after roadmap creation*
