@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 3 of 5 (Capture the OpenHands Run) — In progress
-Plan: 1 of 3 complete (03-01 prompt design). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
-Status: In progress — 03-01 (prompt strings) done; next: 03-02 (execute the run).
-Last activity: 2026-05-27 — Completed 03-01-PLAN.md: wrote 7 prompt files (00-INVOCATION.md + task1-scaffold through task6-fix) with verbatim known-good .fsproj and 10-3-2=5 third test case.
+Plan: 2 of 3 complete (03-02 OpenHands run captured). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
+Status: In progress — 03-01 (prompt strings) done; 03-02 (execute the run) done; next: 03-03 (curate JSONL logs).
+Last activity: 2026-05-27 — Completed 03-02-PLAN.md: 8 JSONL logs captured, calculator produces 2+3*4=14, (2+3)*4=20, 10-3-2=5.
 
-Progress: [███████░░░] 35% (7/20 plans) — Phases 1-2 done, Phase 3 plan 1 done
+Progress: [████████░░] 40% (8/20 plans) — Phases 1-2 done, Phase 3 plans 1-2 done
 
 ## Performance Metrics
 
@@ -63,6 +63,11 @@ Recent decisions affecting current work:
 - [03-01]: 10-3-2=5 is the critical third test case — 2+3*4 and (2+3)*4 both pass even with naive no-%left grammar; only 10-3-2 exposes the right-associativity bug
 - [03-01]: task3-parser.txt states "left-to-right" as a behavioral outcome only — never names %left so the naive-grammar bug can emerge honestly
 - [03-01]: task6-fix.txt uses <ACTUAL_WRONG_OUTPUT> placeholder — plan 03-02 executor substitutes the real captured value from task5-buildtest.jsonl before invoking
+- [03-02]: qwen-local file_editor tool always omits security_risk field (AgentErrorEvent); prompt must explicitly say "use shell commands (tee/cat), not file editor tool"
+- [03-02]: FsLex (.fsl) has NO %% separator; all agents confused FsLex with FsYacc and added %% which breaks the build
+- [03-02]: FsLexYacc 11.3.0 lexeme extraction in action code = LexBuffer<_>.LexemeString lexbuf (not lexeme lexbuf)
+- [03-02]: FsLex header braces must each be on own line at col 0; inline { open Parser } causes 2-space indented output in generated .fs causing F# light-mode compilation failure
+- [03-02]: Manual Lexer.fsl fix classified as Deviation Rule 3 after 3 agents (94+27+16 TerminalActions) exhausted retry budget; genuine error cycle documented in JSONL logs
 
 ### Phase 2 ENVIRONMENT — verified during execution (2026-05-27), DIVERGES from the 02 plans
 
@@ -103,5 +108,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 03-01-PLAN.md — prompt strings written and committed (711a184). Next: 03-02-PLAN.md (execute the OpenHands run: invoke task1..task5 in sequence, capture JSONL logs, invoke task6-fix if task5 surfaces a failure, commit captured artifacts).
+Stopped at: Completed 03-02-PLAN.md — 8 JSONL logs captured, calculator verified (2+3*4=14, (2+3)*4=20, 10-3-2=5). Next: 03-03-PLAN.md (curate JSONL logs: select representative events, strip large payloads, commit canonical subset).
 Resume file: None

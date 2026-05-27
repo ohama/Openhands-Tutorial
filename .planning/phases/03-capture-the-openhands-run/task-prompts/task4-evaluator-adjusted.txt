@@ -1,0 +1,50 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir
+
+An F# FsLexYacc project exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+  cat Lexer.fsl
+  cat Parser.fsy
+  cat Program.fs
+
+The project already has calc.fsproj (wired for FsLex/FsYacc), Lexer.fsl (tokenizer), Parser.fsy (grammar), and Program.fs (currently a placeholder — probably just prints "Hello from F#" from `dotnet new`). The build system will auto-generate Parser.fsi, Parser.fs, and Lexer.fs from the .fsy/.fsl sources when you run `dotnet build`.
+
+Your task: Rewrite Program.fs — the CLI entry point — so the calculator works end-to-end.
+
+Program.fs must:
+- Read exactly one command-line argument (the arithmetic expression as a string).
+- If the wrong number of arguments is given, print a usage message to stderr and exit with a nonzero exit code.
+- Parse and evaluate the expression using the generated lexer and parser:
+  - Open FSharp.Text.Lexing (use this exact namespace — NOT Microsoft.FSharp.Text.Lexing, which does not exist in .NET 10).
+  - Create a LexBuffer<char> from the argument string using LexBuffer<char>.FromString.
+  - Call Parser.start Lexer.tokenize lexbuf to parse and evaluate.
+- Print the integer result (and only the result) to stdout, followed by a newline.
+
+Constraints:
+- The invocation must be: `dotnet run -- "2+3*4"` prints `14`.
+- Do NOT modify calc.fsproj, Lexer.fsl, or Parser.fsy.
+- Use `open FSharp.Text.Lexing` (not the old Microsoft namespace).
+
+IMPORTANT: Write Program.fs using a shell heredoc via tee, like this:
+
+  tee calc/Program.fs << 'FSEOF'
+  module Program
+
+  open FSharp.Text.Lexing
+
+  [<EntryPoint>]
+  let main argv =
+      if argv.Length <> 1 then
+          eprintfn "Usage: calc <expression>"
+          1
+      else
+          let lexbuf = LexBuffer<char>.FromString argv.[0]
+          let result = Parser.start Lexer.tokenize lexbuf
+          printfn "%d" result
+          0
+  FSEOF
+
+Do NOT use any file editor tool. Use only bash shell commands (tee, cat, printf) to write files.
+After writing, verify with: cat calc/Program.fs

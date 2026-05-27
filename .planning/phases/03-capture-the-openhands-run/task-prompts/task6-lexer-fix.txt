@@ -1,0 +1,74 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir
+
+An F# FsLexYacc calculator project exists in the calc/ subdirectory. The project currently fails to build because Lexer.fsl is malformed.
+
+Start by reading the current files:
+
+  cd calc
+  cat Lexer.fsl
+  dotnet build 2>&1
+
+The build error is: Lexer.fsl(N): error : Unexpected character '%'
+
+ROOT CAUSE: Lexer.fsl was incorrectly edited with '%%' separators (which belong in FsYacc .fsy files, NOT in FsLex .fsl files). FsLex uses a completely different format.
+
+CORRECT FsLex (.fsl) format:
+- Header block: { F# code here }  (curly braces, no %% before or after)
+- Then directly: rule <rulename> = parse
+- Then: | <pattern>  { <action> }
+- The header uses { } NOT %{ %}
+- There is NO %% separator anywhere in .fsl files
+
+Here is the EXACT correct content for Lexer.fsl. Write it using a heredoc:
+
+tee calc/Lexer.fsl << 'FSEOF'
+{ open Parser }
+
+rule tokenize = parse
+    | [' ' '\t']
+        { tokenize lexbuf }
+    | ['0'-'9']+
+        { let s = LexBuffer<_>.LexemeString lexbuf
+          let v = System.Int32.Parse s
+          INT v }
+    | '+'
+        { PLUS }
+    | '-'
+        { MINUS }
+    | '*'
+        { STAR }
+    | '/'
+        { SLASH }
+    | '('
+        { LPAREN }
+    | ')'
+        { RPAREN }
+    | eof
+        { EOF }
+    | _
+        { let c = LexBuffer<_>.LexemeString lexbuf
+          failwithf "Unexpected character '%s'" c }
+FSEOF
+
+After writing Lexer.fsl, verify it looks correct:
+  cat calc/Lexer.fsl
+
+Then build:
+  cd calc && dotnet build 2>&1
+
+If the build succeeds, run all three test cases:
+  dotnet run -- "2+3*4"
+  dotnet run -- "(2+3)*4"
+  dotnet run -- "10-3-2"
+
+Required outputs:
+  - "2+3*4"   must print 14
+  - "(2+3)*4" must print 20
+  - "10-3-2"  must print 5
+
+Report each test result explicitly with the actual output observed.
+
+Constraints:
+- Do NOT use any file editor tool. Use only the tee heredoc command shown above.
+- Do NOT modify calc.fsproj or Parser.fsy.
+- If the build still fails after writing the file, show the error and diagnose further.
