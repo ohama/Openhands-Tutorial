@@ -22,6 +22,7 @@ openhands --headless --json --yolo --override-with-envs -t "$(cat <prompt-file>)
 - The agent's initial working directory is `OPENHANDS_WORK_DIR` (i.e., `/Users/ohama/projs/OpenHandsTests/oh-workdir`). The calculator project lives in the `calc/` subdirectory — every prompt must instruct the agent to `cd calc` (except task 1, which creates it).
 - bare `dotnet` (10.0.203) works in the agent's PTY — no absolute path prefix needed.
 - FsLexYacc 11.3.0 is already in the local NuGet cache (`~/.nuget/packages/fslexyacc/11.3.0/`) — `dotnet restore` does NOT require network access.
+- File writes must be bash-only: the qwen-local model's `file_editor` / `str_replace` tool calls fail validation (missing `security_risk` field). Every task prompt instructs the agent to write/edit files using only bash (printf, tee, quoted heredoc). Do not change this.
 
 ## Per-Task JSONL Log Filenames
 

@@ -1,5 +1,7 @@
 Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir
 
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
 A complete F# FsLexYacc calculator project exists in the calc/ subdirectory. Start by running:
 
   cd calc
