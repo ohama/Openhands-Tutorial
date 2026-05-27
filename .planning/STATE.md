@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-05-27)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** Phase 2 — Environment Setup & Verification (in progress)
+**Current focus:** Phase 3 — Capture the OpenHands Run (next)
 
 ## Current Position
 
-Phase: 2 of 5 (Environment Setup & Verification) — In progress
-Plan: 3 of 5 complete in Phase 2 (02-01 preflight + 02-02 end-to-end verification + 02-03 3부 chapters). Phase 1 remains ✓ COMPLETE (3/3).
-Status: In progress — 02-03 complete. Next: 02-04.
-Last activity: 2026-05-27 — Completed 02-03-PLAN.md: wrote 3부 setup chapters (installation/qwen-connection/first-run), wired SUMMARY.md, mdbook build green
+Phase: 2 of 5 (Environment Setup & Verification) — ✓ COMPLETE, goal verified 5/5
+Plan: 3 of 3 complete (02-01 preflight, 02-02 end-to-end verification + evidence, 02-03 3부 chapters). Phase 2 was re-planned to 3 plans (the original Docker-Desktop 5-plan sketch was archived). Phase 1 also ✓ COMPLETE (3/3).
+Status: Phase 2 complete and verified — the capture gate is OPEN. Ready to plan Phase 3.
+Last activity: 2026-05-27 — Phase 2 verified 5/5: real headless OpenHands run proved tool calling + dotnet 10.0.203 in LocalWorkspace; 3부 setup chapter written; mdbook build green.
 
-Progress: [██████░░░░] 30% (6/20 plans) — Phase 1 done + 02-01 + 02-02 + 02-03
+Progress: [██████░░░░] 30% (6/20 plans) — Phases 1-2 of 5 done
 
 ## Performance Metrics
 
@@ -72,7 +72,17 @@ The machine is a HEADLESS SSH Mac (Apple Silicon). Phase 2 plans assumed Docker 
 - **Headless, no browser**: the `openhands serve` + localhost:3000 browser checkpoint is not doable over SSH. Use the headless CLI (`openhands --headless --json -t "..."`) for the run (Phase 3) and verify via curl/JSONL, not a browser.
 - **RESOLVED by 02-02:** headless OpenHands tool-call path proven end-to-end. LocalWorkspace = host PTY (no Docker needed for primary path). `--override-with-envs` routes LLM_* to litellm proxy. echo OPENHANDS_PING_OK action+observation captured (PING PASS). dotnet 10.0.203 in agent observation (DOTNET PASS). See 02-VERIFICATION-EVIDENCE.md for verbatim outputs.
 
-→ CONSEQUENCE: Phase 2 plans 02-01..02-05 and their must_haves are now out of sync with reality. Plans 02-01 and 02-02 executed successfully on the verified path. Remaining plans (02-03..02-05) may need adjustment.
+→ RESOLVED: Phase 2 was re-planned to 3 plans against this verified environment and all 3 executed + verified 5/5. The original Docker-Desktop 5-plan sketch is archived under the phase dir's _archived-docker-desktop-plans/.
+
+### Phase 3 invocation facts (carry forward)
+
+The exact OpenHands invocation Phase 3 will use to build the calculator (proven in 02-02):
+```
+LLM_MODEL="openai/qwen-local" LLM_BASE_URL="http://127.0.0.1:4000/v1" LLM_API_KEY="dummy" \
+OPENHANDS_WORK_DIR="<scratch dir>" \
+openhands --headless --json --yolo --override-with-envs -t "<task>" | tee run.jsonl
+```
+LocalWorkspace = agent runs on the host (no container). bare `dotnet` (10.0.203) works in the agent PTY. JSONL events: ActionEvent (TerminalAction) + ObservationEvent (TerminalObservation). Simple tasks ran ~15s; the multi-step calculator build will be longer — decompose into ≥5 scoped tasks (RUN-02).
 
 ### Pending Todos
 
@@ -89,5 +99,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 02-03-PLAN.md (3부 setup chapters written from evidence). installation.md + qwen-connection.md + first-run.md created. SUMMARY.md wired. mdbook build green. Next: 02-04.
+Stopped at: Phase 2 complete and verified 5/5 (capture gate OPEN). SETUP-01..04 done. Next: /gsd:plan-phase 3 (Capture the OpenHands Run — build the FsLex/FsYacc calculator, decomposed into ≥5 scoped tasks, capture the JSONL log incl. an error-and-fix cycle, prove 2+3*4 → 14).
 Resume file: None

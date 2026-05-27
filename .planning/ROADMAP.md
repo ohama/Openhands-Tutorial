@@ -13,7 +13,7 @@ This tutorial is built around a strict authoring dependency chain: run-independe
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Scaffold & Concept Chapters** - Initialize the mdBook and write the run-independent concept/architecture chapters ✓
-- [ ] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate
+- [x] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate ✓
 - [ ] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output
 - [ ] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run
 - [ ] **Phase 5: Troubleshooting, Reproducibility & Publish** - Complete the book and ship it to GitHub Pages
@@ -50,9 +50,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Confirm/record base stack: uv-installed OpenHands CLI 1.16.0 + PATH + Python 3.12; litellm proxy preflight (qwen-local @ 127.0.0.1:4000)
-- [ ] 02-02-PLAN.md — End-to-end headless verification (SLOW ~240s/call): env-var run of openai/qwen-local, echo tool-call ping (action+observation), agent runs dotnet --version; write 02-VERIFICATION-EVIDENCE.md
-- [ ] 02-03-PLAN.md — Write 3부 setup chapter (3 files) from verified evidence; convert SUMMARY 3부 drafts→real paths; mdbook build green (4부/5부 stay drafts)
+- [x] 02-01-PLAN.md — Confirm/record base stack: uv-installed OpenHands CLI 1.16.0 + PATH + Python 3.12; litellm proxy preflight (qwen-local @ 127.0.0.1:4000)
+- [x] 02-02-PLAN.md — End-to-end headless verification: env-var run of openai/qwen-local, echo tool-call ping (action+observation), agent runs dotnet --version (10.0.203); 02-VERIFICATION-EVIDENCE.md (measured ~15s/call, not 240s)
+- [x] 02-03-PLAN.md — Wrote 3부 setup chapter (3 files) from verified evidence; SUMMARY 3부 drafts→real paths; mdbook build green (4부/5부 stay drafts)
 
 > Note: re-planned 2026-05-27 against the verified headless-CLI + LocalWorkspace path. The original 5-plan Docker-Desktop / config.toml / custom-sandbox sketch is stale (archived). Docker is NOT on the critical path; dotnet is on the host; LLM config is via env vars + `--override-with-envs`.
 
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Scaffold & Concept Chapters | 3/3 | ✓ Complete | 2026-05-27 |
-| 2. Environment Setup & Verification | 0/3 | Not started | - |
+| 2. Environment Setup & Verification | 3/3 | ✓ Complete | 2026-05-27 |
 | 3. Capture the OpenHands Run | 0/3 | Not started | - |
 | 4. Worked-Example Chapter | 0/5 | Not started | - |
 | 5. Troubleshooting, Reproducibility & Publish | 0/4 | Not started | - |

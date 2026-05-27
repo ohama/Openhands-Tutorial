@@ -16,10 +16,10 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Setup
 
-- [ ] **SETUP-01**: Reader can install and run OpenHands on macOS (uv + headless CLI) by following the tutorial
-- [ ] **SETUP-02**: Reader can configure OpenHands to use the local Qwen endpoint via env vars (`LLM_MODEL=openai/qwen-local`, `LLM_BASE_URL=http://127.0.0.1:4000/v1`, dummy api_key, `--override-with-envs`)
-- [ ] **SETUP-03**: The .NET SDK is available to the agent's workspace (host toolchain via LocalWorkspace; `dotnet --version` works inside an OpenHands session)
-- [ ] **SETUP-04**: Tutorial provides a pre-run verification checklist (litellm proxy + tool calling, headless tool-call ping, `dotnet --version` via the agent) the reader runs before the live run
+- [x] **SETUP-01**: Reader can install and run OpenHands on macOS (uv + headless CLI) by following the tutorial
+- [x] **SETUP-02**: Reader can configure OpenHands to use the local Qwen endpoint via env vars (`LLM_MODEL=openai/qwen-local`, `LLM_BASE_URL=http://127.0.0.1:4000/v1`, dummy api_key, `--override-with-envs`)
+- [x] **SETUP-03**: The .NET SDK is available to the agent's workspace (host toolchain via LocalWorkspace; `dotnet --version` works inside an OpenHands session)
+- [x] **SETUP-04**: Tutorial provides a pre-run verification checklist (litellm proxy + tool calling, headless tool-call ping, `dotnet --version` via the agent) the reader runs before the live run
 
 ### Run capture
 
@@ -85,10 +85,10 @@ Which phases cover which requirements. Populated during roadmap creation.
 | CONCEPT-01 | Phase 1 | Complete |
 | CONCEPT-02 | Phase 1 | Complete |
 | CONCEPT-03 | Phase 1 | Complete |
-| SETUP-01 | Phase 2 | Pending |
-| SETUP-02 | Phase 2 | Pending |
-| SETUP-03 | Phase 2 | Pending |
-| SETUP-04 | Phase 2 | Pending |
+| SETUP-01 | Phase 2 | Complete |
+| SETUP-02 | Phase 2 | Complete |
+| SETUP-03 | Phase 2 | Complete |
+| SETUP-04 | Phase 2 | Complete |
 | RUN-01 | Phase 3 | Pending |
 | RUN-02 | Phase 3 | Pending |
 | RUN-03 | Phase 3 | Pending |
