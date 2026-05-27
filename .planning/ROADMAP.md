@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Scaffold & Concept Chapters** - Initialize the mdBook and write the run-independent concept/architecture chapters ✓
 - [x] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate ✓
-- [ ] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output
+- [x] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output ✓
 - [ ] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run
 - [ ] **Phase 5: Troubleshooting, Reproducibility & Publish** - Complete the book and ship it to GitHub Pages
 
@@ -68,9 +68,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Design & write the 6 prompt strings (5 scoped build tasks + conditional fix); scaffold carries the known-good .fsproj; build-test requires 2+3*4/( 2+3)*4/10-3-2; %left never revealed (autonomous, fast)
-- [ ] 03-02-PLAN.md — Execute the run: 5 openhands --headless invocations sharing oh-workdir/calc, per-task tee'd JSONL, retry/adjust policy, drive a real error-and-fix, confirm 14/20/5 (SLOW, --yolo, empirical)
-- [ ] 03-03-PLAN.md — Verify captured run against all 4 criteria from real evidence; commit captured logs + transcript + final source snapshot + test output + manifest to tracked captured/; oh-workdir stays gitignored
+- [x] 03-01-PLAN.md — Designed & wrote the prompt strings; scaffold carries the known-good .fsproj; build-test requires 2+3*4/(2+3)*4/10-3-2; %left never revealed
+- [x] 03-02-PLAN.md — Executed the run (attempt 2, lexer scaffolded): 5 openhands --headless invocations sharing oh-workdir/calc; agent self-corrected 4 real build errors in task3-parser (RUN-03); 14/20/5 confirmed. (Attempt 1 failed honesty — model couldn't write FsLex, archived.)
+- [x] 03-03-PLAN.md — Verified against all 4 criteria from real evidence; committed captured logs + transcript + final source snapshot + test output + manifest to tracked captured/; oh-workdir gitignored
 
 ### Phase 4: Worked-Example Chapter
 **Goal**: The core tutorial chapter walks the reader through the real run step by step, with concept callouts, the error-and-fix narration, final source, and verification output
@@ -117,6 +117,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Scaffold & Concept Chapters | 3/3 | ✓ Complete | 2026-05-27 |
 | 2. Environment Setup & Verification | 3/3 | ✓ Complete | 2026-05-27 |
-| 3. Capture the OpenHands Run | 0/3 | Not started | - |
+| 3. Capture the OpenHands Run | 3/3 | ✓ Complete | 2026-05-28 |
 | 4. Worked-Example Chapter | 0/5 | Not started | - |
 | 5. Troubleshooting, Reproducibility & Publish | 0/4 | Not started | - |

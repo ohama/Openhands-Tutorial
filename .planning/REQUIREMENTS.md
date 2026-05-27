@@ -23,9 +23,9 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Run capture
 
-- [ ] **RUN-01**: Tutorial is built from a real captured OpenHands run (commands + output logged), not fabricated output
-- [ ] **RUN-02**: The captured run shows OpenHands building the calculator across scoped tasks (scaffold → lexer → parser → evaluator → integration), not one mega-prompt
-- [ ] **RUN-03**: The captured run includes at least one real error-and-fix cycle, narrated explicitly (the strongest agentic demonstration)
+- [x] **RUN-01**: Tutorial is built from a real captured OpenHands run (commands + output logged), not fabricated output
+- [x] **RUN-02**: The captured run shows OpenHands building the calculator across scoped tasks (scaffold → lexer → parser → evaluator → integration), not one mega-prompt
+- [x] **RUN-03**: The captured run includes at least one real error-and-fix cycle, narrated explicitly (the strongest agentic demonstration)
 
 ### Worked example
 
@@ -89,9 +89,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | SETUP-02 | Phase 2 | Complete |
 | SETUP-03 | Phase 2 | Complete |
 | SETUP-04 | Phase 2 | Complete |
-| RUN-01 | Phase 3 | Pending |
-| RUN-02 | Phase 3 | Pending |
-| RUN-03 | Phase 3 | Pending |
+| RUN-01 | Phase 3 | Complete |
+| RUN-02 | Phase 3 | Complete |
+| RUN-03 | Phase 3 | Complete |
 | WALK-01 | Phase 4 | Pending |
 | WALK-02 | Phase 4 | Pending |
 | WALK-03 | Phase 4 | Pending |
