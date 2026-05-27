@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FsYacc Include="Parser.fsy">
+      <OtherFlags>--module Parser</OtherFlags>
+    </FsYacc>
+    <FsLex Include="Lexer.fsl">
+      <OtherFlags>--unicode --module Lexer</OtherFlags>
+    </FsLex>
+  </ItemGroup>
+
+  <!-- REQUIRED WORKAROUND for .NET 10 + FsLexYacc 11.3.0:
+       fsyacc generates "# 0 """" line directives that F# 10 compiler rejects.
+       Strip them with a post-generation sed step. -->
+  <Target Name="FixLineDirectives" BeforeTargets="CoreCompile" DependsOnTargets="CallFsYacc;CallFsLex">
+    <Exec Command="sed -i '' '/^# 0/d' Parser.fs" Condition="Exists('Parser.fs')" />
+    <Exec Command="sed -i '' '/^# 0/d' Lexer.fs" Condition="Exists('Lexer.fs')" />
+  </Target>
+
+  <ItemGroup>
+    <!-- Compile order matters in F#: Parser.fsi/.fs must precede Lexer.fs (Lexer opens Parser) -->
+    <Compile Include="Parser.fsi" />
+    <Compile Include="Parser.fs" />
+    <Compile Include="Lexer.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsLexYacc" Version="11.3.0" />
+  </ItemGroup>
+</Project>
