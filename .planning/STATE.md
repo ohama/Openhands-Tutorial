@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 3 of 5 (Capture the OpenHands Run) — In progress
-Plan: 2 of 3 complete (03-02 OpenHands run captured). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
-Status: In progress — 03-01 (prompt strings) done; 03-02 (execute the run) done; next: 03-03 (curate JSONL logs).
-Last activity: 2026-05-27 — Completed 03-02-PLAN.md: 8 JSONL logs captured, calculator produces 2+3*4=14, (2+3)*4=20, 10-3-2=5.
+Plan: 2 of 3 complete (03-02 OpenHands run captured, attempt 2). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
+Status: In progress — 03-01 (prompt strings) done; 03-02 (execute the run) done (attempt 2: 5 JSONL logs, error-and-fix in task3-parser.jsonl, calc verified 14/20/5); next: 03-03 (curate JSONL logs).
+Last activity: 2026-05-28 — Completed 03-02-PLAN.md attempt 2: 5 JSONL logs (146 events, 67 TerminalActions); genuine FsYacc error-and-fix in task3 (4 build failures, self-corrected); calculator produces 2+3*4=14, (2+3)*4=20, 10-3-2=5.
 
 Progress: [████████░░] 40% (8/20 plans) — Phases 1-2 done, Phase 3 plans 1-2 done
 
@@ -68,6 +68,10 @@ Recent decisions affecting current work:
 - [03-02]: FsLexYacc 11.3.0 lexeme extraction in action code = LexBuffer<_>.LexemeString lexbuf (not lexeme lexbuf)
 - [03-02]: FsLex header braces must each be on own line at col 0; inline { open Parser } causes 2-space indented output in generated .fs causing F# light-mode compilation failure
 - [03-02]: Manual Lexer.fsl fix classified as Deviation Rule 3 after 3 agents (94+27+16 TerminalActions) exhausted retry budget; genuine error cycle documented in JSONL logs
+- [03-02-attempt2]: Lexer.fsl provided verbatim in task2-lexer.txt — eliminates FsLex out-of-distribution blocker; agent's real work is parser + evaluator
+- [03-02-attempt2]: Genuine error-and-fix captured in task3-parser.jsonl: 4 build failures (%start missing, %start <int> syntax invalid, same, LexBuffer.FromText non-existent) → self-corrected to build success
+- [03-02-attempt2]: Branch A taken — error-and-fix in task3, not task5; task5 passed all 3 cases cleanly on first build; task6-fix.txt not needed
+- [03-02-attempt2]: Agent wrote %left PLUS MINUS / %left STAR SLASH from the start — no precedence bug surfaced; associativity (10-3-2=5) was correct all along
 
 ### Phase 2 ENVIRONMENT — verified during execution (2026-05-27), DIVERGES from the 02 plans
 
@@ -107,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27
-Stopped at: Completed 03-02-PLAN.md — 8 JSONL logs captured, calculator verified (2+3*4=14, (2+3)*4=20, 10-3-2=5). Next: 03-03-PLAN.md (curate JSONL logs: select representative events, strip large payloads, commit canonical subset).
+Last session: 2026-05-28
+Stopped at: Completed 03-02-PLAN.md (attempt 2) — 5 JSONL logs (task1-scaffold through task5-buildtest); genuine error-and-fix in task3-parser.jsonl; calculator verified 14/20/5. Next: 03-03-PLAN.md (curate JSONL logs: select representative events from the 5 keepers, strip large payloads, commit canonical subset).
 Resume file: None
