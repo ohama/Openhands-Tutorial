@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 1 of 5 (Scaffold & Concept Chapters)
-Plan: 1 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In progress
-Last activity: 2026-05-27 — Completed 01-01-PLAN.md (mdBook scaffold: book.toml, SUMMARY.md, about.md, stubs)
+Last activity: 2026-05-27 — Completed 01-03-PLAN.md (2부 OpenHands architecture chapter: five ch02 files, mdbook build exits 0)
 
-Progress: [█░░░░░░░░░] 5% (1/20 plans)
+Progress: [███░░░░░░░] 15% (3/20 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: ~15 min
-- Total execution time: ~15 min
+- Total plans completed: 3
+- Average duration: ~10 min
+- Total execution time: ~35 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-scaffold-and-concept-chapters | 1/4 | ~15 min | ~15 min |
+| 01-scaffold-and-concept-chapters | 3/4 | ~35 min | ~12 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~15 min)
-- Trend: Baseline established
+- Last 5 plans: 01-01 (~15 min), 01-02 (partial/parallel), 01-03 (~4 min)
+- Trend: Fast execution for content-writing plans
 
 *Updated after each plan completion*
 
@@ -47,6 +47,8 @@ Recent decisions affecting current work:
 - [Roadmap]: BOOK-01 and BOOK-02 placed in Phase 1 — mdBook scaffold and Korean language constraint apply from the very first chapter
 - [01-01]: mdbook installed via brew (0.5.3) — was not pre-installed; use /opt/homebrew/bin/mdbook in all subsequent plans
 - [01-01]: mdBook 0.5.x site-url goes into 404.html base href, not index.html asset paths — this is correct behavior for GitHub Pages project sites
+- [01-03]: Prose-only forward references to 3부+ chapters — draft SUMMARY.md entries have no files; Markdown links produce dead links
+- [01-03]: ASCII art used for all ch02 architecture diagrams — zero preprocessor dependencies, builds cleanly with mdBook 0.5.3
 
 ### Pending Todos
 
@@ -62,5 +64,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Completed 01-01-PLAN.md — mdBook scaffold complete, mdbook build exits 0
+Stopped at: Completed 01-03-PLAN.md — 2부 OpenHands architecture chapter complete, mdbook build exits 0
 Resume file: None
