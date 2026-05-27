@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 2 of 5 (Environment Setup & Verification) — ✓ COMPLETE, goal verified 5/5
-Plan: 3 of 3 complete (02-01 preflight, 02-02 end-to-end verification + evidence, 02-03 3부 chapters). Phase 2 was re-planned to 3 plans (the original Docker-Desktop 5-plan sketch was archived). Phase 1 also ✓ COMPLETE (3/3).
-Status: Phase 2 complete and verified — the capture gate is OPEN. Ready to plan Phase 3.
-Last activity: 2026-05-27 — Phase 2 verified 5/5: real headless OpenHands run proved tool calling + dotnet 10.0.203 in LocalWorkspace; 3부 setup chapter written; mdbook build green.
+Phase: 3 of 5 (Capture the OpenHands Run) — In progress
+Plan: 1 of 3 complete (03-01 prompt design). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3).
+Status: In progress — 03-01 (prompt strings) done; next: 03-02 (execute the run).
+Last activity: 2026-05-27 — Completed 03-01-PLAN.md: wrote 7 prompt files (00-INVOCATION.md + task1-scaffold through task6-fix) with verbatim known-good .fsproj and 10-3-2=5 third test case.
 
-Progress: [██████░░░░] 30% (6/20 plans) — Phases 1-2 of 5 done
+Progress: [███████░░░] 35% (7/20 plans) — Phases 1-2 done, Phase 3 plan 1 done
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: ~8 min
-- Total execution time: ~38 min
+- Total execution time: ~50 min
 
 **By Phase:**
 
@@ -59,6 +59,10 @@ Recent decisions affecting current work:
 - [02-03]: Real timing documented in chapters (~14-15s/call from evidence); plan's "240s" figure was a worst-case estimate, not measured — chapters cite real evidence
 - [02-03]: dotnet PATH confirmed bare dotnet works; no /opt/homebrew/bin prefix needed in agent PTY
 - [02-03]: 3부 documentation complete; SUMMARY.md wired; 4부/5부 remain () drafts; mdbook build green
+- [03-01]: Verbatim known-good calc.fsproj (FixLineDirectives + FsLexYacc 11.3.0) embedded in task1-scaffold.txt — bypasses # 0 "" line-directive bug without stalling the run on a non-instructive error
+- [03-01]: 10-3-2=5 is the critical third test case — 2+3*4 and (2+3)*4 both pass even with naive no-%left grammar; only 10-3-2 exposes the right-associativity bug
+- [03-01]: task3-parser.txt states "left-to-right" as a behavioral outcome only — never names %left so the naive-grammar bug can emerge honestly
+- [03-01]: task6-fix.txt uses <ACTUAL_WRONG_OUTPUT> placeholder — plan 03-02 executor substitutes the real captured value from task5-buildtest.jsonl before invoking
 
 ### Phase 2 ENVIRONMENT — verified during execution (2026-05-27), DIVERGES from the 02 plans
 
@@ -99,5 +103,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-27
-Stopped at: Phase 2 complete and verified 5/5 (capture gate OPEN). SETUP-01..04 done. Next: /gsd:plan-phase 3 (Capture the OpenHands Run — build the FsLex/FsYacc calculator, decomposed into ≥5 scoped tasks, capture the JSONL log incl. an error-and-fix cycle, prove 2+3*4 → 14).
+Stopped at: Completed 03-01-PLAN.md — prompt strings written and committed (711a184). Next: 03-02-PLAN.md (execute the OpenHands run: invoke task1..task5 in sequence, capture JSONL logs, invoke task6-fix if task5 surfaces a failure, commit captured artifacts).
 Resume file: None
