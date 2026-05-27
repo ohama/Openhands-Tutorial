@@ -1,0 +1,29 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir
+
+An F# FsLexYacc project scaffold already exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+
+The project has calc.fsproj (already wired for FsLex/FsYacc), placeholder files Lexer.fsl and Parser.fsy (currently empty or minimal), and Program.fs. The .fsproj expects FsLex to read Lexer.fsl and generate Lexer.fs, and FsYacc to read Parser.fsy and generate Parser.fsi + Parser.fs.
+
+Your task: Write Lexer.fsl — the FsLex lexer source — that tokenizes integer arithmetic expressions.
+
+The lexer must:
+- Skip whitespace (spaces and tabs).
+- Recognize sequences of digits and emit an INT token carrying the integer value.
+- Recognize the four arithmetic operators and emit: PLUS (+), MINUS (-), STAR (*), SLASH (/).
+- Recognize parentheses and emit: LPAREN ((), RPAREN ()).
+- Emit an EOF token at end of input.
+- Raise an error on any unexpected character.
+
+Constraints:
+- Integers only (no decimals, no floats).
+- The lexer header block must open Parser (i.e., the first block should contain `open Parser`), because the token type DU is defined by the parser grammar.
+- Use exactly these token names: INT (carries an int value), PLUS, MINUS, STAR, SLASH, LPAREN, RPAREN, EOF. The parser will be written to match these names.
+- The tokenize rule must accept a `lexbuf` parameter (standard FsLex pattern: `rule tokenize = parse ...`).
+- Do NOT create or modify calc.fsproj.
+- Do NOT write Parser.fsy yet — only Lexer.fsl is needed in this task.
+
+Write the completed Lexer.fsl file to calc/Lexer.fsl.

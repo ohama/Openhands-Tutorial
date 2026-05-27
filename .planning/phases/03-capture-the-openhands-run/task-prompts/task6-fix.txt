@@ -1,0 +1,33 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir
+
+An F# FsLex/FsYacc calculator project exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat Parser.fsy
+
+The project builds successfully, but it produces wrong results for at least one test case:
+
+  dotnet run -- "10-3-2"  prints <ACTUAL_WRONG_OUTPUT> (should be 5)
+
+NOTE TO EXECUTOR (plan 03-02): Before running this task, replace <ACTUAL_WRONG_OUTPUT> above with
+the real wrong value captured from task5-buildtest.jsonl (e.g., "9" if the naive grammar gave 9).
+
+Your task: Diagnose and fix the operator-evaluation bug so that all three test cases produce correct results.
+
+Required passing outputs after the fix:
+  - dotnet run -- "2+3*4"   must print 14
+  - dotnet run -- "(2+3)*4" must print 20
+  - dotnet run -- "10-3-2"  must print 5
+
+The bug is in the grammar (Parser.fsy). Read the current Parser.fsy carefully, identify the issue with how operators are evaluated for equal-precedence expressions, and fix it.
+
+After fixing Parser.fsy:
+  1. Run dotnet build 2>&1 and confirm the build succeeds.
+  2. Run all three test cases and report each result explicitly.
+
+Constraints:
+- The fix is in Parser.fsy — examine and correct the grammar there.
+- Do NOT rewrite the project from scratch.
+- Do NOT modify calc.fsproj, Lexer.fsl, or Program.fs.
+- After fixing, verify all three cases pass and report the actual outputs.
