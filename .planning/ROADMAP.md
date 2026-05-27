@@ -47,14 +47,14 @@ Plans:
   3. A custom sandbox Docker image is built with the .NET SDK installed; `dotnet --version` runs correctly from within an OpenHands sandbox session using that image
   4. The pre-run verification checklist passes: tool-call ping returns a response, `dotnet --version` in sandbox prints a version, Docker can reach the host LLM endpoint
   5. The setup chapter in the tutorial covers every step a reader must take, matching the verified configuration exactly
-**Plans**: 5 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Install Docker Desktop (checkpoint) + uv Python 3.12 + OpenHands 1.7; confirm `openhands serve` UI loads (autonomous: false)
-- [ ] 02-02-PLAN.md — Write ~/.openhands/config.toml [llm]; preflight Checks 1-2; confirm working model string (double-slash/alias)
-- [ ] 02-03-PLAN.md — Build custom .NET sandbox image (Dockerfile + dotnet-install.sh); register [sandbox]; verify dotnet in bare image
-- [ ] 02-04-PLAN.md — Run full pre-run checklist: dotnet in real session (checkpoint) + tool-call ping + fallbacks; write evidence file (autonomous: false)
-- [ ] 02-05-PLAN.md — Write 3부 setup chapter (4 files) from verified evidence; convert SUMMARY drafts→real paths; mdbook build green
+- [ ] 02-01-PLAN.md — Confirm/record base stack: uv-installed OpenHands CLI 1.16.0 + PATH + Python 3.12; litellm proxy preflight (qwen-local @ 127.0.0.1:4000)
+- [ ] 02-02-PLAN.md — End-to-end headless verification (SLOW ~240s/call): env-var run of openai/qwen-local, echo tool-call ping (action+observation), agent runs dotnet --version; write 02-VERIFICATION-EVIDENCE.md
+- [ ] 02-03-PLAN.md — Write 3부 setup chapter (3 files) from verified evidence; convert SUMMARY 3부 drafts→real paths; mdbook build green (4부/5부 stay drafts)
+
+> Note: re-planned 2026-05-27 against the verified headless-CLI + LocalWorkspace path. The original 5-plan Docker-Desktop / config.toml / custom-sandbox sketch is stale (archived). Docker is NOT on the critical path; dotnet is on the host; LLM config is via env vars + `--override-with-envs`.
 
 ### Phase 3: Capture the OpenHands Run
 **Goal**: A real, complete OpenHands session that builds the F# FsLex/FsYacc calculator is captured to a log file
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Scaffold & Concept Chapters | 3/3 | ✓ Complete | 2026-05-27 |
-| 2. Environment Setup & Verification | 0/4 | Not started | - |
+| 2. Environment Setup & Verification | 0/3 | Not started | - |
 | 3. Capture the OpenHands Run | 0/3 | Not started | - |
 | 4. Worked-Example Chapter | 0/5 | Not started | - |
 | 5. Troubleshooting, Reproducibility & Publish | 0/4 | Not started | - |
