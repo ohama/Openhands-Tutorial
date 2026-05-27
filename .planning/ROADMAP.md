@@ -42,11 +42,11 @@ Plans:
 **Depends on**: Phase 1
 **Requirements**: SETUP-01, SETUP-02, SETUP-03, SETUP-04
 **Success Criteria** (what must be TRUE):
-  1. OpenHands is installed via `uv tool install openhands --python 3.12` and `openhands serve` starts without error on macOS
-  2. OpenHands connects to the local Qwen endpoint using the `openai/` model prefix, `host.docker.internal:8000/v1` base_url, and a timeout ≥300s — confirmed by a successful tool-call ping from inside the Docker sandbox
-  3. A custom sandbox Docker image is built with the .NET SDK installed; `dotnet --version` runs correctly from within an OpenHands sandbox session using that image
-  4. The pre-run verification checklist passes: tool-call ping returns a response, `dotnet --version` in sandbox prints a version, Docker can reach the host LLM endpoint
-  5. The setup chapter in the tutorial covers every step a reader must take, matching the verified configuration exactly
+  1. OpenHands is installed via `uv tool install openhands --python 3.12` and runs on macOS via the headless CLI (`openhands --version` works; no browser needed)
+  2. OpenHands connects to the local Qwen endpoint via env vars (`LLM_MODEL=openai/qwen-local`, `LLM_BASE_URL=http://127.0.0.1:4000/v1`, dummy key, `--override-with-envs`) — confirmed by a headless tool-call ping where the agent calls a tool and an action+observation appear in the JSONL
+  3. `dotnet --version` (10.0.x) runs in the agent's LocalWorkspace (the host toolchain) — confirmed by the headless agent running it; no custom Docker image needed
+  4. The pre-run verification checklist passes: `openhands --version`; litellm proxy lists `qwen-local` and tool calling works through it; the headless agent runs a tool and runs `dotnet --version` — real outputs captured in an evidence file
+  5. The 3부 setup chapter covers every step a reader must take, matching the verified configuration exactly
 **Plans**: 3 plans
 
 Plans:

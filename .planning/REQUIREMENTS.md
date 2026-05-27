@@ -16,10 +16,10 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Setup
 
-- [ ] **SETUP-01**: Reader can install and run OpenHands on macOS (uv + Docker) by following the tutorial
-- [ ] **SETUP-02**: Reader can configure OpenHands to use the local Qwen endpoint (`openai/` model prefix, `host.docker.internal:8000/v1` base_url, dummy api_key, timeout ≥300s)
-- [ ] **SETUP-03**: Reader can build a .NET-enabled OpenHands sandbox image (custom Dockerfile adding the .NET SDK)
-- [ ] **SETUP-04**: Tutorial provides a pre-run verification checklist (tool-call ping, `dotnet --version` inside sandbox, Docker connectivity) the reader runs before the live run
+- [ ] **SETUP-01**: Reader can install and run OpenHands on macOS (uv + headless CLI) by following the tutorial
+- [ ] **SETUP-02**: Reader can configure OpenHands to use the local Qwen endpoint via env vars (`LLM_MODEL=openai/qwen-local`, `LLM_BASE_URL=http://127.0.0.1:4000/v1`, dummy api_key, `--override-with-envs`)
+- [ ] **SETUP-03**: The .NET SDK is available to the agent's workspace (host toolchain via LocalWorkspace; `dotnet --version` works inside an OpenHands session)
+- [ ] **SETUP-04**: Tutorial provides a pre-run verification checklist (litellm proxy + tool calling, headless tool-call ping, `dotnet --version` via the agent) the reader runs before the live run
 
 ### Run capture
 
