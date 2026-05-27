@@ -1,0 +1,17 @@
+[book]
+title = "에이전틱 AI 튜토리얼: OpenHands로 배우는 AI 에이전트"
+authors = ["ohama100"]
+description = "OpenHands와 로컬 Qwen LLM을 사용하여 에이전틱 AI를 배우는 한국어 튜토리얼"
+language = "ko"
+src = "src"
+
+[output.html]
+site-url = "/OpenHandsTests/"
+default-theme = "light"
+preferred-dark-theme = "navy"
+
+[output.html.search]
+enable = true
+
+[build]
+create-missing = false
