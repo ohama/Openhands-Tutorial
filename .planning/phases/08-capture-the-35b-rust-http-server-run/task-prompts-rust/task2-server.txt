@@ -1,0 +1,33 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-rust
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+A Rust project scaffold exists in rust-server/. Start by reviewing it:
+
+  cd rust-server
+  ls
+  cat Cargo.toml
+  cat src/main.rs
+
+Your task: rewrite src/main.rs so that when the program runs, it listens on TCP
+port 8080 and responds to any HTTP request it receives with the text:
+
+  hello
+
+followed by a newline character, then closes the connection.
+
+Requirements:
+- Port: 8080 (bind to 0.0.0.0:8080 or 127.0.0.1:8080 — either is fine)
+- Response: the literal characters "hello" followed by a newline (\n)
+- The program must continue running, accepting connections in a loop (not exit
+  after the first request)
+- Use ONLY the Rust standard library — no external crates (Cargo.toml stays as-is,
+  with an empty [dependencies] section)
+
+After writing src/main.rs, show its contents:
+  cat src/main.rs
+
+Do NOT build yet — a later task handles build and testing.

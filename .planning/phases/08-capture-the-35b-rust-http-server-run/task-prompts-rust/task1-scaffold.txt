@@ -1,0 +1,22 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-rust
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+The directory /Users/ohama/projs/OpenHandsTests/oh-workdir-rust is empty. Your task:
+create a new Rust project here named rust-server.
+
+  cd /Users/ohama/projs/OpenHandsTests/oh-workdir-rust
+  cargo new rust-server
+
+This creates rust-server/ with Cargo.toml and src/main.rs filled in with the default
+template by cargo itself.
+
+After running cargo new, confirm the project was created:
+  ls rust-server/
+  cat rust-server/Cargo.toml
+  cat rust-server/src/main.rs
+
+Do NOT modify any files yet — a later task fills in the source code.

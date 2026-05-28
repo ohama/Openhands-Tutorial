@@ -1,0 +1,57 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-rust
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands. Do NOT use
+the file_editor tool.
+
+A Rust HTTP server source exists in rust-server/src/main.rs. Your task: build it,
+run it, test it with curl, and report the REAL outcome.
+
+Step 1: Build.
+
+  cd rust-server
+  cargo build 2>&1
+
+If the build fails, read the compiler error carefully, edit src/main.rs to fix the
+error at hand (using heredoc/printf/tee — NOT file_editor), and rebuild. Repeat
+until the build succeeds. Report each error you saw and what you changed to fix it.
+
+Step 2: Run the server in the background.
+
+  cargo run &
+  sleep 2
+
+(The `&` is REQUIRED — `cargo run` blocks the shell while the server accepts
+connections, so it MUST run in the background or the next command never runs.
+The `sleep 2` lets the server finish binding before curl tries to connect.)
+
+Step 3: Test with curl and capture the exact output.
+
+  curl -s http://localhost:8080/
+
+Required behavior: curl prints `hello` and a newline (so the shell prompt appears
+on the next line, not run together with "hello"). The curl command should exit 0.
+
+If curl hangs (no output, no return) for more than ~5 seconds, the server is
+probably blocking trying to read from the socket. Kill the server (`kill %1`),
+adjust src/main.rs (consider whether the read operation might block waiting for
+data that the client never sends), and re-run from Step 1.
+
+Step 4: Kill the server.
+
+  kill %1
+  wait %1 2>/dev/null
+
+Step 5: Report results explicitly.
+
+State the EXACT output curl printed (verbatim — copy from the terminal), the curl
+exit code (`echo $?`), and whether the required output ("hello\n") was produced.
+
+Constraints:
+- Do NOT modify Cargo.toml (no external crates).
+- If you fix src/main.rs, fix only the error at hand — and report what you changed
+  and WHY.
+- Report every build error you encountered and how you fixed it — this is the
+  point of the exercise.
+- DO NOT modify results to appear successful. If the server did not respond, if
+  curl returned an error, or if the output was wrong, state that clearly. An
+  honest failure is more valuable than a fabricated success.

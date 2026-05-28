@@ -1,0 +1,31 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-rust
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool.
+
+A Rust project scaffold exists in rust-server/. Replace its src/main.rs with the
+following exact contents using a heredoc:
+
+  cd rust-server
+  cat > src/main.rs <<'RUST_EOF'
+  use std::net::TcpListener;
+  use std::io::{Read, Write};
+
+  fn main() {
+      let listener = TcpListener::bind("0.0.0.0:8080").unwrap();
+      for stream in listener.incoming() {
+          let mut stream = stream.unwrap();
+          let mut buf = [0u8; 4096];
+          let _ = stream.read(&mut buf);
+          let response = "HTTP/1.1 200 OK\r\nContent-Length: 6\r\nConnection: close\r\n\r\nhello\n";
+          stream.write_all(response.as_bytes()).unwrap();
+      }
+  }
+  RUST_EOF
+
+After writing, confirm the contents:
+  cat src/main.rs
+
+Do NOT modify Cargo.toml (no external crates). Do NOT build yet — a later task
+handles build and testing.
