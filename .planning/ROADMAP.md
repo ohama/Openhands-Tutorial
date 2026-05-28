@@ -84,9 +84,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Prepare 122B task-prompts (unaided task2; reuse v1 task1/3/4/5/6 with workdir swap) + preflight (gitignore oh-workdir-122b, confirm proxy serves qwen-122b)
-- [ ] 06-02-PLAN.md — Execute the 122B run (SLOW/empirical/--yolo, background+poll); unaided-first lexer with retry→disclosed-fallback; capture per-task JSONL + RUN-NOTES
-- [ ] 06-03-PLAN.md — Verify JSONL + extract timing/outcome/error-and-fix; write CAPTURE-MANIFEST.md; commit captured-122b/ (oh-workdir-122b/ stays gitignored)
+- [x] 06-01-PLAN.md — Prepare 122B task-prompts (unaided task2; reuse v1 task1/3/4/5/6 with workdir swap) + preflight (gitignore oh-workdir-122b, confirm proxy serves qwen-122b)
+- [x] 06-02-PLAN.md — Execute the 122B run (SLOW/empirical/--yolo, background+poll); unaided-first lexer with retry→disclosed-fallback; capture per-task JSONL + RUN-NOTES
+- [x] 06-03-PLAN.md — Verify JSONL + extract timing/outcome/error-and-fix; write CAPTURE-MANIFEST.md; commit captured-122b/ (oh-workdir-122b/ stays gitignored)
 
 ---
 
@@ -122,5 +122,5 @@ Plans:
 | 3. Capture the 35B OpenHands Run | v1 | 3/3 | Complete | 2026-05-28 |
 | 4. Worked-Example Chapter | v1 | 3/3 | Complete | 2026-05-28 |
 | 5. Publish | v1 | 4/4 | Complete | 2026-05-28 |
-| 6. Capture the 122B OpenHands Run | v1.1 | 0/3 | Not started | - |
+| 6. Capture the 122B OpenHands Run | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
 | 7. Comparison Chapter + Publish | v1.1 | 0/3 | Not started | - |

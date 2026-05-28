@@ -10,9 +10,9 @@
 
 ### 122B run capture
 
-- [ ] **RUN122-01**: A real captured 122B OpenHands run of the F# FsLex/FsYacc calculator exists (per-task JSONL on disk), with the `.fsl` lexer attempted **unaided first** (no provided lexer) — testing whether the 122B can do what the 35B could not.
-- [ ] **RUN122-02**: The run honestly records whether 122B wrote the `.fsl` lexer itself; if 122B also couldn't and scaffolding was provided as a fallback, that is disclosed (never hidden, never manually patched to fake success).
-- [ ] **RUN122-03**: The run's real outcome on `2+3*4=14`, `(2+3)*4=20`, `10-3-2=5` is captured (success or honest failure), along with any genuine error-and-fix cycle the agent performed.
+- [x] **RUN122-01**: A real captured 122B OpenHands run of the F# FsLex/FsYacc calculator exists (per-task JSONL on disk), with the `.fsl` lexer attempted **unaided first** (no provided lexer) — testing whether the 122B can do what the 35B could not.
+- [x] **RUN122-02**: The run honestly records whether 122B wrote the `.fsl` lexer itself; if 122B also couldn't and scaffolding was provided as a fallback, that is disclosed (never hidden, never manually patched to fake success).
+- [x] **RUN122-03**: The run's real outcome on `2+3*4=14`, `(2+3)*4=20`, `10-3-2=5` is captured (success or honest failure), along with any genuine error-and-fix cycle the agent performed.
 
 ### Comparison content
 
@@ -45,9 +45,9 @@ Deferred to a later milestone (carried from v1's v2 backlog):
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RUN122-01 | Phase 6 | Pending |
-| RUN122-02 | Phase 6 | Pending |
-| RUN122-03 | Phase 6 | Pending |
+| RUN122-01 | Phase 6 | Complete |
+| RUN122-02 | Phase 6 | Complete |
+| RUN122-03 | Phase 6 | Complete |
 | CMP-01 | Phase 7 | Pending |
 | CMP-02 | Phase 7 | Pending |
 | PUB-01 | Phase 7 | Pending |

@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-05-28)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator. v1.1 extends this with an honest 35B-vs-122B comparison.
-**Current focus:** v1.1 — Phase 6: Capture the 122B OpenHands Run
+**Current focus:** v1.1 — Phase 7: Comparison Chapter + Publish (Phase 6 ✓ complete)
 
 ## Current Position
 
