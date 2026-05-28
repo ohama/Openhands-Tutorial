@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
 Phase: 8 — Capture the 35B Rust HTTP Server Run (in progress)
-Plan: 08-01 complete; 08-02 next
-Status: Preflight green; ready to launch 35B capture
-Last activity: 2026-05-28 — Phase 8 plan 01 (preflight) complete
+Plan: 08-02 complete; 08-03 next
+Status: 35B Rust capture done — did-write-server-unaided=YES, scaffold-invoked=NO, build-status=PASS (after 2 failures), curl-result=`hello\n` exit 0 (task3-buildtest.jsonl event #32)
+Last activity: 2026-05-28 — Phase 8 plan 02 (35B Rust capture) complete
 
-Progress: █░░░░░░░░░ v1.2 ~10% (Phase 8 plan 01 of 3 complete)
+Progress: ██░░░░░░░░ v1.2 ~20% (Phase 8 plans 01+02 of 3 complete)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -32,6 +32,13 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [run-config]: `LLM_MODEL=openai/qwen-{35b|122b} LLM_BASE_URL=http://127.0.0.1:4000/v1 LLM_API_KEY=dummy openhands --headless --json --yolo --override-with-envs -t "<task>"`
 - [honesty discipline]: real captured runs only; no manual edits to agent-written files; setup-asymmetry (scaffolding) disclosed; pre-run predictions never presented as measurements
 - [real measured per-call timing on this hardware]: 35B ≈ 5.3s/call, 122B ≈ 6.3s/call (from v1 + v1.1 JSONL)
+
+### Key decisions for v1.2 Phase 8 plan 02
+
+- [08-02 capture]: did-write-server-unaided=YES — qwen-35b wrote 42-line Rust HTTP server using TcpListener + BufReader on unaided attempt 1. Scaffold not invoked.
+- [08-02 build story]: build-status=PASS after 2 failures. Error 1: format! syntax (missing paren — agent's own task2 heredoc issue). Error 2: E0382 use of moved value (BufReader iterator moved twice). Both agent-diagnosed and agent-fixed in task3.
+- [08-02 curl-result]: `hello\n`, exit 0 — task3-buildtest.jsonl ObservationEvent #32. Primary RUST-03 evidence.
+- [08-02 honesty]: zero manual edits; no fabrication. All 3 JSONL files reflect verbatim agent actions. No FinishAction in any JSONL (all ended with MessageEvent) — run settled via background process exit.
 
 ### Key decisions for v1.2 Phase 8 plan 01
 
@@ -66,6 +73,6 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 ## Session Continuity
 
-Last session: 2026-05-28T08:37:28Z
-Stopped at: Completed 08-01-PLAN.md (preflight — task prompts authored, PREFLIGHT GREEN confirmed)
-Resume file: None — continue with /gsd:execute-phase 8 (will run 08-02).
+Last session: 2026-05-28T08:58:58Z
+Stopped at: Completed 08-02-PLAN.md (35B Rust capture — 3 tasks, curl PASS)
+Resume file: None — continue with /gsd:execute-phase 8 (will run 08-03, CAPTURE-MANIFEST.md).
