@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 4 of 5 (Write Worked-Example Chapter) — In progress (1/5 complete). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
-Plan: 04-03 complete (final.md — WALK-03 + VERIFY-01 + VERIFY-02). Next: 04-04 (wire SUMMARY.md ch04 links).
-Status: Phase 4 in progress — final.md written and committed; 04-01/04-02 by parallel agents; 04-04/04-05 remain.
-Last activity: 2026-05-28 — Completed 04-03-PLAN.md: final.md with verbatim source + 14/20/5 verification + honest ~10 min / ~150 min perf note; no "240s" figure.
+Phase: 4 of 5 (Write Worked-Example Chapter) — In progress (wave 1+2 of 4 complete). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
+Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 (writing.md), 04-03 complete (final.md). Next: 04-04 (wire SUMMARY.md ch04 links).
+Status: Phase 4 in progress — intro.md (WALK-01), planning.md (WALK-02 decomp + Callout D), final.md (WALK-03 + VERIFY-01 + VERIFY-02) committed. writing.md (04-02), build-test.md remaining or parallel.
+Last activity: 2026-05-28 — Completed 04-01-PLAN.md: intro.md (tokenize→parse→evaluate, 4-file arch, scaffolding disclosure) + planning.md (5-task decomp with real timings, FsLex out-of-distribution rationale, Callout D). Also 04-03 complete: final.md with verbatim source + verification block.
 
-Progress: [██████████░] 50% (10/20 plans) — Phases 1-3 done, Phase 4 plan 3 done
+Progress: [██████████░] 50% (10/20 plans) — Phases 1-3 done, Phase 4 plans 01 + 03 done (parallel wave)
 
 ## Performance Metrics
 
@@ -115,5 +115,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 04-03-PLAN.md — final.md written (225 lines, WALK-03 + VERIFY-01 + VERIFY-02). Commit c0f0a06. Phase 4 continues with 04-04 (wire SUMMARY.md ch04 entries).
+Stopped at: Completed 04-01-PLAN.md (intro.md + planning.md, commit f924b0e) and 04-03-PLAN.md (final.md, commit c0f0a06) in parallel. Phase 4 continues with 04-02 (writing.md) and 04-04 (wire SUMMARY.md).
 Resume file: None
