@@ -1,0 +1,53 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-122b
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
+An F# FsLexYacc project scaffold already exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+
+The project has calc.fsproj (already wired for FsLex/FsYacc) and a Program.fs placeholder. The .fsproj expects FsLex to read Lexer.fsl and generate Lexer.fs.
+
+Your task: Create calc/Lexer.fsl — the FsLex lexer source — that tokenizes integer arithmetic expressions.
+
+FsLex lexer syntax is unusual (it is NOT the same as FsYacc grammar syntax — FsLex does NOT use `%%` section separators). To avoid that pitfall, the correct lexer is PROVIDED for you below, exactly like the calc.fsproj was provided. Create the file with EXACTLY this content — do not redesign it. Your real engineering work comes in the parser (task 3) and the evaluator/CLI (task 4).
+
+Create calc/Lexer.fsl with EXACTLY this content (use a quoted heredoc so nothing is interpreted):
+
+  cat > Lexer.fsl <<'EOF'
+{
+open Parser
+open FSharp.Text.Lexing
+}
+
+rule tokenize = parse
+    | [' ' '\t']
+        { tokenize lexbuf }
+    | ['0'-'9']+
+        { let s = LexBuffer<_>.LexemeString lexbuf
+          let v = System.Int32.Parse s
+          INT v }
+    | '+'        { PLUS }
+    | '-'        { MINUS }
+    | '*'        { STAR }
+    | '/'        { SLASH }
+    | '('        { LPAREN }
+    | ')'        { RPAREN }
+    | eof        { EOF }
+    | _
+        { let c = LexBuffer<_>.LexemeString lexbuf
+          failwithf "Unexpected character '%s'" c }
+EOF
+
+After writing it, confirm it landed correctly:
+
+  cat Lexer.fsl
+
+The token names used here (INT carrying an int, PLUS, MINUS, STAR, SLASH, LPAREN, RPAREN, EOF) are the ones the parser (task 3) must declare and use.
+
+Constraints:
+- Create Lexer.fsl with the exact provided content — do NOT modify or "improve" it.
+- Do NOT create or modify calc.fsproj.
+- Do NOT write Parser.fsy yet — only Lexer.fsl is needed in this task.

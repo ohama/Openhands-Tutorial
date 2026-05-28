@@ -1,0 +1,40 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-122b
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
+An F# FsLexYacc project scaffold already exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+
+The project has calc.fsproj (already wired for FsLex/FsYacc with --unicode --module Lexer flags) and a Parser.fsy placeholder. The .fsproj expects FsLex to read Lexer.fsl and generate Lexer.fs.
+
+The parser (task 3) will declare and use these EXACT token names — your lexer must match them precisely:
+  INT (of int), PLUS, MINUS, STAR, SLASH, LPAREN, RPAREN, EOF
+
+Your task: Write calc/Lexer.fsl yourself — the FsLex lexer source — that tokenizes integer arithmetic expressions.
+
+FsLex (.fsl) files are structured as a `{ ... }` header block followed by `rule <name> = parse` with one `| pattern { action }` line per token — this is NOT FsYacc grammar syntax.
+
+Behavioral requirements (implement these, not provided code):
+- Skip whitespace (space and tab characters).
+- Match one or more digits and return INT carrying the parsed integer value.
+- Match the character '+' and return PLUS.
+- Match the character '-' and return MINUS.
+- Match the character '*' and return STAR.
+- Match the character '/' and return SLASH.
+- Match the character '(' and return LPAREN.
+- Match the character ')' and return RPAREN.
+- Match end-of-file and return EOF.
+- Match any other unexpected character and raise an error.
+
+The FsLex rule entry point must be named `tokenize` — the parser calls Lexer.tokenize at its start.
+
+After writing Lexer.fsl, confirm it with:
+  cat Lexer.fsl
+
+Constraints:
+- Do NOT create or modify calc.fsproj.
+- Do NOT write Parser.fsy yet — only Lexer.fsl is needed in this task.
+- Do NOT attempt to build yet — the parser source is not written yet.
