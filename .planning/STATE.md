@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — In progress (3/4 plans done). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
-Plan: Phase 5 Wave 1 (parallel): 05-01 COMPLETE (appendix-b-troubleshooting.md + ch05-wrap-up/review.md + ch05-wrap-up/next-steps.md written), 05-02 COMPLETE (appendix-a-repro.md written, commit 2a0506c). 05-03 and 05-04 remain.
-Status: Phase 5 in progress — 05-01 COMPLETE (부록 B + 5부 narrative chapters written, TROUBLE-01 satisfied); 05-02 COMPLETE (부록 A 재현 가이드 written, REPRO-01 satisfied). Next: 05-03 (SUMMARY.md wiring + final mdbook build), 05-04 (GitHub Pages deploy).
-Last activity: 2026-05-28 — Completed 05-01-PLAN.md: wrote src/appendix-b-troubleshooting.md (274 lines, 6 real failure modes + honest reconciliation), src/ch05-wrap-up/review.md (67 lines, 4 agentic concepts revisited), src/ch05-wrap-up/next-steps.md (55 lines); TROUBLE-01 satisfied; mdbook build exits 0.
+Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — In progress (4/4 plans not yet done; 05-03 COMPLETE). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
+Plan: 05-01 COMPLETE, 05-02 COMPLETE, 05-03 COMPLETE (SUMMARY.md wired, final mdbook build green, SC#3 satisfied, commit 3e4877c). 05-04 remains (GitHub Pages deploy).
+Status: Phase 5 in progress — 05-01 COMPLETE (TROUBLE-01 satisfied); 05-02 COMPLETE (REPRO-01 satisfied); 05-03 COMPLETE (SC#3 satisfied: full book mdbook build green, zero () drafts, all chapters render). Next: 05-04 (GitHub Pages deploy, BOOK-03).
+Last activity: 2026-05-28 — Completed 05-03-PLAN.md: wired all four 5부/부록 SUMMARY.md entries (ch05-wrap-up/review.md, ch05-wrap-up/next-steps.md, appendix-a-repro.md, appendix-b-troubleshooting.md); renamed 부록 A to 재현 가이드; mdbook build exits 0, no broken links; four new HTML pages generated.
 
-Progress: [████████████████░] 75% (15/20 plans) — Phases 1-4 done (3+3+3+4), Phase 5: 05-01 + 05-02 done. v1 requirements: 19/20 complete (only BOOK-03 [05-04] left; TROUBLE-01 and REPRO-01 done).
+Progress: [█████████████████░] 80% (16/20 plans) — Phases 1-4 done (3+3+3+4), Phase 5: 05-01+05-02+05-03 done. v1 requirements: 19/20 complete (only BOOK-03 [05-04] left; SC#3 now also satisfied).
 
 ## Performance Metrics
 
@@ -117,5 +117,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 05-01-PLAN.md (appendix-b-troubleshooting.md + ch05-wrap-up/review.md + ch05-wrap-up/next-steps.md written; TROUBLE-01 satisfied; mdbook build exits 0). Phase 5: 05-01 + 05-02 done. Next: 05-03 (SUMMARY.md wiring + final build), 05-04 (GitHub Pages deploy).
+Stopped at: Completed 05-03-PLAN.md (SUMMARY.md wired — zero () drafts; 부록 A renamed to 재현 가이드; final mdbook build exits 0, SC#3 satisfied). Phase 5: 05-01 + 05-02 + 05-03 done. Next: 05-04 (GitHub Pages deploy, BOOK-03).
 Resume file: None
