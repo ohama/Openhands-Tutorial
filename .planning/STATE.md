@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 ## Current Position
 
 Phase: 4 of 5 (Write Worked-Example Chapter) — In progress (wave 1+2 of 4 complete). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
-Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 (writing.md), 04-03 complete (final.md). Next: 04-04 (wire SUMMARY.md ch04 links).
-Status: Phase 4 in progress — intro.md (WALK-01), planning.md (WALK-02 decomp + Callout D), final.md (WALK-03 + VERIFY-01 + VERIFY-02) committed. writing.md (04-02), build-test.md remaining or parallel.
-Last activity: 2026-05-28 — Completed 04-01-PLAN.md: intro.md (tokenize→parse→evaluate, 4-file arch, scaffolding disclosure) + planning.md (5-task decomp with real timings, FsLex out-of-distribution rationale, Callout D). Also 04-03 complete: final.md with verbatim source + verification block.
+Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 COMPLETE (writing.md + build-test.md), 04-03 complete (final.md). Next: 04-04 (wire SUMMARY.md ch04 links).
+Status: Phase 4 in progress — intro.md (WALK-01), planning.md (WALK-02 decomp + Callout D), writing.md (tool calling + memory callouts + Parser.fsy embed WALK-03), build-test.md (4 real build failures WALK-02 + agent loop callout), final.md (WALK-03 + VERIFY-01 + VERIFY-02) all committed. 5 of 5 ch04 content files written; 04-04 (wire SUMMARY.md) remains.
+Last activity: 2026-05-28 — Completed 04-02-PLAN.md: writing.md (149 lines, agent writes Parser.fsy with correct %left from first attempt, Program.fs out-of-scope behavior, callouts A+C) + build-test.md (187 lines, 4 real build failures FSY000/parse error x2/FS0039 narrated observed->decided->corrected, verbatim ThinkAction quotes for F1/F2/F4, no-ThinkAction for F3 stated explicitly, callout B).
 
-Progress: [██████████░] 50% (10/20 plans) — Phases 1-3 done, Phase 4 plans 01 + 03 done (parallel wave)
+Progress: [████████████░] 55% (11/20 plans) — Phases 1-3 done, Phase 4 plans 01+02+03 done (parallel wave complete)
 
 ## Performance Metrics
 
@@ -115,5 +115,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 04-01-PLAN.md (intro.md + planning.md, commit f924b0e) and 04-03-PLAN.md (final.md, commit c0f0a06) in parallel. Phase 4 continues with 04-02 (writing.md) and 04-04 (wire SUMMARY.md).
+Stopped at: Completed 04-02-PLAN.md (writing.md + build-test.md, commit e519147). Phase 4 now has all 5 content files written (04-01 + 04-02 + 04-03). Next: 04-04 (wire SUMMARY.md ch04 links).
 Resume file: None
