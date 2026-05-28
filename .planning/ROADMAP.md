@@ -81,12 +81,12 @@ Plans:
 4. The final test outcomes (`2+3*4=14`, `(2+3)*4=20`, `10-3-2=5`) — success or honest failure — are traceable to a terminal observation in the JSONL.
 5. A CAPTURE-MANIFEST.md for the 122B run records the invocation used, the outcome of the lexer attempt, and any deviations (scaffolding, retries), parallel to the v1 35B manifest.
 
-**Plans**: TBD (expect 2–3 plans: task-prompt preparation, run execution + live monitoring, verify/commit artifacts)
+**Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: Prepare 122B task-prompt files (unaided-first variant — no Lexer.fsl in task2); confirm litellm proxy serving `qwen-122b` at :8001
-- [ ] 06-02: Execute the 122B OpenHands run across all task prompts; capture JSONL per task
-- [ ] 06-03: Verify JSONL integrity; document lexer outcome; commit captured/ + CAPTURE-MANIFEST.md
+- [ ] 06-01-PLAN.md — Prepare 122B task-prompts (unaided task2; reuse v1 task1/3/4/5/6 with workdir swap) + preflight (gitignore oh-workdir-122b, confirm proxy serves qwen-122b)
+- [ ] 06-02-PLAN.md — Execute the 122B run (SLOW/empirical/--yolo, background+poll); unaided-first lexer with retry→disclosed-fallback; capture per-task JSONL + RUN-NOTES
+- [ ] 06-03-PLAN.md — Verify JSONL + extract timing/outcome/error-and-fix; write CAPTURE-MANIFEST.md; commit captured-122b/ (oh-workdir-122b/ stays gitignored)
 
 ---
 
