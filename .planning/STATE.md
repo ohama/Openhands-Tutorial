@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-05-28)
 ## Current Position
 
 Milestone: v1.1 (Model Comparison) — STARTED 2026-05-28. v1 shipped & archived (live: https://ohama.github.io/Openhands-Tutorial/).
-Phase: 6 of 7 (Capture the 122B OpenHands Run)
-Plan: 1 of 3 in current phase
-Status: In progress — 06-01 complete (prompts + preflight done); 06-02 next (execute run).
-Last activity: 2026-05-28 — Completed 06-01-PLAN.md (task-prompts-122b/ + preflight green).
+Phase: 6 of 7 (Capture the 122B OpenHands Run) — COMPLETE
+Plan: 3 of 3 in current phase (06-03 complete — capture gate CLOSED)
+Status: Phase 6 complete. Next: Phase 7 (comparison chapter).
+Last activity: 2026-05-28 — Completed 06-03-PLAN.md (JSONL verified, captured-122b/ committed, capture gate closed).
 
-Progress: [█░░░░░░░░░] v1.1 17% (1/6 plans complete)
+Progress: [████░░░░░░] v1.1 50% (3/6 plans complete)
 
 ## Performance Metrics
 
@@ -49,16 +49,24 @@ Progress: [█░░░░░░░░░] v1.1 17% (1/6 plans complete)
 - [06-01 retry floor]: task2-lexer-unaided-retry.txt adds one line: FsLex format is rule/parse (not %%), nothing else. Prevents format confusion without revealing implementation.
 - [06-01 task4 variant]: task4-evaluator.txt used (not task4-evaluator-adjusted.txt) — original bash-only variant confirmed correct from v1 attempt 2.
 
+### Accumulated Decisions (added 06-03)
+
+- [06-03 did-lexer-unaided]: YES — 122B wrote structurally valid FsLex on first unaided attempt (rule/parse, no %%). task2-lexer-unaided.jsonl event 9 is the proof artifact.
+- [06-03 error-fix]: 8 API fix iterations in task5 (events 12–74) — agent-driven, no manual edits. Key API guesses: int s → Lexing.matched → matchedText → lexbuf.ToString() → lexbuf.Lexeme → new string(lexbuf.Lexeme) (final working).
+- [06-03 outcome]: 14/20/5 confirmed both in JSONL (events 76/78/80) and fresh host re-run (test-output.txt).
+- [06-03 capture gate]: CLOSED. captured-122b/ committed. Phase 7 can consume comparison claims.
+- [06-03 timing]: 122B avg 6.3s/LLM call (150 calls, 20.5 min total). Faster per-call than 35B (~14–32s) but more calls due to longer lexer error-fix sequence.
+
 ### Pending Todos
 
-None.
+None. Phase 6 complete. Phase 7 (comparison chapter) is next.
 
 ### Blockers/Concerns
 
-None at roadmap creation. Phase 6 execution risk: 122B local inference may be slower than 35B; allow longer timeouts and expect a long autonomous run.
+None.
 
 ## Session Continuity
 
-Last session: 2026-05-28T03:28:26Z
-Stopped at: Completed 06-01-PLAN.md. task-prompts-122b/ ready, oh-workdir-122b/ gitignored and clean, proxy confirmed live.
-Resume file: None — next step is execute 06-02-PLAN.md (the actual OpenHands run).
+Last session: 2026-05-28T~14:45Z
+Stopped at: Completed 06-03-PLAN.md. captured-122b/ committed. Phase 6 capture gate closed.
+Resume file: None — next step is execute Phase 7 (07-comparison-chapter).

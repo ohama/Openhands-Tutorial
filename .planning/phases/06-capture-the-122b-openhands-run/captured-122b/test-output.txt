@@ -1,0 +1,29 @@
+# Host re-run: 2026-05-28
+
+## Build
+
+$ dotnet build /Users/ohama/projs/OpenHandsTests/oh-workdir-122b/calc
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:01.00
+
+## Test case 1: 2+3*4 (operator precedence)
+
+$ dotnet run --project .../oh-workdir-122b/calc -- "2+3*4"
+14
+
+## Test case 2: (2+3)*4 (parenthesis grouping)
+
+$ dotnet run --project .../oh-workdir-122b/calc -- "(2+3)*4"
+20
+
+## Test case 3: 10-3-2 (left-associativity)
+
+$ dotnet run --project .../oh-workdir-122b/calc -- "10-3-2"
+5
+
+## Result
+
+all-pass: YES (14, 20, 5)

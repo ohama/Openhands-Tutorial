@@ -1,0 +1,18 @@
+{
+open Parser
+open FSharp.Text.Lexing
+
+exception LexingError of string
+}
+
+rule tokenize = parse
+  | [' ' '\t'] { tokenize lexbuf }
+  | ['0'-'9']+ { INT (int (new string(lexbuf.Lexeme))) }
+  | '+' { PLUS }
+  | '-' { MINUS }
+  | '*' { STAR }
+  | '/' { SLASH }
+  | '(' { LPAREN }
+  | ')' { RPAREN }
+  | eof { EOF }
+  | _ { raise (LexingError (sprintf "Unexpected character: %c" (lexbuf.LexemeChar 0))) }
