@@ -29,14 +29,14 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Worked example
 
-- [ ] **WALK-01**: Tutorial introduces what the calculator does without teaching F# from scratch
-- [ ] **WALK-02**: Worked-example chapter walks the reader through the real run step by step, with concept↔action callouts linking each step to a concept from CONCEPT-02
-- [ ] **WALK-03**: Tutorial includes the final F# source — lexer (`.fsl`), parser (`.fsy`) with correct `%left` operator precedence, and evaluator
+- [x] **WALK-01**: Tutorial introduces what the calculator does without teaching F# from scratch
+- [x] **WALK-02**: Worked-example chapter walks the reader through the real run step by step, with concept↔action callouts linking each step to a concept from CONCEPT-02
+- [x] **WALK-03**: Tutorial includes the final F# source — lexer (`.fsl`), parser (`.fsy`) with correct `%left` operator precedence, and evaluator
 
 ### Verification
 
-- [ ] **VERIFY-01**: Tutorial shows the finished calculator correctly evaluating `2+3*4 → 14` plus a couple more cases (precedence, parentheses)
-- [ ] **VERIFY-02**: Tutorial honestly reports local-LLM performance (~240s/call) and what to expect when running it yourself
+- [x] **VERIFY-01**: Tutorial shows the finished calculator correctly evaluating `2+3*4 → 14` plus a couple more cases (precedence, parentheses)
+- [x] **VERIFY-02**: Tutorial honestly reports local-LLM performance and what to expect when running it yourself (REAL measured: full 5-task run ~10 min, cycles ~14–32s; attempt 1 ~150 min FAILED — the 35B couldn't write FsLex. The earlier "~240s/call" figure was an unmeasured estimate.)
 
 ### Troubleshooting
 
@@ -92,11 +92,11 @@ Which phases cover which requirements. Populated during roadmap creation.
 | RUN-01 | Phase 3 | Complete |
 | RUN-02 | Phase 3 | Complete |
 | RUN-03 | Phase 3 | Complete |
-| WALK-01 | Phase 4 | Pending |
-| WALK-02 | Phase 4 | Pending |
-| WALK-03 | Phase 4 | Pending |
-| VERIFY-01 | Phase 4 | Pending |
-| VERIFY-02 | Phase 4 | Pending |
+| WALK-01 | Phase 4 | Complete |
+| WALK-02 | Phase 4 | Complete |
+| WALK-03 | Phase 4 | Complete |
+| VERIFY-01 | Phase 4 | Complete |
+| VERIFY-02 | Phase 4 | Complete |
 | TROUBLE-01 | Phase 5 | Pending |
 | REPRO-01 | Phase 5 | Pending |
 | BOOK-01 | Phase 1 | Complete |

@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Scaffold & Concept Chapters** - Initialize the mdBook and write the run-independent concept/architecture chapters ✓
 - [x] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate ✓
 - [x] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output ✓
-- [ ] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run
+- [x] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run ✓
 - [ ] **Phase 5: Troubleshooting, Reproducibility & Publish** - Complete the book and ship it to GitHub Pages
 
 ## Phase Details
@@ -81,14 +81,14 @@ Plans:
   2. The walkthrough uses real captured output at every key step (no invented or idealized transcripts)
   3. At least three concept-to-action callouts appear in the walkthrough, each linking a step in the run to a vocabulary term from the concept chapter
   4. The error-and-fix cycle is narrated explicitly, showing what OpenHands observed, what it decided, and how it corrected its code
-  5. The chapter ends with the calculator correctly evaluating `2+3*4 → 14`, at least one parenthesized expression, and an honest performance note (~240s/call on local 35B hardware)
+  5. The chapter ends with the calculator correctly evaluating `2+3*4 → 14`, at least one parenthesized expression, and an honest performance note (REAL measured: full 5-task run ~10 min, cycles ~14–32s; attempt 1 ~150 min FAILED — the 35B couldn't write FsLex. The original "~240s/call" estimate was never measured.)
 **Plans**: 4 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — intro.md (WALK-01: tokenize→parse→evaluate, 4-file arch) + planning.md (5-task decomposition, scaffolding rationale, plan→write→test→run callout)
-- [ ] 04-02-PLAN.md — writing.md (agent writes Parser.fsy w/ %left + Program.fs; tool-calling + memory callouts) + build-test.md (4 real build failures observed→decided→corrected; agent-loop callout)
-- [ ] 04-03-PLAN.md — final.md (WALK-03 full source recap + VERIFY-01 14/20/5 verification + VERIFY-02 honest perf note)
-- [ ] 04-04-PLAN.md — wire 4부 SUMMARY drafts→real paths; mdbook build green (5부/부록 stay drafts)
+- [x] 04-01-PLAN.md — intro.md (WALK-01: tokenize→parse→evaluate, 4-file arch) + planning.md (5-task decomposition, scaffolding rationale, plan→write→test→run callout)
+- [x] 04-02-PLAN.md — writing.md (agent writes Parser.fsy w/ %left + Program.fs; tool-calling + memory callouts) + build-test.md (4 real build failures observed→decided→corrected; agent-loop callout)
+- [x] 04-03-PLAN.md — final.md (WALK-03 full source recap + VERIFY-01 14/20/5 verification + VERIFY-02 honest perf note)
+- [x] 04-04-PLAN.md — wired 4부 SUMMARY drafts→real paths; mdbook build green (5부/부록 stay drafts)
 
 ### Phase 5: Troubleshooting, Reproducibility & Publish
 **Goal**: The book is complete with troubleshooting and reproducibility chapters, builds cleanly, and is live on GitHub Pages
@@ -117,5 +117,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Scaffold & Concept Chapters | 3/3 | ✓ Complete | 2026-05-27 |
 | 2. Environment Setup & Verification | 3/3 | ✓ Complete | 2026-05-27 |
 | 3. Capture the OpenHands Run | 3/3 | ✓ Complete | 2026-05-28 |
-| 4. Worked-Example Chapter | 0/5 | Not started | - |
+| 4. Worked-Example Chapter | 4/4 | ✓ Complete | 2026-05-28 |
 | 5. Troubleshooting, Reproducibility & Publish | 0/4 | Not started | - |

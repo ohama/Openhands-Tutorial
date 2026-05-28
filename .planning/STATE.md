@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-05-27)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** Phase 4 — Write Worked-Example Chapter
+**Current focus:** Phase 5 — Troubleshooting, Reproducibility & Publish (final phase)
 
 ## Current Position
 
@@ -14,7 +14,7 @@ Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 CO
 Status: Phase 4 COMPLETE — all 5 ch04-calculator/*.md files written and wired into SUMMARY.md; mdbook build exits 0; book/ch04-calculator/*.html all generated. 5부/부록 remain () drafts. Next: Phase 5 (정리와 심화).
 Last activity: 2026-05-28 — Completed 04-04-PLAN.md: wired 5 4부 SUMMARY entries to ch04-calculator/{intro,planning,writing,build-test,final}.md; mdbook build exits 0 with no warnings; all ch04 HTML pages generated (commit d669b68).
 
-Progress: [█████████████░] 60% (12/20 plans) — Phases 1-4 done, Phase 5 remains
+Progress: [██████████████░] 65% (13/20 plans) — Phases 1-4 done (3+3+3+4), Phase 5 remains. v1 requirements: 17/20 complete (only TROUBLE-01, REPRO-01, BOOK-03 left).
 
 ## Performance Metrics
 
