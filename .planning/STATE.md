@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-05-27)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** Phase 5 — Troubleshooting, Reproducibility & Publish (final phase)
+**Current focus:** ✅ MILESTONE COMPLETE (v1) — all 5 phases done, book LIVE on GitHub Pages
 
 ## Current Position
 
-Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — In progress (05-04 autonomous task done; publish checkpoint pending user authorization). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
-Plan: 05-01 COMPLETE, 05-02 COMPLETE, 05-03 COMPLETE (SUMMARY.md wired, final mdbook build green, SC#3 satisfied, commit 3e4877c). 05-04 IN PROGRESS — Task 1 committed (0bdbe63: deploy.yml + book.toml repo fields); Task 2 (publish) at checkpoint awaiting user authorization.
-Status: Phase 5 in progress — 05-01 COMPLETE (TROUBLE-01 satisfied); 05-02 COMPLETE (REPRO-01 satisfied); 05-03 COMPLETE (SC#3 satisfied); 05-04 PARTIAL (BOOK-03 structurally satisfied; SC#4 live-site pending publish authorization).
-Last activity: 2026-05-28 — 05-04 Task 1 complete: .github/workflows/deploy.yml created (build+deploy jobs, OIDC, deploy-pages@v4); book.toml git-repository-url + edit-url-template added (ohama/Openhands-Tutorial); local mdbook build green; committed 0bdbe63. STOPPED at publish checkpoint — user must authorize git push + gh Pages enable.
+Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — ✓ COMPLETE, goal verified 4/4. ALL PHASES COMPLETE (1✓ 2✓ 3✓ 4✓ 5✓).
+Plan: 05-01..05-04 all COMPLETE. 05-04 publish authorized by user → pushed main, enabled Pages (source=Actions), deploy workflow run 26548628480 succeeded, live site verified.
+Status: 🎉 MILESTONE v1 COMPLETE. The Korean mdBook tutorial is published and live at https://ohama.github.io/Openhands-Tutorial/ . All 20 v1 requirements Complete. Next: /gsd:audit-milestone (or /gsd:complete-milestone).
+Last activity: 2026-05-28 — Phase 5 verified 4/4: TROUBLE-01 (honest real failure modes + reconciliation), REPRO-01 (verbatim repro guide), SC#3 (full book builds clean, zero draft entries), BOOK-03/SC#4 (deployed; live curls 200 for index + all chapters + hashed assets).
 
-Progress: [█████████████████░] ~85% (17/20 plans; 05-04 partial) — Phases 1-4 done (3+3+3+4), Phase 5: 05-01+05-02+05-03 done, 05-04 Task 1 done. BOOK-03 structural requirement met; SC#4 pending live publish.
+Progress: [████████████████████] 100% (20/20 plans) — all 5 phases complete; 20/20 v1 requirements Complete; tutorial published & live.
 
 ## Performance Metrics
 

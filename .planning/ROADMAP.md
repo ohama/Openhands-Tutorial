@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Environment Setup & Verification** - Install and verify the full stack; this is the capture gate ✓
 - [x] **Phase 3: Capture the OpenHands Run** - Execute the real run and capture its output ✓
 - [x] **Phase 4: Worked-Example Chapter** - Write the core walkthrough chapter from the captured run ✓
-- [ ] **Phase 5: Troubleshooting, Reproducibility & Publish** - Complete the book and ship it to GitHub Pages
+- [x] **Phase 5: Troubleshooting, Reproducibility & Publish** - Complete the book and ship it to GitHub Pages ✓
 
 ## Phase Details
 
@@ -102,10 +102,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — 부록 B 트러블슈팅 (6 real failure modes + honest reconciliation) + 5부 wrap-up chapters (review, next-steps)
-- [ ] 05-02-PLAN.md — 부록 A 재현 가이드 (verbatim prereqs, invocation, task-prompt pointers, 14/20/5 expected outputs)
-- [ ] 05-03-PLAN.md — Wire 5부/부록 SUMMARY entries (rename 부록 A → 재현 가이드); full clean mdbook build (SC#3)
-- [ ] 05-04-PLAN.md — Create .github/workflows/deploy.yml + book.toml repo fields; USER CHECKPOINT for repo create/push/Pages-enable + live-site verify (BOOK-03)
+- [x] 05-01-PLAN.md — 부록 B 트러블슈팅 (6 real failure modes + honest reconciliation) + 5부 wrap-up chapters (review, next-steps)
+- [x] 05-02-PLAN.md — 부록 A 재현 가이드 (verbatim prereqs, invocation, task-prompt pointers, 14/20/5 expected outputs)
+- [x] 05-03-PLAN.md — Wire 5부/부록 SUMMARY entries (rename 부록 A → 재현 가이드); full clean mdbook build (SC#3)
+- [x] 05-04-PLAN.md — Create .github/workflows/deploy.yml + book.toml repo fields; USER CHECKPOINT for repo create/push/Pages-enable + live-site verify (BOOK-03)
 
 ## Progress
 
@@ -118,4 +118,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Environment Setup & Verification | 3/3 | ✓ Complete | 2026-05-27 |
 | 3. Capture the OpenHands Run | 3/3 | ✓ Complete | 2026-05-28 |
 | 4. Worked-Example Chapter | 4/4 | ✓ Complete | 2026-05-28 |
-| 5. Troubleshooting, Reproducibility & Publish | 0/4 | Not started | - |
+| 5. Troubleshooting, Reproducibility & Publish | 4/4 | ✓ Complete | 2026-05-28 |

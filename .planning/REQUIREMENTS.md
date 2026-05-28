@@ -40,17 +40,17 @@ Requirements for the initial published tutorial. Each maps to a roadmap phase.
 
 ### Troubleshooting
 
-- [ ] **TROUBLE-01**: Troubleshooting chapter covers the top failure modes — `host.docker.internal` vs `127.0.0.1`, model name/`openai/` prefix, timeout/retry storm, missing .NET in sandbox, FsYacc precedence
+- [x] **TROUBLE-01**: Troubleshooting chapter covers the top failure modes — `host.docker.internal` vs `127.0.0.1`, model name/`openai/` prefix, timeout/retry storm, missing .NET in sandbox, FsYacc precedence
 
 ### Reproducibility
 
-- [ ] **REPRO-01**: Reproducibility appendix lists exact task strings, Docker/run commands, config values, and expected outputs so a reader can reproduce the run
+- [x] **REPRO-01**: Reproducibility appendix lists exact task strings, Docker/run commands, config values, and expected outputs so a reader can reproduce the run
 
 ### Tutorial artifact (mdBook)
 
 - [x] **BOOK-01**: Tutorial is structured as an mdBook (SUMMARY.md, book.toml with `site-url` for project pages) and builds cleanly with `mdbook build`
 - [x] **BOOK-02**: Tutorial is written in Korean (English for technical terms)
-- [ ] **BOOK-03**: Tutorial is deployed to GitHub Pages via a GitHub Actions workflow (live published site)
+- [x] **BOOK-03**: Tutorial is deployed to GitHub Pages via a GitHub Actions workflow (live published site)
 
 ## v2 Requirements
 
@@ -97,11 +97,11 @@ Which phases cover which requirements. Populated during roadmap creation.
 | WALK-03 | Phase 4 | Complete |
 | VERIFY-01 | Phase 4 | Complete |
 | VERIFY-02 | Phase 4 | Complete |
-| TROUBLE-01 | Phase 5 | Pending |
-| REPRO-01 | Phase 5 | Pending |
+| TROUBLE-01 | Phase 5 | Complete |
+| REPRO-01 | Phase 5 | Complete |
 | BOOK-01 | Phase 1 | Complete |
 | BOOK-02 | Phase 1 | Complete |
-| BOOK-03 | Phase 5 | Pending |
+| BOOK-03 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 20 total
