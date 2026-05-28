@@ -1,14 +1,14 @@
-# 부록 C: 모델 비교 — Qwen2.5-35B vs 122B
+# 부록 C: 모델 비교 — 35B vs 122B
 
-이 부록은 이 책의 v1 캡처(Qwen2.5-35B)와 v1.1 캡처(Qwen2.5-122B)를 나란히 놓고, 세 가지 질문에 답한다: 렉서를 스스로 작성할 수 있는가? 오류를 어떻게 고치는가? 얼마나 빠른가? 모든 수치와 주장은 캡처된 JSONL 파일과 RUN-NOTES에서 직접 인용한 것이다. 추정값이나 재구성이 있는 경우 명시한다.
+이 부록은 같은 과제를 같은 도구로 수행한 두 캡처 — **Qwen 3.6 35B 실행**과 **Qwen 3.6 122B 실행** — 을 나란히 놓고, 세 가지 질문에 답한다: 렉서를 스스로 작성할 수 있는가? 오류를 어떻게 고치는가? 얼마나 빠른가? 모든 수치와 주장은 캡처된 JSONL 파일과 RUN-NOTES에서 직접 인용한 것이다. 추정값이나 재구성이 있는 경우 명시한다.
 
 ## 실험 설계와 공정성 전제
 
 이 비교는 의도적으로 설계가 다른 두 실행을 대상으로 한다. **이 점을 먼저 밝힌다.**
 
-v1의 35B 실행(attempt 2)은 Lexer.fsl을 task2 프롬프트에 그대로 포함시킨 채 진행했다. 그 이유는 attempt 1에서 세 개의 OpenHands 에이전트(task4-evaluator-adjusted: 94 TerminalActions, task5-buildtest: 27 TerminalActions, task6-lexer-fix: 16 TerminalActions; 합계 137+ TerminalActions)가 모두 FsLex가 아닌 FsYacc 스타일의 `%%` 구분자를 사용한 유효하지 않은 .fsl 파일을 생성하다가 막혔기 때문이다. 이것은 모델 크기가 아니라 FsLex 형식에 대한 훈련 데이터 부족 때문으로 분석되었다. 세 에이전트가 예산을 소진한 뒤, 정직한 블로킹 편차(Deviation Rule 3)로 Lexer.fsl을 직접 제공하는 방식이 선택되었다. (출처: 03-02-RUN-NOTES-attempt1.md § "Root Cause Analysis: FsLex Issues"; captured/CAPTURE-MANIFEST.md § "On the lexer and .fsproj (scaffolded, not agent-authored)")
+35B 실행(attempt 2)은 Lexer.fsl을 task2 프롬프트에 그대로 포함시킨 채 진행했다. 그 이유는 attempt 1에서 세 개의 OpenHands 에이전트(task4-evaluator-adjusted: 94 TerminalActions, task5-buildtest: 27 TerminalActions, task6-lexer-fix: 16 TerminalActions; 합계 137+ TerminalActions)가 모두 FsLex가 아닌 FsYacc 스타일의 `%%` 구분자를 사용한 유효하지 않은 .fsl 파일을 생성하다가 막혔기 때문이다. 이것은 모델 크기가 아니라 FsLex 형식에 대한 훈련 데이터 부족 때문으로 분석되었다. 세 에이전트가 예산을 소진한 뒤, 정직한 블로킹 편차(Deviation Rule 3)로 Lexer.fsl을 직접 제공하는 방식이 선택되었다. (출처: 03-02-RUN-NOTES-attempt1.md § "Root Cause Analysis: FsLex Issues"; captured/CAPTURE-MANIFEST.md § "On the lexer and .fsproj (scaffolded, not agent-authored)")
 
-v1.1의 122B 실행은 이 맥락 위에서 설계되었다: **35B가 하지 못한 일을 122B가 할 수 있는가?** Lexer.fsl을 프롬프트에서 제외하고, 에이전트가 처음부터 스스로 FsLex 파일을 작성하도록 했다. 어떤 API 힌트도 제공하지 않았다. (출처: captured-122b/CAPTURE-MANIFEST.md § "Lexer Outcome (RUN122-01/02)")
+122B 실행은 이 맥락 위에서 설계되었다: **35B가 하지 못한 일을 122B가 할 수 있는가?** Lexer.fsl을 프롬프트에서 제외하고, 에이전트가 처음부터 스스로 FsLex 파일을 작성하도록 했다. 어떤 API 힌트도 제공하지 않았다. (출처: captured-122b/CAPTURE-MANIFEST.md § "Lexer Outcome (RUN122-01/02)")
 
 따라서 이 비교는 동일 조건의 head-to-head 비교가 아니다. 35B는 렉서가 스캐폴딩된 환경에서, 122B는 렉서를 무지원으로 작성하는 환경에서 평가되었다. 두 모델이 모두 `2+3*4=14`, `(2+3)*4=20`, `10-3-2=5` 세 테스트 케이스를 통과했지만, 그 과정은 의도적으로 다르게 설계되었다.
 
@@ -31,7 +31,7 @@ v1.1의 122B 실행은 이 맥락 위에서 설계되었다: **35B가 하지 못
 >
 > 세 개의 독립된 에이전트 실행이 모두 실패. 137+ TerminalActions 소모 후 attempt 1 종료. 근본 원인: FsLex `.fsl` 형식에 대한 훈련 데이터 부족 — `%%` 구분자(FsYacc 전용)를 FsLex에 삽입하는 패턴이 모든 시도에서 반복됐다. (출처: 03-02-RUN-NOTES-attempt1.md § "Problem 1: %% separator confusion"; captured/CAPTURE-MANIFEST.md § "Run attempts")
 
-Qwen2.5-35B는 attempt 1에서 FsLex 파일을 자율적으로 작성하지 못했다. 세 개의 독립된 OpenHands 에이전트 호출이 모두 동일한 패턴으로 실패했다: .fsl 파일에 FsYacc의 `%%` 구분자를 삽입하거나, `[<reflaction:remove>]` 같은 F# 속성 문법을 FsLex 액션 코드로 사용하거나, `lexbuf |> LexBuffer<char> |> lexeme |> string`과 같은 잘못된 렉심 추출 패턴을 시도했다.
+Qwen 3.6 35B는 attempt 1에서 FsLex 파일을 자율적으로 작성하지 못했다. 세 개의 독립된 OpenHands 에이전트 호출이 모두 동일한 패턴으로 실패했다: .fsl 파일에 FsYacc의 `%%` 구분자를 삽입하거나, `[<reflaction:remove>]` 같은 F# 속성 문법을 FsLex 액션 코드로 사용하거나, `lexbuf |> LexBuffer<char> |> lexeme |> string`과 같은 잘못된 렉심 추출 패턴을 시도했다.
 
 근본 원인은 FsLex(.fsl)와 FsYacc(.fsy) 형식에 대한 친숙도 편향이었다. FsLex는 `%%` 구분자 없이 `rule name = parse | ...` 형식을 사용하는데, 에이전트는 yacc/bison 스타일 문법을 기대했다. (출처: 03-02-RUN-NOTES-attempt1.md § "Problem 1: %% separator confusion", line 76–79)
 
@@ -59,7 +59,7 @@ attempt 2에서는 Lexer.fsl 전체 내용을 task2 프롬프트에 포함시켰
 >
 > 7회의 TerminalAction, 57.7초 만에 구조적으로 유효한 Lexer.fsl 작성 완료. `rule tokenize = parse` 형식 올바르게 사용, `%%` 혼동 없음. INT 패턴(`as s { INT (int s) }`)은 API 오류를 포함하지만 FsLex 형식 자체는 정확함 — 35B가 137+ TerminalActions으로도 실패한 부분을 첫 시도에 통과. (출처: captured-122b/logs/task2-lexer-unaided.jsonl events 9, 12; captured-122b/CAPTURE-MANIFEST.md § "Lexer Outcome (RUN122-01/02)")
 
-Qwen2.5-122B는 어떤 FsLex 힌트도 없이 task2-lexer-unaided.jsonl event 9에서 cat heredoc를 사용해 Lexer.fsl을 작성했다. `rule tokenize = parse` 형식을 올바르게 사용했고, `%%` 혼동이 없었다. event 12에서 `cat Lexer.fsl` (exit_code=0)로 파일 내용을 확인했다.
+Qwen 3.6 122B는 어떤 FsLex 힌트도 없이 task2-lexer-unaided.jsonl event 9에서 cat heredoc를 사용해 Lexer.fsl을 작성했다. `rule tokenize = parse` 형식을 올바르게 사용했고, `%%` 혼동이 없었다. event 12에서 `cat Lexer.fsl` (exit_code=0)로 파일 내용을 확인했다.
 
 에이전트가 작성한 Lexer.fsl의 최종 완성 버전 (`new string(lexbuf.Lexeme)` 반복 수정 후):
 
