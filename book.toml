@@ -9,6 +9,8 @@ src = "src"
 site-url = "/Openhands-Tutorial/"
 default-theme = "light"
 preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/ohama/Openhands-Tutorial"
+edit-url-template = "https://github.com/ohama/Openhands-Tutorial/edit/main/{path}"
 
 [output.html.search]
 enable = true
