@@ -3,7 +3,7 @@
 ## Milestones
 
 - ✅ **v1 MVP** — Phases 1–5 (shipped 2026-05-28)
-- 🚧 **v1.1 Model Comparison (35B vs 122B)** — Phases 6–7 (in progress)
+- ✅ **v1.1 Model Comparison (35B vs 122B)** — Phases 6–7 (shipped 2026-05-28) — [archive](milestones/v1.1-ROADMAP.md)
 
 ## Phases
 
@@ -60,56 +60,21 @@ Plans:
 
 ---
 
-### 🚧 v1.1 Model Comparison (35B vs 122B) — In Progress
+<details>
+<summary>✅ v1.1 Model Comparison (Phases 6–7) — SHIPPED 2026-05-28</summary>
 
-**Milestone Goal:** Capture a real 122B OpenHands run of the same FsLex/FsYacc calculator (lexer unaided first), then write a 35B-vs-122B comparison chapter backed by both runs' captured evidence and re-deploy the book live.
+**Goal:** Capture a real 122B OpenHands run of the same FsLex/FsYacc calculator (lexer unaided first), then write a 35B-vs-122B comparison chapter backed by both runs' captured evidence and re-deploy the book live.
 
----
+**Outcome:** 122B wrote the `.fsl` lexer unaided (where 35B could not). Comparison chapter (`src/appendix-c-comparison.md`) live with verbatim citations. Per-call latency comparable between models (35B ≈ 5.3s, 122B ≈ 6.3s); run-total difference came from iteration count, not speed.
 
-### Phase 6: Capture the 122B OpenHands Run
+- [x] Phase 6: Capture the 122B OpenHands Run (3/3 plans) — completed 2026-05-28
+- [x] Phase 7: Comparison Chapter + Publish (3/3 plans) — completed 2026-05-28
 
-**Goal**: A real, honest 122B OpenHands run of the F# FsLex/FsYacc calculator is captured on disk (per-task JSONL), with the `.fsl` lexer attempted unaided first, and the run's actual outcome — including any genuine error-and-fix cycle — recorded without fabrication.
+Full archive: [milestones/v1.1-ROADMAP.md](milestones/v1.1-ROADMAP.md)
+Requirements: [milestones/v1.1-REQUIREMENTS.md](milestones/v1.1-REQUIREMENTS.md)
+Audit: [milestones/v1.1-MILESTONE-AUDIT.md](milestones/v1.1-MILESTONE-AUDIT.md)
 
-**Depends on**: Phase 5 complete (v1 shipped; 35B baseline archived). Phase 6 is the capture gate — Phase 7 cannot begin until this phase is complete and artifacts committed.
-
-**Requirements**: RUN122-01, RUN122-02, RUN122-03
-
-**Success Criteria** (what must be TRUE when Phase 6 completes):
-1. A per-task JSONL log set for the 122B run exists on disk and is committed (at least one JSONL file per task prompt, with non-empty ActionEvent + ObservationEvent records).
-2. The JSONL logs show the `.fsl` lexer task was submitted WITHOUT any provided lexer source — confirming the unaided-first protocol was followed.
-3. The captured record honestly documents whether 122B wrote the `.fsl` lexer itself; if it could not and scaffolding was provided as a fallback, a disclosure note in the capture manifest explains this (no silent patching, no fabricated success).
-4. The final test outcomes (`2+3*4=14`, `(2+3)*4=20`, `10-3-2=5`) — success or honest failure — are traceable to a terminal observation in the JSONL.
-5. A CAPTURE-MANIFEST.md for the 122B run records the invocation used, the outcome of the lexer attempt, and any deviations (scaffolding, retries), parallel to the v1 35B manifest.
-
-**Plans**: 3 plans
-
-Plans:
-- [x] 06-01-PLAN.md — Prepare 122B task-prompts (unaided task2; reuse v1 task1/3/4/5/6 with workdir swap) + preflight (gitignore oh-workdir-122b, confirm proxy serves qwen-122b)
-- [x] 06-02-PLAN.md — Execute the 122B run (SLOW/empirical/--yolo, background+poll); unaided-first lexer with retry→disclosed-fallback; capture per-task JSONL + RUN-NOTES
-- [x] 06-03-PLAN.md — Verify JSONL + extract timing/outcome/error-and-fix; write CAPTURE-MANIFEST.md; commit captured-122b/ (oh-workdir-122b/ stays gitignored)
-
----
-
-### Phase 7: Comparison Chapter + Publish
-
-**Goal**: A 35B-vs-122B comparison chapter, backed by verbatim evidence from both captured runs, is added to the book; `mdbook build` is clean; the updated book is live on GitHub Pages.
-
-**Depends on**: Phase 6 complete and artifacts committed (comparison cannot be written from invented numbers).
-
-**Requirements**: CMP-01, CMP-02, PUB-01, PUB-02
-
-**Success Criteria** (what must be TRUE when Phase 7 completes):
-1. The comparison chapter exists as a new `src/` file (comparison or appendix area) and is wired into `src/SUMMARY.md` — `mdbook build` completes with no errors and no broken links.
-2. The chapter addresses: (a) whether 122B wrote the `.fsl` lexer unaided (vs 35B's inability), (b) the error-and-fix cycle comparison between both runs, and (c) measured speed — 122B cycles vs the 35B's documented ~14–32s/cycle.
-3. Every speed number, error count, and capability claim in the comparison chapter traces to a verbatim line in either the 122B JSONL logs or the v1 35B JSONL logs — no fabricated or idealized figures.
-4. The live GitHub Pages site (https://ohama.github.io/Openhands-Tutorial/) returns HTTP 200 and the comparison chapter is reachable via the book navigation.
-
-**Plans**: 3 plans
-
-Plans:
-- [x] 07-01-PLAN.md — Draft `src/appendix-c-comparison.md` from both captured runs (verbatim citations, setup-asymmetry disclosure, honest timing)
-- [x] 07-02-PLAN.md — Wire chapter into `src/SUMMARY.md`; `mdbook build` clean; no broken links
-- [x] 07-03-PLAN.md — Push to `main`; GitHub Actions deploys; verify live URL + new chapter both return 200
+</details>
 
 ---
 

@@ -15,14 +15,15 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Current Milestone: v1.1 — Model Comparison (35B vs 122B)
+## Current State: v1.1 SHIPPED — between milestones
 
-**Goal:** Re-run the same OpenHands calculator build on the newly-available local **122B** model (`openai/qwen-122b` @ `http://127.0.0.1:4000/v1`), capture it honestly, and add a **35B vs 122B comparison chapter** to the published tutorial.
+**Last shipped:** v1.1 Model Comparison (2026-05-28) — see `MILESTONES.md` and `milestones/v1.1-ROADMAP.md`.
 
-**Target features:**
-- A real captured **122B** OpenHands run of the FsLex/FsYacc calculator — attempted **unaided first** (no lexer scaffolding), to test whether the bigger local model can write the `.fsl` lexer the 35B could not.
-- A **comparison chapter/appendix** in the book: capability differences (did 122B write the lexer itself? how did its error-and-fix cycle compare?) and **measured speed** vs the 35B's ~14–32s/cycle.
-- Honest framing throughout (real capture, no fabrication, scaffolding disclosed if used); all v1 content preserved.
+**Live:** https://ohama.github.io/Openhands-Tutorial/ (with the new 부록 C comparison chapter and beginner UX callouts)
+
+**Status:** All v1.1 requirements complete; milestone audit PASSED (7/7 requirements · 12/12 wiring · 5/5 reader flows · honesty preserved). 4 deferrable tech-debt items remain in `milestones/v1.1-MILESTONE-AUDIT.md` (TD-2..TD-5; none reader-facing).
+
+**Next milestone:** not yet defined. Run `/gsd:new-milestone` to start one. Candidate topics (no commitment): EXT-01 additional worked examples, EXT-02 English translation, EXT-03 "build your own minimal agent in F#" appendix, EXT-04 local-vs-cloud model comparison.
 
 ## Requirements
 
@@ -40,15 +41,28 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 - ✓ Published to GitHub Pages (live) — v1
 - ✓ Written in Korean (English for technical terms) — v1
 
+<!-- Shipped in v1.1 (2026-05-28). Live: https://ohama.github.io/Openhands-Tutorial/appendix-c-comparison.html -->
+
+- ✓ Captured a real 122B OpenHands run of the calculator with the `.fsl` lexer attempted unaided first (122B succeeded; scaffold fallback never triggered) — v1.1
+- ✓ Added a 35B-vs-122B comparison chapter (부록 C) to the published book, with verbatim citations from both runs and explicit setup-asymmetry disclosure — v1.1
+- ✓ Re-published the updated book (live on GitHub Pages, HTTP 200 on root + new chapter) — v1.1
+- ✓ Added beginner-friendly 📨 사용자 프롬프트 / ⚙️ 내부 프로세스 / ✅ 결과 callouts to 4 run-walkthrough chapters (additive, out-of-band) — v1.1
+
 ### Active
 
-<!-- v1.1 — Model Comparison (35B vs 122B) -->
+(None — between milestones. Use `/gsd:new-milestone` to start the next one.)
 
-- [ ] Capture a real 122B OpenHands run of the calculator (attempt the lexer unaided first)
-- [ ] Add a 35B-vs-122B comparison chapter to the published book
-- [ ] Re-publish the updated book (live on GitHub Pages)
+<!-- Deferred to a later milestone (carried forward from v1's v2 backlog):
+     - EXT-01: more worked examples beyond the calculator
+     - EXT-02: English translation
+     - EXT-03: "build your own minimal agent in F#" appendix
+     - EXT-04 (added v1.1 audit, optional): local-vs-cloud model comparison
+     - Polish: address 4 remaining tech-debt items from v1.1-MILESTONE-AUDIT.md (TD-2..TD-5) -->
 
-<!-- Still deferred to a later milestone: more worked examples, English translation, "build your own minimal agent in F#" appendix. -->
+<!-- Also flagged for next session: Agentic-AI user-prompt/process/result chapter language consistency
+     (some published prose still references internal v1/v1.1 version labels which are implementation
+     scaffolding, not reader-facing concepts) AND a model-id correction (35B is Qwen 3.6 35B, not Qwen 2.5) -->
+
 
 ### Out of Scope
 
@@ -106,4 +120,4 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
 
 ---
-*Last updated: 2026-05-28 — started v1.1 milestone (35B vs 122B model comparison)*
+*Last updated: 2026-05-28 — v1.1 milestone (35B vs 122B model comparison) shipped + audited + archived*
