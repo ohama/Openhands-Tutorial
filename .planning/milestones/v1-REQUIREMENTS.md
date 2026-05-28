@@ -1,3 +1,5 @@
+<!-- ARCHIVED v1 (SHIPPED 2026-05-28) — all 20 v1 requirements Complete. For current requirements, run /gsd:new-milestone. -->
+
 # Requirements: OpenHands Agentic AI 튜토리얼
 
 **Defined:** 2026-05-27

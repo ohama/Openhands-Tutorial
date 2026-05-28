@@ -1,3 +1,5 @@
+<!-- ARCHIVED v1 (SHIPPED 2026-05-28) — historical record. Current planning starts fresh via /gsd:new-milestone. -->
+
 # Roadmap: OpenHands Agentic AI 튜토리얼
 
 ## Overview

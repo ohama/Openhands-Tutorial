@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-27)
+See: .planning/PROJECT.md (updated 2026-05-28 after v1 milestone)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** ✅ MILESTONE COMPLETE (v1) — all 5 phases done, book LIVE on GitHub Pages
+**Current focus:** 🏁 v1 ARCHIVED — planning next milestone (`/gsd:new-milestone`)
 
 ## Current Position
 
-Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — ✓ COMPLETE, goal verified 4/4. ALL PHASES COMPLETE (1✓ 2✓ 3✓ 4✓ 5✓).
-Plan: 05-01..05-04 all COMPLETE. 05-04 publish authorized by user → pushed main, enabled Pages (source=Actions), deploy workflow run 26548628480 succeeded, live site verified.
-Status: 🎉 MILESTONE v1 COMPLETE. The Korean mdBook tutorial is published and live at https://ohama.github.io/Openhands-Tutorial/ . All 20 v1 requirements Complete. Next: /gsd:audit-milestone (or /gsd:complete-milestone).
-Last activity: 2026-05-28 — Phase 5 verified 4/4: TROUBLE-01 (honest real failure modes + reconciliation), REPRO-01 (verbatim repro guide), SC#3 (full book builds clean, zero draft entries), BOOK-03/SC#4 (deployed; live curls 200 for index + all chapters + hashed assets).
+Milestone: v1 ✅ SHIPPED & ARCHIVED 2026-05-28. Live: https://ohama.github.io/Openhands-Tutorial/
+Phases: 1–5 all complete (archived to .planning/milestones/v1-phases/). 17 plans, 20/20 v1 requirements Complete.
+Status: Ready to start the next milestone. v1 ROADMAP/REQUIREMENTS/phases archived under .planning/milestones/. Run `/gsd:new-milestone` to define v2 (questioning → research → requirements → roadmap). Phase numbering continues at 6+.
+Last activity: 2026-05-28 — v1 milestone completed & archived; MILESTONES.md created; PROJECT.md evolved (requirements → Validated); git tag milestone-v1.
 
-Progress: [████████████████████] 100% (20/20 plans) — all 5 phases complete; 20/20 v1 requirements Complete; tutorial published & live.
+Progress: [████████████████████] v1 100% — shipped & live. (Next milestone: not yet planned.)
 
 ## Performance Metrics
 

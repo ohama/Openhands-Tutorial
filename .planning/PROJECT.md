@@ -19,19 +19,21 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ### Validated
 
-(None yet — ship to validate)
+<!-- Shipped in v1 (2026-05-28). Live: https://ohama.github.io/Openhands-Tutorial/ -->
+
+- ✓ Explains agentic AI concepts (tool/function calling, agent loop, plan→write→test→run, memory/context) — v1
+- ✓ Introduces OpenHands as the example agentic system and maps its V1 architecture to those concepts — v1
+- ✓ Documents setup: installing/running OpenHands + connecting to the local Qwen endpoint — v1
+- ✓ Walks through OpenHands building the F# FsLex/FsYacc calculator end to end — v1
+- ✓ Includes real captured OpenHands output (commands, iterations, the error-and-fix cycle) — v1
+- ✓ Shows the calculator working (`2+3*4` → `14`, plus `(2+3)*4=20`, `10-3-2=5`) with the final F# source — v1
+- ✓ Structured as an mdBook, builds cleanly — v1
+- ✓ Published to GitHub Pages (live) — v1
+- ✓ Written in Korean (English for technical terms) — v1
 
 ### Active
 
-- [ ] Tutorial explains agentic AI concepts (tool/function calling, agent loop, plan→test→run, memory/context) in accessible terms
-- [ ] Tutorial introduces OpenHands as the example agentic system and how its architecture maps to those concepts
-- [ ] Tutorial documents setup: installing/running OpenHands and connecting it to the local Qwen server (OpenAI-compatible endpoint)
-- [ ] Tutorial walks through OpenHands building the F# FsLex/FsYacc calculator end to end (plan → write → test → run)
-- [ ] Tutorial includes real captured OpenHands output (commands, iterations, errors-and-fixes) at the key steps
-- [ ] Tutorial shows the resulting calculator working (e.g., `2+3*4` → `14`) with the final F# source
-- [ ] Tutorial is structured as an mdBook (chapters, navigation) and builds cleanly
-- [ ] Tutorial is published to GitHub Pages
-- [ ] Tutorial is written in Korean (English for technical terms)
+(None — v1 shipped and live. Next milestone is defined via `/gsd:new-milestone`. v2 candidates: more worked examples, English translation, a "build your own minimal agent in F#" appendix, local-vs-cloud model comparison.)
 
 ### Out of Scope
 
@@ -44,6 +46,7 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ## Context
 
+- **Current State (v1 SHIPPED 2026-05-28):** The Korean mdBook is live at https://ohama.github.io/Openhands-Tutorial/ (repo `ohama/Openhands-Tutorial`, public, deployed via GitHub Actions). 21 chapters / ~2,255 lines. The verified run path turned out to be: **Colima** (not Docker Desktop) on a headless SSH Mac, OpenHands **1.16 headless CLI on LocalWorkspace**, configured by **env vars** (`openai/qwen-local` via the existing **litellm proxy** at `127.0.0.1:4000`, `--override-with-envs`), with **.NET on the host**. Measured tool-call cycles were **~14–32s** (the early "~240s/call" estimate below was never measured). The bullets below this one are the project's *original* pre-pivot assumptions, kept for history.
 - **Greenfield** project in `/Users/ohama/projs/OpenHandsTests` (fresh git repo).
 - **Deliverable is documentation (a tutorial), not an application.** Author has `mdbook` and
   `pages` skills configured for building/publishing mdBooks to GitHub Pages.
@@ -79,13 +82,13 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Pivot from "build an F# agent to learn" → "write a tutorial teaching agentic AI via OpenHands" | Author redirected: the deliverable is a tutorial, with OpenHands as the example agentic system | — Pending |
-| OpenHands is used as-is (the agent we demonstrate), not re-implemented | Tutorial teaches agentic AI by showing a real, working agent | — Pending |
-| Worked example = OpenHands building an F# FsLex/FsYacc calculator | Concrete, verifiable goal ("2+3*4 = 14") that shows the full plan→test→run loop | — Pending |
-| Format = mdBook → GitHub Pages | Author has mdbook/pages skills set up; good for a navigable published tutorial | — Pending (assumed) |
-| Language = Korean (English technical terms) | Author communicates in Korean | — Pending (assumed) |
-| Depth = conceptual explanation backed by real captured OpenHands runs | Real runs prove agentic AI works and make the tutorial trustworthy | — Pending (assumed) |
-| OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | — Pending |
+| Pivot from "build an F# agent to learn" → "write a tutorial teaching agentic AI via OpenHands" | Author redirected: the deliverable is a tutorial, with OpenHands as the example agentic system | ✓ Good |
+| OpenHands is used as-is (the agent we demonstrate), not re-implemented | Tutorial teaches agentic AI by showing a real, working agent | ✓ Good |
+| Worked example = OpenHands building an F# FsLex/FsYacc calculator | Concrete, verifiable goal ("2+3*4 = 14") that shows the full plan→test→run loop | ✓ Good |
+| Format = mdBook → GitHub Pages | Author has mdbook/pages skills set up; good for a navigable published tutorial | ✓ Good |
+| Language = Korean (English technical terms) | Author communicates in Korean | ✓ Good |
+| Depth = conceptual explanation backed by real captured OpenHands runs | Real runs prove agentic AI works and make the tutorial trustworthy | ✓ Good |
+| OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
 
 ---
-*Last updated: 2026-05-27 after project pivot to tutorial framing*
+*Last updated: 2026-05-28 after v1 milestone (shipped & live on GitHub Pages)*
