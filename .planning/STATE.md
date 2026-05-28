@@ -5,16 +5,21 @@
 See: .planning/PROJECT.md (updated 2026-05-28 after v1 milestone)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator.
-**Current focus:** 🏁 v1 ARCHIVED — planning next milestone (`/gsd:new-milestone`)
+**Current focus:** v1.1 — Model Comparison (35B vs 122B) — defining requirements
 
 ## Current Position
 
-Milestone: v1 ✅ SHIPPED & ARCHIVED 2026-05-28. Live: https://ohama.github.io/Openhands-Tutorial/
-Phases: 1–5 all complete (archived to .planning/milestones/v1-phases/). 17 plans, 20/20 v1 requirements Complete.
-Status: Ready to start the next milestone. v1 ROADMAP/REQUIREMENTS/phases archived under .planning/milestones/. Run `/gsd:new-milestone` to define v2 (questioning → research → requirements → roadmap). Phase numbering continues at 6+.
-Last activity: 2026-05-28 — v1 milestone completed & archived; MILESTONES.md created; PROJECT.md evolved (requirements → Validated); git tag milestone-v1.
+Milestone: v1.1 (Model Comparison) — STARTED 2026-05-28. v1 shipped & archived (live: https://ohama.github.io/Openhands-Tutorial/).
+Phase: Not started (defining requirements). Phase numbering continues at 6+.
+Status: Defining requirements for v1.1. Goal: capture a real 122B OpenHands run of the calculator (lexer unaided first), add a 35B-vs-122B comparison chapter, re-publish.
+Last activity: 2026-05-28 — v1.1 started; PROJECT.md updated with Current Milestone section + Active goals.
 
-Progress: [████████████████████] v1 100% — shipped & live. (Next milestone: not yet planned.)
+### v1.1 environment facts (confirmed 2026-05-28)
+- litellm proxy at `http://127.0.0.1:4000/v1` now serves THREE aliases: `qwen-35b` (→35B @ :8000), **`qwen-122b` (→122B @ :8001, NEW)**, `qwen-local` (alias →35B). 122B MLX server is up (launchd `com.ohama.qwen122b`).
+- 122B run config = same proven v1 invocation, just `LLM_MODEL=openai/qwen-122b`: `LLM_MODEL="openai/qwen-122b" LLM_BASE_URL="http://127.0.0.1:4000/v1" LLM_API_KEY="dummy" openhands --headless --json --yolo --override-with-envs -t "<task>"` (LocalWorkspace, host dotnet). v1 task-prompts are archived at .planning/milestones/v1-phases/03-capture-the-openhands-run/task-prompts/ — but v1.1 attempts the lexer UNAIDED (no provided Lexer.fsl) first.
+- Decision: 122B attempts the WHOLE calculator (incl. .fsl lexer) unaided first → test if it can do what the 35B couldn't (which forced the lexer scaffold in v1). Fall back to scaffolding only if it can't, and document.
+
+Progress: [░░░░░░░░░░] v1.1 0% — defining requirements.
 
 ## Performance Metrics
 

@@ -15,6 +15,15 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
+## Current Milestone: v1.1 — Model Comparison (35B vs 122B)
+
+**Goal:** Re-run the same OpenHands calculator build on the newly-available local **122B** model (`openai/qwen-122b` @ `http://127.0.0.1:4000/v1`), capture it honestly, and add a **35B vs 122B comparison chapter** to the published tutorial.
+
+**Target features:**
+- A real captured **122B** OpenHands run of the FsLex/FsYacc calculator — attempted **unaided first** (no lexer scaffolding), to test whether the bigger local model can write the `.fsl` lexer the 35B could not.
+- A **comparison chapter/appendix** in the book: capability differences (did 122B write the lexer itself? how did its error-and-fix cycle compare?) and **measured speed** vs the 35B's ~14–32s/cycle.
+- Honest framing throughout (real capture, no fabrication, scaffolding disclosed if used); all v1 content preserved.
+
 ## Requirements
 
 ### Validated
@@ -33,7 +42,13 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ### Active
 
-(None — v1 shipped and live. Next milestone is defined via `/gsd:new-milestone`. v2 candidates: more worked examples, English translation, a "build your own minimal agent in F#" appendix, local-vs-cloud model comparison.)
+<!-- v1.1 — Model Comparison (35B vs 122B) -->
+
+- [ ] Capture a real 122B OpenHands run of the calculator (attempt the lexer unaided first)
+- [ ] Add a 35B-vs-122B comparison chapter to the published book
+- [ ] Re-publish the updated book (live on GitHub Pages)
+
+<!-- Still deferred to a later milestone: more worked examples, English translation, "build your own minimal agent in F#" appendix. -->
 
 ### Out of Scope
 
@@ -91,4 +106,4 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
 
 ---
-*Last updated: 2026-05-28 after v1 milestone (shipped & live on GitHub Pages)*
+*Last updated: 2026-05-28 — started v1.1 milestone (35B vs 122B model comparison)*
