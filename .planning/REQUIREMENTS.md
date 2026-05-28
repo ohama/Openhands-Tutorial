@@ -45,18 +45,19 @@ Deferred to a later milestone (carried from v1's v2 backlog):
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RUN122-01 | TBD | Pending |
-| RUN122-02 | TBD | Pending |
-| RUN122-03 | TBD | Pending |
-| CMP-01 | TBD | Pending |
-| CMP-02 | TBD | Pending |
-| PUB-01 | TBD | Pending |
-| PUB-02 | TBD | Pending |
+| RUN122-01 | Phase 6 | Pending |
+| RUN122-02 | Phase 6 | Pending |
+| RUN122-03 | Phase 6 | Pending |
+| CMP-01 | Phase 7 | Pending |
+| CMP-02 | Phase 7 | Pending |
+| PUB-01 | Phase 7 | Pending |
+| PUB-02 | Phase 7 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 7 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 7 ⚠️
+- Mapped to phases: 7 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-28 (v1.1 milestone)*
+*Traceability updated: 2026-05-28 (roadmap created — Phases 6–7)*
