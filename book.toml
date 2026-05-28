@@ -6,7 +6,7 @@ language = "ko"
 src = "src"
 
 [output.html]
-site-url = "/OpenHandsTests/"
+site-url = "/Openhands-Tutorial/"
 default-theme = "light"
 preferred-dark-theme = "navy"
 
