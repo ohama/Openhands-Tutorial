@@ -1,0 +1,41 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-122b
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
+An F# FsLex/FsYacc calculator project exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat Parser.fsy
+  cat Program.fs
+
+The project is not yet correct. The previous build-and-test task ended with the following failing observation:
+
+  <ACTUAL_FAILING_OUTPUT>
+
+NOTE TO EXECUTOR (plan 03-02): Before running this task, replace <ACTUAL_FAILING_OUTPUT> above with the
+real failure captured from task5-buildtest.jsonl. This may be EITHER:
+  - a build error (paste the exact compiler error line, e.g. "Parser.fs(NN): error FSxxxx: ..."), OR
+  - a wrong arithmetic result (e.g. 'dotnet run -- "10-3-2"' printed 9, should be 5).
+Quote whichever actually occurred so the agent fixes the real problem, not a hypothetical one.
+
+Your task: Diagnose and fix the bug so the project builds AND all three test cases produce correct results.
+
+Required passing outputs after the fix:
+  - dotnet run -- "2+3*4"   must print 14
+  - dotnet run -- "(2+3)*4" must print 20
+  - dotnet run -- "10-3-2"  must print 5
+
+Where to look:
+- If it is a BUILD error, read the compiler error and fix the offending source file (Parser.fsy or Program.fs).
+- If it is a WRONG RESULT, the bug is in the grammar (Parser.fsy) — examine how operators of equal precedence are evaluated (e.g. left-to-right associativity so that 10-3-2 = (10-3)-2 = 5).
+
+After fixing:
+  1. Run dotnet build 2>&1 and confirm the build succeeds.
+  2. Run all three test cases and report each result explicitly (state the command and the actual output).
+
+Constraints:
+- The fix is in Parser.fsy or Program.fs — examine and correct whichever is wrong.
+- Do NOT rewrite the project from scratch.
+- Do NOT modify calc.fsproj or Lexer.fsl (Lexer.fsl was provided verbatim and is correct — do not touch it).
+- After fixing, verify all three cases pass and report the actual outputs honestly. Do NOT silently rewrite the grammar to hide a failure — report what you observe.

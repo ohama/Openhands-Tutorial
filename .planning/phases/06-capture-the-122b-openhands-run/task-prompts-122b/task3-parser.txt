@@ -1,0 +1,31 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-122b
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
+An F# FsLexYacc project exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+  cat Lexer.fsl
+
+The project already has calc.fsproj (wired for FsLex/FsYacc), Lexer.fsl (the lexer that tokenizes integers and arithmetic operators), and Program.fs (a placeholder). Parser.fsy is the file you need to write.
+
+Your task: Write Parser.fsy — the FsYacc grammar — for integer arithmetic expressions.
+
+The parser must:
+- Declare the following tokens: INT (carrying an int value), PLUS, MINUS, STAR, SLASH, LPAREN, RPAREN, EOF.
+- Define a grammar over integer arithmetic with the four operators (+, -, *, /) and parentheses.
+- Evaluate the expression as part of parsing: semantic actions should compute and return an int directly (no separate AST step needed).
+- Expose a single entry point named `start` of type `int`, where `start` parses an `expr` followed by EOF.
+
+Required behavioral outcomes:
+- `*` and `/` must bind more tightly than `+` and `-` (multiplication and division have higher precedence than addition and subtraction).
+- Operators of equal precedence must associate left-to-right (e.g., `10-3-2` evaluates as `(10-3)-2 = 5`, not `10-(3-2) = 9`).
+- Parentheses must override precedence in the normal way.
+
+Constraints:
+- Integers only.
+- Do NOT modify calc.fsproj or Lexer.fsl.
+- The entry point must be named `start` and must have type annotation `%type <int> start`.
+- Use `%start start` to declare the entry point.

@@ -1,0 +1,47 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-122b
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee, or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor / str_replace tool — it errors in this setup (it requires a security_risk field that fails validation).
+
+A complete F# FsLexYacc calculator project exists in the calc/ subdirectory. Start by running:
+
+  cd calc
+  ls
+  cat calc.fsproj
+  cat Lexer.fsl
+  cat Parser.fsy
+  cat Program.fs
+
+The project has all four source files: calc.fsproj (build wiring), Lexer.fsl (tokenizer), Parser.fsy (grammar), Program.fs (CLI entry point). The build system generates Parser.fsi, Parser.fs, and Lexer.fs automatically.
+
+Your task: Build the project and verify its behavior against all required test cases.
+
+Step 1: Build.
+
+  dotnet build 2>&1
+
+Capture the full output. If the build fails, read the error message carefully, diagnose the cause, fix the relevant source file(s), and rebuild. Repeat until the build succeeds.
+
+Step 2: Once the build succeeds, run all three required test cases and report each result.
+
+  dotnet run -- "2+3*4"
+  dotnet run -- "(2+3)*4"
+  dotnet run -- "10-3-2"
+
+Required outputs:
+  - "2+3*4"   must print 14
+  - "(2+3)*4" must print 20
+  - "10-3-2"  must print 5
+
+Step 3: Report results explicitly.
+
+For each test case, state the command and the actual output you observed. For example:
+  dotnet run -- "2+3*4"   → actual output: 14  (PASS)
+  dotnet run -- "(2+3)*4" → actual output: 20  (PASS)
+  dotnet run -- "10-3-2"  → actual output: 5   (PASS)
+
+If any case prints the wrong number, state clearly which case failed and what it printed. Do NOT silently rewrite the grammar to hide a failure — report it.
+
+Constraints:
+- Do not modify calc.fsproj's build wiring (do not touch the FixLineDirectives target or ItemGroups).
+- If you must fix a source file to resolve a build error, fix only the file with the error.
+- Report every test result explicitly, including the actual printed output.
