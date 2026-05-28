@@ -15,15 +15,17 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Current State: v1.1 SHIPPED — between milestones
+## Current Milestone: v1.2 — Rust Example (second worked example)
 
-**Last shipped:** v1.1 Model Comparison (2026-05-28) — see `MILESTONES.md` and `milestones/v1.1-ROADMAP.md`.
+**Goal:** Add a second worked example to the tutorial — OpenHands on the local Qwen 35B autonomously builds a minimal Rust HTTP server (`GET / → "hello\n"`, std-only, no external crates) — captured honestly and added as a new 6부 to the published book.
 
-**Live:** https://ohama.github.io/Openhands-Tutorial/ (with the new 부록 C comparison chapter and beginner UX callouts)
+**Target features:**
+- A real captured 35B OpenHands run of a minimal Rust HTTP server: `cargo new` → `std::net::TcpListener` + accept loop → minimal HTTP/1.1 response writer → `curl localhost:8080/` returns `hello\n`. Decomposed into ~3–4 scoped tasks following the v1 pattern.
+- A new **6부 "다른 워킨 예제: Rust HTTP 서버"** in the book — structurally parallel to 4부 (calculator), written verbatim from the captured run with concept↔action callouts, any error-and-fix narration, and final source. The 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern from v1.1 continues here.
+- Honest framing: the same model (35B) tackling a different language (Rust). Whatever the agent does — including any blind spots in Rust ownership/lifetimes/std::io — is captured as written, not retouched. If scaffolding is needed for any task, it is disclosed (parallel to v1's FsLex scaffolding disclosure).
+- Re-published live to GitHub Pages.
 
-**Status:** All v1.1 requirements complete; milestone audit PASSED (7/7 requirements · 12/12 wiring · 5/5 reader flows · honesty preserved). 4 deferrable tech-debt items remain in `milestones/v1.1-MILESTONE-AUDIT.md` (TD-2..TD-5; none reader-facing).
-
-**Next milestone:** not yet defined. Run `/gsd:new-milestone` to start one. Candidate topics (no commitment): EXT-01 additional worked examples, EXT-02 English translation, EXT-03 "build your own minimal agent in F#" appendix, EXT-04 local-vs-cloud model comparison.
+**Why this is interesting (the honesty story):** v1 showed 35B couldn't write FsLex (FsLex was deeply out-of-distribution); v1.1 showed 122B could (capability scales with size for narrow domains). v1.2 holds the model constant and changes the *language* to one that is far more in-distribution (Rust). The expected outcome is success — but if the agent stumbles anywhere (e.g., borrow checker, manual HTTP framing edge cases), that becomes capture material exactly as the FsLex story did. Either outcome is good educational material.
 
 ## Requirements
 
@@ -50,18 +52,19 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ### Active
 
-(None — between milestones. Use `/gsd:new-milestone` to start the next one.)
+<!-- v1.2 — Rust Example (started 2026-05-28). First concrete instance of EXT-01.
+     Rust is in-distribution for 35B in a way FsLex was not — this milestone tests that hypothesis honestly. -->
 
-<!-- Deferred to a later milestone (carried forward from v1's v2 backlog):
-     - EXT-01: more worked examples beyond the calculator
+- [ ] Capture a real 35B OpenHands run of a minimal Rust HTTP server (`cargo new` → `std::net::TcpListener` accept loop → minimal HTTP/1.1 response → `curl localhost:8080/` returns `hello\n`)
+- [ ] Add a new 6부 "다른 워킨 예제: Rust HTTP 서버" chapter group to the published book, written verbatim from the captured run with the 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern
+- [ ] Re-publish the updated book (live on GitHub Pages)
+
+<!-- Deferred to later milestones (carried forward):
+     - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
      - EXT-02: English translation
      - EXT-03: "build your own minimal agent in F#" appendix
-     - EXT-04 (added v1.1 audit, optional): local-vs-cloud model comparison
-     - Polish: address 4 remaining tech-debt items from v1.1-MILESTONE-AUDIT.md (TD-2..TD-5) -->
-
-<!-- Also flagged for next session: Agentic-AI user-prompt/process/result chapter language consistency
-     (some published prose still references internal v1/v1.1 version labels which are implementation
-     scaffolding, not reader-facing concepts) AND a model-id correction (35B is Qwen 3.6 35B, not Qwen 2.5) -->
+     - EXT-04 (optional): local-vs-cloud model comparison
+     - Polish: 4 remaining tech-debt items from v1.1-MILESTONE-AUDIT.md (TD-2..TD-5) -->
 
 
 ### Out of Scope
@@ -70,8 +73,10 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
   the agent being demonstrated, not something we re-implement.
 - Cloud/hosted LLM APIs — the tutorial uses the existing local Qwen server.
 - Teaching F# language fundamentals — F#/FsLex/FsYacc appear only as the example project OpenHands builds.
+- Teaching Rust language fundamentals — Rust appears in v1.2 only as the example project the agent builds. Readers are expected to be able to follow Rust syntax at a basic level; the chapter focuses on what the agent does, not Rust pedagogy.
+- HTTP framework deep-dive in the Rust example — v1.2 uses `std::net::TcpListener` deliberately (no `hyper`/`axum`/`actix`) to keep the agent's work at the byte-and-socket level the tutorial can show end-to-end. Framework-based variants are out of scope for v1.2 (could be a later milestone).
 - Contributing to or modifying OpenHands' source — we use it as-is.
-- Comprehensive coverage of every OpenHands feature — the tutorial focuses on the agentic concepts and the one worked example.
+- Comprehensive coverage of every OpenHands feature — the tutorial focuses on the agentic concepts and the worked examples (currently: F# calculator + Rust HTTP server).
 
 ## Context
 
@@ -120,4 +125,4 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
 
 ---
-*Last updated: 2026-05-28 — v1.1 milestone (35B vs 122B model comparison) shipped + audited + archived*
+*Last updated: 2026-05-28 — started v1.2 milestone (Rust HTTP server worked example, 35B)*
