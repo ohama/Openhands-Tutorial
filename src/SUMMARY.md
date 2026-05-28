@@ -31,10 +31,10 @@
 
 # 5부: 정리와 심화
 
-- [개념 되짚기]()
-- [다음 단계]()
+- [개념 되짚기](ch05-wrap-up/review.md)
+- [다음 단계](ch05-wrap-up/next-steps.md)
 
 ---
 
-[부록 A: 자주 묻는 질문]()
-[부록 B: 트러블슈팅]()
+[부록 A: 재현 가이드](appendix-a-repro.md)
+[부록 B: 트러블슈팅](appendix-b-troubleshooting.md)
