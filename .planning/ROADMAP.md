@@ -99,13 +99,13 @@ Plans:
   2. The reproducibility appendix contains the exact task strings, Docker/run commands, config values, and expected outputs used in the real run — enough for a reader to reproduce it
   3. `mdbook build` succeeds on the complete book (no broken links, all chapters render, navigation works)
   4. A GitHub Actions workflow deploys the book to GitHub Pages and the live URL serves all chapters with correct CSS/JS (no 404s on assets)
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 05-01: Write troubleshooting chapter (five failure modes, diagnostic steps)
-- [ ] 05-02: Write reproducibility appendix (exact task strings, commands, config, expected outputs)
-- [ ] 05-03: Final mdbook build check (all chapters, navigation, no broken links)
-- [ ] 05-04: Set up GitHub Actions deploy workflow and verify live GitHub Pages site
+- [ ] 05-01-PLAN.md — 부록 B 트러블슈팅 (6 real failure modes + honest reconciliation) + 5부 wrap-up chapters (review, next-steps)
+- [ ] 05-02-PLAN.md — 부록 A 재현 가이드 (verbatim prereqs, invocation, task-prompt pointers, 14/20/5 expected outputs)
+- [ ] 05-03-PLAN.md — Wire 5부/부록 SUMMARY entries (rename 부록 A → 재현 가이드); full clean mdbook build (SC#3)
+- [ ] 05-04-PLAN.md — Create .github/workflows/deploy.yml + book.toml repo fields; USER CHECKPOINT for repo create/push/Pages-enable + live-site verify (BOOK-03)
 
 ## Progress
 
