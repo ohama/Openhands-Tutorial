@@ -11,9 +11,9 @@ requires:
 provides:
   - .github/workflows/deploy.yml — build+deploy GitHub Actions workflow for mdbook→GitHub Pages
   - book.toml repo fields (git-repository-url, edit-url-template) for edit-on-GitHub links
-  - PARTIAL: publish step awaits user authorization at checkpoint (Task 2 not yet executed)
+  - PUBLISHED: pushed to ohama/Openhands-Tutorial; Pages enabled (source=Actions); deploy workflow succeeded; live site verified 200
 
-affects: ["SC#4 live-site verification (post-publish checkpoint)"]
+affects: ["SC#4 satisfied — live site at https://ohama.github.io/Openhands-Tutorial/"]
 
 tech-stack:
   added: [GitHub Actions, actions/checkout@v4, actions/configure-pages@v4, actions/upload-pages-artifact@v3, actions/deploy-pages@v4]
@@ -41,10 +41,9 @@ completed: 2026-05-28
 
 **GitHub Actions deploy workflow (build+deploy jobs, OIDC Pages auth) created and committed; book.toml repo fields added; publish step paused at user-authorization checkpoint**
 
-## Status: PARTIAL — Awaiting Publish Authorization
+## Status: COMPLETE — Published & live
 
-Task 1 (autonomous) is COMPLETE and committed.
-Task 2 (checkpoint:human-action) is PENDING — user must authorize the push + Pages enable.
+Task 1 (autonomous) COMPLETE and committed. Task 2 (publish checkpoint) — user authorized "Publish everything"; orchestrator pushed `main`, enabled Pages (source=GitHub Actions), the deploy workflow run succeeded, and the live site was verified.
 
 ## Performance
 
@@ -99,21 +98,17 @@ Task 2 (checkpoint:human-action) is PENDING — user must authorize the push + P
 
 - `python3 -c "import yaml ..."` failed with `ModuleNotFoundError` (pyyaml not in system Python). Resolved via `uv run python3 -c "import yaml ..."` — YAML is valid.
 
-## Pending: Publish Checkpoint (Task 2)
+## Publish Checkpoint (Task 2) — DONE (user authorized "Publish everything")
 
-The following actions are NOT yet performed and require user authorization:
+Performed by the orchestrator after authorization:
+1. `git push -u origin main` — pushed all commits (incl. `.planning/`) to the public repo `ohama/Openhands-Tutorial` ✓ (the `-25308` lines were harmless macOS Keychain credential-store warnings; the branch pushed fine)
+2. `gh api -X POST repos/ohama/Openhands-Tutorial/pages -f build_type=workflow` — Pages enabled, source = GitHub Actions ✓
+3. Deploy workflow run `26548628480` ("Deploy mdBook to GitHub Pages") succeeded (build + deploy jobs ✓; only non-blocking Node-20 deprecation annotations)
+4. Live-site verification (SC#4): index + all spot-checked chapters (ch01/ch03/ch04/부록 A/부록 B/ch05) return 200; the real fingerprinted assets (`css/general-0392ca55.css`, `book-*.js`, fonts) return 200; `lang="ko"` present. (An initial 404 was a stale-filename test on my part — mdBook 0.5.3 hashes asset names; the actual referenced assets all serve.)
 
-1. `git push -u origin main` — pushes all commits to the existing public repo `ohama/Openhands-Tutorial`
-2. `gh api -X POST repos/ohama/Openhands-Tutorial/pages -f build_type=workflow` — enables Pages with source=GitHub Actions
-3. Watch the workflow run, then verify `https://ohama.github.io/Openhands-Tutorial/` returns 200
+**Live site:** https://ohama.github.io/Openhands-Tutorial/  — BOOK-03 / SC#4 satisfied.
 
-**Warning:** Pushing makes the full repo history (including `.planning/`) PUBLIC.
-
-## Next Phase Readiness
-
-- Deploy workflow and book.toml repo fields are committed; the book is ready to publish
-- BOOK-03 is satisfied structurally (workflow exists and is valid)
-- SC#4 (live URL serves all chapters) can only be verified after the publish checkpoint is authorized
+The full repo history (including `.planning/`) is now public, per the author's explicit "Publish everything" choice.
 
 ---
 *Phase: 05-troubleshooting-reproducibility-publish*
