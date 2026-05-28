@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: 8 — Capture the 35B Rust HTTP Server Run (not started)
-Plan: —
-Status: Roadmap defined; ready for /gsd:plan-phase 8
-Last activity: 2026-05-28 — v1.2 roadmap created (Phases 8–9 defined, traceability filled)
+Phase: 8 — Capture the 35B Rust HTTP Server Run (in progress)
+Plan: 08-01 complete; 08-02 next
+Status: Preflight green; ready to launch 35B capture
+Last activity: 2026-05-28 — Phase 8 plan 01 (preflight) complete
 
-Progress: ░░░░░░░░░░ v1.2 0% (Phase 8 not started)
+Progress: █░░░░░░░░░ v1.2 ~10% (Phase 8 plan 01 of 3 complete)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -32,6 +32,12 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [run-config]: `LLM_MODEL=openai/qwen-{35b|122b} LLM_BASE_URL=http://127.0.0.1:4000/v1 LLM_API_KEY=dummy openhands --headless --json --yolo --override-with-envs -t "<task>"`
 - [honesty discipline]: real captured runs only; no manual edits to agent-written files; setup-asymmetry (scaffolding) disclosed; pre-run predictions never presented as measurements
 - [real measured per-call timing on this hardware]: 35B ≈ 5.3s/call, 122B ≈ 6.3s/call (from v1 + v1.1 JSONL)
+
+### Key decisions for v1.2 Phase 8 plan 01
+
+- [08-01 prompt authoring]: task2-server.txt zero-leak discipline enforced — "any incoming HTTP request" → "any HTTP request it receives" (the word "incoming" triggers TcpListener::incoming() grep). All four leak-greps return 0.
+- [08-01 preflight]: PREFLIGHT GREEN confirmed 2026-05-28 — rustc/cargo 1.95.0, port 8080 free, qwen-35b proxy live. oh-workdir-rust/ empty + gitignored.
+- [08-01 scaffold]: task2-server-scaffold.txt staged; fallback policy documented in 00-INVOCATION.md — only triggers on 3+ identical build failures with no variation.
 
 ### Key decisions for v1.2 (just made)
 
@@ -60,6 +66,6 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 ## Session Continuity
 
-Last session: 2026-05-28
-Stopped at: v1.2 roadmap created (Phases 8–9); traceability filled; STATE.md updated. Ready for /gsd:plan-phase 8.
-Resume file: None — continue with /gsd:plan-phase 8.
+Last session: 2026-05-28T08:37:28Z
+Stopped at: Completed 08-01-PLAN.md (preflight — task prompts authored, PREFLIGHT GREEN confirmed)
+Resume file: None — continue with /gsd:execute-phase 8 (will run 08-02).
