@@ -10,9 +10,11 @@ OpenHands의 중요한 설계 결정 중 하나는 Agent 코드가 Workspace 구
 
 | Workspace | 격리 수준 | 내부 동작 방식 | 사용 목적 |
 |-----------|----------|----------------|----------|
-| **LocalWorkspace** | 호스트 프로세스 + 파일시스템 | 도구 함수 in-process 직접 호출 | 개발·테스트 |
-| **DockerWorkspace** | 컨테이너 + 내부 HTTP 서버 | FastAPI Action Execution Server | 이 튜토리얼 |
+| **LocalWorkspace** | 호스트 프로세스 + 파일시스템 | 도구 함수 in-process 직접 호출 | 개발·테스트 — **이 튜토리얼이 사용** |
+| **DockerWorkspace** | 컨테이너 + 내부 HTTP 서버 | FastAPI Action Execution Server | `openhands serve` GUI 기본값 · 격리 실행 |
 | **RemoteAPIWorkspace** | 네트워크 RPC | HTTP로 원격 에이전트 서버에 전달 | 클라우드·멀티테넌트 |
+
+> 이 튜토리얼은 **LocalWorkspace**를 사용합니다 — 헤드리스 CLI에서 에이전트가 별도 컨테이너 없이 호스트 위에서 직접 도구(bash/파일 편집)를 실행합니다(3부 참고). 아래의 DockerWorkspace 내부 설명은 OpenHands의 **기본 격리 모델**을 이해하기 위한 것으로, 주로 `openhands serve` GUI에서 쓰입니다. LocalWorkspace는 그 격리를 포기하는 대신 설정이 단순하다는 트레이드오프가 있습니다.
 
 ## DockerWorkspace 내부
 

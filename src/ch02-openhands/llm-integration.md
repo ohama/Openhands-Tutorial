@@ -27,11 +27,13 @@ LLM 응답 (tool_calls 또는 텍스트)
 
 ### Custom Model: `openai/<model-id>`
 
-모델 문자열 앞의 `openai/` prefix는 LiteLLM에게 OpenAI 클라이언트 라이브러리를 사용하라고 지시합니다. `<model-id>` 자리에는 서버가 서빙 중인 실제 모델 이름을 넣습니다(예: `openai/qwen35b`). 호스트에서 `curl http://127.0.0.1:8000/v1/models`로 정확한 이름을 확인할 수 있습니다.
+모델 문자열 앞의 `openai/` prefix는 LiteLLM에게 OpenAI 클라이언트 라이브러리를 사용하라고 지시합니다. `<model-id>` 자리에는 엔드포인트가 서빙 중인 실제 모델 이름을 넣습니다. 이 튜토리얼에서는 litellm 프록시가 노출하는 별칭을 사용해 `openai/qwen-local`이 됩니다. `curl http://127.0.0.1:4000/v1/models`로 프록시가 서빙하는 이름을 확인할 수 있습니다.
 
-### Base URL: `http://host.docker.internal:8000/v1`
+### Base URL: `http://127.0.0.1:4000/v1`
 
-OpenHands가 Docker 컨테이너 안에서 실행되므로, 호스트의 MLX 서버에 도달하려면 `host.docker.internal` 호스트명을 사용해야 합니다. `127.0.0.1`은 컨테이너 자신을 가리키므로 사용하면 안 됩니다.
+이 튜토리얼은 OpenHands를 **LocalWorkspace 모드**(헤드리스 CLI)로, 즉 Docker 컨테이너가 아니라 호스트에서 직접 실행합니다. 따라서 LLM 호출도 호스트에서 일어나며 loopback 주소 `127.0.0.1`이 그대로 동작합니다. 포트 `4000`은 호스트의 MLX 서버(`:8000`) 앞단에 있는 litellm 프록시이며, 3부에서 이 2계층 구성(OpenHands → litellm `:4000` → MLX `:8000`)을 자세히 다룹니다.
+
+> 참고: OpenHands를 **Docker 컨테이너 안**(예: `openhands serve` GUI가 쓰는 DockerWorkspace)에서 실행하는 다른 구성에서는, 컨테이너에서 호스트에 닿기 위해 `127.0.0.1` 대신 `host.docker.internal`을 써야 합니다. 이 튜토리얼의 LocalWorkspace 경로에서는 필요하지 않습니다.
 
 ### API Key: 임의의 placeholder 문자열
 
@@ -45,4 +47,4 @@ OpenHands가 Docker 컨테이너 안에서 실행되므로, 호스트의 MLX 서
 
 ## 다음 단계
 
-실제 설정 단계(OpenHands GUI에서 Custom Model, Base URL, API Key를 입력하는 방법, MLX 서버 실행 방법)는 3부 '로컬 Qwen 서버 연결'에서 상세히 다룹니다.
+실제 설정 단계(환경 변수 `LLM_MODEL` / `LLM_BASE_URL` / `LLM_API_KEY`와 `--override-with-envs`로 헤드리스 CLI를 구성하는 방법, 프록시·MLX 서버 확인 방법)는 3부 '로컬 Qwen 서버 연결'에서 상세히 다룹니다.
