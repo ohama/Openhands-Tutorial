@@ -16,7 +16,7 @@
 
 ### Comparison content
 
-- [ ] **CMP-01**: A comparison chapter/appendix contrasts 35B vs 122B on this task — capability (did 122B write the lexer unaided?), error-and-fix differences, and **measured speed** (122B cycles vs the 35B's ~14–32s/cycle).
+- [ ] **CMP-01**: A comparison chapter/appendix contrasts 35B vs 122B on this task — capability (did 122B write the lexer unaided?), error-and-fix differences, and **measured speed** (real per-call timing from both runs' JSONL — the original "~14–32s/cycle" estimate was a pre-run prediction, not measured data).
 - [ ] **CMP-02**: Every comparison claim is backed by real captured evidence from both runs (verbatim, traceable to the JSONL/logs); no fabrication or idealized numbers.
 
 ### Publish
