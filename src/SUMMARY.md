@@ -38,3 +38,4 @@
 
 [부록 A: 재현 가이드](appendix-a-repro.md)
 [부록 B: 트러블슈팅](appendix-b-troubleshooting.md)
+[부록 C: 모델 비교 — 35B vs 122B](appendix-c-comparison.md)
