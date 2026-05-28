@@ -174,11 +174,11 @@ rule tokenize = parse
 
 ## 검증 (VERIFY-01)
 
-> 📨 **사용자 프롬프트 (User prompt)**
+> **사용자 프롬프트 (User prompt)**
 >
 > task5-buildtest.txt: "Build the project and verify its behavior against all required test cases. Run `dotnet build 2>&1`. If the build fails, diagnose, fix, and rebuild. Then run `dotnet run -- "2+3*4"`, `"(2+3)*4"`, `"10-3-2"` and report each result. Required outputs: 14, 20, 5."
 
-> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+> **내부 프로세스 (Process — agent step() 루프)**
 >
 > - Step 1: 소스 파일 읽기 (`ls`, `cat calc.fsproj`, `cat Lexer.fsl`, `cat Parser.fsy`, `cat Program.fs`) (CmdRunAction)
 > - Step 2: `dotnet build 2>&1` 실행 — 빌드 성공(`calc net10.0 성공`) (CmdRunAction)
@@ -186,7 +186,7 @@ rule tokenize = parse
 > - Step 4: `dotnet run -- "(2+3)*4"` → `20` (CmdRunAction + CmdOutputObservation)
 > - Step 5: `dotnet run -- "10-3-2"` → `5` (CmdRunAction + CmdOutputObservation)
 
-> ✅ **결과 (Result)**
+> **결과 (Result)**
 >
 > 9회의 TerminalAction, 32초 만에 완료. 3개 테스트 케이스 모두 통과. 아래는 호스트에서 직접 재실행해 캡처한 전체 출력입니다(`captured/test-output.txt`). (출처: captured/logs/task5-buildtest.jsonl; 03-02-RUN-NOTES.md § Per-Task Outcome Table)
 

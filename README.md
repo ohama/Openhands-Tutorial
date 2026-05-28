@@ -2,7 +2,7 @@
 
 OpenHands와 로컬 Qwen LLM을 사용하여 **에이전틱 AI(agentic AI)** 를 배우는 한국어 튜토리얼입니다.
 
-📖 **읽기:** https://ohama.github.io/Openhands-Tutorial/
+**읽기:** https://ohama.github.io/Openhands-Tutorial/
 
 ## 이 튜토리얼은 무엇인가
 
@@ -10,7 +10,7 @@ OpenHands와 로컬 Qwen LLM을 사용하여 **에이전틱 AI(agentic AI)** 를
 
 핵심 원칙은 **정직한 실제 실행**입니다. 책에 인용된 명령·출력·에러는 모두 실제 OpenHands 세션의 JSONL 로그에서 그대로 가져온 것이며, 꾸며낸 트랜스크립트가 아닙니다. 무엇이 에이전트의 실제 작업이고 무엇이 미리 제공된 스캐폴딩인지도 솔직하게 밝힙니다(예: 35B는 `.fsl` 렉서를 스캐폴딩으로 제공받았지만 122B는 무지원으로 직접 작성했다는 점을 부록 C 첫 절에서 명시).
 
-각 실행 사이클은 초보자도 흐름을 한눈에 따라갈 수 있도록 **📨 사용자 프롬프트 (User prompt) → ⚙️ 내부 프로세스 (Process) → ✅ 결과 (Result)** 콜아웃 패턴으로 표시했습니다.
+각 실행 사이클은 초보자도 흐름을 한눈에 따라갈 수 있도록 **사용자 프롬프트 (User prompt) → 내부 프로세스 (Process) → 결과 (Result)** 콜아웃 패턴으로 표시했습니다.
 
 ## 구성
 

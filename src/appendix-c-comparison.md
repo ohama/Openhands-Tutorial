@@ -16,18 +16,18 @@
 
 ### 35B — attempt 1의 실패
 
-> 📨 **사용자 프롬프트 (User prompt)**
+> **사용자 프롬프트 (User prompt)**
 >
 > (attempt 1 시퀀스) task4-evaluator-adjusted.txt / task5-buildtest.txt / task6-lexer-fix.txt: 각각 별도의 `openhands --headless` 호출로 Lexer.fsl 작성 + 빌드 검증을 시도. 힌트나 스캐폴딩 없이 에이전트가 FsLex 파일을 자력으로 작성하도록 했다. (출처: 03-02-RUN-NOTES-attempt1.md § Root Cause Analysis)
 
-> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+> **내부 프로세스 (Process — agent step() 루프)**
 >
 > - task4-evaluator-adjusted: 94회의 TerminalAction — `%%` 구분자를 FsLex에 삽입, `[<reflaction:remove>]` 속성 문법 혼용, 잘못된 렉심 추출 패턴(`lexbuf |> LexBuffer<char> |> lexeme |> string`) 시도, 무한 루프로 종료
 > - task5-buildtest: 27회의 TerminalAction — 동일한 `%%` 혼동 패턴 반복, FsLex 파일 파싱 오류로 막힘
 > - task6-lexer-fix: 16회의 TerminalAction — 세 번째 별도 에이전트, 동일 패턴으로 실패
 > - 세 에이전트 합계: 137+ TerminalActions, 모두 유효하지 않은 .fsl 파일 생성
 
-> ✅ **결과 (Result)**
+> **결과 (Result)**
 >
 > 세 개의 독립된 에이전트 실행이 모두 실패. 137+ TerminalActions 소모 후 attempt 1 종료. 근본 원인: FsLex `.fsl` 형식에 대한 훈련 데이터 부족 — `%%` 구분자(FsYacc 전용)를 FsLex에 삽입하는 패턴이 모든 시도에서 반복됐다. (출처: 03-02-RUN-NOTES-attempt1.md § "Problem 1: %% separator confusion"; captured/CAPTURE-MANIFEST.md § "Run attempts")
 
@@ -45,17 +45,17 @@ attempt 2에서는 Lexer.fsl 전체 내용을 task2 프롬프트에 포함시켰
 
 ### 122B — 무지원 첫 시도 성공
 
-> 📨 **사용자 프롬프트 (User prompt)**
+> **사용자 프롬프트 (User prompt)**
 >
 > task2-lexer-unaided.txt: "Write calc/Lexer.fsl yourself — the FsLex lexer source — that tokenizes integer arithmetic expressions. Behavioral requirements: skip whitespace, match digits → INT(int), match `+`/`-`/`*`/`/`/`(`/`)` → respective tokens, match EOF → EOF, raise error on unexpected char. Entry point must be named `tokenize`. Do NOT create or modify calc.fsproj. Do NOT write Parser.fsy yet."
 
-> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+> **내부 프로세스 (Process — agent step() 루프)**
 >
 > - event 1–8: `cd calc`, `ls`, `cat calc.fsproj`으로 프로젝트 구조 파악 (CmdRunAction + CmdOutputObservation)
 > - event 9: `cat > Lexer.fsl <<'EOF'`로 `rule tokenize = parse` 형식의 FsLex 파일 작성 — `%%` 구분자 없이 올바른 FsLex 형식 사용 (CmdRunAction)
 > - event 12: `cat Lexer.fsl` (exit_code=0)로 작성된 파일 내용 확인 (CmdRunAction + CmdOutputObservation)
 
-> ✅ **결과 (Result)**
+> **결과 (Result)**
 >
 > 7회의 TerminalAction, 57.7초 만에 구조적으로 유효한 Lexer.fsl 작성 완료. `rule tokenize = parse` 형식 올바르게 사용, `%%` 혼동 없음. INT 패턴(`as s { INT (int s) }`)은 API 오류를 포함하지만 FsLex 형식 자체는 정확함 — 35B가 137+ TerminalActions으로도 실패한 부분을 첫 시도에 통과. (출처: captured-122b/logs/task2-lexer-unaided.jsonl events 9, 12; captured-122b/CAPTURE-MANIFEST.md § "Lexer Outcome (RUN122-01/02)")
 
@@ -94,11 +94,11 @@ task2에서 에이전트가 처음 작성한 INT 라인은 `['0'-'9']+ as s { IN
 
 ### 35B — task3 Parser.fsy의 4회 반복
 
-> 📨 **사용자 프롬프트 (User prompt)**
+> **사용자 프롬프트 (User prompt)**
 >
 > task3-parser.txt: "Write Parser.fsy — the FsYacc grammar — … Use `%start start` to declare the entry point. … Do NOT modify calc.fsproj or Lexer.fsl." (에이전트는 빌드 검증을 위해 Program.fs도 자발적으로 작성했습니다.)
 
-> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+> **내부 프로세스 (Process — agent step() 루프)**
 >
 > - event 9→10: `dotnet build` → `FSY000: %start 누락` → `%start <int> start` 추가 (잘못된 구문)
 > - event 11→16: `dotnet build` → `Parser.fsy(16,7): error parse error` → `%type <int> start` 제거 시도
@@ -106,7 +106,7 @@ task2에서 에이전트가 처음 작성한 INT 라인은 `['0'-'9']+ as s { IN
 > - event 23→26: `dotnet build` → `FS0039: 'LexBuffer<_>' does not define 'FromText'` → `LexBuffer<char>.FromString` 으로 수정
 > - event 29→30: `dotnet build` → `calc net10.0 성공 (0.7초)`
 
-> ✅ **결과 (Result)**
+> **결과 (Result)**
 >
 > 4회 반복 / 21 events로 FsYacc 선언 문법(`%start`) 오류와 가짜 API(`LexBuffer.FromText`) 1개를 완전 자율 수정해 빌드 성공. 런타임 크래시 없음. (출처: captured/logs/task3-parser.jsonl events 9–30; 03-02-RUN-NOTES.md § "Error-and-Fix Cycle")
 
@@ -126,11 +126,11 @@ Event 30 빌드 성공 출력: `calc net10.0 성공 (0.7초) → bin/Debug/net10
 
 ### 122B — task5 Lexer API의 9회 반복
 
-> 📨 **사용자 프롬프트 (User prompt)**
+> **사용자 프롬프트 (User prompt)**
 >
 > task5-buildtest.txt (122B 버전): "Build the project and verify its behavior against all required test cases. Run `dotnet build 2>&1`. If the build fails, diagnose, fix, and rebuild. Then run `dotnet run -- "2+3*4"`, `"(2+3)*4"`, `"10-3-2"` and report each result. Required outputs: 14, 20, 5."
 
-> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+> **내부 프로세스 (Process — agent step() 루프)**
 >
 > - event 12 (상속): `as s { INT (int s) }` — `FS0001`, `FS0039` 오류
 > - event 18: `Lexing.matched` 시도 — `FS0038` (lexbuf 이중 바인딩), `FS0001`
@@ -140,7 +140,7 @@ Event 30 빌드 성공 출력: `calc net10.0 성공 (0.7초) → bin/Debug/net10
 > - event 70: `lexbuf.Lexeme` — `FS0193` (char array → int 변환 불가)
 > - event 74: `new string(lexbuf.Lexeme)` — 빌드 성공
 
-> ✅ **결과 (Result)**
+> **결과 (Result)**
 >
 > 9회 반복 / 62 events로 `FSharp.Text.Lexing` 렉심 추출 API를 처음부터 탐색해 `new string(lexbuf.Lexeme)` 패턴에 수렴. 런타임 크래시(exit_code=134)까지 경험했으나 완전 자율 복구. 최종 빌드 성공 후 3개 테스트 케이스 모두 통과(14, 20, 5). (출처: captured-122b/logs/task5-buildtest.jsonl events 12–74; captured-122b/CAPTURE-MANIFEST.md § "Error-and-Fix Record (RUN122-03)")
 
