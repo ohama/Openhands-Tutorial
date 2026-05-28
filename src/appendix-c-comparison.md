@@ -16,6 +16,21 @@ v1.1의 122B 실행은 이 맥락 위에서 설계되었다: **35B가 하지 못
 
 ### 35B — attempt 1의 실패
 
+> 📨 **사용자 프롬프트 (User prompt)**
+>
+> (attempt 1 시퀀스) task4-evaluator-adjusted.txt / task5-buildtest.txt / task6-lexer-fix.txt: 각각 별도의 `openhands --headless` 호출로 Lexer.fsl 작성 + 빌드 검증을 시도. 힌트나 스캐폴딩 없이 에이전트가 FsLex 파일을 자력으로 작성하도록 했다. (출처: 03-02-RUN-NOTES-attempt1.md § Root Cause Analysis)
+
+> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+>
+> - task4-evaluator-adjusted: 94회의 TerminalAction — `%%` 구분자를 FsLex에 삽입, `[<reflaction:remove>]` 속성 문법 혼용, 잘못된 렉심 추출 패턴(`lexbuf |> LexBuffer<char> |> lexeme |> string`) 시도, 무한 루프로 종료
+> - task5-buildtest: 27회의 TerminalAction — 동일한 `%%` 혼동 패턴 반복, FsLex 파일 파싱 오류로 막힘
+> - task6-lexer-fix: 16회의 TerminalAction — 세 번째 별도 에이전트, 동일 패턴으로 실패
+> - 세 에이전트 합계: 137+ TerminalActions, 모두 유효하지 않은 .fsl 파일 생성
+
+> ✅ **결과 (Result)**
+>
+> 세 개의 독립된 에이전트 실행이 모두 실패. 137+ TerminalActions 소모 후 attempt 1 종료. 근본 원인: FsLex `.fsl` 형식에 대한 훈련 데이터 부족 — `%%` 구분자(FsYacc 전용)를 FsLex에 삽입하는 패턴이 모든 시도에서 반복됐다. (출처: 03-02-RUN-NOTES-attempt1.md § "Problem 1: %% separator confusion"; captured/CAPTURE-MANIFEST.md § "Run attempts")
+
 Qwen2.5-35B는 attempt 1에서 FsLex 파일을 자율적으로 작성하지 못했다. 세 개의 독립된 OpenHands 에이전트 호출이 모두 동일한 패턴으로 실패했다: .fsl 파일에 FsYacc의 `%%` 구분자를 삽입하거나, `[<reflaction:remove>]` 같은 F# 속성 문법을 FsLex 액션 코드로 사용하거나, `lexbuf |> LexBuffer<char> |> lexeme |> string`과 같은 잘못된 렉심 추출 패턴을 시도했다.
 
 근본 원인은 FsLex(.fsl)와 FsYacc(.fsy) 형식에 대한 친숙도 편향이었다. FsLex는 `%%` 구분자 없이 `rule name = parse | ...` 형식을 사용하는데, 에이전트는 yacc/bison 스타일 문법을 기대했다. (출처: 03-02-RUN-NOTES-attempt1.md § "Problem 1: %% separator confusion", line 76–79)
@@ -29,6 +44,20 @@ attempt 2에서는 Lexer.fsl 전체 내용을 task2 프롬프트에 포함시켰
 35B가 attempt 2에서 보여준 진정한 자율 능력은 Parser.fsy 작성과 4회의 빌드 오류 자가 수정에 있었다 — Lexer.fsl 작성이 아니었다.
 
 ### 122B — 무지원 첫 시도 성공
+
+> 📨 **사용자 프롬프트 (User prompt)**
+>
+> task2-lexer-unaided.txt: "Write calc/Lexer.fsl yourself — the FsLex lexer source — that tokenizes integer arithmetic expressions. Behavioral requirements: skip whitespace, match digits → INT(int), match `+`/`-`/`*`/`/`/`(`/`)` → respective tokens, match EOF → EOF, raise error on unexpected char. Entry point must be named `tokenize`. Do NOT create or modify calc.fsproj. Do NOT write Parser.fsy yet."
+
+> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+>
+> - event 1–8: `cd calc`, `ls`, `cat calc.fsproj`으로 프로젝트 구조 파악 (CmdRunAction + CmdOutputObservation)
+> - event 9: `cat > Lexer.fsl <<'EOF'`로 `rule tokenize = parse` 형식의 FsLex 파일 작성 — `%%` 구분자 없이 올바른 FsLex 형식 사용 (CmdRunAction)
+> - event 12: `cat Lexer.fsl` (exit_code=0)로 작성된 파일 내용 확인 (CmdRunAction + CmdOutputObservation)
+
+> ✅ **결과 (Result)**
+>
+> 7회의 TerminalAction, 57.7초 만에 구조적으로 유효한 Lexer.fsl 작성 완료. `rule tokenize = parse` 형식 올바르게 사용, `%%` 혼동 없음. INT 패턴(`as s { INT (int s) }`)은 API 오류를 포함하지만 FsLex 형식 자체는 정확함 — 35B가 137+ TerminalActions으로도 실패한 부분을 첫 시도에 통과. (출처: captured-122b/logs/task2-lexer-unaided.jsonl events 9, 12; captured-122b/CAPTURE-MANIFEST.md § "Lexer Outcome (RUN122-01/02)")
 
 Qwen2.5-122B는 어떤 FsLex 힌트도 없이 task2-lexer-unaided.jsonl event 9에서 cat heredoc를 사용해 Lexer.fsl을 작성했다. `rule tokenize = parse` 형식을 올바르게 사용했고, `%%` 혼동이 없었다. event 12에서 `cat Lexer.fsl` (exit_code=0)로 파일 내용을 확인했다.
 
@@ -65,6 +94,22 @@ task2에서 에이전트가 처음 작성한 INT 라인은 `['0'-'9']+ as s { IN
 
 ### 35B — task3 Parser.fsy의 4회 반복
 
+> 📨 **사용자 프롬프트 (User prompt)**
+>
+> task3-parser.txt: "Write Parser.fsy — the FsYacc grammar — … Use `%start start` to declare the entry point. … Do NOT modify calc.fsproj or Lexer.fsl." (에이전트는 빌드 검증을 위해 Program.fs도 자발적으로 작성했습니다.)
+
+> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+>
+> - event 9→10: `dotnet build` → `FSY000: %start 누락` → `%start <int> start` 추가 (잘못된 구문)
+> - event 11→16: `dotnet build` → `Parser.fsy(16,7): error parse error` → `%type <int> start` 제거 시도
+> - event 17→20: `dotnet build` → 동일 `parse error` 재발 → `%start start` + `%type <int> start` 별도 줄로 분리
+> - event 23→26: `dotnet build` → `FS0039: 'LexBuffer<_>' does not define 'FromText'` → `LexBuffer<char>.FromString` 으로 수정
+> - event 29→30: `dotnet build` → `calc net10.0 성공 (0.7초)`
+
+> ✅ **결과 (Result)**
+>
+> 4회 반복 / 21 events로 FsYacc 선언 문법(`%start`) 오류와 가짜 API(`LexBuffer.FromText`) 1개를 완전 자율 수정해 빌드 성공. 런타임 크래시 없음. (출처: captured/logs/task3-parser.jsonl events 9–30; 03-02-RUN-NOTES.md § "Error-and-Fix Cycle")
+
 35B의 자율 오류-수정 사이클은 task3-parser.jsonl (events 9–30)에 완전히 기록되어 있다. (출처: 03-02-RUN-NOTES.md § "Error-and-Fix Cycle (Branch A)", line 48–100)
 
 | 시도 | Event | 오류 | 에이전트의 수정 |
@@ -80,6 +125,24 @@ Event 30 빌드 성공 출력: `calc net10.0 성공 (0.7초) → bin/Debug/net10
 세 가지 실제 오류: `%start` 선언 누락, `%start <int> start` 잘못된 FsYacc 문법, `LexBuffer.FromText` 존재하지 않는 API. 모두 에이전트가 컴파일러 출력을 읽고 자율적으로 진단하고 수정했다. (출처: captured/logs/task3-parser.jsonl events 9–30; captured/CAPTURE-MANIFEST.md § "RUN-03")
 
 ### 122B — task5 Lexer API의 9회 반복
+
+> 📨 **사용자 프롬프트 (User prompt)**
+>
+> task5-buildtest.txt (122B 버전): "Build the project and verify its behavior against all required test cases. Run `dotnet build 2>&1`. If the build fails, diagnose, fix, and rebuild. Then run `dotnet run -- "2+3*4"`, `"(2+3)*4"`, `"10-3-2"` and report each result. Required outputs: 14, 20, 5."
+
+> ⚙️ **내부 프로세스 (Process — agent step() 루프)**
+>
+> - event 12 (상속): `as s { INT (int s) }` — `FS0001`, `FS0039` 오류
+> - event 18: `Lexing.matched` 시도 — `FS0038` (lexbuf 이중 바인딩), `FS0001`
+> - event 30: `Lexing.matched lexbuf` — `FS0001`, `FS0039`
+> - event 40–66: `FSharp.Text.Lexing.matched`, `matchedText` 등 API 탐색 — `FS0039` 반복
+> - event 66: `lexbuf.ToString()` — exit_code=134 런타임 크래시 (타입 이름 반환)
+> - event 70: `lexbuf.Lexeme` — `FS0193` (char array → int 변환 불가)
+> - event 74: `new string(lexbuf.Lexeme)` — 빌드 성공
+
+> ✅ **결과 (Result)**
+>
+> 9회 반복 / 62 events로 `FSharp.Text.Lexing` 렉심 추출 API를 처음부터 탐색해 `new string(lexbuf.Lexeme)` 패턴에 수렴. 런타임 크래시(exit_code=134)까지 경험했으나 완전 자율 복구. 최종 빌드 성공 후 3개 테스트 케이스 모두 통과(14, 20, 5). (출처: captured-122b/logs/task5-buildtest.jsonl events 12–74; captured-122b/CAPTURE-MANIFEST.md § "Error-and-Fix Record (RUN122-03)")
 
 122B의 오류-수정은 더 긴 경로를 걸었다. 핵심 문제: task2에서 작성한 `['0'-'9']+ as s { INT (int s) }`의 `as s`가 char[] (문자열이 아님)를 바인딩하므로 `int s`가 FS0001 타입 불일치를 유발한다. 에이전트는 `FSharp.Text.Lexing` 네임스페이스의 올바른 API를 모르는 상태에서 9회 반복으로 수렴했다.
 
