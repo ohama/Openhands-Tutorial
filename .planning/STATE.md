@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 4 of 5 (Write Worked-Example Chapter) — In progress (wave 1+2 of 4 complete). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
-Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 COMPLETE (writing.md + build-test.md), 04-03 complete (final.md). Next: 04-04 (wire SUMMARY.md ch04 links).
-Status: Phase 4 in progress — intro.md (WALK-01), planning.md (WALK-02 decomp + Callout D), writing.md (tool calling + memory callouts + Parser.fsy embed WALK-03), build-test.md (4 real build failures WALK-02 + agent loop callout), final.md (WALK-03 + VERIFY-01 + VERIFY-02) all committed. 5 of 5 ch04 content files written; 04-04 (wire SUMMARY.md) remains.
-Last activity: 2026-05-28 — Completed 04-02-PLAN.md: writing.md (149 lines, agent writes Parser.fsy with correct %left from first attempt, Program.fs out-of-scope behavior, callouts A+C) + build-test.md (187 lines, 4 real build failures FSY000/parse error x2/FS0039 narrated observed->decided->corrected, verbatim ThinkAction quotes for F1/F2/F4, no-ThinkAction for F3 stated explicitly, callout B).
+Phase: 4 of 5 (Write Worked-Example Chapter) — COMPLETE (4/4 plans done). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
+Plan: Wave 1: 04-01 complete (intro.md + planning.md). Wave 2 parallel: 04-02 COMPLETE (writing.md + build-test.md), 04-03 complete (final.md). 04-04 COMPLETE (SUMMARY.md wired, mdbook build green).
+Status: Phase 4 COMPLETE — all 5 ch04-calculator/*.md files written and wired into SUMMARY.md; mdbook build exits 0; book/ch04-calculator/*.html all generated. 5부/부록 remain () drafts. Next: Phase 5 (정리와 심화).
+Last activity: 2026-05-28 — Completed 04-04-PLAN.md: wired 5 4부 SUMMARY entries to ch04-calculator/{intro,planning,writing,build-test,final}.md; mdbook build exits 0 with no warnings; all ch04 HTML pages generated (commit d669b68).
 
-Progress: [████████████░] 55% (11/20 plans) — Phases 1-3 done, Phase 4 plans 01+02+03 done (parallel wave complete)
+Progress: [█████████████░] 60% (12/20 plans) — Phases 1-4 done, Phase 5 remains
 
 ## Performance Metrics
 
@@ -115,5 +115,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 04-02-PLAN.md (writing.md + build-test.md, commit e519147). Phase 4 now has all 5 content files written (04-01 + 04-02 + 04-03). Next: 04-04 (wire SUMMARY.md ch04 links).
+Stopped at: Completed 04-04-PLAN.md (SUMMARY.md wired, mdbook build green, commit d669b68). Phase 4 COMPLETE (all 4 plans done). Next: Phase 5 (정리와 심화).
 Resume file: None
