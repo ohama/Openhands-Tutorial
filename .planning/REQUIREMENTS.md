@@ -53,19 +53,19 @@ Deferred to later milestones:
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RUST-01 | TBD (Phase 8 expected) | Pending |
-| RUST-02 | TBD (Phase 8 expected) | Pending |
-| RUST-03 | TBD (Phase 8 expected) | Pending |
-| CHAP-01 | TBD (Phase 9 expected) | Pending |
-| CHAP-02 | TBD (Phase 9 expected) | Pending |
-| PUB-01 | TBD (Phase 9 expected) | Pending |
-| PUB-02 | TBD (Phase 9 expected) | Pending |
+| RUST-01 | Phase 8 | Pending |
+| RUST-02 | Phase 8 | Pending |
+| RUST-03 | Phase 8 | Pending |
+| CHAP-01 | Phase 9 | Pending |
+| CHAP-02 | Phase 9 | Pending |
+| PUB-01 | Phase 9 | Pending |
+| PUB-02 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 7 total
-- Mapped to phases: 0 (roadmapper will fill in)
-- Unmapped: 7 (until roadmap is built)
+- Mapped to phases: 7 (Phase 8: 3, Phase 9: 4)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-28 (v1.2 milestone)*
-*Traceability will be updated when roadmap is built.*
+*Traceability updated: 2026-05-28 (roadmap created)*

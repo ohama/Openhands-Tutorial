@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. **v1.2: same 35B model, different language — a minimal Rust HTTP server.**
-**Current focus:** v1.2 — defining requirements + roadmap.
+**Current focus:** v1.2 — Phase 8 (Capture the 35B Rust HTTP Server Run) not started.
 
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: Not started (defining requirements)
+Phase: 8 — Capture the 35B Rust HTTP Server Run (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-28 — v1.2 milestone started (PROJECT.md updated, between-milestones state cleared)
+Status: Roadmap defined; ready for /gsd:plan-phase 8
+Last activity: 2026-05-28 — v1.2 roadmap created (Phases 8–9 defined, traceability filled)
 
-Progress: ░░░░░░░░░░ v1.2 0% (requirements and roadmap pending)
+Progress: ░░░░░░░░░░ v1.2 0% (Phase 8 not started)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -40,6 +40,7 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [v1.2 model]: 35B only (same model as v1). Tests the hypothesis that Rust is more in-distribution for 35B than FsLex was. Single-model run; no 35B-vs-122B comparison this milestone (could be a later milestone if interesting).
 - [v1.2 placement]: new 6부 "다른 워킨 예제: Rust HTTP 서버" — structurally parallel to 4부 (calculator). Book becomes: 1부~5부 + 6부 + 부록 A/B/C.
 - [v1.2 honesty]: same discipline as v1/v1.1 — capture as-written, no manual fixes, disclose any scaffolding. If 35B fails on Rust ownership / borrow checker / std::io edge cases, that's the chapter's material exactly as the FsLex story was v1's.
+- [v1.2 phase structure]: 2 phases (8 + 9) — same tight additive shape as v1.1. Phase 8 closes with CAPTURE-MANIFEST.md committed (capture gate); Phase 9 cannot begin until gate is closed.
 
 ### Open tech debt (from v1.1 audit, deferrable; not in v1.2 scope)
 
@@ -50,9 +51,8 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ### Pending Todos
 
-- Decide on research (Phase 7 of /gsd:new-milestone): research vs skip
-- Define v1.2 requirements (REQ-IDs in RUST-* category, ~3-5 requirements expected)
-- Build roadmap (Phases 8–9 of new milestone? — continuing numbering from v1.1's Phase 7)
+- Run /gsd:plan-phase 8 to decompose Phase 8 into executable plans (~3 plans expected)
+- After Phase 8 complete + CAPTURE-MANIFEST.md committed: run /gsd:plan-phase 9
 
 ### Blockers/Concerns
 
@@ -60,6 +60,6 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 ## Session Continuity
 
-Last session: 2026-05-28T~16:30Z
-Stopped at: v1.2 milestone started; PROJECT.md updated with Current Milestone section; STATE.md reset; next step is /gsd:new-milestone Phase 7 (research decision).
-Resume file: None — continue in the /gsd:new-milestone flow.
+Last session: 2026-05-28
+Stopped at: v1.2 roadmap created (Phases 8–9); traceability filled; STATE.md updated. Ready for /gsd:plan-phase 8.
+Resume file: None — continue with /gsd:plan-phase 8.
