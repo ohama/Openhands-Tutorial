@@ -104,12 +104,12 @@ Plans:
 3. Every speed number, error count, and capability claim in the comparison chapter traces to a verbatim line in either the 122B JSONL logs or the v1 35B JSONL logs — no fabricated or idealized figures.
 4. The live GitHub Pages site (https://ohama.github.io/Openhands-Tutorial/) returns HTTP 200 and the comparison chapter is reachable via the book navigation.
 
-**Plans**: TBD (expect 2–3 plans: draft chapter from evidence, wire into SUMMARY.md + build check, deploy)
+**Plans**: 3 plans
 
 Plans:
-- [ ] 07-01: Extract speed + outcome evidence from both JSONL sets; draft comparison chapter in Korean
-- [ ] 07-02: Wire chapter into SUMMARY.md; `mdbook build` green; fix any broken links
-- [ ] 07-03: Push to main; GitHub Actions deploys; verify live site
+- [ ] 07-01-PLAN.md — Draft `src/appendix-c-comparison.md` from both captured runs (verbatim citations, setup-asymmetry disclosure, honest timing)
+- [ ] 07-02-PLAN.md — Wire chapter into `src/SUMMARY.md`; `mdbook build` clean; no broken links
+- [ ] 07-03-PLAN.md — Push to `main`; GitHub Actions deploys; verify live URL + new chapter both return 200
 
 ---
 
@@ -123,4 +123,4 @@ Plans:
 | 4. Worked-Example Chapter | v1 | 3/3 | Complete | 2026-05-28 |
 | 5. Publish | v1 | 4/4 | Complete | 2026-05-28 |
 | 6. Capture the 122B OpenHands Run | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
-| 7. Comparison Chapter + Publish | v1.1 | 0/3 | Not started | - |
+| 7. Comparison Chapter + Publish | v1.1 | 0/3 | Planned | - |
