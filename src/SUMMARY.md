@@ -23,11 +23,11 @@
 
 # 4부: OpenHands로 F# 계산기 만들기
 
-- [예제 프로젝트 소개]()
-- [태스크 계획 단계]()
-- [코드 작성 단계]()
-- [빌드와 테스트 단계]()
-- [완성된 계산기]()
+- [예제 프로젝트 소개](ch04-calculator/intro.md)
+- [태스크 계획 단계](ch04-calculator/planning.md)
+- [코드 작성 단계](ch04-calculator/writing.md)
+- [빌드와 테스트 단계](ch04-calculator/build-test.md)
+- [완성된 계산기](ch04-calculator/final.md)
 
 # 5부: 정리와 심화
 
