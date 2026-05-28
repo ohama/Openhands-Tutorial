@@ -43,6 +43,8 @@ Progress: [██████████████░] 65% (13/20 plans) — 
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
+- [Phase 5 / PUBLISH]: GitHub repo = **ohama/Openhands-Tutorial** (PUBLIC, ALREADY EXISTS). `origin` set to https://github.com/ohama/Openhands-Tutorial. book.toml `site-url = "/Openhands-Tutorial/"`. Pages URL will be https://ohama.github.io/Openhands-Tutorial/. → Phase 5 plan 05-04 deploy MUST use this repo name (NOT the old "OpenHandsTests") and must SKIP `gh repo create` (repo exists) — just push `main`, add the Actions workflow, enable Pages (source=GitHub Actions), verify live. NOTE: `/Users/ohama/projs/OpenHandsTests/...` paths inside chapters are the real LOCAL working dir in verbatim captured commands — intentionally NOT changed.
+
 - [Roadmap]: Capture gate enforced — Phase 3 (run capture) strictly depends on Phase 2 (verified env); Phase 4 (worked-example chapter) strictly depends on Phase 3
 - [Roadmap]: VERIFY-01 and VERIFY-02 placed in Phase 4 (not Phase 3) — verification content belongs in the walkthrough chapter, written from captured evidence
 - [Roadmap]: BOOK-01 and BOOK-02 placed in Phase 1 — mdBook scaffold and Korean language constraint apply from the very first chapter
