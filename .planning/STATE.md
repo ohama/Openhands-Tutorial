@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-05-28)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F# FsLex/FsYacc calculator. v1.1 extends this with an honest 35B-vs-122B comparison.
-**Current focus:** v1.1 — Phase 7: Comparison Chapter + Publish (Phase 6 ✓ complete)
+**Current focus:** v1.1 — COMPLETE. All phases delivered. Live: https://ohama.github.io/Openhands-Tutorial/appendix-c-comparison.html
 
 ## Current Position
 
-Milestone: v1.1 (Model Comparison) — STARTED 2026-05-28. v1 shipped & archived (live: https://ohama.github.io/Openhands-Tutorial/).
-Phase: 6 of 7 (Capture the 122B OpenHands Run) — COMPLETE
-Plan: 3 of 3 in current phase (06-03 complete — capture gate CLOSED)
-Status: Phase 6 complete. Next: Phase 7 (comparison chapter).
-Last activity: 2026-05-28 — Completed 06-03-PLAN.md (JSONL verified, captured-122b/ committed, capture gate closed).
+Milestone: v1.1 (Model Comparison) — COMPLETE 2026-05-28. Live: https://ohama.github.io/Openhands-Tutorial/.
+Phase: 7 of 7 (Comparison Chapter + Publish) — COMPLETE
+Plan: 3 of 3 in phase 7 (07-03 complete — comparison chapter live on GitHub Pages)
+Status: v1.1 COMPLETE. All 6 plans across Phases 6-7 done.
+Last activity: 2026-05-28 — Completed 07-03-PLAN.md (pushed to origin/main, Actions deploy succeeded, 부록 C live).
 
-Progress: [████░░░░░░] v1.1 50% (3/6 plans complete)
+Progress: [██████████] v1.1 100% (6/6 plans complete)
 
 ## Performance Metrics
 
@@ -57,9 +57,15 @@ Progress: [████░░░░░░] v1.1 50% (3/6 plans complete)
 - [06-03 capture gate]: CLOSED. captured-122b/ committed. Phase 7 can consume comparison claims.
 - [06-03 timing]: 122B avg 6.3s/LLM call (150 calls, 20.5 min total). Faster per-call than 35B (~14–32s) but more calls due to longer lexer error-fix sequence.
 
+### Accumulated Decisions (added 07-03)
+
+- [07-03 nav-verification]: mdBook sidebar is JS-injected via `<mdbook-sidebar-scrollbox>` web component. Nav links live in toc.js, not root HTML. Future nav checks: `curl toc-*.js | grep href`.
+- [07-03 push-warnings]: macOS Keychain `-25308` during `git push` is cosmetic; push succeeded. Not a failure signal.
+- [07-03 v1.1-complete]: v1.1 fully delivered. 부록 C live. No further v1.1 work planned.
+
 ### Pending Todos
 
-None. Phase 6 complete. Phase 7 (comparison chapter) is next.
+None. v1.1 complete.
 
 ### Blockers/Concerns
 
@@ -67,6 +73,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-05-28T~14:45Z
-Stopped at: Completed 06-03-PLAN.md. captured-122b/ committed. Phase 6 capture gate closed.
-Resume file: None — next step is execute Phase 7 (07-comparison-chapter).
+Last session: 2026-05-28T06:24:10Z
+Stopped at: Completed 07-03-PLAN.md. 부록 C live at https://ohama.github.io/Openhands-Tutorial/appendix-c-comparison.html. v1.1 done.
+Resume file: None — v1.1 milestone complete.
