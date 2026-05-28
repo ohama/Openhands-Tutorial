@@ -107,9 +107,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Draft `src/appendix-c-comparison.md` from both captured runs (verbatim citations, setup-asymmetry disclosure, honest timing)
-- [ ] 07-02-PLAN.md — Wire chapter into `src/SUMMARY.md`; `mdbook build` clean; no broken links
-- [ ] 07-03-PLAN.md — Push to `main`; GitHub Actions deploys; verify live URL + new chapter both return 200
+- [x] 07-01-PLAN.md — Draft `src/appendix-c-comparison.md` from both captured runs (verbatim citations, setup-asymmetry disclosure, honest timing)
+- [x] 07-02-PLAN.md — Wire chapter into `src/SUMMARY.md`; `mdbook build` clean; no broken links
+- [x] 07-03-PLAN.md — Push to `main`; GitHub Actions deploys; verify live URL + new chapter both return 200
 
 ---
 
@@ -123,4 +123,4 @@ Plans:
 | 4. Worked-Example Chapter | v1 | 3/3 | Complete | 2026-05-28 |
 | 5. Publish | v1 | 4/4 | Complete | 2026-05-28 |
 | 6. Capture the 122B OpenHands Run | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
-| 7. Comparison Chapter + Publish | v1.1 | 0/3 | Planned | - |
+| 7. Comparison Chapter + Publish | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |

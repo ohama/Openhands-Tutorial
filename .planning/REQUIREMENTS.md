@@ -16,13 +16,13 @@
 
 ### Comparison content
 
-- [ ] **CMP-01**: A comparison chapter/appendix contrasts 35B vs 122B on this task — capability (did 122B write the lexer unaided?), error-and-fix differences, and **measured speed** (real per-call timing from both runs' JSONL — the original "~14–32s/cycle" estimate was a pre-run prediction, not measured data).
-- [ ] **CMP-02**: Every comparison claim is backed by real captured evidence from both runs (verbatim, traceable to the JSONL/logs); no fabrication or idealized numbers.
+- [x] **CMP-01**: A comparison chapter/appendix contrasts 35B vs 122B on this task — capability (did 122B write the lexer unaided?), error-and-fix differences, and **measured speed** (real per-call timing from both runs' JSONL — the original "~14–32s/cycle" estimate was a pre-run prediction, not measured data).
+- [x] **CMP-02**: Every comparison claim is backed by real captured evidence from both runs (verbatim, traceable to the JSONL/logs); no fabrication or idealized numbers.
 
 ### Publish
 
-- [ ] **PUB-01**: The updated book builds clean with `mdbook build` (no broken links), the new comparison chapter wired into `src/SUMMARY.md`.
-- [ ] **PUB-02**: The updated book is re-deployed live to GitHub Pages (the existing GitHub Actions workflow on push to `main`).
+- [x] **PUB-01**: The updated book builds clean with `mdbook build` (no broken links), the new comparison chapter wired into `src/SUMMARY.md`.
+- [x] **PUB-02**: The updated book is re-deployed live to GitHub Pages (the existing GitHub Actions workflow on push to `main`).
 
 ## Future Requirements
 
@@ -48,10 +48,10 @@ Deferred to a later milestone (carried from v1's v2 backlog):
 | RUN122-01 | Phase 6 | Complete |
 | RUN122-02 | Phase 6 | Complete |
 | RUN122-03 | Phase 6 | Complete |
-| CMP-01 | Phase 7 | Pending |
-| CMP-02 | Phase 7 | Pending |
-| PUB-01 | Phase 7 | Pending |
-| PUB-02 | Phase 7 | Pending |
+| CMP-01 | Phase 7 | Complete |
+| CMP-02 | Phase 7 | Complete |
+| PUB-01 | Phase 7 | Complete |
+| PUB-02 | Phase 7 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 7 total
