@@ -82,14 +82,13 @@ Plans:
   3. At least three concept-to-action callouts appear in the walkthrough, each linking a step in the run to a vocabulary term from the concept chapter
   4. The error-and-fix cycle is narrated explicitly, showing what OpenHands observed, what it decided, and how it corrected its code
   5. The chapter ends with the calculator correctly evaluating `2+3*4 → 14`, at least one parenthesized expression, and an honest performance note (~240s/call on local 35B hardware)
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 04-01: Write the calculator intro section (what it does, F# at a glance, no language tutorial)
-- [ ] 04-02: Write the step-by-step walkthrough from the captured log (concept callouts woven in)
-- [ ] 04-03: Write the error-and-fix narration section from the real captured failure moment
-- [ ] 04-04: Write the final F# source section (lexer .fsl, parser .fsy with %left precedence, evaluator)
-- [ ] 04-05: Write the verification section (`2+3*4 → 14`, parentheses case, performance transparency)
+- [ ] 04-01-PLAN.md — intro.md (WALK-01: tokenize→parse→evaluate, 4-file arch) + planning.md (5-task decomposition, scaffolding rationale, plan→write→test→run callout)
+- [ ] 04-02-PLAN.md — writing.md (agent writes Parser.fsy w/ %left + Program.fs; tool-calling + memory callouts) + build-test.md (4 real build failures observed→decided→corrected; agent-loop callout)
+- [ ] 04-03-PLAN.md — final.md (WALK-03 full source recap + VERIFY-01 14/20/5 verification + VERIFY-02 honest perf note)
+- [ ] 04-04-PLAN.md — wire 4부 SUMMARY drafts→real paths; mdbook build green (5부/부록 stay drafts)
 
 ### Phase 5: Troubleshooting, Reproducibility & Publish
 **Goal**: The book is complete with troubleshooting and reproducibility chapters, builds cleanly, and is live on GitHub Pages
