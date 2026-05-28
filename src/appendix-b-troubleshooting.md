@@ -128,7 +128,7 @@ Linux에서는 인수 없이: `sed -i '/^# 0/d'`
 
 **무엇이 일어났나**
 
-Qwen2.5-35B 모델은 FsLex(`.fsl`) 문법에 익숙하지 않습니다. FsLex 파일은 `%%` 구분자를 사용하지 않습니다 — 그것은 FsYacc(`.fsy`) 문법입니다. Attempt 1에서 에이전트를 세 번 별도로 실행했지만(94 + 27 + 16 = 137회 TerminalAction), 세 번 모두 유효한 Lexer.fsl 파일을 만들어내지 못했습니다.
+Qwen 35B(qwen36-35b) 모델은 FsLex(`.fsl`) 문법에 익숙하지 않습니다. FsLex 파일은 `%%` 구분자를 사용하지 않습니다 — 그것은 FsYacc(`.fsy`) 문법입니다. Attempt 1에서 에이전트를 세 번 별도로 실행했지만(94 + 27 + 16 = 137회 TerminalAction), 세 번 모두 유효한 Lexer.fsl 파일을 만들어내지 못했습니다.
 
 **실제 오류 메시지**
 

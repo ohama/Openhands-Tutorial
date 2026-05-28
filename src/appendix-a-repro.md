@@ -14,7 +14,7 @@
 | OpenHands CLI | v1.16.0 (SDK v1.21.0) | `uv tool install openhands --python 3.12`; 바이너리는 `~/.local/bin`에 설치된다. |
 | .NET SDK | 10.0.203+ | `dotnet --version`이 10.x를 출력해야 한다. 에이전트는 LocalWorkspace (호스트 PTY) 를 사용하므로 호스트 PATH의 `dotnet`을 직접 쓴다. |
 | litellm proxy | 127.0.0.1:4000 에서 실행 중 | `litellm --config /path/to/config.yaml`; 모델 alias `qwen-local`을 노출해야 한다. |
-| Qwen2.5-35B 이상 | MLX 또는 vLLM 경유 | tool calling을 지원해야 한다 (`finish_reason: "tool_calls"`). proxy가 `openai/qwen-local`로 라우팅한다. |
+| Qwen 35B(qwen36-35b) 이상 | MLX 또는 vLLM 경유 | tool calling을 지원해야 한다 (`finish_reason: "tool_calls"`). proxy가 `openai/qwen-local`로 라우팅한다. |
 | FsLexYacc 11.3.0 | NuGet 캐시 | `~/.nuget/packages/fslexyacc/11.3.0/`에 미리 캐시되어 있으면 `dotnet restore`가 네트워크 없이 동작한다. |
 
 **Docker와 LocalWorkspace에 대한 참고:** 이 실행에서 OpenHands는 LocalWorkspace 모드(Docker 컨테이너 없이 호스트 PTY에서 직접 실행)를 사용했다. 따라서 Docker는 OpenHands의 primary 실행 경로에 필수적이지 않다. 단, Colima 사용자는 OpenHands가 Docker 데몬을 찾을 수 있도록 `DOCKER_HOST`를 설정해야 한다.
