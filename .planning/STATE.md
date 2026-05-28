@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 3 of 5 (Capture the OpenHands Run) — COMPLETE (3/3). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
-Plan: 3 of 3 complete (03-03 verify + commit captured artifacts). Next: Phase 4 (write worked-example chapter).
-Status: Phase 3 complete — captured/ committed with 5 JSONL logs, transcript, final-source (4 files), test-output (14/20/5), CAPTURE-MANIFEST; RUN-01/02/03 all verified from real evidence.
-Last activity: 2026-05-28 — Completed 03-03-PLAN.md: programmatic JSONL verification; error-and-fix confirmed in task3-parser.jsonl events 10–30; captured artifacts committed; oh-workdir/ stays gitignored.
+Phase: 4 of 5 (Write Worked-Example Chapter) — In progress (1/5 complete). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3).
+Plan: 04-03 complete (final.md — WALK-03 + VERIFY-01 + VERIFY-02). Next: 04-04 (wire SUMMARY.md ch04 links).
+Status: Phase 4 in progress — final.md written and committed; 04-01/04-02 by parallel agents; 04-04/04-05 remain.
+Last activity: 2026-05-28 — Completed 04-03-PLAN.md: final.md with verbatim source + 14/20/5 verification + honest ~10 min / ~150 min perf note; no "240s" figure.
 
-Progress: [█████████░] 45% (9/20 plans) — Phases 1-3 done, Phase 4 next
+Progress: [██████████░] 50% (10/20 plans) — Phases 1-3 done, Phase 4 plan 3 done
 
 ## Performance Metrics
 
@@ -115,5 +115,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 03-03-PLAN.md — Phase 3 complete. All captured artifacts committed to captured/. Phase 4 (write worked-example chapter) is next.
+Stopped at: Completed 04-03-PLAN.md — final.md written (225 lines, WALK-03 + VERIFY-01 + VERIFY-02). Commit c0f0a06. Phase 4 continues with 04-04 (wire SUMMARY.md ch04 entries).
 Resume file: None
