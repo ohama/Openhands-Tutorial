@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-27)
 
 ## Current Position
 
-Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — In progress (4/4 plans not yet done; 05-03 COMPLETE). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
-Plan: 05-01 COMPLETE, 05-02 COMPLETE, 05-03 COMPLETE (SUMMARY.md wired, final mdbook build green, SC#3 satisfied, commit 3e4877c). 05-04 remains (GitHub Pages deploy).
-Status: Phase 5 in progress — 05-01 COMPLETE (TROUBLE-01 satisfied); 05-02 COMPLETE (REPRO-01 satisfied); 05-03 COMPLETE (SC#3 satisfied: full book mdbook build green, zero () drafts, all chapters render). Next: 05-04 (GitHub Pages deploy, BOOK-03).
-Last activity: 2026-05-28 — Completed 05-03-PLAN.md: wired all four 5부/부록 SUMMARY.md entries (ch05-wrap-up/review.md, ch05-wrap-up/next-steps.md, appendix-a-repro.md, appendix-b-troubleshooting.md); renamed 부록 A to 재현 가이드; mdbook build exits 0, no broken links; four new HTML pages generated.
+Phase: 5 of 5 (Troubleshooting, Reproducibility & Publish) — In progress (05-04 autonomous task done; publish checkpoint pending user authorization). Phase 1 ✓ COMPLETE (3/3). Phase 2 ✓ COMPLETE (3/3). Phase 3 ✓ COMPLETE (3/3). Phase 4 ✓ COMPLETE (4/4).
+Plan: 05-01 COMPLETE, 05-02 COMPLETE, 05-03 COMPLETE (SUMMARY.md wired, final mdbook build green, SC#3 satisfied, commit 3e4877c). 05-04 IN PROGRESS — Task 1 committed (0bdbe63: deploy.yml + book.toml repo fields); Task 2 (publish) at checkpoint awaiting user authorization.
+Status: Phase 5 in progress — 05-01 COMPLETE (TROUBLE-01 satisfied); 05-02 COMPLETE (REPRO-01 satisfied); 05-03 COMPLETE (SC#3 satisfied); 05-04 PARTIAL (BOOK-03 structurally satisfied; SC#4 live-site pending publish authorization).
+Last activity: 2026-05-28 — 05-04 Task 1 complete: .github/workflows/deploy.yml created (build+deploy jobs, OIDC, deploy-pages@v4); book.toml git-repository-url + edit-url-template added (ohama/Openhands-Tutorial); local mdbook build green; committed 0bdbe63. STOPPED at publish checkpoint — user must authorize git push + gh Pages enable.
 
-Progress: [█████████████████░] 80% (16/20 plans) — Phases 1-4 done (3+3+3+4), Phase 5: 05-01+05-02+05-03 done. v1 requirements: 19/20 complete (only BOOK-03 [05-04] left; SC#3 now also satisfied).
+Progress: [█████████████████░] ~85% (17/20 plans; 05-04 partial) — Phases 1-4 done (3+3+3+4), Phase 5: 05-01+05-02+05-03 done, 05-04 Task 1 done. BOOK-03 structural requirement met; SC#4 pending live publish.
 
 ## Performance Metrics
 
@@ -117,5 +117,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-28
-Stopped at: Completed 05-03-PLAN.md (SUMMARY.md wired — zero () drafts; 부록 A renamed to 재현 가이드; final mdbook build exits 0, SC#3 satisfied). Phase 5: 05-01 + 05-02 + 05-03 done. Next: 05-04 (GitHub Pages deploy, BOOK-03).
-Resume file: None
+Stopped at: 05-04 Task 1 committed (0bdbe63 — deploy.yml + book.toml repo fields). Paused at publish checkpoint (Task 2): user must authorize `git push -u origin main` + `gh api ... pages` enable. Repo is ohama/Openhands-Tutorial (already public on GitHub). Warning: pushing makes .planning/ history public.
+Resume file: None — continuation agent should resume 05-04 Task 2 after user confirms publish authorization.
