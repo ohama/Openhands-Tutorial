@@ -1,0 +1,44 @@
+=== Rust HTTP Server Independent Host Re-Run ===
+Date: 2026-05-29
+Host: macOS Darwin 25.3.0
+Rust: rustc/cargo 1.95.0
+Source: oh-workdir-rust/rust-server/ (agent-written, no edits)
+
+--- Step 1: cargo build ---
+$ cd /Users/ohama/projs/OpenHandsTests/oh-workdir-rust/rust-server && cargo build 2>&1
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.03s
+
+Build result: SUCCESS (exit 0). Already compiled from task3. No recompilation needed.
+
+--- Step 2: cargo run (background) ---
+$ cargo run > /tmp/cargo-run-out.log 2>&1 &
+Server PID: started in background.
+Port 8080 bound after 1s (confirmed via lsof -ti :8080).
+
+--- Step 3: curl test ---
+$ curl -s -i http://localhost:8080/
+HTTP/1.1 200 OK
+Content-Length: 6
+Connection: close
+
+hello
+
+Curl exit: 0
+
+--- Step 4: kill server ---
+$ kill $(lsof -ti :8080)
+Port 8080: 0 processes after kill (confirmed).
+
+--- Summary ---
+build-status: PASS (exit 0)
+curl-output: "hello" followed by newline (verbatim response body)
+curl-exit: 0
+http-status: 200 OK
+headers: Content-Length: 6, Connection: close
+host-rerun-matches-agent-capture: YES
+
+Host re-run vs Agent Capture (task3-buildtest.jsonl event #38):
+- Agent curl command: curl -s http://localhost:8080/ ; echo "EXIT_CODE=$?"
+- Agent curl content: hello\nEXIT_CODE=0  (exit_code=0)
+- Host re-run: curl -s -i http://localhost:8080/ → HTTP/1.1 200 OK + Content-Length: 6 + Connection: close + hello\n (exit 0)
+- Match: YES — both show "hello" body, both exit 0.
