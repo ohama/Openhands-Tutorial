@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: 8 — Capture the 35B Rust HTTP Server Run (in progress)
-Plan: 08-02 complete; 08-03 next
-Status: 35B Rust capture done — did-write-server-unaided=YES, scaffold-invoked=NO, build-status=PASS (after 2 failures), curl-result=`hello\n` exit 0 (task3-buildtest.jsonl event #32)
-Last activity: 2026-05-28 — Phase 8 plan 02 (35B Rust capture) complete
+Phase: 8 — Capture the 35B Rust HTTP Server Run (COMPLETE)
+Plan: 08-03 complete; Phase 8 done — capture gate CLOSED
+Status: 35B Rust capture committed under captured-rust/; CAPTURE-MANIFEST.md tracked; ready for Phase 9 (6부 chapter)
+Last activity: 2026-05-29 — Phase 8 plan 03 (capture gate) complete
 
-Progress: ██░░░░░░░░ v1.2 ~20% (Phase 8 plans 01+02 of 3 complete)
+Progress: ███░░░░░░░ v1.2 ~33% (Phase 8 all 3 plans complete; Phase 9 next)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -33,11 +33,18 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [honesty discipline]: real captured runs only; no manual edits to agent-written files; setup-asymmetry (scaffolding) disclosed; pre-run predictions never presented as measurements
 - [real measured per-call timing on this hardware]: 35B ≈ 5.3s/call, 122B ≈ 6.3s/call (from v1 + v1.1 JSONL)
 
+### Key decisions for v1.2 Phase 8 plan 03
+
+- [08-03 honesty-gate]: PASSED — every ActionEvent across all 3 JSONLs has source=agent; verified mechanically by python3 before any commit
+- [08-03 capture-gate]: CLOSED — captured-rust/ committed (CAPTURE-MANIFEST.md + logs/ + final-source/ + test-output.txt + transcript.md); oh-workdir-rust/ stays gitignored (0 tracked files)
+- [08-03 event-indices]: JSONL line numbers: curl at task3-buildtest.jsonl lines #37/#38 (not #32 as in RUN-NOTES — RUN-NOTES used 0-based or different counting; manifest uses actual line indices)
+- [08-03 host-rerun]: PASS — fresh cargo run + curl on 2026-05-29; HTTP/1.1 200 OK, Content-Length: 6, "hello\n", exit 0. Matches agent's task3 capture.
+
 ### Key decisions for v1.2 Phase 8 plan 02
 
 - [08-02 capture]: did-write-server-unaided=YES — qwen-35b wrote 42-line Rust HTTP server using TcpListener + BufReader on unaided attempt 1. Scaffold not invoked.
 - [08-02 build story]: build-status=PASS after 2 failures. Error 1: format! syntax (missing paren — agent's own task2 heredoc issue). Error 2: E0382 use of moved value (BufReader iterator moved twice). Both agent-diagnosed and agent-fixed in task3.
-- [08-02 curl-result]: `hello\n`, exit 0 — task3-buildtest.jsonl ObservationEvent #32. Primary RUST-03 evidence.
+- [08-02 curl-result]: `hello\n`, exit 0 — task3-buildtest.jsonl ObservationEvent line #38. Primary RUST-03 evidence.
 - [08-02 honesty]: zero manual edits; no fabrication. All 3 JSONL files reflect verbatim agent actions. No FinishAction in any JSONL (all ended with MessageEvent) — run settled via background process exit.
 
 ### Key decisions for v1.2 Phase 8 plan 01
@@ -73,6 +80,6 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 ## Session Continuity
 
-Last session: 2026-05-28T08:58:58Z
-Stopped at: Completed 08-02-PLAN.md (35B Rust capture — 3 tasks, curl PASS)
-Resume file: None — continue with /gsd:execute-phase 8 (will run 08-03, CAPTURE-MANIFEST.md).
+Last session: 2026-05-29
+Stopped at: Completed 08-03-PLAN.md (capture gate — 4 tasks, CAPTURE-MANIFEST.md committed, Phase 8 DONE)
+Resume file: None — continue with /gsd:plan-phase 9 then /gsd:execute-phase 9 (6부 chapter).
