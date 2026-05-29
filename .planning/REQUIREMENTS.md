@@ -10,9 +10,9 @@
 
 ### Rust capture
 
-- [ ] **RUST-01**: A real captured 35B OpenHands run of a minimal Rust HTTP server exists on disk (per-task JSONL), with the agent attempting the work **unaided first** — no provided source for any file, including `Cargo.toml` (the agent runs `cargo new` itself). Scaffold fallback may be prepared but should only be invoked if the agent demonstrably cannot proceed, and if invoked it must be disclosed in the capture manifest (parallel to v1.1's lexer protocol).
-- [ ] **RUST-02**: The run honestly records whether 35B wrote the Rust source itself; if scaffolding was provided as a fallback for any task, that is disclosed (never hidden, never manually patched to fake success). The "any ActionEvent across all JSONLs must have `source=agent`" rule from v1/v1.1 applies — zero manual edits to agent-written files between tasks.
-- [ ] **RUST-03**: The run's real outcome on the canonical test (`curl localhost:8080/` returns the body `hello\n` while the server runs from `cargo run`) is captured in a terminal observation in the JSONL — success or honest failure. Any genuine build error, runtime error, or borrow-checker/lifetime confusion the agent encountered and its self-correction sequence are captured in the JSONL (events traceable, no fabrication).
+- [x] **RUST-01**: A real captured 35B OpenHands run of a minimal Rust HTTP server exists on disk (per-task JSONL), with the agent attempting the work **unaided first** — no provided source for any file, including `Cargo.toml` (the agent runs `cargo new` itself). Scaffold fallback may be prepared but should only be invoked if the agent demonstrably cannot proceed, and if invoked it must be disclosed in the capture manifest (parallel to v1.1's lexer protocol).
+- [x] **RUST-02**: The run honestly records whether 35B wrote the Rust source itself; if scaffolding was provided as a fallback for any task, that is disclosed (never hidden, never manually patched to fake success). The "any ActionEvent across all JSONLs must have `source=agent`" rule from v1/v1.1 applies — zero manual edits to agent-written files between tasks.
+- [x] **RUST-03**: The run's real outcome on the canonical test (`curl localhost:8080/` returns the body `hello\n` while the server runs from `cargo run`) is captured in a terminal observation in the JSONL — success or honest failure. Any genuine build error, runtime error, or borrow-checker/lifetime confusion the agent encountered and its self-correction sequence are captured in the JSONL (events traceable, no fabrication).
 
 ### 6부 chapter content
 
@@ -53,9 +53,9 @@ Deferred to later milestones:
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RUST-01 | Phase 8 | Pending |
-| RUST-02 | Phase 8 | Pending |
-| RUST-03 | Phase 8 | Pending |
+| RUST-01 | Phase 8 | Complete |
+| RUST-02 | Phase 8 | Complete |
+| RUST-03 | Phase 8 | Complete |
 | CHAP-01 | Phase 9 | Pending |
 | CHAP-02 | Phase 9 | Pending |
 | PUB-01 | Phase 9 | Pending |

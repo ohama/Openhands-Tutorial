@@ -144,5 +144,5 @@ Audit: [milestones/v1.1-MILESTONE-AUDIT.md](milestones/v1.1-MILESTONE-AUDIT.md)
 | 5. Publish | v1 | 4/4 | Complete | 2026-05-28 |
 | 6. Capture the 122B OpenHands Run | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
 | 7. Comparison Chapter + Publish | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
-| 8. Capture the 35B Rust HTTP Server Run | v1.2 | 0/? | Not started | — |
+| 8. Capture the 35B Rust HTTP Server Run | v1.2 | 3/3 | ✓ Complete | 2026-05-29 |
 | 9. 6부 Chapter + Publish | v1.2 | 0/? | Not started | — |

@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. **v1.2: same 35B model, different language — a minimal Rust HTTP server.**
-**Current focus:** v1.2 — Phase 8 (Capture the 35B Rust HTTP Server Run) not started.
+**Current focus:** v1.2 — Phase 8 (35B Rust Capture) COMPLETE + verified + human-approved 2026-05-29; Phase 9 (6부 Chapter + Publish) next.
 
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: 8 — Capture the 35B Rust HTTP Server Run (COMPLETE)
-Plan: 08-03 complete; Phase 8 done — capture gate CLOSED
-Status: 35B Rust capture committed under captured-rust/; CAPTURE-MANIFEST.md tracked; ready for Phase 9 (6부 chapter)
-Last activity: 2026-05-29 — Phase 8 plan 03 (capture gate) complete
+Phase: 8 — Capture the 35B Rust HTTP Server Run (✓ COMPLETE + verified + human-approved 2026-05-29)
+Plan: 08-03 complete; Phase 8 done — capture gate CLOSED; verifier 5/5 PASS; human approval recorded in 08-VERIFICATION.md
+Status: 35B Rust capture committed under captured-rust/; CAPTURE-MANIFEST.md tracked; RUST-01/02/03 marked Complete in REQUIREMENTS.md; ROADMAP marks Phase 8 ✓ Complete 2026-05-29; ready for /gsd:plan-phase 9 (6부 chapter)
+Last activity: 2026-05-29 — Phase 8 verified (5/5 must-haves PASS via automated checks; 2 human-eyeball items approved); ROADMAP + REQUIREMENTS + VERIFICATION updated
 
-Progress: ███░░░░░░░ v1.2 ~33% (Phase 8 all 3 plans complete; Phase 9 next)
+Progress: █████░░░░░ v1.2 50% (Phase 8 of 2 phases complete; Phase 9 next)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -71,8 +71,8 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ### Pending Todos
 
-- Run /gsd:plan-phase 8 to decompose Phase 8 into executable plans (~3 plans expected)
-- After Phase 8 complete + CAPTURE-MANIFEST.md committed: run /gsd:plan-phase 9
+- Run /gsd:plan-phase 9 (6부 chapter writing — Phase 8 capture gate now closed, manifest committed, evidence ready for verbatim quoting)
+- After Phase 9 complete + book deployed: run /gsd:audit-milestone (v1.2 milestone close-out, parallel to v1.1)
 
 ### Blockers/Concerns
 
@@ -81,5 +81,5 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 ## Session Continuity
 
 Last session: 2026-05-29
-Stopped at: Completed 08-03-PLAN.md (capture gate — 4 tasks, CAPTURE-MANIFEST.md committed, Phase 8 DONE)
+Stopped at: Phase 8 fully closed — 08-03 complete, verifier 5/5 PASS, human approval given, ROADMAP/REQUIREMENTS/VERIFICATION updated, completion commit made.
 Resume file: None — continue with /gsd:plan-phase 9 then /gsd:execute-phase 9 (6부 chapter).
