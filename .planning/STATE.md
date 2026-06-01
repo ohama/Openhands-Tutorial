@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
 Phase: 9 — 6부 Chapter + Publish (IN PROGRESS)
-Plan: 09-01 COMPLETE; 09-02 (build verify) and 09-03 (publish) remain.
-Status: 09-01 executed — five chapter files written and committed (src/ch06-rust-server/); SUMMARY.md wired; 09-01-SUMMARY.md created. Awaiting 09-02 (mdBook build verification).
-Last activity: 2026-06-01 — Executed 09-01-PLAN.md (chapter write + wire)
+Plan: 09-01 COMPLETE; 09-02 COMPLETE (PUB-01 gate passed); 09-03 (publish) remains.
+Status: 09-02 executed — mdbook build verified clean (exit 0, zero new warnings, all 6부 HTML generated). Awaiting 09-03 (GitHub Pages publish).
+Last activity: 2026-06-01 — Executed 09-02-PLAN.md (build verify gate)
 
-Progress: ██████░░░░ v1.2 67% (Phase 8 complete + Phase 9 plan 01 of 3 complete)
+Progress: ███████░░░ v1.2 78% (Phase 8 complete + Phase 9 plans 01+02 of 3 complete)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -74,9 +74,15 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [09-01 event-numbering]: Used CAPTURE-MANIFEST.md event numbers as authoritative (e.g., build-fail-1 = #16, E0382 = #28, curl = #37/#38). Raw JSONL line-indices differ due to non-JSON header/trailer lines in the JSONL files. The manifest is the plan's stated authoritative source.
 - [09-01 audit]: Task 4 honesty audit PASSED — zero fabricated values, zero stale artifacts, no emoji in callouts, deploy.yml untouched.
 
+### Key decisions for v1.2 Phase 9 plan 02
+
+- [09-02 build-gate]: PUB-01 PASSED — mdbook build exit 0, zero errors, exactly one WARN (pre-existing <char> in appendix-c-comparison.md), zero new warnings for 6부.
+- [09-02 sidebar-nav]: Confirmed via toc-e259f6ea.js — all five ch06-rust-server/*.html entries present in TOC JS. Sidebar nav uses collapsible JS tree, not inline HTML.
+- [09-02 no-regression]: All 1부–5부 and 부록 A/B/C HTML files confirmed present post-build.
+
 ### Pending Todos
 
-- Run /gsd:execute-phase 9 plan 09-02 (mdBook build verification — confirm book still builds with 6부 chapter)
+- Run /gsd:execute-phase 9 plan 09-03 (GitHub Pages publish)
 - After Phase 9 complete + book deployed: run /gsd:audit-milestone (v1.2 milestone close-out, parallel to v1.1)
 
 ### Blockers/Concerns
@@ -85,6 +91,6 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 ## Session Continuity
 
-Last session: 2026-05-29
-Stopped at: Phase 8 fully closed — 08-03 complete, verifier 5/5 PASS, human approval given, ROADMAP/REQUIREMENTS/VERIFICATION updated, completion commit made.
-Resume file: None — continue with /gsd:execute-phase 9 plan 09-02 (mdBook build verify).
+Last session: 2026-06-01
+Stopped at: 09-02 complete — PUB-01 build gate passed, SUMMARY.md created, metadata committed (3e2408f).
+Resume file: None — continue with /gsd:execute-phase 9 plan 09-03 (GitHub Pages publish).
