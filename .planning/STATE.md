@@ -2,20 +2,20 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-01 — v1.3 Scala Example shipped)
+See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
-**Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부).
-**Current focus:** v1.4 Planning Comparison — STARTED 2026-06-01. Claude-led vs OpenHands-native task planning, on 35B, across F#/Rust/Scala examples; published as 부록 D. Phases 12+.
+**Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
+**Current focus:** v1.4 Planning Comparison — roadmap created 2026-06-01. Phase 12 is next: build the comparison harness and pilot both arms on Rust.
 
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — STARTED 2026-06-01. Continues at Phase 12 (v1.3 ended at Phase 11).
-Phase: Not started (defining requirements / roadmap).
-Plan: —
-Status: Defining requirements. Decided: model=35B; scope=all 3 examples (F#/Rust/Scala); deliverable=published 부록 D; metrics=retry/time + LLM-call/TA counts + error-fix cycles + plan-structure(qualitative) + success/correctness. Open unknown for research: OpenHands 1.16 native planning/task mechanism + fair Claude-plan→OpenHands-plan conversion.
-Last activity: 2026-06-01 — /gsd:new-milestone v1.4 (PROJECT.md updated; scope decided via questioning).
+Phase: 12 — Harness + Rust Pilot (not yet started; roadmap created, ready to plan).
+Plan: — (no active plan; next: `/gsd:plan-phase 12`)
+Status: Roadmap created. All 12 v1.4 requirements mapped (METH→Phase 12, PCAP/ANAL→Phase 13, DCHAP/DPUB→Phase 14). Phase 12 unblocked; Phase 13 blocked on Phase 12 capture gate; Phase 14 blocked on Phase 13 capture gate.
+Last activity: 2026-06-01 — roadmap created (ROADMAP.md + STATE.md updated; REQUIREMENTS.md traceability confirmed).
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). No active milestone.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). v1.4 roadmap defined (Phases 12–14).
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -24,6 +24,7 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - **v1.1 Model Comparison** (shipped 2026-05-28): 2 phases, 6 plans, 122B capture + 부록 C 35B-vs-122B comparison + UX callouts. See `milestones/v1.1-ROADMAP.md`.
 - **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server (6부) — unaided. See `milestones/v1.2-ROADMAP.md`.
 - **v1.3 Scala Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Scala 3 calculator (7부) — unaided, one self-corrected compile error. Completes the calculator trilogy; confirms capability is domain-distribution, not model size. See `milestones/v1.3-ROADMAP.md`.
+- **v1.4 Planning Comparison** (in progress — started 2026-06-01): 3 phases planned (12/13/14), 0 plans complete. Arm A (Claude-authored plan → 35B executes) vs. Arm B (35B self-plans + executes) across F#/Rust/Scala; published as 부록 D.
 
 ## Accumulated Context
 
@@ -37,6 +38,18 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - [35B capability]: domain-distribution, not size — fails OOD DSLs (FsLex) but writes in-distribution languages (Rust std, Scala 3) unaided; errors it makes are teachable in-distribution mistakes (borrow-checker, access modifiers).
 - [publish]: book deploys to GitHub Pages via `.github/workflows/deploy.yml` on push to `main` (do NOT modify); mdbook sidebar nav is JS-rendered from `toc-{hash}.js` — verify live sidebar there. One accepted build warning: the `<char>` tag in 부록 C (TD-4).
 
+### v1.4 decisions (new this milestone)
+
+- [v1.4 study design]: One OpenHands invocation per arm per example (single-session constraint); BOTH arms use the default CodeActAgent via established headless CLI (no SDK PlanningAgent); Arm A uses `-f plan.txt` or pre-written `.agents_tmp/PLAN.md`; Arm B prompt: control block + "Plan your own implementation steps using the task tracker, then execute each step."
+- [v1.4 prompt symmetry]: Arm A and Arm B prompts share an identical control block (goal wording, constraints, canonical tests); the ONLY difference is whether a numbered task plan is supplied (Arm A) or withheld (Arm B). A literal diff is mandatory before any invocation.
+- [v1.4 workspace isolation]: `oh-workdir-planning/` is gitignored; each arm gets its own empty directory; workspace empty verified before each run.
+- [v1.4 run order counterbalancing]: litellm proxy restarted between arms OR run order counterbalanced (e.g., Arm B first for F#, Arm A first for Rust, Arm B first for Scala) to mitigate KV-cache prefix warmth.
+- [v1.4 repetition policy]: n=3 preferred (median + min–max); n=1 acceptable floor with explicit `(단일 실행)` label on every metric. Never use "significantly," "consistently," or "reliably" at n=1.
+- [v1.4 metrics]: P1 (auto from JSONL): TerminalAction count, total event count, wall-clock active time, error-fix cycle count, AgentErrorEvent count, canonical-test pass/fail. P2: avg/min/max LLM-call gap, time-to-first-correct, qualitative plan comparison. P3 (only if `usage` in JSONL): token counts — confirm in Phase 12 pilot before committing to P3.
+- [v1.4 framing rule]: 부록 D frames the study as "does an expert-authored plan help the 35B execute?" — NOT "Claude plans better." Inconclusive/mixed results are valid findings, reported honestly.
+- [v1.4 artifact layout]: `captured-planning/` under `.planning/milestones/v1.4-phases/12-planning-comparison-harness/`; structure per example: `arm-a/` and `arm-b/` each with `logs/run.jsonl`, `planning-artifact/`, `final-source/`, `test-output.txt`, `metrics.json`; plus `comparison.json` per example; plus top-level `CAPTURE-MANIFEST.md`.
+- [v1.4 open unknowns — to resolve in Phase 12 pilot]: (1) Does the Qwen 35B emit `TaskTrackerObservation` events at the chosen Arm B prompt phrasing? (2) Is `usage` data (prompt/completion tokens) present in the JSONL ObservationEvents?
+
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
 - **TD-2**: 부록 C event-71 → should be event-25 citation. ~5 min sed.
@@ -47,17 +60,18 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 
 ### Candidate next milestones (no commitment)
 
-- EXT-07: cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — now natural since the trilogy is complete; language-axis parallel to 부록 C's model-axis comparison.
+- EXT-07: cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — now natural since the trilogy is complete.
 - EXT-01: more-language worked examples (Go / Python), following the precedent.
 - EXT-06: 35B-vs-122B comparison on the Rust or Scala example.
+- EXT-08: extend the planning comparison to 122B, or add the SDK `PlanningAgent` as a third arm.
 - EXT-02: English translation. EXT-03: "build your own minimal agent" appendix. EXT-04: local-vs-cloud comparison. EXT-05: Rust/Scala with a framework.
 
 ### Blockers/Concerns
 
-None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + JDK 17). LLM proxy serving qwen-35b/122b/local.
+None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + JDK 17). LLM proxy serving qwen-35b/122b/local. Phase 12 is unblocked.
 
 ## Session Continuity
 
 Last session: 2026-06-01
-Stopped at: v1.3 milestone shipped + archived; tag milestone-v1.3 created. Calculator trilogy live.
-Resume file: None — next: `/gsd:new-milestone` to scope the next milestone.
+Stopped at: v1.4 roadmap created (Phases 12–14 defined; ROADMAP.md + STATE.md + REQUIREMENTS.md updated).
+Resume file: None — next: `/gsd:plan-phase 12`
