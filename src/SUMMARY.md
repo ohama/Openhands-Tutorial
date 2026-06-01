@@ -42,6 +42,14 @@
 - [빌드와 테스트 단계](ch06-rust-server/build-test.md)
 - [완성된 Rust 서버](ch06-rust-server/final.md)
 
+# 7부: 다른 워킹 예제 - Scala 계산기
+
+- [예제 프로젝트 소개](ch07-scala-calc/intro.md)
+- [태스크 계획 단계](ch07-scala-calc/planning.md)
+- [코드 작성 단계](ch07-scala-calc/writing.md)
+- [빌드와 테스트 단계](ch07-scala-calc/build-test.md)
+- [완성된 Scala 계산기](ch07-scala-calc/final.md)
+
 ---
 
 [부록 A: 재현 가이드](appendix-a-repro.md)
