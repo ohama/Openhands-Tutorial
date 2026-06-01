@@ -13,7 +13,8 @@ Milestone: v1.2 (Rust Example) — COMPLETE 2026-06-01
 Phase: 9 — 6부 Chapter + Publish — COMPLETE (all 3 plans done)
 Plan: 09-01 COMPLETE; 09-02 COMPLETE (PUB-01 gate); 09-03 COMPLETE (PUB-02 gate — live deploy)
 Status: Phase 9 complete — 6부 live on GitHub Pages. v1.2 milestone deliverable shipped. Phase verifier 5/5 PASS (09-VERIFICATION.md): code byte-identical to final-source/main.rs, both build errors verbatim from JSONL, no fabrication/emoji, only pre-existing <char> warning, live pages HTTP 200, deploy.yml unchanged. CHAP-01/02 + PUB-01/02 = Complete.
-Last activity: 2026-06-01 — /gsd:execute-phase 9 (3 waves: write+wire → build verify → publish); verifier 5/5 PASS; ROADMAP/STATE/REQUIREMENTS updated
+Audit: /gsd:audit-milestone 2026-06-01 — Requirements 7/7, Phases 2/2, Integration 4/5. Caught TD-6 (6부 final.md cited v1 35B ~14–32s/call as a measurement, contradicting 부록 C which marks it a prediction; real ~5.3s/call). TD-6 + TD-7 (task3 41→36 event count) + TD-8 (off-by-one event labels) all FIXED in 6부, rebuilt clean, redeployed. See .planning/v1.2-MILESTONE-AUDIT.md.
+Last activity: 2026-06-01 — /gsd:audit-milestone + TD-6/7/8 fixes pushed; book re-deployed. Ready for /gsd:complete-milestone.
 
 Progress: ██████████ v1.2 100% (Phase 8 + Phase 9 all 3 plans complete; book live)
 Live (v1 + v1.1 + v1.2): https://ohama.github.io/Openhands-Tutorial/
@@ -22,7 +23,7 @@ Live (v1 + v1.1 + v1.2): https://ohama.github.io/Openhands-Tutorial/
 
 - **v1 MVP** (shipped 2026-05-28): 5 phases, 17 plans, Korean mdBook tutorial + 35B captured run of F# calculator. See `milestones/v1-ROADMAP.md`.
 - **v1.1 Model Comparison** (shipped 2026-05-28): 2 phases, 6 plans, 122B capture + 부록 C comparison + UX callouts. See `milestones/v1.1-ROADMAP.md`.
-- **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server capture + 6부 chapter (다른 워킹 예제) live. Confirms Rust is more in-distribution for 35B than FsLex was (wrote the server unaided where it failed FsLex). Pending milestone audit/close-out.
+- **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server capture + 6부 chapter (다른 워킹 예제) live. Confirms Rust is more in-distribution for 35B than FsLex was (wrote the server unaided where it failed FsLex). Audited (gaps_found → TD-6/7/8 fixed). Ready for close-out.
 
 ## Accumulated Context
 
