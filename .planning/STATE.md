@@ -9,14 +9,14 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 ## Current Position
 
-Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: 9 — 6부 Chapter + Publish (IN PROGRESS)
-Plan: 09-01 COMPLETE; 09-02 COMPLETE (PUB-01 gate passed); 09-03 (publish) remains.
-Status: 09-02 executed — mdbook build verified clean (exit 0, zero new warnings, all 6부 HTML generated). Awaiting 09-03 (GitHub Pages publish).
-Last activity: 2026-06-01 — Executed 09-02-PLAN.md (build verify gate)
+Milestone: v1.2 (Rust Example) — COMPLETE 2026-06-01
+Phase: 9 — 6부 Chapter + Publish — COMPLETE (all 3 plans done)
+Plan: 09-01 COMPLETE; 09-02 COMPLETE (PUB-01 gate); 09-03 COMPLETE (PUB-02 gate — live deploy)
+Status: Phase 9 complete — 6부 live on GitHub Pages. v1.2 milestone deliverable shipped.
+Last activity: 2026-06-01 — Executed 09-03-PLAN.md (GitHub Pages publish)
 
-Progress: ███████░░░ v1.2 78% (Phase 8 complete + Phase 9 plans 01+02 of 3 complete)
-Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
+Progress: ██████████ v1.2 100% (Phase 8 + Phase 9 all 3 plans complete; book live)
+Live (v1 + v1.1 + v1.2): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
 
@@ -80,10 +80,17 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - [09-02 sidebar-nav]: Confirmed via toc-e259f6ea.js — all five ch06-rust-server/*.html entries present in TOC JS. Sidebar nav uses collapsible JS tree, not inline HTML.
 - [09-02 no-regression]: All 1부–5부 and 부록 A/B/C HTML files confirmed present post-build.
 
+### Key decisions for v1.2 Phase 9 plan 03
+
+- [09-03 deploy.yml-guard]: PUB-02 HARD GUARD PASSED — both `git diff -- .github/workflows/deploy.yml` and `git diff origin/main..HEAD -- .github/workflows/deploy.yml` returned zero output (byte-for-byte unchanged)
+- [09-03 push]: Pushed 7 commits to origin/main (ff953b1..56bfcad). Keychain stderr noise is a headless SSH artifact, not a push failure.
+- [09-03 actions]: Run 26731890916 — build (10s) + deploy (10s) both green; conclusion: success
+- [09-03 live-verify]: root HTTP 200; ch06-rust-server/intro.html HTTP 200; toc-e259f6ea.js CDN contains all 5 ch06 pages; last-modified: Mon, 01 Jun 2026 02:24:44 GMT
+- [09-03 toc-pattern]: mdbook sidebar nav is JS-rendered from toc-{hash}.js — check that file for live sidebar verification, not root HTML
+
 ### Pending Todos
 
-- Run /gsd:execute-phase 9 plan 09-03 (GitHub Pages publish)
-- After Phase 9 complete + book deployed: run /gsd:audit-milestone (v1.2 milestone close-out, parallel to v1.1)
+- Run /gsd:audit-milestone (v1.2 milestone close-out, parallel to v1.1)
 
 ### Blockers/Concerns
 
@@ -92,5 +99,5 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 ## Session Continuity
 
 Last session: 2026-06-01
-Stopped at: 09-02 complete — PUB-01 build gate passed, SUMMARY.md created, metadata committed (3e2408f).
-Resume file: None — continue with /gsd:execute-phase 9 plan 09-03 (GitHub Pages publish).
+Stopped at: 09-03 COMPLETE — 6부 live on GitHub Pages; v1.2 milestone shipped. Actions run 26731890916 green; HTTP 200 on root + ch06-rust-server/intro.html.
+Resume file: None — next: /gsd:audit-milestone (v1.2 closeout).
