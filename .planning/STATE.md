@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부).
-**Current focus:** Between milestones — v1.2 shipped + archived 2026-06-01. Next milestone scoped via `/gsd:new-milestone`.
+**Current focus:** v1.3 Scala Example — STARTED 2026-06-01. 35B builds a Scala 3 arithmetic calculator (scala-cli, ADT + recursive-descent parser); completes the calculator trilogy (F# → Scala). Phases 10–11.
 
 ## Current Position
 
-Milestone: None active — v1.2 (Rust Example) SHIPPED + archived 2026-06-01.
-Phase: None active — phases 1–9 all complete and archived under `.planning/milestones/`.
-Plan: Not started — awaiting next milestone definition.
-Status: Ready to plan. Run `/gsd:new-milestone` to scope the next worked example / comparison / translation.
-Last activity: 2026-06-01 — /gsd:complete-milestone v1.2 (archived roadmap/requirements/audit/phases; tagged milestone-v1.2).
+Milestone: v1.3 (Scala Example) — STARTED 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
+Phase: Not started (defining requirements / roadmap).
+Plan: —
+Status: Defining requirements. Next: roadmap → /gsd:plan-phase 10.
+Last activity: 2026-06-01 — /gsd:new-milestone v1.3 (PROJECT.md updated; scope decided = Scala arithmetic calculator).
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans total). No active milestone.
+Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 starting (Phases 10–11).
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History

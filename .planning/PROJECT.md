@@ -15,19 +15,17 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Last Shipped: v1.2 — Rust Example (2026-06-01) · Next milestone TBD via `/gsd:new-milestone`
+## Current Milestone: v1.3 — Scala Example (third worked example)
 
-**Delivered:** A second worked example — OpenHands on the local Qwen 35B autonomously built a minimal std-only Rust HTTP server (`GET / → "hello\n"`), captured honestly and published as a new 6부. The thesis held: the model that could not write FsLex unaided in v1 wrote a working Rust server unaided on attempt 1. The original milestone framing is preserved below as the (now-delivered) description.
-
-**Goal (delivered):** Add a second worked example to the tutorial — OpenHands on the local Qwen 35B autonomously builds a minimal Rust HTTP server (`GET / → "hello\n"`, std-only, no external crates) — captured honestly and added as a new 6부 to the published book.
+**Goal:** Add a third worked example — OpenHands on the local Qwen 35B autonomously builds a minimal arithmetic calculator in **Scala 3** (`sealed trait` ADT + hand-written recursive-descent parser + pattern-matching evaluator, std-only, run via `scala-cli`) — captured honestly and published as a new 7부. Completes the "calculator trilogy": F# (v1, FsLex/FsYacc DSL, needed a scaffolded lexer) → Scala (the same goal expressed the idiomatic Scala way).
 
 **Target features:**
-- A real captured 35B OpenHands run of a minimal Rust HTTP server: `cargo new` → `std::net::TcpListener` + accept loop → minimal HTTP/1.1 response writer → `curl localhost:8080/` returns `hello\n`. Decomposed into ~3–4 scoped tasks following the v1 pattern.
-- A new **6부 "다른 워킨 예제: Rust HTTP 서버"** in the book — structurally parallel to 4부 (calculator), written verbatim from the captured run with concept↔action callouts, any error-and-fix narration, and final source. The 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern from v1.1 continues here.
-- Honest framing: the same model (35B) tackling a different language (Rust). Whatever the agent does — including any blind spots in Rust ownership/lifetimes/std::io — is captured as written, not retouched. If scaffolding is needed for any task, it is disclosed (parallel to v1's FsLex scaffolding disclosure).
+- A real captured 35B OpenHands run of a minimal Scala calculator: `scala-cli` project → `sealed trait Expr` ADT → hand-written recursive-descent parser (operator precedence, left-assoc, parentheses) → pattern-matching evaluator → `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`. Decomposed into ~3–4 scoped tasks following the v1.2 pattern. No parser-combinator library, no parser generator — the model writes the parser itself (parallel to v1.2's "std only" discipline).
+- A new **7부 "다른 워킹 예제: Scala 계산기"** in the book — structurally parallel to 4부/6부, written verbatim from the captured run with concept↔action callouts, error-and-fix narration, and final source. The 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern continues.
+- Honest framing: same model (35B), a third language (Scala). Whatever the agent does — Scala 3 vs Scala 2 syntax slips, operator-precedence bugs, type errors — is captured as written, not retouched. Any scaffolding disclosed (parallel to v1).
 - Re-published live to GitHub Pages.
 
-**Why this is interesting (the honesty story):** v1 showed 35B couldn't write FsLex (FsLex was deeply out-of-distribution); v1.1 showed 122B could (capability scales with size for narrow domains). v1.2 holds the model constant and changes the *language* to one that is far more in-distribution (Rust). The expected outcome is success — but if the agent stumbles anywhere (e.g., borrow checker, manual HTTP framing edge cases), that becomes capture material exactly as the FsLex story did. Either outcome is good educational material.
+**Why this is interesting (the honesty story):** v1 (F# FsLex) hit the model's boundary — a parser-generator DSL, deeply out-of-distribution. v1.2 (Rust std) was in-distribution and succeeded unaided. v1.3 returns to the *calculator* goal but in Scala, where `sealed trait` ADTs + pattern matching are the canonical idiom — testing whether the model can write unaided the very thing it needed a scaffolded lexer for in F#. New unknowns to capture honestly: **Scala 3** (newer, less training data — the model may emit Scala 2 syntax) and **`scala-cli`** tooling. Success or stumble, both are good chapter material — and it lets the book end on a direct calculator-to-calculator comparison across three languages.
 
 ## Requirements
 
@@ -61,9 +59,11 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ### Active
 
-<!-- v1.2 shipped 2026-06-01. No active milestone — the next is scoped via /gsd:new-milestone. -->
+<!-- v1.3 Scala Example — started 2026-06-01. Phases 10–11. Completes the calculator trilogy (F# → Scala). -->
 
-(None — v1.2 shipped. Run `/gsd:new-milestone` to scope the next worked example, comparison, or translation.)
+- [ ] Capture a real 35B OpenHands run of a minimal Scala 3 arithmetic calculator (`scala-cli`, sealed-trait ADT + hand-written recursive-descent parser + pattern-matching evaluator, std-only) — `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`, unaided-first
+- [ ] Add a new 7부 "다른 워킹 예제: Scala 계산기" chapter group, written verbatim from the captured run, with the 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern and concept↔action callouts
+- [ ] Re-publish the updated book (live on GitHub Pages)
 
 <!-- Deferred to later milestones (carried forward):
      - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
@@ -133,4 +133,4 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | v1.2: per-call timing must cite real measurements, never the v1 `~14–32s/call` pre-run prediction | Honesty core value — predictions never presented as measurements (the same correction v1.1 made for 부록 C) | ⚠️ Caught in audit — 6부 had re-introduced the prediction; fixed to derived ~5.3s/call before close-out (TD-6) |
 
 ---
-*Last updated: 2026-06-01 — completed v1.2 milestone (Rust HTTP server worked example, 35B); next milestone TBD*
+*Last updated: 2026-06-01 — started v1.3 milestone (Scala calculator worked example, 35B)*
