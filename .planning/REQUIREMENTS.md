@@ -10,9 +10,9 @@
 
 ### Scala capture
 
-- [ ] **SCAL-01**: A real captured 35B OpenHands run of a minimal Scala 3 arithmetic calculator exists on disk (per-task JSONL), with the agent attempting the work **unaided first** — no provided source for any file (the agent runs the `scala-cli` project setup itself). The run is preceded by a host **preflight** that verifies the Scala toolchain (`scala-cli` / JDK) is present and a trivial `scala-cli run` works. Scaffold fallback may be prepared but only invoked if the agent demonstrably cannot proceed, and if invoked it must be disclosed in the capture manifest (parallel to v1's lexer protocol). The parser must be the model's own work — **no parser-combinator library, no parser generator** (std-only discipline, parallel to v1.2).
-- [ ] **SCAL-02**: The run honestly records whether 35B wrote the Scala source itself; if scaffolding was provided as a fallback for any task, that is disclosed (never hidden, never manually patched to fake success). The "every ActionEvent across all JSONLs must have `source=agent`" rule applies — zero manual edits to agent-written files between tasks.
-- [ ] **SCAL-03**: The run's real outcome on the canonical test (`2+3*4 → 14`, plus `(2+3)*4 → 20` and `10-3-2 → 5`) is captured in a terminal `ObservationEvent` in the JSONL — success or honest failure, whichever actually occurred. Any genuine error the agent encountered (operator-precedence bug, Scala 3-vs-2 syntax slip, type/compile error, `scala-cli` usage confusion) and its self-correction sequence are captured in the JSONL (events traceable, no fabrication).
+- [x] **SCAL-01**: A real captured 35B OpenHands run of a minimal Scala 3 arithmetic calculator exists on disk (per-task JSONL), with the agent attempting the work **unaided first** — no provided source for any file (the agent runs the `scala-cli` project setup itself). The run is preceded by a host **preflight** that verifies the Scala toolchain (`scala-cli` / JDK) is present and a trivial `scala-cli run` works. Scaffold fallback may be prepared but only invoked if the agent demonstrably cannot proceed, and if invoked it must be disclosed in the capture manifest (parallel to v1's lexer protocol). The parser must be the model's own work — **no parser-combinator library, no parser generator** (std-only discipline, parallel to v1.2).
+- [x] **SCAL-02**: The run honestly records whether 35B wrote the Scala source itself; if scaffolding was provided as a fallback for any task, that is disclosed (never hidden, never manually patched to fake success). The "every ActionEvent across all JSONLs must have `source=agent`" rule applies — zero manual edits to agent-written files between tasks.
+- [x] **SCAL-03**: The run's real outcome on the canonical test (`2+3*4 → 14`, plus `(2+3)*4 → 20` and `10-3-2 → 5`) is captured in a terminal `ObservationEvent` in the JSONL — success or honest failure, whichever actually occurred. Any genuine error the agent encountered (operator-precedence bug, Scala 3-vs-2 syntax slip, type/compile error, `scala-cli` usage confusion) and its self-correction sequence are captured in the JSONL (events traceable, no fabrication).
 
 ### 7부 chapter content
 
@@ -49,9 +49,9 @@ Deferred to later milestones:
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCAL-01 | Phase 10 | Pending |
-| SCAL-02 | Phase 10 | Pending |
-| SCAL-03 | Phase 10 | Pending |
+| SCAL-01 | Phase 10 | Complete |
+| SCAL-02 | Phase 10 | Complete |
+| SCAL-03 | Phase 10 | Complete |
 | CHAP-01 | Phase 11 | Pending |
 | CHAP-02 | Phase 11 | Pending |
 | PUB-01 | Phase 11 | Pending |

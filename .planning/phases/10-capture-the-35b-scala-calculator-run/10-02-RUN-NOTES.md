@@ -4,6 +4,8 @@ Run date: 2026-06-01. Model: `openai/qwen-35b` via litellm proxy @ 127.0.0.1:400
 
 Honesty discipline (carried v1/v1.1/v1.2): zero manual edits to agent files; no fabricated output; scaffold disclosed if invoked; the `~14–32s/call` figure is a v1 prediction and is NOT cited as a measurement.
 
+> **Event-numbering convention note:** the per-task event indices in the sections below use **0-based** `enumerate()` positions (a scratchpad convention). The committed `captured-scala/CAPTURE-MANIFEST.md` — **authoritative for all Phase 11 citations** — uses **1-based** JSONL positions (i.e. +1 vs the lists below). The error-and-fix *content* is identical under both. Phase 11 must cite the MANIFEST's numbers, not these.
+
 ---
 
 ## task1-scaffold

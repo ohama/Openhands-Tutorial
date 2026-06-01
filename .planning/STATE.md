@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부). v1.3: same 35B, Scala 3 arithmetic calculator (7부) — completes the calculator trilogy.
-**Current focus:** v1.3 Scala Example — STARTED 2026-06-01. 35B builds a Scala 3 arithmetic calculator (scala-cli, ADT + recursive-descent parser); completes the calculator trilogy (F# → Scala). Phases 10–11. Roadmap created — ready to plan Phase 10.
+**Current focus:** v1.3 Scala Example — Phase 10 (capture) COMPLETE + verified 5/5. 35B wrote a Scala 3 calculator UNAIDED (14/20/5 pass, one self-corrected compile error). Next: Phase 11 (write 7부 chapter + publish).
 
 ## Current Position
 
 Milestone: v1.3 (Scala Example) — IN PROGRESS 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Phase 10 (Capture the 35B Scala Calculator Run) — ALL 3 PLANS COMPLETE. Phase 10 DONE.
-Plan: 10-03 complete (3 of 3 plans in Phase 10). Next: Phase 11 (write the 7부 Scala chapter).
-Status: Phase 10 capture gate CLOSED — captured-scala/ committed (acd3009). Phase 11 ready to begin.
-Last activity: 2026-06-01 — completed 10-03-PLAN.md (honesty gate + captured-scala/ + CAPTURE-MANIFEST.md).
+Phase: Phase 10 (Capture the 35B Scala Calculator Run) — ✓ COMPLETE + verified 5/5 PASS (10-VERIFICATION.md).
+Plan: All 3 Phase 10 plans complete. Next: Phase 11 (7부 chapter from captured-scala/). Run /gsd:plan-phase 11.
+Status: Capture gate CLOSED — captured-scala/ committed (acd3009). Outcome: 35B wrote idiomatic Scala 3 recursive-descent calc UNAIDED (correct precedence + left-assoc); ONE genuine compile error (`private pos` accessed from `@main`) self-corrected by agent's own `sed`; canonical tests 14/20/5 all pass; scaffold never invoked; 36/36 ActionEvents source=agent; host re-run reproduced 14/20/5. Completes the calculator trilogy (failed FsLex → unaided Scala). EVENT-NUMBERING: CAPTURE-MANIFEST.md (1-based) is authoritative for Phase 11 citations; 10-02-RUN-NOTES per-task lists are 0-based (+1 offset) — see the convention note at the top of RUN-NOTES.
+Last activity: 2026-06-01 — Phase 10 executed (3 waves) + verified 5/5; ROADMAP/STATE/REQUIREMENTS updated.
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). ✅ v1.3 Phase 10 complete (3/3 plans). Next: Phase 11.
+Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3: Phase 10 ✓ complete + verified (3/3); Phase 11 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History

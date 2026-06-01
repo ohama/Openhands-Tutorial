@@ -127,9 +127,11 @@ Audit: [milestones/v1.2-MILESTONE-AUDIT.md](milestones/v1.2-MILESTONE-AUDIT.md)
 **Plans:** 3 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Author zero-leak task prompts + 00-INVOCATION; preflight (install scala-cli, pre-warm cache, gitignore, proxy) → PREFLIGHT GREEN
-- [ ] 10-02-PLAN.md — Execute the 35B capture: task1 scaffold → task2 write-calc unaided → task3 run all three canonical tests; RUN-NOTES
-- [ ] 10-03-PLAN.md — Honesty gate (source=agent) + CAPTURE-MANIFEST.md + host re-run; commit captured-scala/ (closes the capture gate)
+- [x] 10-01-PLAN.md — Author zero-leak task prompts + 00-INVOCATION; preflight (scala-cli + pre-warm cache, gitignore, proxy) → PREFLIGHT GREEN
+- [x] 10-02-PLAN.md — Execute the 35B capture: task1 scaffold → task2 write-calc unaided → task3 run all three canonical tests; RUN-NOTES
+- [x] 10-03-PLAN.md — Honesty gate (source=agent) + CAPTURE-MANIFEST.md + host re-run; commit captured-scala/ (closes the capture gate)
+
+**Outcome:** The 35B wrote an idiomatic **Scala 3** recursive-descent calculator **unaided** (correct precedence + left-associativity); hit **one** genuine compile error (`private pos` accessed from `@main`), self-corrected with its own `sed`, and **all three canonical tests passed (14 / 20 / 5)**. Scaffold never invoked; 36/36 ActionEvents `source=agent`; host re-run reproduced 14/20/5. Verified 5/5. ✓ Complete 2026-06-01.
 
 ### Phase 11: 7부 Chapter + Publish
 
@@ -159,5 +161,5 @@ Plans:
 | 7. Comparison Chapter + Publish | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
 | 8. Capture the 35B Rust HTTP Server Run | v1.2 | 3/3 | ✓ Complete | 2026-05-29 |
 | 9. 6부 Chapter + Publish | v1.2 | 3/3 | ✓ Complete | 2026-06-01 |
-| 10. Capture the 35B Scala Calculator Run | v1.3 | 0/3 | Not started | — |
+| 10. Capture the 35B Scala Calculator Run | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 11. 7부 Chapter + Publish | v1.3 | 0/3 | Not started | — |
