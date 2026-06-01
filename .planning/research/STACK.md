@@ -1,364 +1,385 @@
-# Stack Research
+# Stack Research — v1.4 Planning Comparison
 
-**Domain:** Korean-language mdBook tutorial teaching Agentic AI via OpenHands (local Qwen LLM), worked example = F# FsLex/FsYacc calculator
-**Researched:** 2026-05-27
-**Confidence:** MEDIUM-HIGH overall (details per layer below)
-
----
-
-## Layer 1: Tutorial Authoring & Publishing (mdBook + GitHub Pages)
-
-### Core Technologies
-
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| mdBook | 0.5.3 | Static site generator — turns Markdown chapters into a navigable HTML book | The project-standard tool; author has the `mdbook` skill configured. Rust-native, zero JS framework overhead, excellent GitHub Pages story. |
-| GitHub Actions | N/A (cloud) | CI: build mdBook and deploy to Pages on every push | Free for public repos; tight integration with Pages; fully declarative via workflow YAML. |
-| GitHub Pages | N/A (hosted) | Hosting for the published tutorial | Free static hosting; pairs perfectly with Actions-based mdBook deploys. |
-
-### Installation on macOS (Apple Silicon)
-
-```bash
-# Option A — Homebrew (simplest, no Rust required)
-brew install mdbook          # installs 0.5.3 as of May 2026
-
-# Option B — Cargo (always gets latest)
-cargo install mdbook         # requires Rust >= 1.88 (rustup install stable)
-```
-
-Homebrew is recommended for local authoring because it requires no Rust toolchain; Cargo is useful if you need a cutting-edge pre-release.
-
-### Essential Commands
-
-```bash
-mdbook init my-book          # scaffold: book.toml + src/SUMMARY.md + src/chapter_1.md
-mdbook serve                 # live-reload dev server at http://localhost:3000
-mdbook build                 # produce book/ directory for deployment
-```
-
-### GitHub Pages Deployment (GitHub Actions)
-
-Use the modern "GitHub Actions" Pages deploy method (Settings → Pages → Source = "GitHub Actions"), NOT the legacy `gh-pages` branch approach.
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy mdBook to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install mdBook
-        run: |
-          tag=$(curl -s 'https://api.github.com/repos/rust-lang/mdBook/releases/latest' \
-            | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-          curl -sSL \
-            "https://github.com/rust-lang/mdBook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz" \
-            | tar -xz --directory="$HOME/.cargo/bin"
-
-      - name: Build book
-        run: mdbook build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: book
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-**Configuration tip:** Set `output.html.site-url` in `book.toml` to your GitHub Pages URL so relative links work correctly.
-
-### What NOT to Use
-
-| Avoid | Why | Use Instead |
-|-------|-----|-------------|
-| `gh-pages` branch approach | Deprecated in favour of Actions-native deploy; requires extra push permissions and manual worktree management | `actions/deploy-pages@v4` (direct artifact deploy) |
-| `peaceiris/actions-mdbook` third-party action | Adds an unmaintained dependency for something the install-from-release-URL pattern does cleanly | Direct binary download in workflow |
-| Netlify / Vercel | Adds unnecessary account dependency when GitHub Pages is free and native | GitHub Pages |
-
-**Confidence: HIGH** — Official mdBook docs, GitHub wiki, and Homebrew formula all consistent.
+**Domain:** Korean mdBook tutorial — v1.4 milestone: compare two task-planning regimes (Claude-led decomposition vs OpenHands-native planning) on Qwen 35B
+**Researched:** 2026-06-01
+**Confidence:** HIGH (confirmed against installed binary v1.16.0 / SDK v1.21.0; source verified via GitHub API)
 
 ---
 
-## Layer 2: OpenHands (Agentic AI Runtime)
+## Verified Versions (runtime, not assumed)
 
-### Current Version
+| Component | Confirmed Version | How Verified |
+|-----------|-------------------|--------------|
+| OpenHands CLI | **1.16.0** | `openhands --version` on this machine |
+| OpenHands SDK | **v1.21.0** | banner: `OpenHands SDK v1.21.0` |
+| litellm proxy (already running) | pre-existing | milestone context, not re-researched |
+| Qwen 35B endpoint | `openai/qwen-35b` @ `127.0.0.1:4000` | milestone context |
 
-**OpenHands 1.7** (released 2026-05-01). Docker image: `docker.openhands.dev/openhands/openhands:1.7`. Agent-server image: `ghcr.io/openhands/agent-server:1.19.1-python`.
+---
 
-### Recommended Install Method on macOS (Apple Silicon)
+## Core Question: Does OpenHands 1.16 / SDK 1.21 Have Native Planning?
 
-**Use `uv tool install` + `openhands serve` (GUI mode). This is the recommended non-Docker path, but Docker Desktop must still be running in the background** because OpenHands spawns agent sandboxes as containers.
+**YES — a dedicated Planning Agent exists, introduced in v1.5.0 (March 2026), present in 1.16.0.**
 
-```bash
-# 1. Install uv (if not already present)
-curl -LsSf https://astral.sh/uv/install.sh | sh
+Key facts (verified against SDK source at `OpenHands/software-agent-sdk` main branch):
 
-# 2. Install OpenHands (Python 3.12 required)
-uv tool install openhands --python 3.12
+1. **`get_planning_agent()`** — a first-class factory in `openhands.tools.preset.planning`. Returns an `Agent` with read-only tools: `GlobTool`, `GrepTool`, and `PlanningFileEditorTool` (the only writable surface).
 
-# 3. Launch GUI on http://localhost:3000
-openhands serve
-```
+2. **`PLAN.md` output path** — `.agents_tmp/PLAN.md` relative to workspace root (default; configurable via `plan_path` param to `get_planning_tools()`).
 
-**Why `uv` over raw Docker:** The `openhands serve` path is documented as the "easiest way to start" and avoids writing/maintaining the full `docker run` invocation manually. Docker Desktop must still be running; OpenHands will pull agent-server images automatically.
+3. **System prompt** — `system_prompt_planning.j2`; directs the agent through four phases: Initial Understanding → Planning → Synthesis & User Alignment → Refinement. The agent clarifies ambiguities BEFORE writing the plan.
 
-**macOS Docker Desktop prerequisite:** Enable `Settings > Advanced > Allow the default Docker socket to be used` — required so OpenHands can spawn sandbox containers.
+4. **PLAN.md structure** — five mandatory sections defined in `PLAN_STRUCTURE`:
+   1. OBJECTIVE
+   2. CONTEXT SUMMARY
+   3. APPROACH OVERVIEW
+   4. IMPLEMENTATION STEPS (goal + method + optional reference per step)
+   5. TESTING AND VALIDATION
 
-**Alternative — raw Docker (useful for scripting or CI):**
+5. **TaskTrackerTool** — a separate in-process tool (`TaskTrackerAction` / `TaskTrackerObservation`) that tracks a live `task_list: TaskItem[]` during execution. Each `TaskItem` has `title`, `notes`, `status` (`"todo" | "in_progress" | "done"`). The command is `"view"` or `"plan"`. This is the "Task List tab" visible in the 1.5.0 GUI. It appears in the JSONL stream as `TaskTrackerAction` / `TaskTrackerObservation` event types.
 
-```bash
-docker run -it --rm --pull=always \
-  -e AGENT_SERVER_IMAGE_REPOSITORY=ghcr.io/openhands/agent-server \
-  -e AGENT_SERVER_IMAGE_TAG=1.19.1-python \
-  -e LOG_ALL_EVENTS=true \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v ~/.openhands:/.openhands \
-  -p 3000:3000 \
-  --add-host host.docker.internal:host-gateway \
-  --name openhands-app \
-  docker.openhands.dev/openhands/openhands:1.7
-```
+6. **`PlanningFileEditorObservation`** — distinct observation type for the planning agent's file writes (separate from `FileEditorObservation`), confirming the planning agent operates in an isolated tool surface.
 
-### Connecting OpenHands to the Local Qwen Endpoint
+**Source:** `frontend/src/types/v1/core/base/action.ts`, `observation.ts`, `common.ts` (GitHub API verified); `openhands-tools/openhands/tools/preset/planning.py` (GitHub API verified); `examples/01_standalone_sdk/24_planning_agent_workflow.py` (GitHub API verified).
 
-OpenHands uses **LiteLLM** under the hood for all LLM calls. LiteLLM determines the provider and routing from the model string prefix.
+---
 
-#### Critical: `host.docker.internal` for Docker ↔ Host Communication
+## Arm A: Claude-Led Decomposition → OpenHands Executes
 
-Because OpenHands sandboxes run inside Docker containers, they cannot reach `localhost` or `127.0.0.1` on the host. Use the Docker-internal hostname `host.docker.internal` to resolve the host machine's IP from within a container.
+**Goal:** Claude authors a task decomposition; feed it to OpenHands for execution.
 
-The local MLX server is at `http://127.0.0.1:8000/v1` on the host. From within Docker this becomes:
+### Mechanism Comparison
 
-```
-http://host.docker.internal:8000/v1
-```
+| Option | Mechanism | Headless Flag | Loaded How | Verdict |
+|--------|-----------|---------------|------------|---------|
+| A1 (RECOMMENDED) | Embed full plan in `-t` / `-f` task prompt | `-f plan.txt` | User message | Simplest; proven in prior milestones |
+| A2 | `.agents_tmp/PLAN.md` pre-written + execution prompt | `-t "Read .agents_tmp/PLAN.md and implement all steps"` | File reference in message | Two-step but explicit; mirrors SDK example |
+| A3 | `AGENTS.md` at workspace root | automatic (always injected) | `SystemPromptEvent.dynamic_context` | Persistent across sessions; but not task-specific |
+| A4 | `.openhands/microagents/repo.md` (V0) | automatic (keyword-triggered or always) | Injected via microagent system | Works; older API, V1 renamed to skills |
 
-#### Exact LLM Configuration
+**Recommended for Arm A: Option A1 or A2.**
 
-Configure via the OpenHands web UI at `http://localhost:3000` → gear icon → LLM tab → Advanced toggle:
+#### Option A1 — File-Seeded Prompt (Simplest)
 
-| Field | Value | Notes |
-|-------|-------|-------|
-| **LLM Provider** | (leave as Custom / OpenAI-compatible) | |
-| **Custom Model** | `openai/qwen36-35b` | `openai/` prefix tells LiteLLM to use the OpenAI chat-completions format. The part after the slash is the model name as returned by the server's `/v1/models` endpoint — verify with `curl http://127.0.0.1:8000/v1/models`. If the server advertises the full path `/Users/ohama/llm-system/models/qwen36-35b`, use that exact string after `openai/`. |
-| **Base URL** | `http://host.docker.internal:8000/v1` | Do NOT use `localhost` or `127.0.0.1` — those resolve inside the Docker container, not to the host. |
-| **API Key** | `dummy` (any non-empty string) | The MLX server does not require authentication; LiteLLM still requires a non-empty key field. |
-
-#### Equivalent `agent_settings.json` (config file approach)
-
-Settings are persisted at `~/.openhands/agent_settings.json`. You can pre-populate this file:
-
-```json
-{
-  "llm": {
-    "model": "openai/qwen36-35b",
-    "api_key": "dummy",
-    "base_url": "http://host.docker.internal:8000/v1"
-  }
-}
-```
-
-#### Equivalent environment-variable override (CLI approach)
+Claude writes `armA-plan.txt` containing an explicit numbered task breakdown. OpenHands receives it as the task.
 
 ```bash
-export LLM_MODEL="openai/qwen36-35b"
-export LLM_API_KEY="dummy"
-export LLM_BASE_URL="http://host.docker.internal:8000/v1"
-openhands --override-with-envs
+# Write Claude's plan to a file
+cat > /path/to/workdir/armA-plan.txt << 'EOF'
+You are implementing a Rust HTTP server. Execute each step in order:
+
+Step 1: Scaffold the project with `cargo new http-server`.
+Step 2: Add `tokio` and `hyper` to Cargo.toml.
+Step 3: Implement a `/ping` endpoint returning 200 OK.
+Step 4: Run `cargo build` and verify it succeeds.
+Step 5: Run `cargo test` and fix any failures.
+EOF
+
+# Run OpenHands with the plan file as task
+OPENHANDS_SUPPRESS_BANNER=1 \
+  LLM_MODEL=openai/qwen-35b \
+  LLM_BASE_URL=http://127.0.0.1:4000/v1 \
+  LLM_API_KEY=dummy \
+  OPENHANDS_WORK_DIR=/path/to/workdir \
+  openhands --headless --json --yolo --override-with-envs \
+    -f armA-plan.txt \
+    2>err-armA.log | tee out-armA.jsonl
 ```
 
-Note: `--override-with-envs` applies env vars as a one-time override; they are NOT persisted to the settings file.
+**Why this works:** The `--headless` flag enables always-approve mode. `-f` reads the file as the initial user message. The agent treats it as a single task and executes sequentially. This is what prior milestones did with per-task prompts, now consolidated.
 
-#### `config.toml` [llm] section (development / self-hosted mode)
+#### Option A2 — Pre-write PLAN.md + Execution Prompt
 
-If running from source (`make run`):
+Claude writes `.agents_tmp/PLAN.md` in the workspace using the SDK's five-section structure. Then pass a short execution prompt:
+
+```bash
+mkdir -p /path/to/workdir/.agents_tmp
+cat > /path/to/workdir/.agents_tmp/PLAN.md << 'EOF'
+# 1. OBJECTIVE
+Implement a Rust HTTP server with /ping endpoint.
+
+# 2. CONTEXT SUMMARY
+Workspace: /workspace. Target: tokio + hyper server.
+
+# 3. APPROACH OVERVIEW
+Use tokio as async runtime, hyper as HTTP server library.
+
+# 4. IMPLEMENTATION STEPS
+Step 1 — cargo new: run `cargo new http-server`
+Step 2 — add deps: edit Cargo.toml, add tokio and hyper
+Step 3 — implement /ping: create src/main.rs with ping handler
+Step 4 — build: run `cargo build`
+Step 5 — test: run `cargo test`
+
+# 5. TESTING AND VALIDATION
+`cargo test` exits 0 and server responds to curl /ping with 200.
+EOF
+
+OPENHANDS_SUPPRESS_BANNER=1 \
+  LLM_MODEL=openai/qwen-35b \
+  LLM_BASE_URL=http://127.0.0.1:4000/v1 \
+  LLM_API_KEY=dummy \
+  OPENHANDS_WORK_DIR=/path/to/workdir \
+  openhands --headless --json --yolo --override-with-envs \
+    -t "Read .agents_tmp/PLAN.md and implement all steps exactly as described." \
+    2>err-armA.log | tee out-armA.jsonl
+```
+
+**Why this matters for the tutorial:** Option A2 makes the plan visible as a file artifact — readers see `PLAN.md`, understand Claude wrote it, and can observe the agent reading it. Strong narrative for the mdBook chapter.
+
+#### Option A3 — AGENTS.md Workspace Injection
+
+Place `AGENTS.md` at the workspace root. OpenHands SDK automatically loads it into `SystemPromptEvent.dynamic_context` at conversation start (confirmed via `test_repo_root_project_skills.py`). Works even when work_dir is a subdirectory — it walks up to the git repo root.
+
+```
+/path/to/workdir/
+  AGENTS.md          ← Claude-authored plan injected automatically
+  src/
+  Cargo.toml
+```
+
+**Caveat:** Injection requires `AgentContext(load_project_skills=True)` or the headless CLI to enable project skill loading. Whether the headless CLI (`openhands --headless`) sets this flag by default is NOT confirmed from docs. Use A1 or A2 for certainty. A3 is better for persistent project context than for single-run plan injection.
+
+#### What NOT to Use for Arm A
+
+| Avoid | Why |
+|-------|-----|
+| Sequential per-task runs (prior milestone pattern) | Loses cross-step context; v1.4 specifically compares single-run planning |
+| Calling `get_planning_agent()` directly in SDK | Planning agent has read-only tools (no execution) — it produces PLAN.md but cannot implement; requires a two-agent chain not available via headless CLI directly |
+| Relying on keyword-triggered microagents for plan injection | Injection timing is non-deterministic for keyword triggers; `repo.md` microagent is better for repo context than task plans |
+
+---
+
+## Arm B: OpenHands-Native Planning (Self-Plan)
+
+**Goal:** Give OpenHands the whole goal in one prompt; let it plan and execute autonomously.
+
+### Mechanism
+
+Use the default `CodeActAgent` (not the Planning Agent) with a comprehensive single prompt. The `CodeActAgent` has access to `TaskTrackerTool`, which it uses to maintain its own task list during execution.
+
+```bash
+OPENHANDS_SUPPRESS_BANNER=1 \
+  LLM_MODEL=openai/qwen-35b \
+  LLM_BASE_URL=http://127.0.0.1:4000/v1 \
+  LLM_API_KEY=dummy \
+  OPENHANDS_WORK_DIR=/path/to/workdir \
+  openhands --headless --json --yolo --override-with-envs \
+    -t "Build a complete Rust HTTP server with the following requirements:
+       1. Use tokio + hyper for async HTTP.
+       2. Implement a /ping endpoint that returns HTTP 200 with body 'pong'.
+       3. All code must compile with 'cargo build'.
+       4. Tests must pass with 'cargo test'.
+       Plan your own implementation steps, then execute them." \
+    2>err-armB.log | tee out-armB.jsonl
+```
+
+**Key phrasing for Arm B:** Include "Plan your own implementation steps" explicitly. This nudges the agent to emit `TaskTrackerAction` events with `command: "plan"` — which appear in the JSONL stream and produce the task list visible in the UI's Task List tab. Without this hint, the agent may skip the planning call.
+
+**Alternative for true two-phase capture** (SDK-level, not headless CLI):
+
+The SDK example `24_planning_agent_workflow.py` shows a clean two-phase approach using the Python SDK directly:
+
+```python
+from openhands.tools.preset.planning import get_planning_agent
+from openhands.tools.preset.default import get_default_agent
+from openhands.sdk import LLM, Conversation
+
+llm = LLM(model="openai/qwen-35b", base_url="http://127.0.0.1:4000/v1",
+          api_key="dummy", usage_id="agent")
+
+# Phase 1: Planning Agent writes .agents_tmp/PLAN.md
+planning_agent = get_planning_agent(llm=llm)
+planning_conv = Conversation(agent=planning_agent, workspace="/path/to/workdir")
+planning_conv.send_message("Plan this: [full goal]. Do NOT ask clarifying questions. Write the plan directly.")
+planning_conv.run()
+
+# Phase 2: Execution Agent reads PLAN.md and implements
+exec_agent = get_default_agent(llm=llm, cli_mode=True)
+exec_conv = Conversation(agent=exec_agent, workspace="/path/to/workdir")
+exec_conv.send_message("Read .agents_tmp/PLAN.md and implement all steps.")
+exec_conv.run()
+```
+
+**Note:** This SDK path produces richer plan artifacts but is NOT accessible via the headless CLI. Requires a Python harness script. JSONL capture must be implemented separately by logging `exec_conv.state.events`. This approach is viable for v1.4 if the harness is extended to a Python runner.
+
+---
+
+## Planning Agent vs CodeActAgent — Key Differences
+
+| Aspect | Planning Agent | CodeActAgent (default) |
+|--------|----------------|------------------------|
+| Tools | Glob, Grep, PlanningFileEditorTool ONLY | Full toolset: Terminal, FileEditor, Browser, TaskTracker, etc. |
+| Output | `PLAN.md` (`.agents_tmp/PLAN.md`) | Task list via `TaskTrackerAction`, plus actual code |
+| Can execute? | No (read-only except PLAN.md) | Yes |
+| Headless CLI | Not directly selectable — only via Python SDK | Yes (default) |
+| Use case | Pre-execution planning step | Execution (with optional self-planning via TaskTrackerTool) |
+| JSONL events | `PlanningFileEditorObservation` | `TaskTrackerObservation`, `TerminalObservation`, etc. |
+
+---
+
+## AGENTS.md / Microagents — Injection Mechanism (Definitive)
+
+**File:** `AGENTS.md` at the git repository root (or workspace root)
+
+**How injection works (source-verified):**
+
+1. `load_project_skills(work_dir)` walks up from `work_dir` to the git root.
+2. Finds `AGENTS.md` → creates a `Skill(name="agents", content=<file contents>)`.
+3. On `LocalConversation` startup, the skill content is rendered into `SystemPromptEvent.dynamic_context.text`.
+4. The agent sees it as part of its system prompt — **always loaded, unconditionally**, as long as `load_project_skills=True`.
+
+**In headless CLI:** Whether `--headless` mode sets `load_project_skills=True` is not confirmed in public docs. Use Option A1 or A2 for guaranteed plan delivery.
+
+**Also supported:** `.openhands/microagents/*.md` (V0 API, keyword-triggered) and `.agents/skills/*.md` (V1 API, `SKILL.md` files). For the comparison harness, AGENTS.md is simpler.
+
+**Source:** `tests/sdk/conversation/test_repo_root_project_skills.py` (GitHub API read directly).
+
+---
+
+## Determinism / Seed / Temperature Controls
+
+### Available Parameters (SDK v1.21.0)
+
+Confirmed in `tests/sdk/config/test_llm_config.py` (source read directly):
+
+| Parameter | Type | Default | Env var (env-override pattern) |
+|-----------|------|---------|-------------------------------|
+| `temperature` | `float \| None` | `None` (provider default) | `LLM_TEMPERATURE` (inferred from naming convention) |
+| `top_p` | `float \| None` | `None` | `LLM_TOP_P` |
+| `top_k` | `float \| None` | `None` | `LLM_TOP_K` |
+| `seed` | `int \| None` | `None` | `LLM_SEED` (inferred) |
+
+**Setting temperature in headless invocation:**
+
+Via `config.toml` `[llm]` section (confirmed in `config.template.toml`):
 
 ```toml
 [llm]
-model = "openai/qwen36-35b"
+model = "openai/qwen-35b"
 api_key = "dummy"
-base_url = "http://localhost:8000/v1"   # no Docker; direct host access
+base_url = "http://127.0.0.1:4000/v1"
+temperature = 0.0
+seed = 42
 timeout = 300
-num_retries = 3
-retry_min_wait = 10
-retry_max_wait = 60
 ```
 
-### Tool/Function Calling Notes
+Via Python SDK:
 
-- The local MLX Qwen server has been verified to return `finish_reason: "tool_calls"` — it is compatible with OpenHands' tool-calling requirements.
-- OpenHands relies heavily on tool calling for its agent loop. Models that fall back to text-based tool simulation will break the loop. The Qwen 3.6 35B is confirmed working.
-- The 35B model is SLOW on local hardware (~240 s per tool-call round trip). OpenHands has default timeouts that are too short for this. Set `timeout = 300` (5 min) or higher in config.
+```python
+llm = LLM(
+    model="openai/qwen-35b",
+    base_url="http://127.0.0.1:4000/v1",
+    api_key="dummy",
+    temperature=0.0,
+    seed=42,
+    usage_id="agent",
+)
+```
 
-### Apple Silicon Caveats
+### Determinism Reality Check
 
-- OpenHands Docker images are built for `linux/amd64`. On Apple Silicon, Docker Desktop uses Rosetta 2 emulation. This works for the main `openhands` container but may cause issues with browser automation tasks (Puppeteer/Chrome inside sandbox). For this tutorial (F# file manipulation only, no browser tasks), Rosetta emulation is acceptable.
-- The MLX server runs natively on Apple GPU — it is NOT inside Docker, so architecture is not an issue there.
-- Known issue (GitHub #3902, closed/stale): Puppeteer fails under Rosetta. Not relevant for this project.
+| Layer | Control | Effect |
+|-------|---------|--------|
+| litellm proxy (127.0.0.1:4000) | Pass `temperature=0` and `seed=N` in request body; litellm forwards to model | Reduces variance; does NOT guarantee identical outputs |
+| Qwen 35B (local inference) | Sampling is inherently stochastic unless the inference backend supports reproducible seeds | Most local inference backends (vLLM, ollama, llama.cpp) do NOT guarantee determinism even with seed |
+| OpenHands SDK | `seed` param passed through to LiteLLM completion call | Best-effort only |
 
-### What NOT to Use
+**Practical recommendation for v1.4:** Run each arm 3 times and report median metric rather than relying on a single run. Use `temperature=0.2` (not 0.0 — temperature 0 causes issues with some models via LiteLLM, see GitHub issue #4131) and a fixed seed (e.g., `seed=42`) for reproducibility signal. Do not claim determinism — document variance in the tutorial chapter.
 
-| Avoid | Why | Use Instead |
-|-------|-----|-------------|
-| `localhost` / `127.0.0.1` as base_url when using Docker | Resolves inside the container, not the host | `host.docker.internal:8000` |
-| Model string without `openai/` prefix | LiteLLM won't know which provider adapter to use; will likely error or fall back to cloud OpenAI | Prefix with `openai/` |
-| Default timeout (60 s) | Too short for 35B local inference (~240 s per request) | Set `timeout = 300` or longer |
-| Cloud LLM APIs | Out of scope; tutorial is local-only | Local MLX endpoint |
-
-**Confidence: MEDIUM** — Core Docker/uvx install path and LiteLLM `openai/` prefix are well-documented. The exact model ID string (what the MLX server advertises after `openai/`) must be verified at runtime with `curl http://127.0.0.1:8000/v1/models`. The `agent_settings.json` key names are inferred from community sources and CLI help; the official config reference page returned 404 during research.
+**UNVERIFIED:** Whether `LLM_TEMPERATURE` and `LLM_SEED` are the exact environment variable names accepted by `--override-with-envs`. The naming convention is consistent (e.g., `LLM_MODEL`, `LLM_API_KEY`, `LLM_BASE_URL`) but temperature/seed via env var in headless CLI has not been tested on this machine.
 
 ---
 
-## Layer 3: F# / FsLex / FsYacc (Example Project Stack)
+## Headless CLI Flags Reference (Confirmed Against v1.16.0)
 
-### Current Version Landscape (May 2026)
+```
+openhands [flags] 
 
-| Technology | Version | Notes |
-|------------|---------|-------|
-| .NET SDK | **10.0.300** (LTS, released 2026-05-12) | LTS release (supported until Nov 2028); includes F# 10.0, C# 14. macOS ARM64 (Apple Silicon) installer available. |
-| F# | **10.0** | Ships with .NET 10 SDK; no separate install needed. |
-| FsLexYacc NuGet | **11.3.0** (released 2024-04-08) | Latest stable; targets .NET Standard 2.0 (compatible with net10.0 projects). |
-| FsLexYacc.Runtime | **11.3.0** | Auto-dependency of FsLexYacc; provides runtime support for generated lexers/parsers. |
+Confirmed flags:
+  -t, --task TASK        Inline task string (seed conversation)
+  -f, --file FILE        File whose contents seed the initial conversation
+  --headless             Headless mode (no UI; always-approve)
+  --json                 Stream JSONL events to stdout
+  --yolo / --always-approve   Auto-approve all agent actions
+  --override-with-envs   Apply LLM_MODEL, LLM_BASE_URL, LLM_API_KEY from env
 
-### Core Technologies
+Environment variables:
+  OPENHANDS_SUPPRESS_BANNER=1   Suppress SDK startup banner
+  OPENHANDS_WORK_DIR=<path>     Working directory for the agent
+  LLM_MODEL=openai/qwen-35b
+  LLM_BASE_URL=http://127.0.0.1:4000/v1
+  LLM_API_KEY=dummy
+```
 
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| .NET SDK | 10.0.300 | Build host for F# projects; provides `dotnet new`, `dotnet build`, `dotnet run` | LTS = 3-year support; Apple Silicon native ARM64; F# 10 included. |
-| FsLexYacc | 11.3.0 | Lexer (`fslex`) + parser (`fsyacc`) generators; produces F# code from `.fsl`/`.fsy` files | The canonical, actively maintained F# lex/yacc toolchain; MSBuild-integrated so `dotnet build` drives everything. |
-| FsLexYacc.Runtime | 11.3.0 | Runtime library consumed by generated lexer/parser code | Auto-referenced via FsLexYacc package dependency. |
+**No `--agent-type` or `--plan-mode` flag exists in the headless CLI.** The Planning Agent is only accessible via Python SDK (`get_planning_agent()`), not via CLI flags.
 
-### Installation on macOS (Apple Silicon)
+**The `--yolo` flag is an alias for `--always-approve`.** Both are present and documented in `openhands --help`.
+
+Full invocation pattern (already proven in prior milestones):
 
 ```bash
-# Download and run the .NET 10 installer for macOS ARM64
-# https://dotnet.microsoft.com/en-us/download/dotnet/10.0
-# or via official script:
-curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0
+OPENHANDS_SUPPRESS_BANNER=1 LLM_MODEL=openai/qwen-35b LLM_BASE_URL=http://127.0.0.1:4000/v1 LLM_API_KEY=dummy OPENHANDS_WORK_DIR=<wd> openhands --headless --json --yolo --override-with-envs -t "<task>" 2>err.log | tee out.jsonl
 ```
 
-Verify:
-```bash
-dotnet --version   # should print 10.0.300 or later
-```
+---
 
-### Minimal F# FsLex/FsYacc Calculator Project Layout
-
-```
-Calculator/
-├── Calculator.fsproj
-├── Lexer.fsl          ← FsLex grammar (tokens: INT, PLUS, MINUS, STAR, SLASH, LPAREN, RPAREN, EOF)
-├── Parser.fsy         ← FsYacc grammar (arithmetic expression rules → AST or int)
-├── Ast.fs             ← (optional) AST type definitions
-└── Program.fs         ← entry point: reads input, calls Lexer → Parser → prints result
-```
-
-### .fsproj Wiring
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <!-- FsYacc processes Parser.fsy → Parser.fsi + Parser.fs before compile -->
-    <FsYacc Include="Parser.fsy">
-      <OtherFlags>--module Parser</OtherFlags>
-    </FsYacc>
-    <!-- FsLex processes Lexer.fsl → Lexer.fs before compile -->
-    <FsLex Include="Lexer.fsl">
-      <OtherFlags>--module Lexer --unicode</OtherFlags>
-    </FsLex>
-
-    <!-- Compile order: generated interfaces/impls before entry point -->
-    <Compile Include="Ast.fs" />
-    <Compile Include="Parser.fsi" />   <!-- generated by FsYacc -->
-    <Compile Include="Parser.fs" />    <!-- generated by FsYacc -->
-    <Compile Include="Lexer.fs" />     <!-- generated by FsLex  -->
-    <Compile Include="Program.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FsLexYacc" Version="11.3.0" />
-  </ItemGroup>
-
-</Project>
-```
-
-**Important:** The FsLexYacc NuGet package injects MSBuild targets that automatically run `fslex`/`fsyacc` on `.fsl`/`.fsy` files before the F# compiler runs. No separate pre-build step is needed.
-
-### Build & Run Commands
-
-```bash
-dotnet new console -lang F# -o Calculator   # scaffold
-cd Calculator
-dotnet add package FsLexYacc               # adds 11.3.0
-dotnet build                               # runs fslex + fsyacc, then fsc
-dotnet run                                 # runs the calculator
-```
-
-Expected interaction (arithmetic input → integer result):
-```
-> 2+3*4
-14
-> (1+2)*-3
--9
-```
-
-### Version Compatibility
-
-| Package | Compatible With | Notes |
-|---------|-----------------|-------|
-| FsLexYacc 11.3.0 | FSharp.Core >= 4.6.2 | F# 10 (FSharp.Core 9.x) is compatible |
-| FsLexYacc 11.3.0 | .NET Standard 2.0 targets | Works with net10.0 projects via Standard 2.0 shim |
-| dotnet SDK 10.0 | macOS ARM64 | Native Apple Silicon support, no Rosetta needed |
-
-### What NOT to Use
+## What NOT to Use
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| `dotnet fsi` (F# Interactive) for the calculator | FsLex/FsYacc produce compiled F# source, not script-friendly; fsi would require manual pre-running the generators | `dotnet build` + `dotnet run` |
-| FsLexYacc < 11 | Older versions lack modern .fsproj MSBuild integration; required manual pre-build steps | 11.3.0 |
-| FParsec (parser combinator library) | Different paradigm — no lexer/grammar file; not what the tutorial demonstrates | FsLexYacc (grammar-file approach is the tutorial's subject) |
-| .NET 8 LTS | Still supported but .NET 10 is now the newer LTS; no reason to use an older version for a greenfield project | .NET 10 (SDK 10.0.300) |
+| `--file` with a very large prompt (>30K chars) | SDK default `max_message_chars=30000`; content will be truncated | Keep plans concise; use PLAN.md file reference instead |
+| Planning Agent via headless CLI for Arm B | No CLI flag to select it; would require Python harness | Use CodeActAgent (default) with explicit "Plan your steps" prompt |
+| `temperature=0.0` | LiteLLM issue #4131: some models error at exactly 0.0 | Use `temperature=0.1` or `0.2` |
+| `--resume` for comparison runs | Continues a prior conversation, contaminating the baseline | Always start fresh conversations for each arm/run |
+| `.openhands/microagents/` keyword-triggered agents for plan injection | Injection timing depends on keyword matching, not guaranteed at task start | Use `-f plan.txt` or pre-written PLAN.md |
 
-**Confidence: HIGH** — NuGet.org confirms 11.3.0 is current; .NET 10 release confirmed by Microsoft; .fsproj wiring verified against official FsLexYacc docs and community tutorials.
+---
+
+## Recommended Invocation Summary
+
+### Arm A (Claude-led, file-seeded — RECOMMENDED)
+
+```bash
+# 1. Claude writes the plan
+python3 generate_arm_a_plan.py --goal "rust-server" --out /tmp/armA-run1/armA-plan.txt
+
+# 2. OpenHands executes it
+OPENHANDS_SUPPRESS_BANNER=1 \
+  LLM_MODEL=openai/qwen-35b \
+  LLM_BASE_URL=http://127.0.0.1:4000/v1 \
+  LLM_API_KEY=dummy \
+  OPENHANDS_WORK_DIR=/tmp/armA-run1 \
+  openhands --headless --json --yolo --override-with-envs \
+    -f /tmp/armA-run1/armA-plan.txt \
+    2>/tmp/armA-run1/err.log | tee /tmp/armA-run1/out.jsonl
+```
+
+### Arm B (OpenHands-native, self-plan)
+
+```bash
+OPENHANDS_SUPPRESS_BANNER=1 \
+  LLM_MODEL=openai/qwen-35b \
+  LLM_BASE_URL=http://127.0.0.1:4000/v1 \
+  LLM_API_KEY=dummy \
+  OPENHANDS_WORK_DIR=/tmp/armB-run1 \
+  openhands --headless --json --yolo --override-with-envs \
+    -t "Build a Rust HTTP server with /ping endpoint using tokio+hyper. \
+        Cargo build and cargo test must succeed. \
+        First, create your own step-by-step implementation plan using the task tracker, then execute each step." \
+    2>/tmp/armB-run1/err.log | tee /tmp/armB-run1/out.jsonl
+```
+
+### Capturable JSONL Events for Comparison Metrics
+
+| Metric | Event Type | Field |
+|--------|-----------|-------|
+| Task plan (Arm B) | `TaskTrackerObservation` | `command=="plan"`, `task_list[]` |
+| Terminal execution | `TerminalObservation` | `command`, `exit_code` |
+| File writes | `FileEditorObservation` | `command=="create"`, `path`, `new_content` |
+| Planning file write (SDK only) | `PlanningFileEditorObservation` | `path`, `new_content` |
+| Agent finish | `FinishObservation` | `content` |
+| Total steps | count of all action events | — |
 
 ---
 
@@ -366,44 +387,46 @@ Expected interaction (arithmetic input → integer result):
 
 | Category | Recommended | Alternative | Why Not |
 |----------|-------------|-------------|---------|
-| Tutorial format | mdBook | Docusaurus, MkDocs, VuePress | mdBook is the skill-configured choice; simpler Rust-native build; no Node.js dependency. |
-| mdBook deploy | `actions/deploy-pages@v4` (native Pages) | `peaceiris/actions-gh-pages` (gh-pages branch) | Native Pages deploy is the current GitHub recommendation; fewer moving parts. |
-| OpenHands install | `uv tool install openhands` + `openhands serve` | Raw `docker run` | `openhands serve` is the officially documented "easiest" path; auto-handles image pulls. |
-| LLM endpoint prefix | `openai/` | `hosted_vllm/` | `openai/` is the generic OpenAI-compatible adapter in LiteLLM and confirmed correct for custom base_url endpoints. `hosted_vllm/` is vLLM-specific and would not apply to an MLX server. |
-| F# build tool | `dotnet build` (MSBuild via SDK) | `dotnet fsi` / standalone fslex/fsyacc CLIs | MSBuild integration in FsLexYacc 11 makes `dotnet build` drive everything declaratively. |
-| F# .NET target | net10.0 | net8.0 | .NET 10 is current LTS; no reason to target older. |
+| Arm A plan delivery | `-f armA-plan.txt` | `.openhands/microagents/repo.md` | File flag is immediate and certain; microagent injection in headless mode unconfirmed |
+| Arm B self-planning | `CodeActAgent` + "plan your steps" prompt | Python SDK `get_planning_agent()` + `get_default_agent()` two-phase | Two-phase SDK approach is richer but adds Python harness complexity not needed for v1.4 headless CLI comparison |
+| Arm B plan capture | `TaskTrackerObservation` from JSONL | None (Planning Agent not accessible via CLI) | TaskTracker is in the default agent's toolset; confirmed in TypeScript types |
+| Temperature control | `config.toml [llm] temperature=0.2` | `LLM_TEMPERATURE` env var | config.toml is confirmed; env var naming unverified for temperature |
 
 ---
 
-## Version Compatibility Matrix
+## Version Compatibility Notes
 
-| Component | Version | Requires | Notes |
-|-----------|---------|---------|-------|
-| mdBook | 0.5.3 | Rust >= 1.88 (only if building from source; brew/binary: none) | |
-| OpenHands | 1.7 | Docker Desktop (daemon); Python 3.12 (for uv install) | |
-| Agent-server image | 1.19.1-python | Docker | Pulled automatically |
-| .NET SDK | 10.0.300 | macOS 13+ on ARM64 | |
-| F# | 10.0 | .NET SDK 10 | Bundled |
-| FsLexYacc | 11.3.0 | FSharp.Core >= 4.6.2; .NET Standard 2.0 | |
+| OpenHands Version | Planning Agent | TaskTrackerTool | AGENTS.md injection |
+|-------------------|---------------|-----------------|---------------------|
+| < 1.0.0 (V0/old) | No | No | Via `.openhands/microagents/repo.md` |
+| 1.0.0 (SDK v1) | No | Partial (task tracker interface added) | Via AGENTS.md (SDK) |
+| 1.5.0+ | YES (Planning Agent, PLAN.md) | YES (Task List tab) | Via AGENTS.md (SDK) |
+| **1.16.0 (our version)** | **YES** | **YES** | **Via AGENTS.md (SDK)** |
 
 ---
 
 ## Sources
 
-- **mdBook Homebrew formula** — `https://formulae.brew.sh/formula/mdbook` — version 0.5.3 confirmed (HIGH)
-- **mdBook GitHub Releases** — `https://github.com/rust-lang/mdBook/releases/latest` — v0.5.3, released 2026-05-19 (HIGH)
-- **mdBook Automated Deployment wiki** — `https://github.com/rust-lang/mdBook/wiki/Automated-Deployment:-GitHub-Actions` — workflow YAML pattern (HIGH)
-- **OpenHands GitHub** — `https://github.com/OpenHands/OpenHands` — version 1.7, released 2026-05-01 (HIGH)
-- **OpenHands Local Setup docs** — `https://docs.openhands.dev/openhands/usage/run-openhands/local-setup` — Docker command, uvx install, macOS socket setting (HIGH)
-- **OpenHands Local LLMs docs** — `https://docs.openhands.dev/openhands/usage/llms/local-llms` — `openai/` prefix, `host.docker.internal`, api_key placeholder (HIGH)
-- **OpenHands CLI quickstart (glukhov.org)** — `https://www.glukhov.org/ai-devtools/openhands/` — `agent_settings.json` path, env var names, CLI flags (MEDIUM — community source)
-- **LiteLLM OpenAI-compatible providers** — `https://docs.litellm.ai/docs/providers/openai_compatible` — `openai/` prefix confirmed, base_url `/v1` convention (HIGH)
-- **NuGet FsLexYacc 11.3.0** — `https://www.nuget.org/packages/FsLexYacc/` — version, release date, dependencies (HIGH)
-- **FsLexYacc official docs (fslex)** — `https://fsprojects.github.io/FsLexYacc/content/fslex.html` — .fsproj ItemGroup configuration (HIGH)
-- **FsLexYacc official docs (fsyacc)** — `https://github.com/fsprojects/FsLexYacc/blob/master/docs/content/fsyacc.md` — grammar example, .fsy structure (HIGH)
-- **thanos.codes FsLexYacc tutorial** — `https://thanos.codes/blog/using-fslexyacc-the-fsharp-lexer-and-parser/` — .fsproj wiring, calculator example (MEDIUM — community)
-- **.NET 10 download page** — `https://dotnet.microsoft.com/en-us/download/dotnet/10.0` — SDK 10.0.300 ARM64, released 2026-05-12 (HIGH)
+| Source | URL | Confidence |
+|--------|-----|------------|
+| OpenHands CLI installed version | `openhands --version` on host | HIGH (direct) |
+| SDK version | startup banner `OpenHands SDK v1.21.0` | HIGH (direct) |
+| CLI flags (--headless, -f, --yolo, --override-with-envs) | `openhands --help` on host | HIGH (direct) |
+| Planning preset (`get_planning_agent`) | `openhands-tools/openhands/tools/preset/planning.py` (GitHub API) | HIGH |
+| Planning system prompt phases | `openhands-sdk/openhands/sdk/agent/prompts/system_prompt_planning.j2` (GitHub API) | HIGH |
+| PLAN.md path `.agents_tmp/PLAN.md` | `examples/01_standalone_sdk/24_planning_agent_workflow.py` (GitHub API) | HIGH |
+| AGENTS.md injection mechanism | `tests/sdk/conversation/test_repo_root_project_skills.py` (GitHub API) | HIGH |
+| TaskTrackerAction/Observation types | `frontend/src/types/v1/core/base/action.ts`, `observation.ts` (GitHub API) | HIGH |
+| TaskItem structure | `frontend/src/types/v1/core/base/common.ts` (GitHub API) | HIGH |
+| temperature/seed/top_p fields in LLM | `tests/sdk/config/test_llm_config.py` (GitHub API) | HIGH |
+| config.toml template | `config.template.toml` (GitHub API) | HIGH |
+| Planning Agent introduction (v1.5.0) | https://toolnavs.com/en/article/1218-openhands-releases-150-task-list-planning-agent-and-skill-slash-menus-are-launch | MEDIUM (third-party) |
+| v1.5.0 release notes | GitHub releases page (WebFetch) | HIGH |
+| Headless mode docs | https://docs.openhands.dev/openhands/usage/cli/headless | MEDIUM (incomplete) |
+| Microagents docs | https://docs.openhands.dev/openhands/usage/microagents/microagents-repo | MEDIUM |
+| LLM_TEMPERATURE / LLM_SEED as env vars | Inferred from naming convention + `--override-with-envs` pattern | LOW — UNVERIFIED |
 
 ---
-*Stack research for: mdBook tutorial + OpenHands local LLM + F# FsLex/FsYacc calculator*
-*Researched: 2026-05-27*
+
+*Stack research for: v1.4 Planning Comparison milestone — OpenHands CLI 1.16.0 / SDK v1.21.0*
+*Researched: 2026-06-01*
