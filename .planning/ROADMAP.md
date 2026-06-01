@@ -124,6 +124,13 @@ Audit: [milestones/v1.2-MILESTONE-AUDIT.md](milestones/v1.2-MILESTONE-AUDIT.md)
 4. The canonical test outcome (`2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5` — or an honest failure) appears as a real terminal `ObservationEvent` in the JSONL. Any genuine errors (operator-precedence bug, Scala 3-vs-2 syntax slip, type/compile error, `scala-cli` usage confusion) and the agent's self-correction sequence are present in the JSONL and traceable — no fabricated events.
 5. CAPTURE-MANIFEST.md is committed to the repo as the capture gate, recording: did-write-calc-unaided (YES/NO), scaffold invoked (YES/NO + which tasks), canonical test result, honesty gate outcome (PASS/FAIL), and the host re-run confirmation.
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 10-01-PLAN.md — Author zero-leak task prompts + 00-INVOCATION; preflight (install scala-cli, pre-warm cache, gitignore, proxy) → PREFLIGHT GREEN
+- [ ] 10-02-PLAN.md — Execute the 35B capture: task1 scaffold → task2 write-calc unaided → task3 run all three canonical tests; RUN-NOTES
+- [ ] 10-03-PLAN.md — Honesty gate (source=agent) + CAPTURE-MANIFEST.md + host re-run; commit captured-scala/ (closes the capture gate)
+
 ### Phase 11: 7부 Chapter + Publish
 
 **Goal:** A new 7부 "다른 워킹 예제: Scala 계산기" chapter group, written verbatim from the Phase 10 captured JSONL, wired into the book, `mdbook build` clean, and the updated book live on GitHub Pages with `deploy.yml` unchanged.
