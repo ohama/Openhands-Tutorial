@@ -15,9 +15,11 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Current Milestone: v1.3 — Scala Example (third worked example)
+## Last Shipped: v1.3 — Scala Example (2026-06-01) · Next milestone TBD via `/gsd:new-milestone`
 
-**Goal:** Add a third worked example — OpenHands on the local Qwen 35B autonomously builds a minimal arithmetic calculator in **Scala 3** (`sealed trait` ADT + hand-written recursive-descent parser + pattern-matching evaluator, std-only, run via `scala-cli`) — captured honestly and published as a new 7부. Completes the "calculator trilogy": F# (v1, FsLex/FsYacc DSL, needed a scaffolded lexer) → Scala (the same goal expressed the idiomatic Scala way).
+**Delivered:** A third worked example — the local Qwen 35B autonomously built a minimal Scala 3 arithmetic calculator (`scala-cli`, hand-rolled recursive descent, std-only) **unaided** (one self-corrected compile error; 14/20/5 pass), published as 7부. **Completes the calculator trilogy** (F# scaffolded → Rust unaided → Scala unaided) and confirms the thesis: the 35B's limit is domain-distribution, not model size. Note: the agent wrote NO `sealed trait` ADT (the pre-run assumption below) — it used direct recursive descent; the chapter documents the real approach honestly. The original milestone framing is preserved below as the (now-delivered) description.
+
+**Goal (delivered):** Add a third worked example — OpenHands on the local Qwen 35B autonomously builds a minimal arithmetic calculator in **Scala 3** (hand-written recursive-descent parser, std-only, run via `scala-cli`) — captured honestly and published as a new 7부. Completes the "calculator trilogy": F# (v1, FsLex/FsYacc DSL, needed a scaffolded lexer) → Scala (the same goal expressed the idiomatic Scala way).
 
 **Target features:**
 - A real captured 35B OpenHands run of a minimal Scala calculator: `scala-cli` project → `sealed trait Expr` ADT → hand-written recursive-descent parser (operator precedence, left-assoc, parentheses) → pattern-matching evaluator → `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`. Decomposed into ~3–4 scoped tasks following the v1.2 pattern. No parser-combinator library, no parser generator — the model writes the parser itself (parallel to v1.2's "std only" discipline).
@@ -57,13 +59,18 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 - ✓ Re-published the updated book (live on GitHub Pages; 6부 reachable from sidebar nav) — v1.2
 - ✓ Confirmed the cross-language hypothesis: the same 35B that failed FsLex unaided succeeded at std Rust unaided — Rust is more in-distribution; per-call latency comparable (~3.8s Rust / ~5.3s F#), run-total difference is call count — v1.2
 
+<!-- Shipped in v1.3 (2026-06-01). Live: https://ohama.github.io/Openhands-Tutorial/ch07-scala-calc/intro.html -->
+
+- ✓ Captured a real 35B OpenHands run of a minimal Scala 3 arithmetic calculator (`scala-cli`, hand-rolled recursive-descent parser, std-only) — unaided attempt 1; one self-corrected compile error (`private` member accessed from `@main`); `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5` — v1.3
+- ✓ Added a new 7부 "다른 워킹 예제 - Scala 계산기" chapter group, written verbatim from the captured run (code byte-identical to source; honest "no sealed-trait ADT" framing) — v1.3
+- ✓ Re-published the updated book (live on GitHub Pages; 7부 reachable from sidebar) — v1.3
+- ✓ Completed the "calculator trilogy" (F# scaffolded / Rust unaided / Scala unaided) — confirms the 35B's limit is domain-distribution, not model size — v1.3
+
 ### Active
 
-<!-- v1.3 Scala Example — started 2026-06-01. Phases 10–11. Completes the calculator trilogy (F# → Scala). -->
+<!-- v1.3 shipped 2026-06-01. No active milestone — the next is scoped via /gsd:new-milestone. -->
 
-- [ ] Capture a real 35B OpenHands run of a minimal Scala 3 arithmetic calculator (`scala-cli`, sealed-trait ADT + hand-written recursive-descent parser + pattern-matching evaluator, std-only) — `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`, unaided-first
-- [ ] Add a new 7부 "다른 워킹 예제: Scala 계산기" chapter group, written verbatim from the captured run, with the 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern and concept↔action callouts
-- [ ] Re-publish the updated book (live on GitHub Pages)
+(None — v1.3 shipped. Run `/gsd:new-milestone` to scope the next worked example, cross-language comparison appendix, or translation.)
 
 <!-- Deferred to later milestones (carried forward):
      - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
@@ -131,6 +138,8 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
 | v1.2: hold the model constant (35B), change the language to Rust (std-only) | Tests whether the v1 FsLex failure was about model size or domain-distribution; Rust is in-distribution where FsLex was not | ✓ Good — 35B wrote a working std Rust HTTP server unaided on attempt 1; hypothesis confirmed |
 | v1.2: per-call timing must cite real measurements, never the v1 `~14–32s/call` pre-run prediction | Honesty core value — predictions never presented as measurements (the same correction v1.1 made for 부록 C) | ⚠️ Caught in audit — 6부 had re-introduced the prediction; fixed to derived ~5.3s/call before close-out (TD-6) |
+| v1.3: third example = the *same calculator goal* as v1, but in Scala (hand-rolled recursive descent, std-only) | Closes the "calculator trilogy" and isolates the distribution axis — same goal that needed a scaffolded FsLex lexer in F# | ✓ Good — 35B wrote it unaided in Scala 3; capability is domain-distribution, not size |
+| v1.3: document what the agent actually wrote, not the assumed design | The pre-run scope assumed a `sealed trait Expr` ADT; the agent used direct recursive descent (no ADT) | ✓ Good — caught at plan time; chapter honestly notes the no-ADT reality instead of claiming the assumed ADT |
 
 ---
-*Last updated: 2026-06-01 — started v1.3 milestone (Scala calculator worked example, 35B)*
+*Last updated: 2026-06-01 — completed v1.3 milestone (Scala calculator worked example, 35B); next milestone TBD*

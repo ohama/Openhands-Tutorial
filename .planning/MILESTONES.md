@@ -1,5 +1,35 @@
 # Project Milestones: OpenHands Agentic AI 튜토리얼
 
+## v1.3 Scala Example (Shipped: 2026-06-01)
+
+**Delivered:** A third worked example — the same local Qwen **35B** built a minimal **Scala 3 arithmetic calculator** (`scala-cli`, hand-rolled recursive-descent parser, std-only), captured honestly and published as **7부 "다른 워킹 예제 - Scala 계산기"**. This **completes the "calculator trilogy"**: the model that needed a scaffolded FsLex lexer for the *F# calculator* in v1 wrote the *same calculator* in Scala **unaided on attempt 1**.
+
+🌐 **Live:** https://ohama.github.io/Openhands-Tutorial/ch07-scala-calc/intro.html
+
+**Phases completed:** 10–11 (6 plans total)
+
+**Key accomplishments:**
+
+- **Phase 10 — 35B Scala capture (unaided):** preflight installed/verified `scala-cli` 1.14.0 (Scala 3.8.3) + pre-warmed the artifact cache, then captured a 3-task run. The 35B verified scala-cli itself (task1, Scala 3 `@main def`), then wrote a **70-line idiomatic Scala 3 recursive-descent calculator unaided** (task2) — `@main def calc`, significant-indentation `class ExprParser:`, `if/then`, `while/do`, `match` on `Option[Char]`; **correct operator precedence AND left-associativity** (avoided the naive right-recursive `10-3-2→9` bug). Scaffold staged but **never invoked**; 36/36 ActionEvents `source=agent`.
+- **Phase 10 — one genuine, teachable error-and-fix:** task3 hit a single compile error — `variable pos cannot be accessed as a member of (parser : ExprParser) from the top-level` (the unaided source declared `private var pos`, accessed from `@main`). The agent **self-corrected with its own `sed`** (drop `private`), recompiled, and **all three canonical tests passed: `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`**. Host re-run reproduced 14/20/5.
+- **Phase 11 — 7부 chapter (verbatim, honest):** 5-file chapter group (~664 lines) written from `captured-scala/` — Scala code **byte-identical** to `final-source/Calc.scala`, compile error verbatim, manifest 1-based event numbers, `사용자 프롬프트/내부 프로세스/결과` callouts (no emoji). It honestly notes the agent used **no `sealed trait` ADT** (the roadmap's pre-run assumption) and frames the contrast as "hand-rolled recursive descent (unaided)" vs 4부's "FsLex/FsYacc DSL (scaffolded, 94+27+16 failed TerminalActions)". Live on Pages.
+- **Thesis confirmed — capability is distribution, not size:** the 35B failed FsLex (out-of-distribution DSL) but succeeded at both Rust (v1.2) and Scala (v1.3) unaided. The errors it *does* make are teachable, in-distribution mistakes (borrow-checker; access modifiers), not deep capability failures. The book now ends on a direct calculator-to-calculator comparison across three languages.
+- **Milestone audit — caught + closed a cross-chapter contradiction:** the integration check found 7부 `final.md` dated the v1.2 Rust run `2026-06-01` (should be `2026-05-28`, per 6부 + the Rust manifest) — TD-9 — plus a cosmetic wrong arithmetic for the ~5.0s/call figure (TD-10). Both fixed, rebuilt, redeployed (run 26741929202), verified live. Notably, the two honesty items that were *prior* tech debt — event-numbering drift (v1.2 TD-7/TD-8) and the `~14–32s/call` prediction-as-measurement (v1.2 TD-6) — were both **correct this time** without needing audit fixes.
+
+**Stats:**
+
+- 7부 chapter: 5 new files (`src/ch07-scala-calc/*.md`, ~664 lines) + SUMMARY.md entry; `captured-scala/`: 11 tracked artifacts (3 JSONL + stderr + final-source Calc.scala/Hello.scala + manifest + transcript + host test-output)
+- 2 phases, 6 plans; 24 commits over ~3 hours on 2026-06-01
+- 35B Scala run: 30 TerminalActions / 234.8s active agent time; ~5.0s/call (weighted LLM-call-gap avg). Single-model run (35B only).
+
+**Git range:** `milestone-v1.2` tag → `milestone-v1.3` tag
+
+**Process note:** Phase 10 was a live local-35B capture driven directly via the OpenHands headless CLI (backgrounded per task, JSONL-polled). It went cleanly on the first attempt — unaided success with one self-corrected error — so no honesty escalations (no scaffold, no rejected attempt) were needed, unlike v1's F# capture. The single defect that reached publish (a copy-paste date error in the trilogy table) was caught by the milestone audit and fixed same-day.
+
+**What's next:** Open candidates (no commitment): **EXT-07** a cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — now natural since the trilogy is complete; **EXT-01** more-language examples (Go / Python); **EXT-06** a 35B-vs-122B comparison on Rust or Scala; **EXT-02** English translation; or polish the carried v1.1 appendix-C debt (TD-2…TD-5).
+
+---
+
 ## v1.2 Rust Example (Shipped: 2026-06-01)
 
 **Delivered:** A second worked example for the tutorial — the same local Qwen **35B** that built the F# calculator now autonomously builds a minimal **std-only Rust HTTP server** (`GET / → "hello\n"`), captured honestly and published as a new **6부 "다른 워킹 예제 - Rust HTTP 서버"**. The milestone's thesis held: the model that **could not** write FsLex unaided in v1 wrote a working Rust server **unaided on attempt 1** — Rust is more in-distribution than FsLex.
