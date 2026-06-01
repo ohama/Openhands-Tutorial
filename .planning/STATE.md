@@ -2,27 +2,28 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
+See: .planning/PROJECT.md (updated 2026-06-01 — v1.3 Scala Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부). v1.3: same 35B, Scala 3 arithmetic calculator (7부) — completes the calculator trilogy.
-**Current focus:** v1.3 Scala Example — Phase 11 Plan 11-02 COMPLETE. PUB-01 build gate passed. Ready to push to GitHub Pages.
+**Current focus:** v1.3 SHIPPED. Phase 11 plan 11-03 COMPLETE. 7부 live on GitHub Pages. Considering candidate next milestones (EXT-01/06/07).
 
 ## Current Position
 
-Milestone: v1.3 (Scala Example) — IN PROGRESS 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Phase 11 (7부 Chapter + Publish) — Plan 11-01 ✓ COMPLETE (5 chapter files + SUMMARY.md wired). Plan 11-02 ✓ COMPLETE (PUB-01 build gate passed).
-Plan: 11-02 complete. Next: push `main` to GitHub Pages (git push origin main triggers deploy workflow).
-Status: PUB-01 PASS. mdbook build exits 0, zero errors, zero new warnings (only TD-4 <char> accepted). All 5 ch07-scala-calc HTML files rendered. Sidebar items 23–27 confirmed in toc-5eb11a0d.js. 1부–6부 + 부록 A/B/C not regressed. Safe to deploy.
-Last activity: 2026-06-01 — Phase 11 plan 11-02 executed; PUB-01 build gate satisfied.
+Milestone: v1.3 (Scala Example) — COMPLETE 2026-06-01.
+Phase: Phase 11 (7부 Chapter + Publish) — ALL PLANS COMPLETE. 11-01 ✓ 11-02 ✓ 11-03 ✓.
+Plan: 11-03 complete (PUB-02: push + deploy + live verification).
+Status: SHIPPED. Actions run 26739869947 success. Live root HTTP 200. ch07-scala-calc/intro.html HTTP 200. All 5 ch07 pages in live toc-5eb11a0d.js.
+Last activity: 2026-06-01 — Phase 11 plan 11-03 executed; 7부 live on GitHub Pages.
 
-Progress: v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). v1.3: Phase 10 complete (3/3); Phase 11 plans 11-01 + 11-02 complete.
-Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html; 7부 pending push)
+Progress: v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 32 plans complete). Phase 11 done (3/3).
+Live: https://ohama.github.io/Openhands-Tutorial/ (7부 Scala calculator live at /ch07-scala-calc/intro.html)
 
 ## Cumulative History
 
 - **v1 MVP** (shipped 2026-05-28): 5 phases, 17 plans, Korean mdBook tutorial + 35B captured run of F# calculator. See `milestones/v1-ROADMAP.md`.
 - **v1.1 Model Comparison** (shipped 2026-05-28): 2 phases, 6 plans, 122B capture + 부록 C comparison + UX callouts. See `milestones/v1.1-ROADMAP.md`.
 - **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server capture + 6부 chapter (다른 워킹 예제) live. Confirmed Rust is more in-distribution for 35B than FsLex was (wrote the server unaided where it failed FsLex). Audit caught + fixed TD-6 (timing prediction mislabeled as measurement). See `milestones/v1.2-ROADMAP.md`.
+- **v1.3 Scala Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Scala 3 recursive-descent calculator unaided + 7부 chapter (다른 워킹 예제 — Scala 계산기) live. Completes the calculator trilogy (F#/Scala/+future). Agent used direct Int-returning methods rather than sealed trait ADT. All canonical tests pass (14/20/5). Actions run 26739869947 success.
 
 ## Accumulated Context
 
@@ -57,12 +58,18 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-ru
 - [v1.3 timing real]: task1 30.5s (avg 2.1s/call), task2 174.8s (avg 6.5s/call), task3 29.5s (avg 2.3s/call). Total active ~234.8s. The legacy `~14-32s/call` is still NOT a measurement.
 - [v1.3 no ADT]: agent did not use `sealed trait Expr` (mentioned in scope note) — used direct Int-returning methods instead. Simpler but valid; chapter can note this difference from spec.
 
+### Key decisions from Phase 11 plan 11-03 (new, 2026-06-01)
+
+- [PUB-02 audit guard]: git diff on deploy.yml must be empty (both working-tree and vs origin) before every publish. Confirmed this plan.
+- [headless push artifact]: keychain -25308 stderr lines on headless macOS are benign; confirm push success from `main -> main` ref update line only.
+- [v1.3 shipped]: 7부 live at https://ohama.github.io/Openhands-Tutorial/ch07-scala-calc/intro.html. Actions run 26739869947 concluded success. toc-5eb11a0d.js confirms all 5 ch07 pages in live sidebar.
+
 ### Blockers/Concerns
 
-None. Phase 10 complete. captured-scala/ committed (commit acd3009). All SCAL-01/02/03 evidenced. Phase 11 can begin immediately.
+None. v1.3 milestone shipped. Open tech debt (TD-2, TD-3, TD-4, TD-5) carried forward — none blocking. Candidate next milestones: EXT-01, EXT-06, EXT-07.
 
 ## Session Continuity
 
-Last session: 2026-06-01T06:40:53Z
-Stopped at: Completed 11-02-PLAN.md (PUB-01 build gate; mdbook build clean; 7부 rendered + sidebar wired). Phase 11 plan 11-02 CLOSED.
-Resume file: None — next: git push origin main (deploys to GitHub Pages via .github/workflows/deploy.yml).
+Last session: 2026-06-01T07:01:00Z
+Stopped at: Completed 11-03-PLAN.md (PUB-02: pushed to origin/main, Actions deploy success, 7부 live verified). Phase 11 CLOSED. v1.3 SHIPPED.
+Resume file: None — milestone complete. See STATE.md "Candidate next milestones" for options.
