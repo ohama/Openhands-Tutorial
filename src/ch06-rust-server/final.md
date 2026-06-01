@@ -109,14 +109,14 @@ edition = "2024"
 
 ## v1 35B 실행과의 비교 (참고)
 
-CAPTURE-MANIFEST.md의 Comparison Hook 절은 이 Rust 실행을 v1 35B F# 계산기 실행과 비교합니다.
+이 Rust 실행을 v1 35B F# 계산기 실행과 비교할 때, 핵심은 호출당 속도가 아니라 **호출 횟수**입니다.
 
-- **v1 35B (F# 계산기):** LLM 호출당 평균 ~14–32초 (v1 실행 기록 기준)
-- **v1.2 35B (Rust 서버):** LLM 호출당 평균 3.8초
+- **v1 35B (F# 계산기):** LLM 호출당 약 5.3초 (부록 C의 파생 측정값 — 실행 구간을 호출 수로 나눈 wall-time 값)
+- **v1.2 35B (Rust 서버):** LLM 호출당 평균 3.8초 (위 표, JSONL 타임스탬프 기반)
 
-속도 차이의 주된 이유는 태스크의 복잡성 차이입니다. Rust 서버는 단일 소스 파일이고 문법 파서·렉서 디버깅이 없었습니다. F# 계산기는 FsYacc/FsLex DSL 디버깅과 다단계 파일 구성이 필요했습니다. 두 실행의 모델은 같지만(openai/qwen-35b), 태스크 도메인이 다릅니다.
+두 수치는 같은 모델(openai/qwen-35b)의 호출당 속도이며 큰 차이가 없습니다(약 1.4배). 실행 전체 시간의 차이는 호출당 속도가 아니라 **호출 횟수**에서 비롯됩니다. F# 계산기는 FsYacc/FsLex DSL 디버깅과 다단계 파일 구성으로 훨씬 많은 반복이 필요했고, Rust 서버는 단일 소스 파일에 문법 파서·렉서 디버깅이 없어 호출 수가 적었습니다.
 
-위의 v1 ~14–32초/call 수치는 **v1 F# 실행의 측정값**입니다. 이 Rust 실행에 적용되지 않습니다.
+> **솔직한 표기 주의:** v1 35B에 대해 한때 인용되던 "~14–32초/call" 수치는 사전 예측값(06-RESEARCH.md의 pre-run prediction)이며 실측이 아닙니다. 부록 C가 이를 바로잡았고, 본 장도 부록 C와 동일하게 파생 측정값 ~5.3초/call을 v1 35B 기준으로 사용합니다.
 
 ---
 
@@ -140,7 +140,7 @@ CAPTURE-MANIFEST.md의 Comparison Hook 절은 이 Rust 실행을 v1 35B F# 계�
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/CAPTURE-MANIFEST.md` — 실행 메타데이터, 요구사항 매핑, 타이밍, 오류·수정 기록, Comparison Hook
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/logs/task1-scaffold.jsonl` — task1 원시 JSONL (10 이벤트, 4 TerminalAction)
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/logs/task2-server.jsonl` — task2 원시 JSONL (16 이벤트, 7 TerminalAction)
-- `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/logs/task3-buildtest.jsonl` — task3 원시 JSONL (41 이벤트, 15 TerminalAction)
+- `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/logs/task3-buildtest.jsonl` — task3 원시 JSONL (36 JSON 이벤트, 15 TerminalAction — 매니페스트의 "41"은 줄 인덱스 기준 표기)
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/final-source/src/main.rs` — 최종 43줄 서버 소스
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/final-source/Cargo.toml` — 최종 Cargo.toml
 - `.planning/phases/08-capture-the-35b-rust-http-server-run/captured-rust/test-output.txt` — 호스트 독립 재실행 결과 (2026-05-29)

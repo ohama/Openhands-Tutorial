@@ -26,9 +26,9 @@ task2를 시작하기 전에 중요한 사실을 밝힙니다.
 
 > **내부 프로세스**
 >
-> - 이벤트 #7, #8, #9 (TerminalAction): `ls`, `cat Cargo.toml`, `cat src/main.rs`로 기존 프로젝트 구조 파악
+> - 도입부 TerminalAction들: `ls`, `cat Cargo.toml`, `cat src/main.rs`로 기존 프로젝트 구조 파악
 > - 이벤트 #13 (TerminalAction): `cat > .../src/main.rs << 'EOF' ... EOF` heredoc으로 43줄 HTTP 서버 작성
-> - 이벤트 #16 (TerminalAction → ObservationEvent, exit=0): `cat src/main.rs`로 파일 내용 확인
+> - 이벤트 #16 (ObservationEvent, exit=0): `cat src/main.rs` 결과로 작성된 파일 내용 확인
 
 > **결과**
 >

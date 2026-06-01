@@ -10,10 +10,12 @@ OpenHands로 Rust HTTP 서버를 만들기 전에, 작업을 어떻게 나눌지
 |--------|------|-----------|----------------|
 | task1-scaffold | `cargo new rust-server` 실행 + 프로젝트 구조 확인 | 10 | 4 |
 | task2-server | `src/main.rs` 작성 (HTTP 서버 코드) | 16 | 7 |
-| task3-buildtest | 빌드 + 오류 2회 자가 수정 + `cargo run` + curl 검증 | 41 | 15 |
-| **합계** | — | **67** | **26** |
+| task3-buildtest | 빌드 + 오류 2회 자가 수정 + `cargo run` + curl 검증 | 36 | 15 |
+| **합계** | — | **62** | **26** |
 
 출처: CAPTURE-MANIFEST.md, RUST-01 표
+
+> **이벤트 수·번호 표기 주의:** 위 "이벤트 수"는 각 JSONL의 파싱 가능한 JSON 이벤트 객체 수입니다(task1 10, task2 16, task3 36). CAPTURE-MANIFEST.md는 task3를 "41 이벤트"로 적었는데, 이는 마지막 이벤트까지의 원시 줄 번호를 센 값입니다 — JSONL에는 JSON 객체와 배너·stderr 텍스트가 섞여 있습니다. TerminalAction 수(task3 15)는 두 방식에서 동일합니다. 본 장에서 인용하는 "이벤트 #N"은 매니페스트의 줄 기반 인덱싱 표기를 따릅니다(JSON 객체의 N번째 위치와는 다를 수 있습니다).
 
 ---
 
@@ -28,7 +30,7 @@ task1의 목적은 단순합니다. `cargo new rust-server` 명령으로 Rust �
 > **내부 프로세스**
 >
 > - 이벤트 #7 (TerminalAction): `cd .../oh-workdir-rust && cargo new rust-server` 실행 → 프로젝트 생성
-> - 이벤트 #8, #9, #10: `ls`, `cat Cargo.toml`, `cat src/main.rs`로 구조 확인
+> - 이어지는 TerminalAction들: `ls`, `cat Cargo.toml`, `cat src/main.rs`로 생성된 구조 확인
 
 > **결과**
 >
