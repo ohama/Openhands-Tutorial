@@ -16,13 +16,13 @@
 
 ### 7부 chapter content
 
-- [ ] **CHAP-01**: A new 7부 "다른 워킹 예제: Scala 계산기" chapter group is added to the book in `src/ch07-scala-calc/` (or equivalent path) and wired into `src/SUMMARY.md`. The chapter is structurally parallel to 4부/6부 (intro / planning / writing / build-test / final or a similar decomposition); it uses the **사용자 프롬프트 / 내부 프로세스 / 결과** callout pattern (without pictograph emojis); concept↔action callouts pair what the agent did with 1부/2부 concepts. It includes a short calculator-to-calculator note contrasting the Scala approach (ADT + pattern matching) with 4부's F# (FsLex/FsYacc DSL).
-- [ ] **CHAP-02**: Every code quote, event number, timing figure, error message, and capability claim in 7부 traces verbatim to the captured JSONL / logs / `scala-cli` output. No fabricated or idealized numbers; the legacy v1 `~14–32s/call` figure is never cited as a measurement. If a section can't be backed by real evidence, it's omitted rather than invented.
+- [x] **CHAP-01**: A new 7부 "다른 워킹 예제: Scala 계산기" chapter group is added to the book in `src/ch07-scala-calc/` (or equivalent path) and wired into `src/SUMMARY.md`. The chapter is structurally parallel to 4부/6부 (intro / planning / writing / build-test / final or a similar decomposition); it uses the **사용자 프롬프트 / 내부 프로세스 / 결과** callout pattern (without pictograph emojis); concept↔action callouts pair what the agent did with 1부/2부 concepts. It includes a short calculator-to-calculator note contrasting the Scala approach (ADT + pattern matching) with 4부's F# (FsLex/FsYacc DSL).
+- [x] **CHAP-02**: Every code quote, event number, timing figure, error message, and capability claim in 7부 traces verbatim to the captured JSONL / logs / `scala-cli` output. No fabricated or idealized numbers; the legacy v1 `~14–32s/call` figure is never cited as a measurement. If a section can't be backed by real evidence, it's omitted rather than invented.
 
 ### Publish
 
-- [ ] **PUB-01**: The updated book builds clean with `mdbook build` (no errors, no broken links). The new 7부 entries appear in `src/SUMMARY.md`; existing chapters (1부~6부 + 부록 A/B/C) are not regressed. The pre-existing cosmetic `<char>` warning from 부록 C is acceptable (TD-4); no NEW warnings introduced.
-- [ ] **PUB-02**: The updated book is re-deployed live to GitHub Pages via the existing Actions workflow on push to `main`. `.github/workflows/deploy.yml` is NOT modified (audit-style guard). Live URL returns HTTP 200; the new 7부 chapters are reachable from sidebar navigation.
+- [x] **PUB-01**: The updated book builds clean with `mdbook build` (no errors, no broken links). The new 7부 entries appear in `src/SUMMARY.md`; existing chapters (1부~6부 + 부록 A/B/C) are not regressed. The pre-existing cosmetic `<char>` warning from 부록 C is acceptable (TD-4); no NEW warnings introduced.
+- [x] **PUB-02**: The updated book is re-deployed live to GitHub Pages via the existing Actions workflow on push to `main`. `.github/workflows/deploy.yml` is NOT modified (audit-style guard). Live URL returns HTTP 200; the new 7부 chapters are reachable from sidebar navigation.
 
 ## Future Requirements
 
@@ -52,10 +52,10 @@ Deferred to later milestones:
 | SCAL-01 | Phase 10 | Complete |
 | SCAL-02 | Phase 10 | Complete |
 | SCAL-03 | Phase 10 | Complete |
-| CHAP-01 | Phase 11 | Pending |
-| CHAP-02 | Phase 11 | Pending |
-| PUB-01 | Phase 11 | Pending |
-| PUB-02 | Phase 11 | Pending |
+| CHAP-01 | Phase 11 | Complete |
+| CHAP-02 | Phase 11 | Complete |
+| PUB-01 | Phase 11 | Complete |
+| PUB-02 | Phase 11 | Complete |
 
 **Coverage:**
 - v1.3 requirements: 7 total

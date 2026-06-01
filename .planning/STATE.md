@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.3 Scala Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부). v1.3: same 35B, Scala 3 arithmetic calculator (7부) — completes the calculator trilogy.
-**Current focus:** v1.3 SHIPPED. Phase 11 plan 11-03 COMPLETE. 7부 live on GitHub Pages. Considering candidate next milestones (EXT-01/06/07).
+**Current focus:** v1.3 functionally COMPLETE — both phases verified (Phase 10 capture 5/5; Phase 11 chapter+publish 4/4). 7부 live. Ready for /gsd:audit-milestone then /gsd:complete-milestone v1.3.
 
 ## Current Position
 
-Milestone: v1.3 (Scala Example) — COMPLETE 2026-06-01.
-Phase: Phase 11 (7부 Chapter + Publish) — ALL PLANS COMPLETE. 11-01 ✓ 11-02 ✓ 11-03 ✓.
-Plan: 11-03 complete (PUB-02: push + deploy + live verification).
-Status: SHIPPED. Actions run 26739869947 success. Live root HTTP 200. ch07-scala-calc/intro.html HTTP 200. All 5 ch07 pages in live toc-5eb11a0d.js.
-Last activity: 2026-06-01 — Phase 11 plan 11-03 executed; 7부 live on GitHub Pages.
+Milestone: v1.3 (Scala Example) — ALL PHASES COMPLETE + verified 2026-06-01. Ready for audit/close-out.
+Phase: Phase 11 (7부 Chapter + Publish) — ✓ COMPLETE + verified 4/4 PASS (11-VERIFICATION.md).
+Plan: All Phase 10 + 11 plans complete. Next: /gsd:audit-milestone (then /gsd:complete-milestone v1.3).
+Status: SHIPPED. 7부 written verbatim from captured-scala/ (byte-identical code, ONE self-corrected compile error, no false sealed-trait claim, manifest 1-based event numbers, ~14–32s only as labeled prediction). mdbook clean; Actions run 26739869947 success; live root + ch07-scala-calc/intro.html HTTP 200; 7부 in live toc-5eb11a0d.js; deploy.yml unchanged. CHAP-01/02 + PUB-01/02 Complete.
+Last activity: 2026-06-01 — Phase 11 executed (3 waves) + verified 4/4; ROADMAP/STATE/REQUIREMENTS updated.
 
-Progress: v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 32 plans complete). Phase 11 done (3/3).
+Progress: ✅ v1 + v1.1 + v1.2 shipped. 🚧 v1.3 functionally complete (Phases 10–11 verified) — pending audit + close-out. Total: 11 phases, 32 plans.
 Live: https://ohama.github.io/Openhands-Tutorial/ (7부 Scala calculator live at /ch07-scala-calc/intro.html)
 
 ## Cumulative History

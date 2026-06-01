@@ -149,9 +149,11 @@ Plans:
 **Plans:** 3 plans in 3 waves (sequential)
 
 Plans:
-- [ ] 11-01-PLAN.md — Write five ch07-scala-calc chapter files from captured-scala evidence + wire 7부 into SUMMARY.md (CHAP-01, CHAP-02)
-- [ ] 11-02-PLAN.md — mdbook build gate: zero errors, zero new warnings, no 1부~6부/부록 regression (PUB-01)
-- [ ] 11-03-PLAN.md — Commit + push to main, watch Actions deploy, verify live HTTP 200 + 7부 in sidebar, deploy.yml unchanged (PUB-02)
+- [x] 11-01-PLAN.md — Write five ch07-scala-calc chapter files from captured-scala evidence + wire 7부 into SUMMARY.md (CHAP-01, CHAP-02)
+- [x] 11-02-PLAN.md — mdbook build gate: zero errors, zero new warnings, no 1부~6부/부록 regression (PUB-01)
+- [x] 11-03-PLAN.md — Commit + push to main, watch Actions deploy, verify live HTTP 200 + 7부 in sidebar, deploy.yml unchanged (PUB-02)
+
+**Outcome:** 7부 "다른 워킹 예제 - Scala 계산기" written verbatim from captured-scala/ (code byte-identical to the real 70-line Calc.scala; ONE self-corrected compile error narrated; honest "no sealed-trait ADT" framing; ADT-vs-FsLex contrast to 4부). mdbook build clean; live on GitHub Pages (Actions run 26739869947; 7부 200 + in sidebar); deploy.yml unchanged. Verified 4/4. ✓ Complete 2026-06-01.
 
 ---
 
@@ -169,4 +171,4 @@ Plans:
 | 8. Capture the 35B Rust HTTP Server Run | v1.2 | 3/3 | ✓ Complete | 2026-05-29 |
 | 9. 6부 Chapter + Publish | v1.2 | 3/3 | ✓ Complete | 2026-06-01 |
 | 10. Capture the 35B Scala Calculator Run | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
-| 11. 7부 Chapter + Publish | v1.3 | 0/3 | Not started | — |
+| 11. 7부 Chapter + Publish | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
