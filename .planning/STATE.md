@@ -5,15 +5,15 @@
 See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. **v1.2: same 35B model, different language — a minimal Rust HTTP server.**
-**Current focus:** v1.2 — Phase 8 (35B Rust Capture) COMPLETE + verified + human-approved 2026-05-29; Phase 9 (6부 Chapter + Publish) next.
+**Current focus:** v1.2 — BOTH phases COMPLETE + verified. 6부 (Rust HTTP 서버) is LIVE. Milestone ready for /gsd:audit-milestone close-out.
 
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — COMPLETE 2026-06-01
 Phase: 9 — 6부 Chapter + Publish — COMPLETE (all 3 plans done)
 Plan: 09-01 COMPLETE; 09-02 COMPLETE (PUB-01 gate); 09-03 COMPLETE (PUB-02 gate — live deploy)
-Status: Phase 9 complete — 6부 live on GitHub Pages. v1.2 milestone deliverable shipped.
-Last activity: 2026-06-01 — Executed 09-03-PLAN.md (GitHub Pages publish)
+Status: Phase 9 complete — 6부 live on GitHub Pages. v1.2 milestone deliverable shipped. Phase verifier 5/5 PASS (09-VERIFICATION.md): code byte-identical to final-source/main.rs, both build errors verbatim from JSONL, no fabrication/emoji, only pre-existing <char> warning, live pages HTTP 200, deploy.yml unchanged. CHAP-01/02 + PUB-01/02 = Complete.
+Last activity: 2026-06-01 — /gsd:execute-phase 9 (3 waves: write+wire → build verify → publish); verifier 5/5 PASS; ROADMAP/STATE/REQUIREMENTS updated
 
 Progress: ██████████ v1.2 100% (Phase 8 + Phase 9 all 3 plans complete; book live)
 Live (v1 + v1.1 + v1.2): https://ohama.github.io/Openhands-Tutorial/
@@ -22,7 +22,7 @@ Live (v1 + v1.1 + v1.2): https://ohama.github.io/Openhands-Tutorial/
 
 - **v1 MVP** (shipped 2026-05-28): 5 phases, 17 plans, Korean mdBook tutorial + 35B captured run of F# calculator. See `milestones/v1-ROADMAP.md`.
 - **v1.1 Model Comparison** (shipped 2026-05-28): 2 phases, 6 plans, 122B capture + 부록 C comparison + UX callouts. See `milestones/v1.1-ROADMAP.md`.
-- **v1.2 Rust Example** (started 2026-05-28): IN PROGRESS. Adds a second worked example (Rust HTTP server, 35B) as 6부.
+- **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server capture + 6부 chapter (다른 워킹 예제) live. Confirms Rust is more in-distribution for 35B than FsLex was (wrote the server unaided where it failed FsLex). Pending milestone audit/close-out.
 
 ## Accumulated Context
 

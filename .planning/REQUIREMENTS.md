@@ -16,13 +16,13 @@
 
 ### 6부 chapter content
 
-- [ ] **CHAP-01**: A new 6부 "다른 워킨 예제: Rust HTTP 서버" (or equivalent name approved during planning) chapter group is added to the book in `src/ch06-rust-server/` (or equivalent path) and is wired into `src/SUMMARY.md`. The chapter is structurally parallel to 4부 (intro / writing / build-test / final or a similar decomposition); it uses the **사용자 프롬프트 / 내부 프로세스 / 결과** callout pattern from v1.1 (without pictograph emojis, per the post-cleanup convention); concept↔action callouts pair what the agent did with the 1부/2부 concepts.
-- [ ] **CHAP-02**: Every code quote, event number, timing figure, error message, and capability claim in 6부 traces verbatim to the captured JSONL / logs / transcript / `cargo` output. No fabricated or idealized numbers. The chapter's existence is permitted only if the underlying capture (RUST-01..03) supports the claim being made; if a section can't be backed by real evidence, it's omitted.
+- [x] **CHAP-01**: A new 6부 "다른 워킨 예제: Rust HTTP 서버" (or equivalent name approved during planning) chapter group is added to the book in `src/ch06-rust-server/` (or equivalent path) and is wired into `src/SUMMARY.md`. The chapter is structurally parallel to 4부 (intro / writing / build-test / final or a similar decomposition); it uses the **사용자 프롬프트 / 내부 프로세스 / 결과** callout pattern from v1.1 (without pictograph emojis, per the post-cleanup convention); concept↔action callouts pair what the agent did with the 1부/2부 concepts.
+- [x] **CHAP-02**: Every code quote, event number, timing figure, error message, and capability claim in 6부 traces verbatim to the captured JSONL / logs / transcript / `cargo` output. No fabricated or idealized numbers. The chapter's existence is permitted only if the underlying capture (RUST-01..03) supports the claim being made; if a section can't be backed by real evidence, it's omitted.
 
 ### Publish
 
-- [ ] **PUB-01**: The updated book builds clean with `mdbook build` (no errors, no broken links). The new 6부 entries appear in `src/SUMMARY.md`; existing chapters (1부~5부 + 부록 A/B/C) are not regressed. The pre-existing cosmetic `<char>` warning from 부록 C is acceptable (tracked as v1.1 TD-4); no NEW warnings introduced.
-- [ ] **PUB-02**: The updated book is re-deployed live to GitHub Pages via the existing Actions workflow on push to `main`. `.github/workflows/deploy.yml` is NOT modified by v1.2 (audit-style guard, parallel to v1.1 PUB-02). Live URL returns HTTP 200; the new 6부 chapters reachable from sidebar navigation.
+- [x] **PUB-01**: The updated book builds clean with `mdbook build` (no errors, no broken links). The new 6부 entries appear in `src/SUMMARY.md`; existing chapters (1부~5부 + 부록 A/B/C) are not regressed. The pre-existing cosmetic `<char>` warning from 부록 C is acceptable (tracked as v1.1 TD-4); no NEW warnings introduced.
+- [x] **PUB-02**: The updated book is re-deployed live to GitHub Pages via the existing Actions workflow on push to `main`. `.github/workflows/deploy.yml` is NOT modified by v1.2 (audit-style guard, parallel to v1.1 PUB-02). Live URL returns HTTP 200; the new 6부 chapters reachable from sidebar navigation.
 
 ## Future Requirements
 
@@ -56,10 +56,10 @@ Deferred to later milestones:
 | RUST-01 | Phase 8 | Complete |
 | RUST-02 | Phase 8 | Complete |
 | RUST-03 | Phase 8 | Complete |
-| CHAP-01 | Phase 9 | Pending |
-| CHAP-02 | Phase 9 | Pending |
-| PUB-01 | Phase 9 | Pending |
-| PUB-02 | Phase 9 | Pending |
+| CHAP-01 | Phase 9 | Complete |
+| CHAP-02 | Phase 9 | Complete |
+| PUB-01 | Phase 9 | Complete |
+| PUB-02 | Phase 9 | Complete |
 
 **Coverage:**
 - v1.2 requirements: 7 total

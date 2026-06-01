@@ -4,7 +4,7 @@
 
 - ✅ **v1 MVP** — Phases 1–5 (shipped 2026-05-28)
 - ✅ **v1.1 Model Comparison (35B vs 122B)** — Phases 6–7 (shipped 2026-05-28) — [archive](milestones/v1.1-ROADMAP.md)
-- 🚧 **v1.2 Rust Example** — Phases 8–9 (in progress)
+- ✅ **v1.2 Rust Example** — Phases 8–9 (shipped 2026-06-01)
 
 ## Phases
 
@@ -145,4 +145,4 @@ Audit: [milestones/v1.1-MILESTONE-AUDIT.md](milestones/v1.1-MILESTONE-AUDIT.md)
 | 6. Capture the 122B OpenHands Run | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
 | 7. Comparison Chapter + Publish | v1.1 | 3/3 | ✓ Complete | 2026-05-28 |
 | 8. Capture the 35B Rust HTTP Server Run | v1.2 | 3/3 | ✓ Complete | 2026-05-29 |
-| 9. 6부 Chapter + Publish | v1.2 | 0/? | Not started | — |
+| 9. 6부 Chapter + Publish | v1.2 | 3/3 | ✓ Complete | 2026-06-01 |
