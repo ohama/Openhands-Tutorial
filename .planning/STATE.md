@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부). v1.3: same 35B, Scala 3 arithmetic calculator (7부) — completes the calculator trilogy.
-**Current focus:** v1.3 Scala Example — Phase 10 (capture) COMPLETE + verified 5/5. 35B wrote a Scala 3 calculator UNAIDED (14/20/5 pass, one self-corrected compile error). Next: Phase 11 (write 7부 chapter + publish).
+**Current focus:** v1.3 Scala Example — Phase 11 Plan 11-01 COMPLETE. 7부 chapter (5 files) written + SUMMARY.md wired. Ready to push to GitHub Pages.
 
 ## Current Position
 
 Milestone: v1.3 (Scala Example) — IN PROGRESS 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Phase 10 (Capture the 35B Scala Calculator Run) — ✓ COMPLETE + verified 5/5 PASS (10-VERIFICATION.md).
-Plan: All 3 Phase 10 plans complete. Next: Phase 11 (7부 chapter from captured-scala/). Run /gsd:plan-phase 11.
-Status: Capture gate CLOSED — captured-scala/ committed (acd3009). Outcome: 35B wrote idiomatic Scala 3 recursive-descent calc UNAIDED (correct precedence + left-assoc); ONE genuine compile error (`private pos` accessed from `@main`) self-corrected by agent's own `sed`; canonical tests 14/20/5 all pass; scaffold never invoked; 36/36 ActionEvents source=agent; host re-run reproduced 14/20/5. Completes the calculator trilogy (failed FsLex → unaided Scala). EVENT-NUMBERING: CAPTURE-MANIFEST.md (1-based) is authoritative for Phase 11 citations; 10-02-RUN-NOTES per-task lists are 0-based (+1 offset) — see the convention note at the top of RUN-NOTES.
-Last activity: 2026-06-01 — Phase 10 executed (3 waves) + verified 5/5; ROADMAP/STATE/REQUIREMENTS updated.
+Phase: Phase 11 (7부 Chapter + Publish) — Plan 11-01 ✓ COMPLETE (5 chapter files + SUMMARY.md wired).
+Plan: 11-01 complete. Next: Phase 11 remaining plans (publish/deploy) if planned, otherwise v1.3 is chapter-complete.
+Status: 7부 chapter written from captured-scala/ evidence. 70-line Calc.scala byte-identical. One compile error verbatim + agent sed fix. 14/20/5 test results cited with manifest 1-based events. ADT-vs-FsLex contrast honest (no sealed-trait claim). ~14–32s/call never cited as measurement. SUMMARY.md 7부 section in correct position. Honesty audit PASS.
+Last activity: 2026-06-01 — Phase 11 plan 11-01 executed; 7부 chapter complete; src/ch07-scala-calc/*.md + src/SUMMARY.md committed.
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3: Phase 10 ✓ complete + verified (3/3); Phase 11 next.
+Progress: v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). v1.3: Phase 10 complete (3/3); Phase 11 plan 11-01 complete.
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History
@@ -63,6 +63,6 @@ None. Phase 10 complete. captured-scala/ committed (commit acd3009). All SCAL-01
 
 ## Session Continuity
 
-Last session: 2026-06-01T06:30:00Z
-Stopped at: Completed 10-03-PLAN.md (honesty gate PASS + captured-scala/ committed). Phase 10 capture gate CLOSED.
-Resume file: None — next: Phase 11 (write the 7부 Scala chapter + publish).
+Last session: 2026-06-01T06:37:51Z
+Stopped at: Completed 11-01-PLAN.md (7부 chapter 5 files + SUMMARY.md; honesty audit PASS). Phase 11 plan 11-01 CLOSED.
+Resume file: None — next: push to main for GitHub Pages deploy (or Phase 11 additional plans if planned).
