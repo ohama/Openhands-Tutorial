@@ -4,18 +4,18 @@
 
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 
-**Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부).
-**Current focus:** v1.3 Scala Example — STARTED 2026-06-01. 35B builds a Scala 3 arithmetic calculator (scala-cli, ADT + recursive-descent parser); completes the calculator trilogy (F# → Scala). Phases 10–11.
+**Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. v1: F# FsLex/FsYacc calculator (35B). v1.1: same calculator with 122B, comparison. v1.2: same 35B, different language — a minimal Rust HTTP server (6부). v1.3: same 35B, Scala 3 arithmetic calculator (7부) — completes the calculator trilogy.
+**Current focus:** v1.3 Scala Example — STARTED 2026-06-01. 35B builds a Scala 3 arithmetic calculator (scala-cli, ADT + recursive-descent parser); completes the calculator trilogy (F# → Scala). Phases 10–11. Roadmap created — ready to plan Phase 10.
 
 ## Current Position
 
 Milestone: v1.3 (Scala Example) — STARTED 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Not started (defining requirements / roadmap).
+Phase: Phase 10 next (Capture the 35B Scala Calculator Run).
 Plan: —
-Status: Defining requirements. Next: roadmap → /gsd:plan-phase 10.
-Last activity: 2026-06-01 — /gsd:new-milestone v1.3 (PROJECT.md updated; scope decided = Scala arithmetic calculator).
+Status: Roadmap created. Next: `/gsd:plan-phase 10`.
+Last activity: 2026-06-01 — roadmap created for v1.3 (Phases 10–11 defined; ROADMAP.md + STATE.md + REQUIREMENTS.md traceability confirmed).
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 starting (Phases 10–11).
+Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 Phase 10 not started.
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History
@@ -33,6 +33,7 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-ru
 - [honesty discipline]: real captured runs only; no manual edits to agent-written files; setup-asymmetry (scaffolding) disclosed; **pre-run predictions never presented as measurements** (enforced again in v1.2 audit — TD-6).
 - [real measured per-call timing on this hardware]: 35B ≈ 5.3s/call (v1 F# derived; v1.2 Rust run ≈ 3.8s/call), 122B ≈ 6.3s/call. The legacy "~14–32s/call" figure is a v1 pre-run prediction, NOT a measurement — do not cite it as measured.
 - [publish]: book deploys to GitHub Pages via `.github/workflows/deploy.yml` on push to `main` (do NOT modify the workflow); mdbook sidebar nav is JS-rendered from `toc-{hash}.js` — verify live sidebar there, not in root HTML. One accepted build warning: the `<char>` tag in 부록 C (TD-4).
+- [v1.3 scope]: minimal Scala 3 arithmetic calculator (integer `+ - * /` with precedence and parentheses); `scala-cli`; `sealed trait Expr` ADT + hand-rolled recursive-descent parser + pattern-matching evaluator; std-only (no parser-combinator library, no parser generator). Canonical test: `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`. Placed as 7부 (structurally parallel to 4부/6부).
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -44,16 +45,17 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-ru
 
 ### Candidate next milestones (no commitment)
 
-- EXT-01: more-language worked examples (Go / Python), following the Rust precedent.
+- EXT-01: more-language worked examples (Go / Python), following the Rust/Scala precedent.
 - EXT-06: 35B-vs-122B comparison on the Rust example (parallel to v1.1 for F#).
-- EXT-02: English translation. EXT-03: "build your own minimal agent in F#" appendix. EXT-04: local-vs-cloud comparison. EXT-05: Rust with a framework.
+- EXT-07: cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — language-axis parallel to 부록 C's model comparison.
+- EXT-02: English translation. EXT-03: "build your own minimal agent in F#" appendix. EXT-04: local-vs-cloud comparison. EXT-05: Rust/Scala with a framework.
 
 ### Blockers/Concerns
 
-None. Toolchains verified on host (.NET 10, rustc/cargo 1.95.0). LLM proxy serving qwen-35b/122b/local.
+None. Toolchains verified on host (.NET 10, rustc/cargo 1.95.0). LLM proxy serving qwen-35b/122b/local. scala-cli/JDK to be confirmed during Phase 10 preflight.
 
 ## Session Continuity
 
 Last session: 2026-06-01
-Stopped at: v1.2 milestone shipped + archived; tag milestone-v1.2 created. Book live with 6부.
-Resume file: None — next: `/gsd:new-milestone` to scope the next milestone.
+Stopped at: v1.3 roadmap created (Phases 10–11). ROADMAP.md, STATE.md, REQUIREMENTS.md traceability all updated.
+Resume file: None — next: `/gsd:plan-phase 10`.
