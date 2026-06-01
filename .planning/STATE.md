@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 ## Current Position
 
 Milestone: v1.3 (Scala Example) — IN PROGRESS 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Phase 10 (Capture the 35B Scala Calculator Run) — Plan 01 COMPLETE. Next: Plan 02 (run agent tasks).
-Plan: 10-01 complete (1 of 3 plans in Phase 10).
-Status: In progress — preflight green, prompts authored, cache warm. Ready to run 10-02.
-Last activity: 2026-06-01 — completed 10-01-PLAN.md (preflight + task-prompt authoring).
+Phase: Phase 10 (Capture the 35B Scala Calculator Run) — ALL 3 PLANS COMPLETE. Phase 10 DONE.
+Plan: 10-03 complete (3 of 3 plans in Phase 10). Next: Phase 11 (write the 7부 Scala chapter).
+Status: Phase 10 capture gate CLOSED — captured-scala/ committed (acd3009). Phase 11 ready to begin.
+Last activity: 2026-06-01 — completed 10-03-PLAN.md (honesty gate + captured-scala/ + CAPTURE-MANIFEST.md).
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 Phase 10 Plan 01 done (1/3).
+Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). ✅ v1.3 Phase 10 complete (3/3 plans). Next: Phase 11.
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History
@@ -50,12 +50,19 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-ru
 - EXT-07: cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — language-axis parallel to 부록 C's model comparison.
 - EXT-02: English translation. EXT-03: "build your own minimal agent in F#" appendix. EXT-04: local-vs-cloud comparison. EXT-05: Rust/Scala with a framework.
 
+### Key decisions from Phase 10 (new, 2026-06-01)
+
+- [v1.3 capture result]: did-write-calc-unaided=YES (attempt 1). scaffold-invoked=NO. 35B wrote idiomatic Scala 3 recursive-descent calculator unaided; one genuine compile error self-corrected (private member access → sed); all three canonical tests pass (14/20/5). This completes the calculator trilogy thesis.
+- [v1.3 scala idiom]: `@main def calc(args: String*)`, `class ExprParser(input: String):` with significant-indentation `:`, `if/then`, `while/do`, `match` — Scala 3 throughout, no Scala 2 slip.
+- [v1.3 timing real]: task1 30.5s (avg 2.1s/call), task2 174.8s (avg 6.5s/call), task3 29.5s (avg 2.3s/call). Total active ~234.8s. The legacy `~14-32s/call` is still NOT a measurement.
+- [v1.3 no ADT]: agent did not use `sealed trait Expr` (mentioned in scope note) — used direct Int-returning methods instead. Simpler but valid; chapter can note this difference from spec.
+
 ### Blockers/Concerns
 
-None. scala-cli 1.14.0 confirmed + cache pre-warmed. JDK 17.0.19 confirmed. LLM proxy serving qwen-35b/122b/local. All tool prompts verified zero-leak. Ready for 10-02 capture run.
+None. Phase 10 complete. captured-scala/ committed (commit acd3009). All SCAL-01/02/03 evidenced. Phase 11 can begin immediately.
 
 ## Session Continuity
 
-Last session: 2026-06-01T05:35:27Z
-Stopped at: Completed 10-01-PLAN.md (preflight + zero-leak task-prompt authoring). PREFLIGHT GREEN.
-Resume file: None — next: execute 10-02-PLAN.md (run agent tasks).
+Last session: 2026-06-01T06:30:00Z
+Stopped at: Completed 10-03-PLAN.md (honesty gate PASS + captured-scala/ committed). Phase 10 capture gate CLOSED.
+Resume file: None — next: Phase 11 (write the 7부 Scala chapter + publish).
