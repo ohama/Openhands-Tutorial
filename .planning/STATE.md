@@ -9,13 +9,13 @@ See: .planning/PROJECT.md (updated 2026-06-01 — v1.2 Rust Example shipped)
 
 ## Current Position
 
-Milestone: v1.3 (Scala Example) — STARTED 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
-Phase: Phase 10 next (Capture the 35B Scala Calculator Run).
-Plan: —
-Status: Roadmap created. Next: `/gsd:plan-phase 10`.
-Last activity: 2026-06-01 — roadmap created for v1.3 (Phases 10–11 defined; ROADMAP.md + STATE.md + REQUIREMENTS.md traceability confirmed).
+Milestone: v1.3 (Scala Example) — IN PROGRESS 2026-06-01. Phases 10–11 (mirror v1.1/v1.2: capture gate → chapter + publish).
+Phase: Phase 10 (Capture the 35B Scala Calculator Run) — Plan 01 COMPLETE. Next: Plan 02 (run agent tasks).
+Plan: 10-01 complete (1 of 3 plans in Phase 10).
+Status: In progress — preflight green, prompts authored, cache warm. Ready to run 10-02.
+Last activity: 2026-06-01 — completed 10-01-PLAN.md (preflight + task-prompt authoring).
 
-Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 Phase 10 not started.
+Progress: ✅ v1 + v1.1 + v1.2 shipped (9 phases, 29 plans). 🚧 v1.3 Phase 10 Plan 01 done (1/3).
 Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-rust-server/intro.html)
 
 ## Cumulative History
@@ -52,10 +52,10 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (6부 Rust example at /ch06-ru
 
 ### Blockers/Concerns
 
-None. Toolchains verified on host (.NET 10, rustc/cargo 1.95.0). LLM proxy serving qwen-35b/122b/local. scala-cli/JDK to be confirmed during Phase 10 preflight.
+None. scala-cli 1.14.0 confirmed + cache pre-warmed. JDK 17.0.19 confirmed. LLM proxy serving qwen-35b/122b/local. All tool prompts verified zero-leak. Ready for 10-02 capture run.
 
 ## Session Continuity
 
-Last session: 2026-06-01
-Stopped at: v1.3 roadmap created (Phases 10–11). ROADMAP.md, STATE.md, REQUIREMENTS.md traceability all updated.
-Resume file: None — next: `/gsd:plan-phase 10`.
+Last session: 2026-06-01T05:35:27Z
+Stopped at: Completed 10-01-PLAN.md (preflight + zero-leak task-prompt authoring). PREFLIGHT GREEN.
+Resume file: None — next: execute 10-02-PLAN.md (run agent tasks).
