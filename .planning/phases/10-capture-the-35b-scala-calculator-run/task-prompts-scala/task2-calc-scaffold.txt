@@ -1,0 +1,122 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool.
+
+A scala-cli project directory exists here. Write a file named Calc.scala with the
+following EXACT contents using a heredoc:
+
+  cd /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+  cat > Calc.scala <<'SCALA_EOF'
+//> using scala 3
+
+sealed trait Expr
+case class Num(n: Int)           extends Expr
+case class Add(l: Expr, r: Expr) extends Expr
+case class Sub(l: Expr, r: Expr) extends Expr
+case class Mul(l: Expr, r: Expr) extends Expr
+case class Div(l: Expr, r: Expr) extends Expr
+
+// ── Tokenizer ─────────────────────────────────────────────────────────────
+enum Token:
+  case TNum(n: Int)
+  case TPlus, TMinus, TStar, TSlash, TLParen, TRParen, TEOF
+
+import Token.*
+
+def tokenize(s: String): List[Token] =
+  var i = 0
+  val tokens = collection.mutable.ListBuffer[Token]()
+  while i < s.length do
+    s(i) match
+      case c if c.isWhitespace => i += 1
+      case c if c.isDigit =>
+        var j = i
+        while j < s.length && s(j).isDigit do j += 1
+        tokens += TNum(s.substring(i, j).toInt)
+        i = j
+      case '+' => tokens += TPlus;   i += 1
+      case '-' => tokens += TMinus;  i += 1
+      case '*' => tokens += TStar;   i += 1
+      case '/' => tokens += TSlash;  i += 1
+      case '(' => tokens += TLParen; i += 1
+      case ')' => tokens += TRParen; i += 1
+      case c   => throw new RuntimeException(s"Unexpected char: '$c'")
+  tokens += TEOF
+  tokens.toList
+
+// ── Recursive-Descent Parser ────────────────────────────────────────────
+// Grammar (operator precedence via grammar hierarchy):
+//   expr  → term   (( '+' | '-' ) term)*
+//   term  → factor (( '*' | '/' ) factor)*
+//   factor → NUMBER | '(' expr ')'
+//
+// Lower in the grammar = higher precedence.
+// Left-associativity via left-recursive while loop.
+
+class Parser(tokens: List[Token]):
+  var pos = 0
+
+  def peek: Token = tokens(pos)
+
+  def consume(): Token =
+    val t = tokens(pos)
+    pos += 1
+    t
+
+  def expect(t: Token): Unit =
+    if peek != t then throw new RuntimeException(s"Expected $t but got $peek")
+    consume()
+
+  // expr → term (( '+' | '-' ) term)*
+  def expr(): Expr =
+    var left = term()
+    while peek == TPlus || peek == TMinus do
+      val op = consume()
+      val right = term()
+      left = if op == TPlus then Add(left, right) else Sub(left, right)
+    left
+
+  // term → factor (( '*' | '/' ) factor)*
+  def term(): Expr =
+    var left = factor()
+    while peek == TStar || peek == TSlash do
+      val op = consume()
+      val right = factor()
+      left = if op == TStar then Mul(left, right) else Div(left, right)
+    left
+
+  // factor → NUMBER | '(' expr ')'
+  def factor(): Expr =
+    peek match
+      case TNum(n) =>
+        consume()
+        Num(n)
+      case TLParen =>
+        consume()
+        val e = expr()
+        expect(TRParen)
+        e
+      case t => throw new RuntimeException(s"Unexpected token: $t")
+
+// ── Evaluator ────────────────────────────────────────────────────────────
+def eval(e: Expr): Int = e match
+  case Num(n)    => n
+  case Add(l, r) => eval(l) + eval(r)
+  case Sub(l, r) => eval(l) - eval(r)
+  case Mul(l, r) => eval(l) * eval(r)
+  case Div(l, r) => eval(l) / eval(r)
+
+// ── Entry Point ─────────────────────────────────────────────────────────
+@main def calc(expression: String): Unit =
+  val tokens = tokenize(expression)
+  val parser = Parser(tokens)
+  val ast    = parser.expr()
+  println(eval(ast))
+  SCALA_EOF
+
+After writing, confirm the contents:
+  cat Calc.scala
+
+Do NOT add any external libraries or build files. A later task runs and tests it.

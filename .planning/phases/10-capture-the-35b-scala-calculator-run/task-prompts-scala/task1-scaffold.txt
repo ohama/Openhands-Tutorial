@@ -1,0 +1,32 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-scala
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+The directory /Users/ohama/projs/OpenHandsTests/oh-workdir-scala is empty. Your task:
+verify that scala-cli is installed and set up a minimal Scala project here.
+
+Step 1: Confirm scala-cli works.
+  scala-cli --version
+
+Step 2: Create a project subdirectory and write a minimal Scala file.
+  mkdir -p /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+  cd /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+
+  Write a file named Hello.scala with this exact content (use a heredoc):
+    @main def hello() = println("SCALA_OK")
+
+Step 3: Run it.
+  scala-cli run Hello.scala
+
+  Note: The first run may download compiler artifacts and take 30-60 seconds. That
+  is normal. Wait for the program output at the END — do not treat the download
+  progress lines as an error and do not retry prematurely.
+  Expected output: SCALA_OK
+
+Step 4: Confirm the output and report the scala-cli version and whether the run
+succeeded (whether SCALA_OK appeared).
+
+Do NOT write any calculator code yet — a later task handles that.

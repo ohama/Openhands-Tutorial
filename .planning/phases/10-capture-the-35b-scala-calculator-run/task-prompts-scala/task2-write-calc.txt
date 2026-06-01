@@ -1,0 +1,30 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+A scala-cli project directory exists here (you set it up in a previous step). Start
+by reviewing it:
+
+  cd /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+  ls
+
+Your task: write a Scala source file named Calc.scala. It must evaluate an arithmetic expression — given as a command-line argument — and print the integer result.
+
+Requirements:
+- Input: a single command-line argument, e.g. "2+3*4"
+- Output: the integer result on its own line, e.g. 14
+- Operators supported: + - * / where * and / bind more tightly than + and -
+  (for example, 2+3*4 should evaluate to 14, not 20)
+- Parentheses override the normal precedence (for example, (2+3)*4 should evaluate
+  to 20)
+- Integer arithmetic only (no floating point)
+- Use ONLY the Scala standard library — no external libraries and no build
+  dependencies
+
+After writing Calc.scala, show its contents:
+  cat Calc.scala
+
+Do NOT run or compile yet — a later task handles running and testing.

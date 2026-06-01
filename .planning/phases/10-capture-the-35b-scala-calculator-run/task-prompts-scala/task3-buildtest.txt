@@ -1,0 +1,48 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-scala/calc
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+tool.
+
+A Scala source file Calc.scala exists in this directory. Your task: run it with
+scala-cli and verify it produces the correct output for these three test cases:
+
+  scala-cli run Calc.scala -- "2+3*4"    -> should print: 14
+  scala-cli run Calc.scala -- "(2+3)*4"  -> should print: 20
+  scala-cli run Calc.scala -- "10-3-2"   -> should print: 5
+
+(The first run may download compiler artifacts and take 30-60 seconds — that is
+normal; wait for the program output at the end.)
+
+Step 1: Compile and run the first test.
+  scala-cli run Calc.scala -- "2+3*4"
+
+If compilation fails, read the compiler error carefully, edit Calc.scala to fix the
+error at hand (using heredoc/printf/tee — NOT file_editor), and retry. Repeat until
+the compilation succeeds. Report each error you saw and what you changed to fix it.
+
+Step 2: Once compilation succeeds, run ALL THREE tests and capture the exact output
+of each:
+  scala-cli run Calc.scala -- "2+3*4"
+  scala-cli run Calc.scala -- "(2+3)*4"
+  scala-cli run Calc.scala -- "10-3-2"
+
+Step 3: Report results explicitly. For EACH of the three test cases, state the EXACT
+output the program printed (verbatim — copy from the terminal), whether it matched
+the expected value (14, 20, 5 respectively), and — if you made any fixes — what
+compiler or runtime errors you encountered and exactly what you changed in
+Calc.scala.
+
+Constraints:
+- Do NOT add external library dependencies. No build.sbt, no project/plugins.sbt,
+  no scala-parser-combinators, no fastparse, no cats-parse. The whole program must
+  use only the Scala standard library.
+- If a test produces the WRONG number (for example 10-3-2 prints 9 instead of 5),
+  that is a real result — investigate and fix Calc.scala if you can, but report the
+  wrong output honestly first. Fix only the error at hand and report what you changed
+  and WHY.
+- Report every error you encountered and how you fixed it — this is the point of the
+  exercise.
+- DO NOT modify results to appear successful. If a test printed the wrong number, if
+  compilation never succeeded, or if the program errored, state that clearly. An
+  honest failure is more valuable than a fabricated success.
