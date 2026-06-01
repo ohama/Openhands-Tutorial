@@ -146,6 +146,13 @@ Plans:
 3. `mdbook build` completes with zero errors and zero NEW warnings. Existing chapters (1부~6부 + 부록 A/B/C) are not regressed; the pre-existing cosmetic `<char>` warning from 부록 C (TD-4) is the only accepted warning.
 4. The updated book is live on GitHub Pages with HTTP 200, the new 7부 chapters reachable from sidebar navigation, and `.github/workflows/deploy.yml` is byte-identical to what it was before Phase 11 began.
 
+**Plans:** 3 plans in 3 waves (sequential)
+
+Plans:
+- [ ] 11-01-PLAN.md — Write five ch07-scala-calc chapter files from captured-scala evidence + wire 7부 into SUMMARY.md (CHAP-01, CHAP-02)
+- [ ] 11-02-PLAN.md — mdbook build gate: zero errors, zero new warnings, no 1부~6부/부록 regression (PUB-01)
+- [ ] 11-03-PLAN.md — Commit + push to main, watch Actions deploy, verify live HTTP 200 + 7부 in sidebar, deploy.yml unchanged (PUB-02)
+
 ---
 
 ## Progress
