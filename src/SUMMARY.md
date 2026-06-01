@@ -34,6 +34,14 @@
 - [개념 되짚기](ch05-wrap-up/review.md)
 - [다음 단계](ch05-wrap-up/next-steps.md)
 
+# 6부: 다른 워킹 예제 - Rust HTTP 서버
+
+- [예제 프로젝트 소개](ch06-rust-server/intro.md)
+- [태스크 계획 단계](ch06-rust-server/planning.md)
+- [코드 작성 단계](ch06-rust-server/writing.md)
+- [빌드와 테스트 단계](ch06-rust-server/build-test.md)
+- [완성된 Rust 서버](ch06-rust-server/final.md)
+
 ---
 
 [부록 A: 재현 가이드](appendix-a-repro.md)
