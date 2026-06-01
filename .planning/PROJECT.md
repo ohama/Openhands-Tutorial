@@ -15,17 +15,19 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Last Shipped: v1.3 — Scala Example (2026-06-01) · Next milestone TBD via `/gsd:new-milestone`
+## Current Milestone: v1.4 — Planning Comparison (Claude-led vs OpenHands-native task planning)
 
-**Delivered:** A third worked example — the local Qwen 35B autonomously built a minimal Scala 3 arithmetic calculator (`scala-cli`, hand-rolled recursive descent, std-only) **unaided** (one self-corrected compile error; 14/20/5 pass), published as 7부. **Completes the calculator trilogy** (F# scaffolded → Rust unaided → Scala unaided) and confirms the thesis: the 35B's limit is domain-distribution, not model size. Note: the agent wrote NO `sealed trait` ADT (the pre-run assumption below) — it used direct recursive descent; the chapter documents the real approach honestly. The original milestone framing is preserved below as the (now-delivered) description.
-
-**Goal (delivered):** Add a third worked example — OpenHands on the local Qwen 35B autonomously builds a minimal arithmetic calculator in **Scala 3** (hand-written recursive-descent parser, std-only, run via `scala-cli`) — captured honestly and published as a new 7부. Completes the "calculator trilogy": F# (v1, FsLex/FsYacc DSL, needed a scaffolded lexer) → Scala (the same goal expressed the idiomatic Scala way).
+**Goal:** For the three existing worked examples — F# FsLex/FsYacc calculator, Rust HTTP server, Scala 3 calculator — capture and compare two task-planning regimes on the local **35B**, then publish the findings as a new 부록 D. **Arm A (Claude-led):** Claude authors the task decomposition, it is converted into an OpenHands-consumable plan, and OpenHands executes it. **Arm B (OpenHands-native):** OpenHands is given the whole goal in a single prompt and plans + decomposes + executes it itself. Research question: **does who plans (Claude vs OpenHands itself) change execution efficiency?**
 
 **Target features:**
-- A real captured 35B OpenHands run of a minimal Scala calculator: `scala-cli` project → `sealed trait Expr` ADT → hand-written recursive-descent parser (operator precedence, left-assoc, parentheses) → pattern-matching evaluator → `2+3*4 → 14`, `(2+3)*4 → 20`, `10-3-2 → 5`. Decomposed into ~3–4 scoped tasks following the v1.2 pattern. No parser-combinator library, no parser generator — the model writes the parser itself (parallel to v1.2's "std only" discipline).
-- A new **7부 "다른 워킹 예제: Scala 계산기"** in the book — structurally parallel to 4부/6부, written verbatim from the captured run with concept↔action callouts, error-and-fix narration, and final source. The 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern continues.
-- Honest framing: same model (35B), a third language (Scala). Whatever the agent does — Scala 3 vs Scala 2 syntax slips, operator-precedence bugs, type errors — is captured as written, not retouched. Any scaffolding disclosed (parallel to v1).
-- Re-published live to GitHub Pages.
+- A documented, repeatable **capture method** for both arms, per example, on 35B, under the carried honesty discipline (real captured runs, `source=agent` on every ActionEvent, no manual edits, scaffolding disclosed). The two planning artifacts (Claude's task plan; OpenHands' self-generated plan) are saved per example for qualitative comparison.
+- A **metrics harness** that extracts per-arm, from the captured JSONL: retries / error-fix cycles, wall-clock + per-call time, LLM-call & TerminalAction counts, and final canonical-test pass/fail (14/20/5; `hello`; 2+3*4=14 etc.).
+- The comparison applied to **all three examples** (F# / Rust / Scala), Arm A vs Arm B.
+- A published **부록 D "계획 방식 비교: Claude 계획 vs OpenHands 자체 계획"** chapter, written verbatim from the captured comparison data — honest about which arm wins on which metric, including mixed/inconclusive results (that is itself a finding). Live on GitHub Pages.
+
+**Open unknown to resolve (research):** OpenHands 1.16 headless's native planning mechanism — is there a plan / task-list tool or artifact format ("OpenHands plan / Task"), or does "OpenHands-native planning" just mean single-prompt self-decomposition by the agent loop? And the cleanest, fair way to "convert a Claude plan into an OpenHands plan" so Arm A and Arm B differ only in *who planned*, not in how the plan is delivered.
+
+**Why this is interesting (the honesty story):** every prior milestone used Claude-authored task decomposition (task1/task2/task3 prompts) without ever testing whether that decomposition *helped*. v1.4 makes the planning step itself the object of study — a fair, captured A/B on the same model and same goals. The result may favor Claude-led planning, OpenHands-native, or be mixed per-metric; whichever it is, it is reported honestly from real captured data.
 
 **Why this is interesting (the honesty story):** v1 (F# FsLex) hit the model's boundary — a parser-generator DSL, deeply out-of-distribution. v1.2 (Rust std) was in-distribution and succeeded unaided. v1.3 returns to the *calculator* goal but in Scala, where `sealed trait` ADTs + pattern matching are the canonical idiom — testing whether the model can write unaided the very thing it needed a scaffolded lexer for in F#. New unknowns to capture honestly: **Scala 3** (newer, less training data — the model may emit Scala 2 syntax) and **`scala-cli`** tooling. Success or stumble, both are good chapter material — and it lets the book end on a direct calculator-to-calculator comparison across three languages.
 
@@ -68,9 +70,12 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
 ### Active
 
-<!-- v1.3 shipped 2026-06-01. No active milestone — the next is scoped via /gsd:new-milestone. -->
+<!-- v1.4 Planning Comparison — started 2026-06-01. Phases 12+. Claude-led vs OpenHands-native task planning, on 35B, across F#/Rust/Scala, published as 부록 D. -->
 
-(None — v1.3 shipped. Run `/gsd:new-milestone` to scope the next worked example, cross-language comparison appendix, or translation.)
+- [ ] Capture, per example (F# / Rust / Scala) on 35B, two planning arms: Arm A (Claude-authored task plan → converted to an OpenHands-consumable plan → executed) and Arm B (OpenHands given the whole goal in one prompt → self-plans + executes), with both planning artifacts saved
+- [ ] Extract per-arm metrics from the captured JSONL: retries/error-fix cycles, wall-clock + per-call time, LLM-call & TerminalAction counts, final canonical-test pass/fail
+- [ ] Add a new 부록 D "계획 방식 비교: Claude 계획 vs OpenHands 자체 계획" chapter, written verbatim from the captured comparison data (honest about mixed/inconclusive results)
+- [ ] Re-publish the updated book (live on GitHub Pages)
 
 <!-- Deferred to later milestones (carried forward):
      - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
@@ -142,4 +147,4 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | v1.3: document what the agent actually wrote, not the assumed design | The pre-run scope assumed a `sealed trait Expr` ADT; the agent used direct recursive descent (no ADT) | ✓ Good — caught at plan time; chapter honestly notes the no-ADT reality instead of claiming the assumed ADT |
 
 ---
-*Last updated: 2026-06-01 — completed v1.3 milestone (Scala calculator worked example, 35B); next milestone TBD*
+*Last updated: 2026-06-01 — started v1.4 milestone (Planning Comparison: Claude-led vs OpenHands-native task planning, 35B, across F#/Rust/Scala)*

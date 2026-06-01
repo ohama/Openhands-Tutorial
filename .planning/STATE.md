@@ -5,15 +5,15 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.3 Scala Example shipped)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부).
-**Current focus:** Between milestones — v1.3 shipped + archived 2026-06-01. The "calculator trilogy" (F#/Rust/Scala) is complete. Next milestone scoped via `/gsd:new-milestone`.
+**Current focus:** v1.4 Planning Comparison — STARTED 2026-06-01. Claude-led vs OpenHands-native task planning, on 35B, across F#/Rust/Scala examples; published as 부록 D. Phases 12+.
 
 ## Current Position
 
-Milestone: None active — v1.3 (Scala Example) SHIPPED + archived 2026-06-01.
-Phase: None active — phases 1–11 all complete and archived under `.planning/milestones/`.
-Plan: Not started — awaiting next milestone definition.
-Status: Ready to plan. Run `/gsd:new-milestone` to scope the next worked example / cross-language comparison appendix / translation.
-Last activity: 2026-06-01 — /gsd:complete-milestone v1.3 (archived roadmap/requirements/audit/phases; tagged milestone-v1.3).
+Milestone: v1.4 (Planning Comparison) — STARTED 2026-06-01. Continues at Phase 12 (v1.3 ended at Phase 11).
+Phase: Not started (defining requirements / roadmap).
+Plan: —
+Status: Defining requirements. Decided: model=35B; scope=all 3 examples (F#/Rust/Scala); deliverable=published 부록 D; metrics=retry/time + LLM-call/TA counts + error-fix cycles + plan-structure(qualitative) + success/correctness. Open unknown for research: OpenHands 1.16 native planning/task mechanism + fair Claude-plan→OpenHands-plan conversion.
+Last activity: 2026-06-01 — /gsd:new-milestone v1.4 (PROJECT.md updated; scope decided via questioning).
 
 Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). No active milestone.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
