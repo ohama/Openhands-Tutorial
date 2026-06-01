@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-05-28 — started v1.2 Rust Example)
 ## Current Position
 
 Milestone: v1.2 (Rust Example) — STARTED 2026-05-28
-Phase: 8 — Capture the 35B Rust HTTP Server Run (✓ COMPLETE + verified + human-approved 2026-05-29)
-Plan: 08-03 complete; Phase 8 done — capture gate CLOSED; verifier 5/5 PASS; human approval recorded in 08-VERIFICATION.md
-Status: 35B Rust capture committed under captured-rust/; CAPTURE-MANIFEST.md tracked; RUST-01/02/03 marked Complete in REQUIREMENTS.md; ROADMAP marks Phase 8 ✓ Complete 2026-05-29; ready for /gsd:plan-phase 9 (6부 chapter)
-Last activity: 2026-05-29 — Phase 8 verified (5/5 must-haves PASS via automated checks; 2 human-eyeball items approved); ROADMAP + REQUIREMENTS + VERIFICATION updated
+Phase: 9 — 6부 Chapter + Publish (IN PROGRESS)
+Plan: 09-01 COMPLETE; 09-02 (build verify) and 09-03 (publish) remain.
+Status: 09-01 executed — five chapter files written and committed (src/ch06-rust-server/); SUMMARY.md wired; 09-01-SUMMARY.md created. Awaiting 09-02 (mdBook build verification).
+Last activity: 2026-06-01 — Executed 09-01-PLAN.md (chapter write + wire)
 
-Progress: █████░░░░░ v1.2 50% (Phase 8 of 2 phases complete; Phase 9 next)
+Progress: ██████░░░░ v1.2 67% (Phase 8 complete + Phase 9 plan 01 of 3 complete)
 Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 
 ## Cumulative History
@@ -69,9 +69,14 @@ Live (v1 + v1.1): https://ohama.github.io/Openhands-Tutorial/
 - **TD-4**: cosmetic mdbook WARN on `<char>` HTML tag inside code span. Optional.
 - **TD-5**: Sources section bibliography paths not clickable in 부록 C. v1.2-or-later polish opportunity.
 
+### Key decisions for v1.2 Phase 9 plan 01
+
+- [09-01 event-numbering]: Used CAPTURE-MANIFEST.md event numbers as authoritative (e.g., build-fail-1 = #16, E0382 = #28, curl = #37/#38). Raw JSONL line-indices differ due to non-JSON header/trailer lines in the JSONL files. The manifest is the plan's stated authoritative source.
+- [09-01 audit]: Task 4 honesty audit PASSED — zero fabricated values, zero stale artifacts, no emoji in callouts, deploy.yml untouched.
+
 ### Pending Todos
 
-- Run /gsd:plan-phase 9 (6부 chapter writing — Phase 8 capture gate now closed, manifest committed, evidence ready for verbatim quoting)
+- Run /gsd:execute-phase 9 plan 09-02 (mdBook build verification — confirm book still builds with 6부 chapter)
 - After Phase 9 complete + book deployed: run /gsd:audit-milestone (v1.2 milestone close-out, parallel to v1.1)
 
 ### Blockers/Concerns
@@ -82,4 +87,4 @@ None. Rust toolchain verified on host (rustc/cargo/rustup 1.95.0). LLM proxy sti
 
 Last session: 2026-05-29
 Stopped at: Phase 8 fully closed — 08-03 complete, verifier 5/5 PASS, human approval given, ROADMAP/REQUIREMENTS/VERIFICATION updated, completion commit made.
-Resume file: None — continue with /gsd:plan-phase 9 then /gsd:execute-phase 9 (6부 chapter).
+Resume file: None — continue with /gsd:execute-phase 9 plan 09-02 (mdBook build verify).
