@@ -1,5 +1,36 @@
 # Project Milestones: OpenHands Agentic AI 튜토리얼
 
+## v1.2 Rust Example (Shipped: 2026-06-01)
+
+**Delivered:** A second worked example for the tutorial — the same local Qwen **35B** that built the F# calculator now autonomously builds a minimal **std-only Rust HTTP server** (`GET / → "hello\n"`), captured honestly and published as a new **6부 "다른 워킹 예제 - Rust HTTP 서버"**. The milestone's thesis held: the model that **could not** write FsLex unaided in v1 wrote a working Rust server **unaided on attempt 1** — Rust is more in-distribution than FsLex.
+
+🌐 **Live:** https://ohama.github.io/Openhands-Tutorial/ch06-rust-server/intro.html
+
+**Phases completed:** 8–9 (6 plans total)
+
+**Key accomplishments:**
+
+- **Phase 8 — 35B Rust capture (unaided-first):** OpenHands on the local Qwen 35B ran `cargo new` → wrote `src/main.rs` → built/tested, captured as 3 per-task JSONL (`task1-scaffold`, `task2-server`, `task3-buildtest`). The agent wrote a 43-line server using `std::net::TcpListener` + `BufReader` on **unaided attempt 1** (task2 event #13); the scaffold fallback was prepared but **never invoked**. Honesty gate PASSED — all 28 ActionEvents `source=agent`, zero manual edits.
+- **Phase 8 — genuine error-and-fix cycle:** two real build failures self-corrected with no human help — (1) a `format!` heredoc syntax artifact (`unexpected closing delimiter`, event #16): two `sed` patches failed silently, the agent detected the unchanged file and escalated to a full heredoc rewrite; (2) a genuine borrow-checker error (`E0382: use of moved value: reader`, event #28: `reader.lines()` consumed twice) fixed with a single `Lines` iterator. Build PASS (event #32); `curl` → `hello\nEXIT_CODE=0` exit 0 (#37/#38); independent host re-run confirmed `HTTP/1.1 200 OK`, `Content-Length: 6`.
+- **Phase 9 — 6부 chapter (verbatim, honest):** new "다른 워킹 예제 - Rust HTTP 서버" chapter group (5 sections, ~605 lines Korean Markdown) written verbatim from the captured evidence — server code **byte-identical** to `final-source/src/main.rs`, both compiler errors quoted verbatim, `사용자 프롬프트 / 내부 프로세스 / 결과` callouts (no pictograph emoji), concept↔action pairing to 1부/2부. Wired into SUMMARY.md, `mdbook build` clean, live on GitHub Pages.
+- **Thesis confirmed (same model, different language):** the 35B that failed FsLex (deeply out-of-distribution) succeeded at std Rust (in-distribution). Per-call latency is comparable (~3.8s/call Rust vs ~5.3s/call v1 F#); the run-total difference comes from **call count**, not per-call speed — the Rust task needed far fewer iterations.
+- **Milestone audit — caught + closed a cross-chapter honesty regression:** the audit found 6부 had re-introduced v1's deprecated `~14–32s/call` **pre-run prediction** as if it were a v1 *measurement* (the exact number v1.1 had already corrected), contradicting 부록 C. Fixed to the derived `~5.3s/call` baseline with a disclosure note, reconciling 6부 / 부록 C / the Phase 8 manifest. Two cosmetic items also closed (TD-7 task3 event count 41→36 JSON objects + numbering footnote; TD-8 unverifiable per-action event indices removed). Rebuilt clean, redeployed, verified live (7/7 requirements, 2/2 phases, 5/5 integration after fix).
+
+**Stats:**
+
+- 6부 chapter: 5 new files (`src/ch06-rust-server/*.md`, ~605 lines) + SUMMARY.md entry; `captured-rust/`: 12 tracked artifacts (3 JSONL + stderr + final-source + manifest + transcript + host test-output)
+- 2 phases, 6 plans; 26 commits over 4 days (2026-05-28 → 2026-06-01)
+- 35B Rust run: 62 JSON events / 26 TerminalActions / 113.4s active agent time; per-call ~3.8s avg (range 1.2–7.7s)
+- Single-model run (35B only) — a 122B Rust comparison was deliberately deferred (EXT-06)
+
+**Git range:** `milestone-v1.1` tag → `milestone-v1.2` tag
+
+**Process note:** a flaky tool-output channel during `/gsd:plan-phase 9` caused an early verify loop to race against an as-yet-empty phase directory and let a first draft of plan 09-01 bake in wrong evidence paths/event-counts. This was caught, re-grounded against `CAPTURE-MANIFEST.md` before execution, and the phase verifier (5/5) + integration checker independently re-confirmed every citation against the real artifacts. Honesty discipline held end-to-end; the one regression that slipped to publish (the timing figure) was caught by the milestone audit and fixed same-day.
+
+**What's next:** Open candidates (no commitment): **EXT-01** more worked examples (Go / Python, following the Rust precedent); **EXT-06** a 35B-vs-122B comparison on the Rust example (parallel to v1.1 for F#); **EXT-02** English translation; or polish the carried-over v1.1 appendix-C tech debt (TD-2…TD-5).
+
+---
+
 ## v1.1 Model Comparison (Shipped: 2026-05-28)
 
 **Delivered:** A real captured **122B** OpenHands run of the same FsLex/FsYacc calculator — with the `.fsl` lexer attempted **unaided first** (122B succeeded where the 35B could not) — and a **35B-vs-122B comparison chapter (부록 C)** added to the published tutorial, backed by verbatim citations from both runs. Beginner-friendly 📨/⚙️/✅ callouts also added across the run-walkthrough chapters.

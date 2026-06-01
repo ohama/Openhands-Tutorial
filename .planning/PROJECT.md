@@ -15,9 +15,11 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Current Milestone: v1.2 — Rust Example (second worked example)
+## Last Shipped: v1.2 — Rust Example (2026-06-01) · Next milestone TBD via `/gsd:new-milestone`
 
-**Goal:** Add a second worked example to the tutorial — OpenHands on the local Qwen 35B autonomously builds a minimal Rust HTTP server (`GET / → "hello\n"`, std-only, no external crates) — captured honestly and added as a new 6부 to the published book.
+**Delivered:** A second worked example — OpenHands on the local Qwen 35B autonomously built a minimal std-only Rust HTTP server (`GET / → "hello\n"`), captured honestly and published as a new 6부. The thesis held: the model that could not write FsLex unaided in v1 wrote a working Rust server unaided on attempt 1. The original milestone framing is preserved below as the (now-delivered) description.
+
+**Goal (delivered):** Add a second worked example to the tutorial — OpenHands on the local Qwen 35B autonomously builds a minimal Rust HTTP server (`GET / → "hello\n"`, std-only, no external crates) — captured honestly and added as a new 6부 to the published book.
 
 **Target features:**
 - A real captured 35B OpenHands run of a minimal Rust HTTP server: `cargo new` → `std::net::TcpListener` + accept loop → minimal HTTP/1.1 response writer → `curl localhost:8080/` returns `hello\n`. Decomposed into ~3–4 scoped tasks following the v1 pattern.
@@ -50,14 +52,18 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 - ✓ Re-published the updated book (live on GitHub Pages, HTTP 200 on root + new chapter) — v1.1
 - ✓ Added beginner-friendly 📨 사용자 프롬프트 / ⚙️ 내부 프로세스 / ✅ 결과 callouts to 4 run-walkthrough chapters (additive, out-of-band) — v1.1
 
+<!-- Shipped in v1.2 (2026-06-01). Live: https://ohama.github.io/Openhands-Tutorial/ch06-rust-server/intro.html -->
+
+- ✓ Captured a real 35B OpenHands run of a minimal std-only Rust HTTP server (`cargo new` → `TcpListener` accept loop → `curl localhost:8080/` → `hello\n`, exit 0) — unaided attempt 1, with two genuine build failures self-corrected (format! heredoc syntax; E0382 borrow-checker) — v1.2
+- ✓ Added a new 6부 "다른 워킹 예제 - Rust HTTP 서버" chapter group, written verbatim from the captured run (code byte-identical to source; both errors verbatim) — v1.2
+- ✓ Re-published the updated book (live on GitHub Pages; 6부 reachable from sidebar nav) — v1.2
+- ✓ Confirmed the cross-language hypothesis: the same 35B that failed FsLex unaided succeeded at std Rust unaided — Rust is more in-distribution; per-call latency comparable (~3.8s Rust / ~5.3s F#), run-total difference is call count — v1.2
+
 ### Active
 
-<!-- v1.2 — Rust Example (started 2026-05-28). First concrete instance of EXT-01.
-     Rust is in-distribution for 35B in a way FsLex was not — this milestone tests that hypothesis honestly. -->
+<!-- v1.2 shipped 2026-06-01. No active milestone — the next is scoped via /gsd:new-milestone. -->
 
-- [ ] Capture a real 35B OpenHands run of a minimal Rust HTTP server (`cargo new` → `std::net::TcpListener` accept loop → minimal HTTP/1.1 response → `curl localhost:8080/` returns `hello\n`)
-- [ ] Add a new 6부 "다른 워킨 예제: Rust HTTP 서버" chapter group to the published book, written verbatim from the captured run with the 사용자 프롬프트 / 내부 프로세스 / 결과 callout pattern
-- [ ] Re-publish the updated book (live on GitHub Pages)
+(None — v1.2 shipped. Run `/gsd:new-milestone` to scope the next worked example, comparison, or translation.)
 
 <!-- Deferred to later milestones (carried forward):
      - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
@@ -123,6 +129,8 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | Language = Korean (English technical terms) | Author communicates in Korean | ✓ Good |
 | Depth = conceptual explanation backed by real captured OpenHands runs | Real runs prove agentic AI works and make the tutorial trustworthy | ✓ Good |
 | OpenHands connects to existing local MLX Qwen server (OpenAI-compatible, tool calling verified) | Already installed and working; no new infra | ⚠️ Adjusted — connected via the existing **litellm proxy** (`qwen-local` @ `127.0.0.1:4000`) with OpenHands on **LocalWorkspace** (headless CLI); the raw-MLX/DockerWorkspace assumption changed during Phase 2 |
+| v1.2: hold the model constant (35B), change the language to Rust (std-only) | Tests whether the v1 FsLex failure was about model size or domain-distribution; Rust is in-distribution where FsLex was not | ✓ Good — 35B wrote a working std Rust HTTP server unaided on attempt 1; hypothesis confirmed |
+| v1.2: per-call timing must cite real measurements, never the v1 `~14–32s/call` pre-run prediction | Honesty core value — predictions never presented as measurements (the same correction v1.1 made for 부록 C) | ⚠️ Caught in audit — 6부 had re-introduced the prediction; fixed to derived ~5.3s/call before close-out (TD-6) |
 
 ---
-*Last updated: 2026-05-28 — started v1.2 milestone (Rust HTTP server worked example, 35B)*
+*Last updated: 2026-06-01 — completed v1.2 milestone (Rust HTTP server worked example, 35B); next milestone TBD*
