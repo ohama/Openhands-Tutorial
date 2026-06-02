@@ -10,12 +10,13 @@ See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison start
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — STARTED 2026-06-01. Continues at Phase 12 (v1.3 ended at Phase 11).
-Phase: 12 — Harness + Rust Pilot (not yet started; roadmap created, ready to plan).
-Plan: — (no active plan; next: `/gsd:plan-phase 12`)
-Status: Roadmap created. All 12 v1.4 requirements mapped (METH→Phase 12, PCAP/ANAL→Phase 13, DCHAP/DPUB→Phase 14). Phase 12 unblocked; Phase 13 blocked on Phase 12 capture gate; Phase 14 blocked on Phase 13 capture gate.
-Last activity: 2026-06-01 — roadmap created (ROADMAP.md + STATE.md updated; REQUIREMENTS.md traceability confirmed).
+Phase: 12 — Harness + Rust Pilot (IN PROGRESS — 12-01 complete).
+Plan: 01 of 3 in Phase 12 — COMPLETE.
+Status: 12-01 harness built (prompts, symmetry diff, metrics_extractor.py). Next: 12-02 (run both arms live on Rust).
+Last activity: 2026-06-02 — Completed 12-01-PLAN.md (harness preflight + prompts + extractor).
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). v1.4 roadmap defined (Phases 12–14).
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). v1.4: 1/3 plans in Phase 12 done.
+████░░░░░░ ~33% of Phase 12 complete.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -48,7 +49,10 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - [v1.4 metrics]: P1 (auto from JSONL): TerminalAction count, total event count, wall-clock active time, error-fix cycle count, AgentErrorEvent count, canonical-test pass/fail. P2: avg/min/max LLM-call gap, time-to-first-correct, qualitative plan comparison. P3 (only if `usage` in JSONL): token counts — confirm in Phase 12 pilot before committing to P3.
 - [v1.4 framing rule]: 부록 D frames the study as "does an expert-authored plan help the 35B execute?" — NOT "Claude plans better." Inconclusive/mixed results are valid findings, reported honestly.
 - [v1.4 artifact layout]: `captured-planning/` under `.planning/milestones/v1.4-phases/12-planning-comparison-harness/`; structure per example: `arm-a/` and `arm-b/` each with `logs/run.jsonl`, `planning-artifact/`, `final-source/`, `test-output.txt`, `metrics.json`; plus `comparison.json` per example; plus top-level `CAPTURE-MANIFEST.md`.
-- [v1.4 open unknowns — to resolve in Phase 12 pilot]: (1) Does the Qwen 35B emit `TaskTrackerObservation` events at the chosen Arm B prompt phrasing? (2) Is `usage` data (prompt/completion tokens) present in the JSONL ObservationEvents?
+- [v1.4 open unknowns — to resolve in Phase 12 pilot]: (1) Does the Qwen 35B emit `TaskTrackerObservation` events at the chosen Arm B prompt phrasing? (2) Is `usage` data (prompt/completion tokens) present in the JSONL ObservationEvents? — metrics_extractor.py now emits task_tracker_observation_count and usage_present to answer both automatically.
+- [12-01 symmetry evidence]: PROMPT-DIFF-rust.txt records control-block diff with CONTROL-BLOCK SYMMETRY: PASS. Literal diff saved before any live run.
+- [12-01 Arm A conversion]: Mechanical — v1.2 task1/2/3 → 3 numbered single-session steps. No new planning detail. No scaffolded source.
+- [12-01 extractor 1-based]: metrics_extractor.py uses enumerate(events, start=1) throughout; ARCHITECTURE.md 0-based snippet explicitly converted. Self-validated with clean+dirty fixtures.
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -72,6 +76,6 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 
 ## Session Continuity
 
-Last session: 2026-06-01
-Stopped at: v1.4 roadmap created (Phases 12–14 defined; ROADMAP.md + STATE.md + REQUIREMENTS.md updated).
-Resume file: None — next: `/gsd:plan-phase 12`
+Last session: 2026-06-02
+Stopped at: Completed 12-01-PLAN.md (harness preflight + Rust prompts + metrics_extractor.py).
+Resume file: None — next: run 12-02 (execute both arms on Rust; prompts ready at captured-planning/rust/arm-a/planning-artifact/oh-prompt.txt and arm-b/planning-artifact/oh-goal-prompt.txt).
