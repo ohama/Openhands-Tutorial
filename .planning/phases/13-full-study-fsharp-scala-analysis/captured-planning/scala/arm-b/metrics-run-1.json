@@ -1,0 +1,170 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "scala",
+  "arm": "arm-b",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-b/planning-artifact/oh-goal-prompt.txt",
+  "event_counts": {
+    "total_events": 83,
+    "MessageEvent": 2,
+    "ActionEvent": 40,
+    "ObservationEvent": 37,
+    "AgentErrorEvent": 3,
+    "Condensation": 1
+  },
+  "terminal_actions": {
+    "count": 27,
+    "commands": [
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1/Calc.scala << 'EOF'\n//> using scala \"3.6.2\"\n\n",
+      "printf '%s\\n' '//> using scala \"3.6.2\"' '' 'object Calc {' '' '  sealed trait Token' '  case class Num(value: Int)    ex",
+      "python3 -c \"\ncontent = '''//> using scala \\\"3.6.2\\\"\n\nobject Calc {\n\n  sealed trait Token\n  case class Num(value: Int)   ",
+      "C-c",
+      "rm -f Calc.scala",
+      "cat > /tmp/gen_calc.py << 'PYEOF'\nimport os\n\ncode = r\"\"\"//> using scala \"3.6.2\"\n\nobject Calc {\n\n  sealed trait Token\n  c",
+      "rm -f /tmp/gen_calc.py Calc.scala",
+      "python3 << 'PYEOF'\nlines = [\n'//> using scala \"3.6.2\"',\n'',\n'object Calc {',\n'',\n'  sealed trait Token',\n'  case class N",
+      "rm -f Calc.scala",
+      "head -20 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1/Calc.scala",
+      "wc -l /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1/Calc.scala && tail -20 /Users/ohama/projs/Ope",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1 && scala-cli run Calc.scala -- \"2+3*4\" 2>&1; ech",
+      "sed -n '20,35p' /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1/Calc.scala",
+      "sed -n '50,90p' /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1/Calc.scala",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r1 && sed -i \"s/Op('+')/Op(\\\"+\\\")/g; s/Op('-')/Op(\\",
+      "sed -i '' \"s/Op('+')/Op(\\\"+\\\")/g; s/Op('-')/Op(\\\"-\\\")/g; s/Op('*')/Op(\\\"*\\\")/g; s|Op('/')|Op(\\\"/\\\")|g\" Calc.scala",
+      "sed -i '' 's/def parseExpr: Int =/def parseExpr(): Int =/g; s/def parseTerm: Int =/def parseTerm(): Int =/g; s/def parse",
+      "sed -n '24,30p' Calc.scala",
+      "sed -i '' \"s/Op('\\*')/Op(\\\"*\\\")/g\" Calc.scala",
+      "sed -n '24,30p' Calc.scala",
+      "scala-cli run Calc.scala -- \"2+3*4\" 2>&1; echo \"EXIT_CODE=$?\"",
+      "sed -i '' 's/parser.parseExpr$/parser.parseExpr()/' Calc.scala",
+      "sed -i '' 's/val op = consume/val op = consume.asInstanceOf[Op]/g' Calc.scala",
+      "scala-cli run Calc.scala -- \"2+3*4\" 2>&1; echo \"EXIT_CODE=$?\"",
+      "scala-cli run Calc.scala -- \"(2+3)*4\" 2>&1; echo \"EXIT_CODE=$?\"",
+      "scala-cli run Calc.scala -- \"10-3-2\" 2>&1; echo \"EXIT_CODE=$?\"",
+      "cat Calc.scala"
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T11:42:59.848916",
+    "last_event_ts": "2026-06-02T12:07:02.132043",
+    "wall_clock_seconds": 1442.28,
+    "llm_call_gaps_seconds": [
+      5.419,
+      1.386,
+      2.718,
+      13.91,
+      35.318,
+      23.538,
+      12.679,
+      12.344,
+      21.295,
+      10.214,
+      26.911,
+      10.7,
+      23.335,
+      36.867,
+      10.923,
+      3.782,
+      10.857,
+      5.696,
+      7.65,
+      5.79,
+      10.056,
+      5.312,
+      6.706,
+      4.003,
+      4.683,
+      3.409,
+      5.007,
+      6.323,
+      6.734,
+      3.98,
+      60.699,
+      4.724,
+      12.288,
+      5.827,
+      12.026,
+      4.153
+    ],
+    "avg_llm_call_gap_seconds": 12.15,
+    "min_llm_call_gap_seconds": 1.39,
+    "max_llm_call_gap_seconds": 60.7
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 5,
+    "cycle_count": 5,
+    "cycles": [
+      {
+        "error_event_index": 15,
+        "error_exit_code": 258,
+        "error_command_excerpt": "bash: syntax error near unexpected token `\"+\"'",
+        "fix_event_index": 16,
+        "fix_command_excerpt": "python3 -c \"\ncontent = '''//> using scala \\\"3.6.2\\\"\n\nobject Calc {\n\n  sealed trait Token\n  case class Num(value: Int)   "
+      },
+      {
+        "error_event_index": 17,
+        "error_exit_code": -1,
+        "error_command_excerpt": "python3 -c \"\ncontent = '''//> using scala \\\"3.6.2\\\"\n\nobject Calc {\n\n  sealed trait Token\n  case class Num(value: Int)   ",
+        "fix_event_index": 18,
+        "fix_command_excerpt": "C-c"
+      },
+      {
+        "error_event_index": 23,
+        "error_exit_code": 1,
+        "error_command_excerpt": "cat > /tmp/gen_calc.py << 'PYEOF'\nimport os\n\ncode = r\"\"\"//> using scala \"3.6.2\"\n\nobject Calc {\n\n  sealed trait Token\n  c",
+        "fix_event_index": 24,
+        "fix_command_excerpt": "rm -f /tmp/gen_calc.py Calc.scala"
+      },
+      {
+        "error_event_index": 27,
+        "error_exit_code": 1,
+        "error_command_excerpt": "python3 << 'PYEOF'\nlines = [\n'//> using scala \"3.6.2\"',\n'',\n'object Calc {',\n'',\n'  sealed trait Token',\n'  case class N",
+        "fix_event_index": 28,
+        "fix_command_excerpt": "rm -f Calc.scala"
+      },
+      {
+        "error_event_index": 51,
+        "error_exit_code": 1,
+        "error_command_excerpt": "sed: 1: \"Calc.scala\n\": invalid command code C",
+        "fix_event_index": 52,
+        "fix_command_excerpt": "sed -i '' \"s/Op('+')/Op(\\\"+\\\")/g; s/Op('-')/Op(\\\"-\\\")/g; s/Op('*')/Op(\\\"*\\\")/g; s|Op('/')|Op(\\\"/\\\")|g\" Calc.scala"
+      }
+    ]
+  },
+  "canonical_tests": {
+    "2+3*4": {
+      "expected": "14",
+      "actual": "EXIT_CODE=1",
+      "pass": false,
+      "event_index": 45
+    },
+    "(2+3)*4": {
+      "expected": "20",
+      "actual": "EXIT_CODE=0",
+      "pass": false,
+      "event_index": 73
+    },
+    "10-3-2": {
+      "expected": "5",
+      "actual": "EXIT_CODE=0",
+      "pass": false,
+      "event_index": 77
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 40,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 9,
+  "task_tracker_action_count": 10
+}

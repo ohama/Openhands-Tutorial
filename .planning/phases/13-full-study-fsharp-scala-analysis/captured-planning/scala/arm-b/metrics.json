@@ -1,0 +1,87 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "scala",
+  "arm": "arm-b",
+  "n": 3,
+  "honesty_gate": "PASS",
+  "metrics": {
+    "terminal_actions_count": {
+      "median": 13,
+      "min": 8,
+      "max": 27,
+      "n": 3
+    },
+    "total_events": {
+      "median": 50,
+      "min": 37,
+      "max": 83,
+      "n": 3
+    },
+    "wall_clock_seconds": {
+      "median": 936.16,
+      "min": 868.45,
+      "max": 1442.28,
+      "n": 3
+    },
+    "avg_llm_call_gap_seconds": {
+      "median": 19.76,
+      "min": 12.15,
+      "max": 37.5,
+      "n": 3
+    },
+    "min_llm_call_gap_seconds": {
+      "median": 1.7,
+      "min": 1.39,
+      "max": 2.18,
+      "n": 3
+    },
+    "max_llm_call_gap_seconds": {
+      "median": 64.03,
+      "min": 60.7,
+      "max": 118.0,
+      "n": 3
+    },
+    "error_fix_cycle_count": {
+      "median": 2,
+      "min": 2,
+      "max": 5,
+      "n": 3
+    },
+    "nonzero_exit_count": {
+      "median": 2,
+      "min": 2,
+      "max": 5,
+      "n": 3
+    },
+    "task_tracker_observation_count": {
+      "median": 5,
+      "min": 5,
+      "max": 9,
+      "n": 3
+    },
+    "task_tracker_action_count": {
+      "median": 8,
+      "min": 7,
+      "max": 10,
+      "n": 3
+    }
+  },
+  "canonical_tests_aggregate": {
+    "2+3*4": {
+      "pass_count": 0,
+      "n": 3,
+      "pass_fraction_label": "0/3 reps PASS"
+    },
+    "(2+3)*4": {
+      "pass_count": 0,
+      "n": 3,
+      "pass_fraction_label": "0/3 reps PASS"
+    },
+    "10-3-2": {
+      "pass_count": 0,
+      "n": 3,
+      "pass_fraction_label": "0/3 reps PASS"
+    }
+  },
+  "extractor_note": "canonical_tests reflect the first matching ObservationEvent per test (metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may cause false-first-match FAILs. Authoritative final outcomes are in 13-02-RUN-NOTES.md."
+}

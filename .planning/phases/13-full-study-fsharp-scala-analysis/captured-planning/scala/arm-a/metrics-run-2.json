@@ -1,0 +1,213 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "scala",
+  "arm": "arm-a",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-a/planning-artifact/oh-prompt.txt",
+  "event_counts": {
+    "total_events": 76,
+    "MessageEvent": 2,
+    "ActionEvent": 37,
+    "ObservationEvent": 37
+  },
+  "terminal_actions": {
+    "count": 37,
+    "commands": [
+      "scala-cli --version",
+      "mkdir -p /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Hello.scala << 'EOF'\n@main def hello() =",
+      "scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Hello.scala",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala << 'SCALAEOF'\nimport scala.an",
+      "wc -l /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "head -5 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "tail -5 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "scala-cli compile /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala 2>&1",
+      "python3 -c \"\ncontent = '''import scala.annotation.tailrec\n\nobject Calc {\n\n  // Token types\n  sealed trait Token\n  case c",
+      "printf '%s\\n' '#!/usr/bin/env python3' 'import textwrap' 'code = textwrap.dedent(\"\"\"\\\\' 'import scala.annotation.tailrec",
+      "python3 /tmp/write_calc.py",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "sed -i '1{/^\\\\/d}' /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "head -3 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala | cat -A",
+      "head -3 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala | od -c | head -5",
+      "sed -i '' '1{/^\\\\$/d}' /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh",
+      "head -3 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala 2>&",
+      "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala 2>&",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala --m",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala --m",
+      "scala-cli run --help 2>&1 | head -40",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala --m",
+      "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -M ",
+      "CALC_EXPR=\"(2+3)*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -",
+      "CALC_EXPR=\"10-3-2\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -M",
+      "scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -- \"2+3*4\" 2>&1",
+      "C-c",
+      "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh",
+      "scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -- \"2+3*4\" 2>&1",
+      "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh",
+      "scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala -- \"2+3*4\" 2>&1",
+      "echo \"=== Test 1: 2+3*4 ===\" && scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala"
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T12:26:19.662551",
+    "last_event_ts": "2026-06-02T12:31:23.898175",
+    "wall_clock_seconds": 304.24,
+    "llm_call_gaps_seconds": [
+      1.41,
+      1.679,
+      1.612,
+      14.754,
+      6.343,
+      1.592,
+      1.583,
+      2.015,
+      16.793,
+      20.47,
+      1.333,
+      1.604,
+      2.727,
+      1.783,
+      1.82,
+      2.223,
+      2.884,
+      1.726,
+      2.644,
+      4.761,
+      2.295,
+      3.173,
+      3.379,
+      1.472,
+      2.752,
+      2.772,
+      2.945,
+      2.84,
+      4.274,
+      3.256,
+      5.783,
+      2.888,
+      6.317,
+      2.593,
+      5.106,
+      2.519
+    ],
+    "avg_llm_call_gap_seconds": 4.06,
+    "min_llm_call_gap_seconds": 1.33,
+    "max_llm_call_gap_seconds": 20.47
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 10,
+    "cycle_count": 10,
+    "cycles": [
+      {
+        "error_event_index": 19,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Compiling project (Scala 3.8.3, JVM (17))\n[error] ./calc/Calc.scala:88:26\n[error] '=' expected, but identifier found\n[er",
+        "fix_event_index": 20,
+        "fix_command_excerpt": "python3 -c \"\ncontent = '''import scala.annotation.tailrec\n\nobject Calc {\n\n  // Token types\n  sealed trait Token\n  case c"
+      },
+      {
+        "error_event_index": 29,
+        "error_exit_code": 1,
+        "error_command_excerpt": "sed: 1: \"/Users/ohama/projs/Open ...\": invalid command code o",
+        "fix_event_index": 30,
+        "fix_command_excerpt": "head -3 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala | cat -A"
+      },
+      {
+        "error_event_index": 31,
+        "error_exit_code": 1,
+        "error_command_excerpt": "cat: illegal option -- A\nusage: cat [-belnstuv] [file ...]",
+        "fix_event_index": 32,
+        "fix_command_excerpt": "head -3 /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala | od -c | head -5"
+      },
+      {
+        "error_event_index": 35,
+        "error_exit_code": 1,
+        "error_command_excerpt": "sed: 1: \"1{/^\\\\$/d}\n\": extra characters at the end of d command",
+        "fix_event_index": 36,
+        "fix_command_excerpt": "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh"
+      },
+      {
+        "error_event_index": 41,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Compiling project (Scala 3.8.3, JVM (17))\n[warn] ./calc/Calc.scala:42:16\n[warn] match may not be exhaustive.\n[warn]\n[war",
+        "fix_event_index": 42,
+        "fix_command_excerpt": "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh"
+      },
+      {
+        "error_event_index": 45,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Compiling project (Scala 3.8.3, JVM (17))\n[warn] ./calc/Calc.scala:42:16\n[warn] match may not be exhaustive.\n[warn]\n[war",
+        "fix_event_index": 46,
+        "fix_command_excerpt": "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala --m"
+      },
+      {
+        "error_event_index": 47,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Compiling project (Scala 3.8.3, JVM (17))\n[warn] ./calc/Calc.scala:42:16\n[warn] match may not be exhaustive.\n[warn]\n[war",
+        "fix_event_index": 48,
+        "fix_command_excerpt": "CALC_EXPR=\"2+3*4\" scala-cli run /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala --m"
+      },
+      {
+        "error_event_index": 49,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Unrecognized argument: --main-file\n\nTo list all available options, run\n  scala-cli run --help",
+        "fix_event_index": 50,
+        "fix_command_excerpt": "scala-cli run --help 2>&1 | head -40"
+      },
+      {
+        "error_event_index": 61,
+        "error_exit_code": -1,
+        "error_command_excerpt": "[warn] ./calc/Calc.scala:50:16\n[warn] match may not be exhaustive.\n[warn]\n[warn] It would fail on pattern case: Num(_), ",
+        "fix_event_index": 62,
+        "fix_command_excerpt": "C-c"
+      },
+      {
+        "error_event_index": 67,
+        "error_exit_code": 1,
+        "error_command_excerpt": "Compiling project (Scala 3.8.3, JVM (17))\n[error] ./calc/Calc.scala:68:3\n[error] No given instance of type scala.util.Co",
+        "fix_event_index": 68,
+        "fix_command_excerpt": "python3 -c \"\nf='/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/scala-r2/calc/Calc.scala'\nwith open(f) as fh"
+      }
+    ]
+  },
+  "canonical_tests": {
+    "2+3*4": {
+      "expected": "14",
+      "actual": "[error]  No main class found",
+      "pass": false,
+      "event_index": 41
+    },
+    "(2+3)*4": {
+      "expected": "20",
+      "actual": "20",
+      "pass": true,
+      "event_index": 57
+    },
+    "10-3-2": {
+      "expected": "5",
+      "actual": "5",
+      "pass": true,
+      "event_index": 59
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 37,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 0,
+  "task_tracker_action_count": 0
+}

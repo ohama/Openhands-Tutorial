@@ -1,0 +1,163 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "n_arm_a": 3,
+  "n_arm_b": 3,
+  "arm_a": {
+    "terminal_actions_count": {
+      "median": 12,
+      "min": 12,
+      "max": 14,
+      "n": 3
+    },
+    "total_events": {
+      "median": 26,
+      "min": 26,
+      "max": 30,
+      "n": 3
+    },
+    "wall_clock_seconds": {
+      "median": 48.3,
+      "min": 42.32,
+      "max": 49.32,
+      "n": 3
+    },
+    "avg_llm_call_gap_seconds": {
+      "median": 2.13,
+      "min": 2.11,
+      "max": 2.56,
+      "n": 3
+    },
+    "min_llm_call_gap_seconds": {
+      "median": 1.27,
+      "min": 1.12,
+      "max": 1.54,
+      "n": 3
+    },
+    "max_llm_call_gap_seconds": {
+      "median": 4.87,
+      "min": 4.85,
+      "max": 5.28,
+      "n": 3
+    },
+    "error_fix_cycle_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "nonzero_exit_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "task_tracker_observation_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "task_tracker_action_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    }
+  },
+  "arm_b": {
+    "terminal_actions_count": {
+      "median": 13,
+      "min": 12,
+      "max": 16,
+      "n": 3
+    },
+    "total_events": {
+      "median": 44,
+      "min": 40,
+      "max": 50,
+      "n": 3
+    },
+    "wall_clock_seconds": {
+      "median": 66.79,
+      "min": 59.04,
+      "max": 71.48,
+      "n": 3
+    },
+    "avg_llm_call_gap_seconds": {
+      "median": 2.21,
+      "min": 2.15,
+      "max": 2.29,
+      "n": 3
+    },
+    "min_llm_call_gap_seconds": {
+      "median": 0.87,
+      "min": 0.77,
+      "max": 1.05,
+      "n": 3
+    },
+    "max_llm_call_gap_seconds": {
+      "median": 5.07,
+      "min": 5.04,
+      "max": 5.14,
+      "n": 3
+    },
+    "error_fix_cycle_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "nonzero_exit_count": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "task_tracker_observation_count": {
+      "median": 7,
+      "min": 7,
+      "max": 7,
+      "n": 3
+    },
+    "task_tracker_action_count": {
+      "median": 7,
+      "min": 7,
+      "max": 8,
+      "n": 3
+    }
+  },
+  "deltas_a_minus_b": {
+    "terminal_actions_count": -1,
+    "total_events": -18,
+    "wall_clock_seconds": -18.49,
+    "avg_llm_call_gap_seconds": -0.08,
+    "min_llm_call_gap_seconds": 0.4,
+    "max_llm_call_gap_seconds": -0.2,
+    "error_fix_cycle_count": 0,
+    "nonzero_exit_count": 0,
+    "task_tracker_observation_count": -7,
+    "task_tracker_action_count": -7
+  },
+  "canonical_test_pass_counts": {
+    "arm_a": {
+      "curl_hello": {
+        "pass_count": 3,
+        "n": 3,
+        "pass_fraction_label": "3/3 reps PASS"
+      }
+    },
+    "arm_b": {
+      "curl_hello": {
+        "pass_count": 3,
+        "n": 3,
+        "pass_fraction_label": "3/3 reps PASS"
+      }
+    }
+  },
+  "caveats": [
+    "Timing metrics (wall_clock_seconds, avg_llm_call_gap_seconds, etc.) are derived from JSONL timestamps. They carry a cache-warmth / run-order confound: the litellm proxy KV-cache may warm across reps, and arm order was counterbalanced across examples (Arm B first for F# and Scala; Arm A first for Rust). Do NOT interpret timing deltas as clean planning-quality signals.",
+    "canonical_tests reflect the first matching ObservationEvent per test (metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may cause false-first-match FAILs for tests the agent ultimately passed. Authoritative final outcomes per rep are in 13-02-RUN-NOTES.md.",
+    "Run order: Arm A ran first (reps 2–3; rep 1 is Phase-12 pilot), then Arm B (reps 2–3; rep 1 is Phase-12 pilot). Run-1 JSONLs are from the Phase-12 pilot (separate session)."
+  ]
+}

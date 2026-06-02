@@ -1,0 +1,95 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "arm": "arm-b",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-b/planning-artifact/oh-goal-prompt.txt",
+  "event_counts": {
+    "total_events": 50,
+    "MessageEvent": 2,
+    "ActionEvent": 24,
+    "ObservationEvent": 22,
+    "AgentErrorEvent": 2
+  },
+  "terminal_actions": {
+    "count": 16,
+    "commands": [
+      "",
+      "ls /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3/",
+      "which rustc && rustc --version && which cargo && cargo --version",
+      "mkdir -p /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3/src",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3/Cargo.toml << 'EOF'\n[package]\nname = \"rust-r3\"",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3/src/main.rs << 'RUSTEOF'\nuse std::io::{Read, W",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3/src/main.rs",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3 && cargo build --release 2>&1",
+      "sed -i '' 's/if let Ok(n) = stream.read/if let Ok(_n) = stream.read/' /Users/ohama/projs/OpenHandsTests/oh-workdir-plann",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r3 && cargo build --release 2>&1",
+      "pkill -f \"target/release/rust-r3\" 2>/dev/null; sleep 0.5; /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/ru",
+      "sleep 1 && curl -sv http://localhost:8080/ 2>&1",
+      "curl -s http://localhost:8080/ | xxd | head -5",
+      "curl -s http://localhost:8080/ && echo \"---\" && curl -s http://localhost:8080/any/path && echo \"---\" && curl -s http://l",
+      "curl -s http://localhost:8080/; echo \"EXIT_CODE=$?\"",
+      "pkill -f \"target/release/rust-r3\" 2>/dev/null; echo \"Server stopped\""
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T13:31:50.931014",
+    "last_event_ts": "2026-06-02T13:33:02.407927",
+    "wall_clock_seconds": 71.48,
+    "llm_call_gaps_seconds": [
+      0.766,
+      2.846,
+      1.092,
+      1.234,
+      1.65,
+      1.982,
+      2.86,
+      5.069,
+      1.61,
+      3.226,
+      1.666,
+      2.285,
+      1.7,
+      3.178,
+      1.749,
+      1.409,
+      2.017,
+      2.319,
+      1.802,
+      1.591,
+      3.015
+    ],
+    "avg_llm_call_gap_seconds": 2.15,
+    "min_llm_call_gap_seconds": 0.77,
+    "max_llm_call_gap_seconds": 5.07
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 0,
+    "cycle_count": 0,
+    "cycles": []
+  },
+  "canonical_tests": {
+    "curl_hello": {
+      "expected": "hello",
+      "actual": "hello",
+      "pass": true,
+      "event_index": 39
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 24,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 7,
+  "task_tracker_action_count": 7
+}

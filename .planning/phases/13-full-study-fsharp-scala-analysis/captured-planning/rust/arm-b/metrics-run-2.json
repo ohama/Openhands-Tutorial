@@ -1,0 +1,90 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "arm": "arm-b",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-b/planning-artifact/oh-goal-prompt.txt",
+  "event_counts": {
+    "total_events": 44,
+    "MessageEvent": 2,
+    "ActionEvent": 21,
+    "AgentErrorEvent": 1,
+    "ObservationEvent": 20
+  },
+  "terminal_actions": {
+    "count": 13,
+    "commands": [
+      "ls -la /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/",
+      "mkdir -p /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/src",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/Cargo.toml << 'EOF'\n[package]\nname = \"rust-r2\"",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/src/main.rs << 'RUSTEOF'\nuse std::io::{Read, W",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/src/main.rs",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2 && cargo build --release 2>&1",
+      "sed -i '' 's/if let Ok(n) = stream.read/if let Ok(_n) = stream.read/' /Users/ohama/projs/OpenHandsTests/oh-workdir-plann",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2 && cargo build --release 2>&1",
+      "/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust-r2/target/release/rust-r2 &",
+      "sleep 1 && curl -sv http://localhost:8080/ 2>&1",
+      "curl -s http://localhost:8080/ ; echo \"EXIT_CODE=$?\"",
+      "curl -s http://localhost:8080/test && curl -s http://localhost:8080/anything && curl -s http://localhost:8080/",
+      "kill 95958 2>/dev/null; echo \"Server stopped\""
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T13:21:14.344539",
+    "last_event_ts": "2026-06-02T13:22:21.131259",
+    "wall_clock_seconds": 66.79,
+    "llm_call_gaps_seconds": [
+      0.873,
+      1.543,
+      3.138,
+      1.304,
+      1.98,
+      2.962,
+      5.036,
+      2.046,
+      3.365,
+      1.657,
+      2.126,
+      1.676,
+      3.332,
+      1.407,
+      1.362,
+      1.735,
+      1.84,
+      1.57,
+      3.108
+    ],
+    "avg_llm_call_gap_seconds": 2.21,
+    "min_llm_call_gap_seconds": 0.87,
+    "max_llm_call_gap_seconds": 5.04
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 0,
+    "cycle_count": 0,
+    "cycles": []
+  },
+  "canonical_tests": {
+    "curl_hello": {
+      "expected": "hello",
+      "actual": "hello",
+      "pass": true,
+      "event_index": 35
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 21,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 7,
+  "task_tracker_action_count": 8
+}

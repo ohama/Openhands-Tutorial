@@ -1,0 +1,117 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "scala",
+  "arm": "arm-b",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-b/planning-artifact/oh-goal-prompt.txt",
+  "event_counts": {
+    "total_events": 50,
+    "MessageEvent": 2,
+    "ActionEvent": 24,
+    "AgentErrorEvent": 4,
+    "ObservationEvent": 20
+  },
+  "terminal_actions": {
+    "count": 13,
+    "commands": [
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala << 'EOF'\n//> using scala \"3\"\n\nobje",
+      "wc -l /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala && head -5 /Users/ohama/projs/Open",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala",
+      "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala",
+      "python3 -c \"\ncontent = '''//> using scala \\\"3\\\"\n\nobject Calc {\n\n  // --- Token types ---\n  sealed trait Token\n  case cla",
+      "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala /Users/ohama/projs/OpenHandsTests/",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/_write_calc.py << 'PYEOF'\nimport os\npath = \"/",
+      "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/_write_calc.py /Users/ohama/projs/OpenHandsTe",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3 && scala-cli run Calc.scala -- \"2+3*4\" 2>&1; ech",
+      "cat -n /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala | head -40",
+      "cat -n /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala | sed -n '40,70p'",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3 && echo \"=== Test 2: (2+3)*4 ===\" && scala-cli r",
+      "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/_write_calc.py"
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T12:04:36.796807",
+    "last_event_ts": "2026-06-02T12:20:12.960234",
+    "wall_clock_seconds": 936.16,
+    "llm_call_gaps_seconds": [
+      2.631,
+      47.386,
+      19.398,
+      5.594,
+      24.343,
+      64.026,
+      13.086,
+      35.511,
+      13.206,
+      27.97,
+      47.158,
+      4.153,
+      6.131,
+      4.159,
+      11.582,
+      39.995,
+      2.972,
+      4.373,
+      1.705
+    ],
+    "avg_llm_call_gap_seconds": 19.76,
+    "min_llm_call_gap_seconds": 1.7,
+    "max_llm_call_gap_seconds": 64.03
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 2,
+    "cycle_count": 2,
+    "cycles": [
+      {
+        "error_event_index": 17,
+        "error_exit_code": 1,
+        "error_command_excerpt": "python3 -c \"\ncontent = '''//> using scala \\\"3\\\"\n\nobject Calc {\n\n  // --- Token types ---\n  sealed trait Token\n  case cla",
+        "fix_event_index": 18,
+        "fix_command_excerpt": "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/Calc.scala /Users/ohama/projs/OpenHandsTests/"
+      },
+      {
+        "error_event_index": 21,
+        "error_exit_code": 1,
+        "error_command_excerpt": "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/_write_calc.py << 'PYEOF'\nimport os\npath = \"/",
+        "fix_event_index": 22,
+        "fix_command_excerpt": "rm -f /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/scala-r3/_write_calc.py /Users/ohama/projs/OpenHandsTe"
+      }
+    ]
+  },
+  "canonical_tests": {
+    "2+3*4": {
+      "expected": "14",
+      "actual": "EXIT_CODE=1",
+      "pass": false,
+      "event_index": 35
+    },
+    "(2+3)*4": {
+      "expected": "20",
+      "actual": "EXIT_CODE=0",
+      "pass": false,
+      "event_index": 45
+    },
+    "10-3-2": {
+      "expected": "5",
+      "actual": "EXIT_CODE=0",
+      "pass": false,
+      "event_index": 45
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 24,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 5,
+  "task_tracker_action_count": 8
+}

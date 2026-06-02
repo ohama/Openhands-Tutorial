@@ -1,0 +1,87 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "arm": "arm-b",
+  "run_date": "2026-06-02",
+  "model": "openai/qwen-35b",
+  "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-b/planning-artifact/oh-goal-prompt.txt",
+  "event_counts": {
+    "total_events": 40,
+    "MessageEvent": 2,
+    "ActionEvent": 19,
+    "ObservationEvent": 18,
+    "AgentErrorEvent": 1
+  },
+  "terminal_actions": {
+    "count": 12,
+    "commands": [
+      "",
+      "ls /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/",
+      "mkdir -p /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/src",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/Cargo.toml << 'EOF'\n[package]\nname = \"hello-serve",
+      "cat > /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/src/main.rs << 'RUSTEOF'\nuse std::io::{Read, Writ",
+      "cat /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/src/main.rs",
+      "cd /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust && cargo build --release 2>&1",
+      "/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust/target/release/hello-server &",
+      "sleep 1 && curl -sv http://localhost:8080/ 2>&1",
+      "curl -s http://localhost:8080/ ; echo \"EXIT_CODE=$?\"",
+      "curl -s http://localhost:8080/test && curl -s http://localhost:8080/other && curl -s http://localhost:8080/",
+      "kill 44937 2>/dev/null; echo \"Server stopped\""
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-02T09:24:13.960507",
+    "last_event_ts": "2026-06-02T09:25:13.003007",
+    "wall_clock_seconds": 59.04,
+    "llm_call_gaps_seconds": [
+      2.615,
+      2.714,
+      1.051,
+      1.53,
+      1.911,
+      2.781,
+      5.136,
+      1.883,
+      3.351,
+      1.615,
+      3.314,
+      1.349,
+      1.334,
+      1.925,
+      1.647,
+      1.674,
+      3.154
+    ],
+    "avg_llm_call_gap_seconds": 2.29,
+    "min_llm_call_gap_seconds": 1.05,
+    "max_llm_call_gap_seconds": 5.14
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 0,
+    "cycle_count": 0,
+    "cycles": []
+  },
+  "canonical_tests": {
+    "curl_hello": {
+      "expected": "hello",
+      "actual": "hello",
+      "pass": true,
+      "event_index": 31
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 19,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 7,
+  "task_tracker_action_count": 7
+}
