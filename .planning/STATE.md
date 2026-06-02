@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 12 (harness + Rust pilot) COMPLETE + verified 5/5. Harness proven; both open unknowns resolved. Next: Phase 13 (F#+Scala full study + analysis).
+**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-01 COMPLETE (prompt sets + symmetry diffs PASS + n=3 layout). Next: 13-02 (execute live F# + Scala runs).
 
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
-Phase: 12 — Harness + Rust Pilot — ✓ COMPLETE + verified 5/5 PASS (12-VERIFICATION.md).
-Plan: All 3 Phase 12 plans complete. Next: Phase 13 (PCAP/ANAL) — run /gsd:plan-phase 13.
-Status: Harness PROVEN on Rust pilot. Both arms = single CodeActAgent invocation, both PASS curl→hello (Arm A Claude-plan 14 TA/48.3s; Arm B self-plan 12 TA/59.0s — timing has cache-warmth caveat, proxy not restarted, Arm B ran first/cold). Symmetry diff PASS; honesty gate 0/0 non-agent. captured-planning/rust/ committed (metrics.json×2 + comparison.json + CAPTURE-MANIFEST GATE CLOSED). metrics_extractor.py validated (1-based; curl detection skips exit_code=None).
+Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (1/4 plans complete).
+Plan: 13-01 COMPLETE. 13-02 (execute runs), 13-03 (metrics+comparison), 13-04 (부록 D) next.
+Status: Prompt sets frozen. CONTROL-BLOCK-fsharp.txt + CONTROL-BLOCK-scala.txt written. Both PROMPT-DIFF files PASS (literal diff exits 0). F# Arm A: 5-step plan covers fslex/fsyacc + FixLineDirectives workaround; no source embedded. Scala Arm A: 3-step plan; no source embedded. Arm B prompts: verbatim Phase-12 task-tracker self-plan instruction. n=3 runs/+final-source/ layout scaffolded. Ready for 13-02 live runs.
 KEY v1.4 FINDINGS (carry into Phase 13): (1) 35B self-plans via task_tracker at the Arm B phrasing — TaskTrackerObservation emitted (Arm B), NO Arm B prompt change needed. (2) NO token `usage` in the JSONL → P3 token metrics DROPPED; use P1/P2 only. (3) Arm A uses 0 tracker events (executes given plan); Arm B uses tracker to self-plan — the clean qualitative contrast. (4) Run-order/cache is a real timing confound — Phase 13 must counterbalance order across F#/Scala and label timing "derived".
-Last activity: 2026-06-02 — Phase 12 executed (3 waves) + verified 5/5; METH-01/02/03 Complete.
+Last activity: 2026-06-02 — Phase 13 plan 01 executed; F#+Scala prompt sets built + symmetry PASS; n=3 layout scaffolded.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phases 13–14 next.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 1/4 plans ✓; Phase 14 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -53,6 +53,10 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - [12-01 symmetry evidence]: PROMPT-DIFF-rust.txt records control-block diff with CONTROL-BLOCK SYMMETRY: PASS. Literal diff saved before any live run.
 - [12-01 Arm A conversion]: Mechanical — v1.2 task1/2/3 → 3 numbered single-session steps. No new planning detail. No scaffolded source.
 - [12-01 extractor 1-based]: metrics_extractor.py uses enumerate(events, start=1) throughout; ARCHITECTURE.md 0-based snippet explicitly converted. Self-validated with clean+dirty fixtures.
+- [13-01 F# canonical command]: `dotnet run -- "<expr>"` — frozen; do not change before any arm is run.
+- [13-01 Scala canonical command]: `scala-cli run Calc.scala -- "<expr>"` — frozen; do not change before any arm is run.
+- [13-01 F# fairness rule]: Arm A claude-plan DESCRIBES fslex/fsyacc build wiring (FixLineDirectives, compile order) as required steps but embeds NO .fsproj XML, NO Lexer.fsl, NO Parser.fsy, NO Program.fs source. Both arms write all source themselves. F# may FAIL in both arms (OOD) — valid data.
+- [13-01 symmetry evidence]: PROMPT-DIFF-fsharp.txt + PROMPT-DIFF-scala.txt both end with CONTROL-BLOCK SYMMETRY: PASS. Literal diffs saved before any live run.
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -77,5 +81,5 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 ## Session Continuity
 
 Last session: 2026-06-02
-Stopped at: Completed 12-01-PLAN.md (harness preflight + Rust prompts + metrics_extractor.py).
-Resume file: None — next: run 12-02 (execute both arms on Rust; prompts ready at captured-planning/rust/arm-a/planning-artifact/oh-prompt.txt and arm-b/planning-artifact/oh-goal-prompt.txt).
+Stopped at: Completed 13-01-PLAN.md (F#+Scala prompt sets + symmetry diffs + n=3 layout).
+Resume file: None — next: run 13-02 (execute F# and Scala live runs; prompts frozen at captured-planning/{fsharp,scala}/arm-{a,b}/planning-artifact/).
