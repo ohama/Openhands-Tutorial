@@ -1,0 +1,29 @@
+{
+module Lexer
+
+open System
+open Parser
+}
+
+rule tokenize = parse
+  | [' ' '\t' '\r' '\n']+
+      { tokenize lexbuf }
+  | ['0'-'9']+
+      { let n = Int32.Parse(lexbuf.Lexeme)
+        INT n }
+  | '+'
+      { PLUS }
+  | '-'
+      { MINUS }
+  | '*'
+      { TIMES }
+  | '/'
+      { DIVIDE }
+  | '('
+      { LPAREN }
+  | ')'
+      { RPAREN }
+  | eof
+      { EOF }
+  | _
+      { invalidOp "Unexpected character" }

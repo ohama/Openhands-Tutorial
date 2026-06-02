@@ -1,0 +1,26 @@
+{
+open Parser
+open FSharp.Text.Lexing
+}
+
+rule tokenize = parse
+  | ' ' | '\t' | '\r' | '\n' { tokenize lexbuf }
+  | '0' { digitAccumulate lexbuf }
+  | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' { digitAccumulate lexbuf }
+  | '+' { PLUS }
+  | '-' { MINUS }
+  | '*' { STAR }
+  | '/' { SLASH }
+  | '(' { LPAREN }
+  | ')' { RPAREN }
+  | eof { EOF }
+
+and digitAccumulate = parse
+  | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' { digitAccumulate lexbuf }
+  | _ {
+      let lexeme = lexbuf.Lexeme
+      let numStr = System.String(lexeme, 0, lexeme.Length - 1)
+      match System.Int32.TryParse numStr with
+      | (true, n) -> INT n
+      | _ -> failwith (sprintf "Invalid integer: %s" numStr)
+    }
