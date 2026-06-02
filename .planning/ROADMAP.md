@@ -151,6 +151,13 @@ Audit: [milestones/v1.3-MILESTONE-AUDIT.md](milestones/v1.3-MILESTONE-AUDIT.md)
 4. `metrics_extractor.py` successfully parses both Rust JSONLs and writes `captured-planning/rust/arm-a/metrics.json` and `arm-b/metrics.json`, each with `honesty_gate = "PASS"` and `canonical_tests.curl_hello` recorded as PASS or FAIL (not null).
 5. The Phase 12 manifest documents whether Arm B emitted `TaskTrackerObservation` events and whether `usage` data is present in the JSONL — resolving both open unknowns before Phase 13 begins.
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 12-01-PLAN.md — Preflight + harness: gitignored arm-isolated workspaces, both Rust prompts (identical control block) + mandatory symmetry diff, metrics_extractor.py
+- [ ] 12-02-PLAN.md — Run both arms live on Rust (single invocation each, background + poll), resolve the two open unknowns (TaskTracker emission, token usage)
+- [ ] 12-03-PLAN.md — Capture gate: honesty gate, metrics.json x2 + comparison.json, CAPTURE-MANIFEST.md, commit pilot artifacts
+
 ---
 
 ### Phase 13: Full Study (F# + Scala) + Analysis
