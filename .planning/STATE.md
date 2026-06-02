@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-01 COMPLETE (prompt sets + symmetry diffs PASS + n=3 layout). Next: 13-02 (execute live F# + Scala runs).
+**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-02 COMPLETE (all 18 live runs captured). Next: 13-03 (metrics_extractor + honesty gate + comparison) then 13-04 (부록 D).
 
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
-Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (1/4 plans complete).
-Plan: 13-01 COMPLETE. 13-02 (execute runs), 13-03 (metrics+comparison), 13-04 (부록 D) next.
-Status: Prompt sets frozen. CONTROL-BLOCK-fsharp.txt + CONTROL-BLOCK-scala.txt written. Both PROMPT-DIFF files PASS (literal diff exits 0). F# Arm A: 5-step plan covers fslex/fsyacc + FixLineDirectives workaround; no source embedded. Scala Arm A: 3-step plan; no source embedded. Arm B prompts: verbatim Phase-12 task-tracker self-plan instruction. n=3 runs/+final-source/ layout scaffolded. Ready for 13-02 live runs.
-KEY v1.4 FINDINGS (carry into Phase 13): (1) 35B self-plans via task_tracker at the Arm B phrasing — TaskTrackerObservation emitted (Arm B), NO Arm B prompt change needed. (2) NO token `usage` in the JSONL → P3 token metrics DROPPED; use P1/P2 only. (3) Arm A uses 0 tracker events (executes given plan); Arm B uses tracker to self-plan — the clean qualitative contrast. (4) Run-order/cache is a real timing confound — Phase 13 must counterbalance order across F#/Scala and label timing "derived".
-Last activity: 2026-06-02 — Phase 13 plan 01 executed; F#+Scala prompt sets built + symmetry PASS; n=3 layout scaffolded.
+Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (2/4 plans complete).
+Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 (metrics+comparison), 13-04 (부록 D) next.
+Status: All 18 JSONL runs captured (F# 6 + Scala 6 + Rust 6). PCAP-01 satisfied. KEY RESULTS: F# arm-a 1/3 PASS (OOD); F# arm-b 0/3 PASS (OOD); Scala arm-a 3/3 PASS; Scala arm-b 2/3 PASS + 1 PARTIAL; Rust both arms 3/3 PASS. Ready for 13-03 metrics extraction.
+KEY v1.4 FINDINGS (updated from 13-02): (1) F# is OOD for 35B: arm-b 0/3 PASS, arm-a 1/3 PASS (claude plan helped in one run but OOD dominated). (2) Scala in-distribution: arm-a 3/3, arm-b ~3/3 PASS. (3) Rust in-distribution: both arms 3/3 PASS. (4) Arm B consistently self-plans via task_tracker across all examples. (5) Idle-settle detection: runs can continue after 3-poll idle; final event count is authoritative.
+Last activity: 2026-06-02 — Phase 13 plan 02 executed; 18 live 35B runs captured across F#/Scala/Rust.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 1/4 plans ✓; Phase 14 next.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 2/4 plans ✓; Phase 14 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -57,6 +57,11 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - [13-01 Scala canonical command]: `scala-cli run Calc.scala -- "<expr>"` — frozen; do not change before any arm is run.
 - [13-01 F# fairness rule]: Arm A claude-plan DESCRIBES fslex/fsyacc build wiring (FixLineDirectives, compile order) as required steps but embeds NO .fsproj XML, NO Lexer.fsl, NO Parser.fsy, NO Program.fs source. Both arms write all source themselves. F# may FAIL in both arms (OOD) — valid data.
 - [13-01 symmetry evidence]: PROMPT-DIFF-fsharp.txt + PROMPT-DIFF-scala.txt both end with CONTROL-BLOCK SYMMETRY: PASS. Literal diffs saved before any live run.
+    - [13-02 idle-settle]: Idle-settle (3 consecutive polls with same last_ts) is reliable but runs CAN continue after apparent settle; final event count in committed JSONL is authoritative.
+    - [13-02 Rust prompt tokens]: Phase-12 Rust prompts use hardcoded workspace paths, NOT `__WORKDIR__` tokens. Top-up runs must use `sed "s#$OLD_PATH#$NEW_PATH#g"`.
+    - [13-02 F# result]: arm-a 1/3 PASS, arm-b 0/3 PASS. OOD confirmed at n=3. For 부록 D: Arm A run-1 PASS shows claude plan CAN help navigate OOD task; but 5/6 runs overall failed on FsLex/FsYacc.
+    - [13-02 Scala result]: arm-a 3/3 PASS, arm-b ~3/3 PASS (2 PASS + 1 PARTIAL-PASS). In-distribution; both arms broadly succeed.
+    - [13-02 Rust result]: both arms 3/3 PASS. In-distribution; highly reliable.
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -81,5 +86,5 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 ## Session Continuity
 
 Last session: 2026-06-02
-Stopped at: Completed 13-01-PLAN.md (F#+Scala prompt sets + symmetry diffs + n=3 layout).
-Resume file: None — next: run 13-02 (execute F# and Scala live runs; prompts frozen at captured-planning/{fsharp,scala}/arm-{a,b}/planning-artifact/).
+Stopped at: Completed 13-02-PLAN.md (all 18 live 35B runs captured + RUN-NOTES + SUMMARY).
+Resume file: None — next: run 13-03 (metrics_extractor.py on all 18 JSONLs, honesty gate, comparison.json, CAPTURE-MANIFEST.md).
