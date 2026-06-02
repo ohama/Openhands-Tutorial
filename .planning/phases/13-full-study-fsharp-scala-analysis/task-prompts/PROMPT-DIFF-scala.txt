@@ -1,0 +1,37 @@
+# Prompt Symmetry Diff — Scala Example (METH-01 Evidence)
+
+## What was masked before diffing
+
+1. **Workdir token**: Both prompts use `__WORKDIR__` as the working directory
+   placeholder (substituted at run time per arm). No substitution needed for the
+   diff — the token is already identical in both files.
+
+2. **Variable plan block removed**:
+   - Arm A: everything from "Complete the following numbered steps in order, in
+     this one session:" to the end of file was stripped.
+   - Arm B: the single line "Plan your own implementation steps using the task
+     tracker, then execute each step. Do not ask for confirmation between steps."
+     (and trailing content) was stripped.
+
+## Commands used
+
+```
+ARM_A=.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-a/planning-artifact/oh-prompt.txt
+ARM_B=.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-b/planning-artifact/oh-goal-prompt.txt
+
+sed '/^Complete the following numbered steps/,$d' "$ARM_A" \
+  > /tmp/norm-scala-arm-a.txt
+
+sed '/^Plan your own/,$d' "$ARM_B" \
+  > /tmp/norm-scala-arm-b.txt
+
+diff /tmp/norm-scala-arm-a.txt /tmp/norm-scala-arm-b.txt
+```
+
+## Diff output
+
+(no output — diff exited 0)
+
+## Result
+
+CONTROL-BLOCK SYMMETRY: PASS
