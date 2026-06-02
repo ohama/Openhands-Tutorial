@@ -191,6 +191,14 @@ Plans:
 5. The qualitative plan comparison (ANAL-02) is written per example, covering task count, granularity, ordering, and structural match to the scaffold→write→build→test shape for both Claude's plan and the agent's self-plan.
 6. `CAPTURE-MANIFEST.md` is committed under `captured-planning/` summarizing all six outcomes, run conditions and order, and honesty-gate results — closing the capture gate and unblocking Phase 14.
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 13-01-PLAN.md — Build F# + Scala prompt sets (symmetric control block + Arm A claude-plan + Arm B self-plan; F# covers fslex/fsyacc, no embedded source) + symmetry diffs (PASS) + n=3 layout
+- [ ] 13-02-PLAN.md — Run full study live: F#+Scala both arms n=3 + Rust topped to n=3, counterbalanced run order, arm-isolated gitignored workspaces, one invocation per run, honest F# FAILs preserved
+- [ ] 13-03-PLAN.md — metrics_extractor.py over every run + blocking source=agent gate + per-arm metrics.json (median/range) + per-example comparison.json + both planning artifacts + ANAL-02 qualitative comparison
+- [ ] 13-04-PLAN.md — CAPTURE-MANIFEST.md (all six cells, run conditions/order, honesty results, GATE CLOSED) + human-verify checkpoint + commit (closes the capture gate, unblocks Phase 14)
+
 ---
 
 ### Phase 14: 부록 D Chapter + Publish
