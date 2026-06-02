@@ -151,6 +151,12 @@ def _extract_canonical_tests(events, example):
             cmd = obs.get("command", "")
             content = extract_text(obs.get("content", "")).strip()
             exit_code = obs.get("exit_code", -1)
+            # Skip rejected multi-command observations (exit_code is None = runtime
+            # rejected the command before execution; "Cannot execute multiple commands"
+            # pattern also indicates the curl never actually ran — Pitfall: first curl
+            # ObservationEvent may be a rejection, not a real result).
+            if exit_code is None:
+                continue
             if "curl" in cmd and tests["curl_hello"]["actual"] is None:
                 actual = "hello" if "hello" in content else content[:40]
                 tests["curl_hello"]["actual"] = actual

@@ -1,0 +1,19 @@
+=== ARM A: Fresh host re-run (canonical curl test) ===
+Working dir: captured-planning/rust/arm-a/final-source (rust-server)
+Run date: 2026-06-02
+Source: agent-written (no edits); copied from oh-workdir-planning/arm-a/rust/rust-server/
+
+--- cargo build ---
+   Compiling rust-server v0.1.0
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+
+--- cargo run (background) + curl http://localhost:8080/ ---
+Server listening on 0.0.0.0:8080
+curl output: hello
+curl exit=0
+
+--- RESULT ---
+CANONICAL TEST: PASS
+curl → "hello" | exit_code=0 | expected="hello"
+
+server stopped

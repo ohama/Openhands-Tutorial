@@ -1,0 +1,19 @@
+=== ARM B: Fresh host re-run (canonical curl test) ===
+Working dir: captured-planning/rust/arm-b/final-source (hello-server)
+Run date: 2026-06-02
+Source: agent-written (no edits); copied from oh-workdir-planning/arm-b/rust/
+
+--- cargo build ---
+   Compiling hello-server v0.1.0
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+
+--- cargo run (background) + curl http://localhost:8080/ ---
+Listening on http://0.0.0.0:8080
+curl output: hello
+curl exit=0
+
+--- RESULT ---
+CANONICAL TEST: PASS
+curl → "hello" | exit_code=0 | expected="hello"
+
+server stopped

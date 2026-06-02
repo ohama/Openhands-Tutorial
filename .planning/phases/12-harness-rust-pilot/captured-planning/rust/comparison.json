@@ -1,0 +1,39 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "pilot_note": "n=1 single-run observation. Cache-warmth caveat: Arm B ran first (cold), Arm A ran second (warm proxy cache). Wall-clock timing is NOT a clean planning-quality signal for this pilot.",
+  "arm_a": {
+    "terminal_actions": 14,
+    "total_events": 30,
+    "wall_clock_seconds": 48.3,
+    "avg_llm_call_gap_seconds": 2.11,
+    "error_fix_cycle_count": 0,
+    "agent_error_event_count": 0,
+    "canonical_curl_hello_pass": true,
+    "honesty_gate": "PASS",
+    "task_tracker_observation_count": 0,
+    "task_tracker_action_count": 0,
+    "usage_present": false
+  },
+  "arm_b": {
+    "terminal_actions": 12,
+    "total_events": 40,
+    "wall_clock_seconds": 59.04,
+    "avg_llm_call_gap_seconds": 2.29,
+    "error_fix_cycle_count": 0,
+    "agent_error_event_count": 1,
+    "canonical_curl_hello_pass": true,
+    "honesty_gate": "PASS",
+    "task_tracker_observation_count": 7,
+    "task_tracker_action_count": 7,
+    "usage_present": false
+  },
+  "deltas_a_minus_b": {
+    "terminal_actions": 2,
+    "total_events": -10,
+    "wall_clock_seconds": -10.74,
+    "wall_clock_interpretation": "arm-a faster (note: arm-a ran second with warmer cache; not a clean planning-quality signal)",
+    "avg_llm_call_gap_seconds": -0.18,
+    "error_fix_cycle_count": 0
+  }
+}
