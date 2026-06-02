@@ -1,0 +1,40 @@
+# Prompt Symmetry Diff — Rust Example (METH-01 Evidence)
+
+## What was masked before diffing
+
+1. **Workdir token**: Each prompt's arm-specific working directory path was replaced
+   with the token `__WORKDIR__` so the path difference is not counted.
+   - Arm A path masked: `/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-a/rust`
+   - Arm B path masked: `/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-b/rust`
+
+2. **Variable plan block removed**:
+   - Arm A: everything from "Complete the following numbered steps in order, in
+     this one session:" to the end of file was stripped.
+   - Arm B: the single line "Plan your own implementation steps using the task
+     tracker, then execute each step. Do not ask for confirmation between steps."
+     (and trailing content) was stripped.
+
+## Commands used
+
+```
+ARM_A=.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-a/planning-artifact/oh-prompt.txt
+ARM_B=.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-b/planning-artifact/oh-goal-prompt.txt
+
+sed 's|.../arm-a/rust|__WORKDIR__|g' "$ARM_A" \
+  | sed '/^Complete the following numbered steps/,$d' \
+  > /tmp/norm-arm-a.txt
+
+sed 's|.../arm-b/rust|__WORKDIR__|g' "$ARM_B" \
+  | sed '/^Plan your own/,$d' \
+  > /tmp/norm-arm-b.txt
+
+diff /tmp/norm-arm-a.txt /tmp/norm-arm-b.txt
+```
+
+## Diff output
+
+(no output — diff exited 0)
+
+## Result
+
+CONTROL-BLOCK SYMMETRY: PASS

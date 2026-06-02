@@ -1,0 +1,26 @@
+Working directory: __WORKDIR__
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+Goal: Build a Rust HTTP server that listens on TCP port 8080 and responds to any
+HTTP request with the text `hello` followed by a newline, then loops (does not
+exit after the first request).
+
+Constraints:
+- Use ONLY the Rust standard library — no external crates. Cargo.toml [dependencies]
+  must remain empty.
+- Bind to port 8080 (0.0.0.0:8080 or 127.0.0.1:8080 — either is fine).
+- The server must continue accepting connections in a loop; it must not exit after
+  the first request.
+
+Canonical test (must pass):
+  curl -s http://localhost:8080/
+Expected output: the literal text `hello` followed by a newline (so the shell
+prompt appears on the next line). curl must exit 0.
+
+Run everything in this one session. Do not stop until the canonical test passes or
+you have documented why it cannot be fixed. Report the EXACT curl output and exit
+code; an honest failure is more valuable than a fabricated success.
