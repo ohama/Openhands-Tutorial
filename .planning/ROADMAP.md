@@ -154,9 +154,11 @@ Audit: [milestones/v1.3-MILESTONE-AUDIT.md](milestones/v1.3-MILESTONE-AUDIT.md)
 **Plans:** 3 plans
 
 Plans:
-- [ ] 12-01-PLAN.md — Preflight + harness: gitignored arm-isolated workspaces, both Rust prompts (identical control block) + mandatory symmetry diff, metrics_extractor.py
-- [ ] 12-02-PLAN.md — Run both arms live on Rust (single invocation each, background + poll), resolve the two open unknowns (TaskTracker emission, token usage)
-- [ ] 12-03-PLAN.md — Capture gate: honesty gate, metrics.json x2 + comparison.json, CAPTURE-MANIFEST.md, commit pilot artifacts
+- [x] 12-01-PLAN.md — Preflight + harness: gitignored arm-isolated workspaces, both Rust prompts (identical control block) + mandatory symmetry diff (PASS), metrics_extractor.py (1-based, self-validated)
+- [x] 12-02-PLAN.md — Ran both arms live on Rust (single invocation each); both PASS curl→hello; resolved unknowns (TaskTracker YES / token-usage NO→P3 dropped)
+- [x] 12-03-PLAN.md — Capture gate: honesty gate PASS, metrics.json x2 + comparison.json, CAPTURE-MANIFEST (GATE CLOSED), human-verified, committed pilot artifacts
+
+**Outcome:** Harness proven on the Rust pilot. Both arms ran as single CodeActAgent invocations in isolated empty workspaces and **both passed** curl→hello (Arm A 14 TA/48.3s; Arm B 12 TA/59.0s — timing carries a cache-warmth caveat). Symmetry diff PASS; honesty gate 0/0 non-agent. **Both open unknowns resolved:** the 35B self-plans via TaskTracker (Arm B, no prompt change needed) and there is **no token `usage` in the JSONL** (P3 token metrics dropped). Verified 5/5. ✓ Complete 2026-06-02.
 
 ---
 
@@ -230,6 +232,6 @@ Plans:
 | 9. 6부 Chapter + Publish | v1.2 | 3/3 | ✓ Complete | 2026-06-01 |
 | 10. Capture the 35B Scala Calculator Run | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 11. 7부 Chapter + Publish | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
-| 12. Harness + Rust Pilot | v1.4 | 0/? | Not started | — |
+| 12. Harness + Rust Pilot | v1.4 | 3/3 | ✓ Complete | 2026-06-02 |
 | 13. Full Study (F# + Scala) + Analysis | v1.4 | 0/? | Not started | — |
 | 14. 부록 D Chapter + Publish | v1.4 | 0/? | Not started | — |

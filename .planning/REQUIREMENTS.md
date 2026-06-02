@@ -10,9 +10,9 @@
 
 ### Comparison method & harness (METH)
 
-- [ ] **METH-01**: Two prompt templates per example share an **identical control block** (the canonical goal, constraints, and canonical tests) and differ ONLY in the planning input: **Arm A** embeds Claude's numbered task plan in the prompt; **Arm B** gives the bare goal plus an instruction to plan its own steps (via the task tracker) then execute. Before any run, the two prompts are diffed and any non-plan asymmetry stripped (fairness control).
-- [ ] **METH-02**: Each (example × arm) is captured with the established headless invocation (default `CodeActAgent`, `--headless --json --yolo --override-with-envs`) as ONE invocation per arm (not split into per-task runs), in an arm-isolated **gitignored** workspace, with identical model/version/timeout/flags for both arms; run-order is counterbalanced across examples and the proxy state is controlled between arms, with conditions disclosed in the manifest (timing-fairness).
-- [ ] **METH-03**: A `metrics_extractor.py` emits a per-run `metrics.json` from the JSONL — TerminalAction count, total event count, wall-clock active time, LLM-call-gap stats (ObservationEvent→next ActionEvent), error-fix cycles (non-zero-exit → next corrective action), AgentErrorEvent count, and canonical-test pass/fail — plus a per-example `comparison.json` (Arm A vs Arm B). The mechanical `source=agent` honesty gate is run over every arm's JSONL. The harness is validated on a **pilot example (Rust)** before the full study.
+- [x] **METH-01**: Two prompt templates per example share an **identical control block** (the canonical goal, constraints, and canonical tests) and differ ONLY in the planning input: **Arm A** embeds Claude's numbered task plan in the prompt; **Arm B** gives the bare goal plus an instruction to plan its own steps (via the task tracker) then execute. Before any run, the two prompts are diffed and any non-plan asymmetry stripped (fairness control).
+- [x] **METH-02**: Each (example × arm) is captured with the established headless invocation (default `CodeActAgent`, `--headless --json --yolo --override-with-envs`) as ONE invocation per arm (not split into per-task runs), in an arm-isolated **gitignored** workspace, with identical model/version/timeout/flags for both arms; run-order is counterbalanced across examples and the proxy state is controlled between arms, with conditions disclosed in the manifest (timing-fairness).
+- [x] **METH-03**: A `metrics_extractor.py` emits a per-run `metrics.json` from the JSONL — TerminalAction count, total event count, wall-clock active time, LLM-call-gap stats (ObservationEvent→next ActionEvent), error-fix cycles (non-zero-exit → next corrective action), AgentErrorEvent count, and canonical-test pass/fail — plus a per-example `comparison.json` (Arm A vs Arm B). The mechanical `source=agent` honesty gate is run over every arm's JSONL. The harness is validated on a **pilot example (Rust)** before the full study.
 
 ### Planning capture (PCAP)
 
@@ -54,9 +54,9 @@ Deferred to later milestones: EXT-07 (cross-language "calculator in 3 languages"
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| METH-01 | Phase 12 | Pending |
-| METH-02 | Phase 12 | Pending |
-| METH-03 | Phase 12 | Pending |
+| METH-01 | Phase 12 | Complete |
+| METH-02 | Phase 12 | Complete |
+| METH-03 | Phase 12 | Complete |
 | PCAP-01 | Phase 13 | Pending |
 | PCAP-02 | Phase 13 | Pending |
 | PCAP-03 | Phase 13 | Pending |

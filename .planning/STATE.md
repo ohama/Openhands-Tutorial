@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — roadmap created 2026-06-01. Phase 12 is next: build the comparison harness and pilot both arms on Rust.
+**Current focus:** v1.4 Planning Comparison — Phase 12 (harness + Rust pilot) COMPLETE + verified 5/5. Harness proven; both open unknowns resolved. Next: Phase 13 (F#+Scala full study + analysis).
 
 ## Current Position
 
-Milestone: v1.4 (Planning Comparison) — STARTED 2026-06-01. Continues at Phase 12 (v1.3 ended at Phase 11).
-Phase: 12 — Harness + Rust Pilot (IN PROGRESS — 12-01 complete).
-Plan: 01 of 3 in Phase 12 — COMPLETE.
-Status: 12-01 harness built (prompts, symmetry diff, metrics_extractor.py). Next: 12-02 (run both arms live on Rust).
-Last activity: 2026-06-02 — Completed 12-01-PLAN.md (harness preflight + prompts + extractor).
+Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
+Phase: 12 — Harness + Rust Pilot — ✓ COMPLETE + verified 5/5 PASS (12-VERIFICATION.md).
+Plan: All 3 Phase 12 plans complete. Next: Phase 13 (PCAP/ANAL) — run /gsd:plan-phase 13.
+Status: Harness PROVEN on Rust pilot. Both arms = single CodeActAgent invocation, both PASS curl→hello (Arm A Claude-plan 14 TA/48.3s; Arm B self-plan 12 TA/59.0s — timing has cache-warmth caveat, proxy not restarted, Arm B ran first/cold). Symmetry diff PASS; honesty gate 0/0 non-agent. captured-planning/rust/ committed (metrics.json×2 + comparison.json + CAPTURE-MANIFEST GATE CLOSED). metrics_extractor.py validated (1-based; curl detection skips exit_code=None).
+KEY v1.4 FINDINGS (carry into Phase 13): (1) 35B self-plans via task_tracker at the Arm B phrasing — TaskTrackerObservation emitted (Arm B), NO Arm B prompt change needed. (2) NO token `usage` in the JSONL → P3 token metrics DROPPED; use P1/P2 only. (3) Arm A uses 0 tracker events (executes given plan); Arm B uses tracker to self-plan — the clean qualitative contrast. (4) Run-order/cache is a real timing confound — Phase 13 must counterbalance order across F#/Scala and label timing "derived".
+Last activity: 2026-06-02 — Phase 12 executed (3 waves) + verified 5/5; METH-01/02/03 Complete.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans total). v1.4: 1/3 plans in Phase 12 done.
-████░░░░░░ ~33% of Phase 12 complete.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phases 13–14 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
