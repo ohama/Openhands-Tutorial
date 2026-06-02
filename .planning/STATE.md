@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-02 COMPLETE (all 18 live runs captured). Next: 13-03 (metrics_extractor + honesty gate + comparison) then 13-04 (부록 D).
+**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-03 COMPLETE (metrics + analysis). Next: 13-04 (부록 D chapter assembly).
 
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
-Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (2/4 plans complete).
-Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 (metrics+comparison), 13-04 (부록 D) next.
-Status: All 18 JSONL runs captured (F# 6 + Scala 6 + Rust 6). PCAP-01 satisfied. KEY RESULTS: F# arm-a 1/3 PASS (OOD); F# arm-b 0/3 PASS (OOD); Scala arm-a 3/3 PASS; Scala arm-b 2/3 PASS + 1 PARTIAL; Rust both arms 3/3 PASS. Ready for 13-03 metrics extraction.
-KEY v1.4 FINDINGS (updated from 13-02): (1) F# is OOD for 35B: arm-b 0/3 PASS, arm-a 1/3 PASS (claude plan helped in one run but OOD dominated). (2) Scala in-distribution: arm-a 3/3, arm-b ~3/3 PASS. (3) Rust in-distribution: both arms 3/3 PASS. (4) Arm B consistently self-plans via task_tracker across all examples. (5) Idle-settle detection: runs can continue after 3-poll idle; final event count is authoritative.
-Last activity: 2026-06-02 — Phase 13 plan 02 executed; 18 live 35B runs captured across F#/Scala/Rust.
+Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (3/4 plans complete).
+Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 COMPLETE. 13-04 (부록 D) next.
+Status: All 18 JSONL runs extracted + honesty gate PASS (18/18). ANAL-01/ANAL-02/PCAP-02/METH-03 complete. 6 per-arm metrics.json + 3 comparison.json + 3 oh-self-plan.md + PLAN-COMPARISON-QUALITATIVE.md produced. Ready for 13-04.
+KEY v1.4 FINDINGS (updated from 13-03): (1) F# OOD: arm-b 0/3 PASS, arm-a 1/3 PASS (extractor shows 0/3 due to first-match limitation; 13-02-RUN-NOTES authoritative). (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 + 1 PARTIAL. (3) Rust both arms 3/3 PASS. (4) Task tracker: arm-b all examples (Rust 7 obs, Scala 9 obs, F# 4-8 obs); arm-a none. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order caveat — not a clean planning-quality signal.
+Last activity: 2026-06-02 — Phase 13 plan 03 executed; metrics extraction + analysis artifacts complete.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 2/4 plans ✓; Phase 14 next.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 3/4 plans ✓; Phase 14 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -62,6 +62,10 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
     - [13-02 F# result]: arm-a 1/3 PASS, arm-b 0/3 PASS. OOD confirmed at n=3. For 부록 D: Arm A run-1 PASS shows claude plan CAN help navigate OOD task; but 5/6 runs overall failed on FsLex/FsYacc.
     - [13-02 Scala result]: arm-a 3/3 PASS, arm-b ~3/3 PASS (2 PASS + 1 PARTIAL-PASS). In-distribution; both arms broadly succeed.
     - [13-02 Rust result]: both arms 3/3 PASS. In-distribution; highly reliable.
+    - [13-03 extractor first-match]: metrics_extractor.py (REUSED AS-IS) matches the FIRST ObservationEvent whose command contains the test expression. Multi-line heredoc writes (cat <<'EOF'...) embed the expression in the command string, causing false-negative FAILs. Extractor results document this via extractor_note; authoritative outcomes are in 13-02-RUN-NOTES.md. Do NOT fix the extractor retroactively.
+    - [13-03 canonical_tests authoritative source]: For 부록 D, cite 13-02-RUN-NOTES.md pass/fail matrix, NOT comparison.json canonical_test_pass_counts (which reflect extractor first-match). comparison.json IS authoritative for P1/P2 numeric metrics.
+    - [13-03 task_tracker metrics]: arm-b shows task_tracker_observation_count across all 3 examples (Rust: median 7, Scala: 9, F#: 4–8); arm-a shows 0 in all examples. Confirms Arm B self-planned via tracker in every run.
+    - [13-03 timing caveat]: Rust arm-a wall_clock median 48.3s vs arm-b 66.8s; Scala arm-b wall_clock median ~936s vs arm-a ~345s (arm-b ran first = colder cache). F# arm-a much higher wall_clock (OOD task, more attempts). All timing deltas carry cache/run-order confound — not planning-quality signals.
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -86,5 +90,5 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 ## Session Continuity
 
 Last session: 2026-06-02
-Stopped at: Completed 13-02-PLAN.md (all 18 live 35B runs captured + RUN-NOTES + SUMMARY).
-Resume file: None — next: run 13-03 (metrics_extractor.py on all 18 JSONLs, honesty gate, comparison.json, CAPTURE-MANIFEST.md).
+Stopped at: Completed 13-03-PLAN.md (metrics extraction + honesty gate + aggregate + planning artifacts + ANAL-02).
+Resume file: None — next: run 13-04 (부록 D chapter assembly; reads comparison.json + PLAN-COMPARISON-QUALITATIVE.md + oh-self-plan.md).
