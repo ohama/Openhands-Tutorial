@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 13 COMPLETE (4/4 plans). Capture gate CLOSED (641f7ea). Next: Phase 14 (부록 D chapter assembly).
+**Current focus:** v1.4 Planning Comparison — Phase 14 IN PROGRESS (1/3 plans). 부록 D chapter file written (9813d4e). Next: 14-02 (SUMMARY.md wiring + mdbook build).
 
 ## Current Position
 
-Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
-Phase: 13 — Full Study F#+Scala + Analysis — COMPLETE (4/4 plans).
-Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 COMPLETE. 13-04 COMPLETE.
-Status: PHASE 13 CAPTURE GATE CLOSED (641f7ea — 2026-06-04). All 18 JSONL runs extracted + honesty gate PASS (18/18). CAPTURE-MANIFEST.md committed. Phase 14 (부록 D chapter) UNBLOCKED.
+Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phase 13 done; Phase 14 in progress (1/3 plans complete).
+Phase: 14 — 부록 D Chapter + Publish — IN PROGRESS (1/3 plans).
+Plan: 14-01 COMPLETE. 14-02 next (SUMMARY.md wiring + mdbook build). 14-03 pending (deploy + live verify).
+Status: 부록 D chapter file written and committed (9813d4e — 2026-06-04). 14-01 honesty audit PASS (9/9 checks). src/appendix-d-planning-comparison.md (287 lines) ready. Next: 14-02 (wire src/SUMMARY.md + mdbook build).
 KEY v1.4 FINDINGS (authoritative — post detector fix b7a74b9): (1) F# OOD confirmed: arm-a 1/3 PASS (single run), arm-b 0/3 PASS. (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 PASS + 1 PARTIAL. (3) Rust both arms 3/3 PASS, zero error-fix cycles. (4) Task tracker arm-b all examples (Rust: median 7 obs, Scala: 5 obs, F#: median 7 obs); arm-a 0 in all. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order confound — not a planning-quality signal.
-Last activity: 2026-06-04 — Phase 13 plan 04 executed; CAPTURE-MANIFEST.md committed; capture gate CLOSED; Phase 14 unblocked.
+Last activity: 2026-06-04 — Phase 14 plan 01 executed; src/appendix-d-planning-comparison.md written (287 lines, 9/9 honesty checks PASS).
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4) — capture gate CLOSED; Phase 14 next.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4); Phase 14 🔄 (1/3 — chapter written, SUMMARY.md wiring + deploy pending).
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -94,5 +94,5 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: Completed 13-04-PLAN.md (CAPTURE-MANIFEST.md committed; Phase 13 capture gate CLOSED; Phase 14 unblocked).
-Resume file: None — next: run Phase 14 (부록 D chapter assembly; reads CAPTURE-MANIFEST + comparison.json + PLAN-COMPARISON-QUALITATIVE.md + oh-self-plan.md).
+Stopped at: Completed 14-01-PLAN.md (src/appendix-d-planning-comparison.md written and committed; 9/9 honesty audit checks PASS).
+Resume file: None — next: run 14-02-PLAN.md (one-line edit to src/SUMMARY.md adding 부록 D entry; mdbook build; assert exit 0 + only TD-4 warning; confirm book/appendix-d-planning-comparison.html exists).
