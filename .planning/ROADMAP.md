@@ -194,10 +194,12 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 13-01-PLAN.md — Build F# + Scala prompt sets (symmetric control block + Arm A claude-plan + Arm B self-plan; F# covers fslex/fsyacc, no embedded source) + symmetry diffs (PASS) + n=3 layout
-- [ ] 13-02-PLAN.md — Run full study live: F#+Scala both arms n=3 + Rust topped to n=3, counterbalanced run order, arm-isolated gitignored workspaces, one invocation per run, honest F# FAILs preserved
-- [ ] 13-03-PLAN.md — metrics_extractor.py over every run + blocking source=agent gate + per-arm metrics.json (median/range) + per-example comparison.json + both planning artifacts + ANAL-02 qualitative comparison
-- [ ] 13-04-PLAN.md — CAPTURE-MANIFEST.md (all six cells, run conditions/order, honesty results, GATE CLOSED) + human-verify checkpoint + commit (closes the capture gate, unblocks Phase 14)
+- [x] 13-01-PLAN.md — Build F# + Scala prompt sets (symmetric control block + Arm A claude-plan + Arm B self-plan; F# covers fslex/fsyacc, no embedded source) + symmetry diffs (PASS) + n=3 layout
+- [x] 13-02-PLAN.md — Run full study live: F#+Scala both arms n=3 + Rust topped to n=3, counterbalanced run order, arm-isolated gitignored workspaces, one invocation per run, honest F# FAILs preserved
+- [x] 13-03-PLAN.md — metrics_extractor.py over every run + blocking source=agent gate + per-arm metrics.json (median/range) + per-example comparison.json + both planning artifacts + ANAL-02 qualitative comparison
+- [x] 13-04-PLAN.md — CAPTURE-MANIFEST.md (all six cells, run conditions/order, honesty results, GATE CLOSED) + human-verify checkpoint + commit (closes the capture gate, unblocks Phase 14)
+
+**Outcome:** All six (example × arm) cells captured at n=3 and committed; CAPTURE-MANIFEST gate CLOSED (`641f7ea`); verified 6/6. Honest canonical outcomes: **F#** (OOD) Arm A 1/3 reps PASS (the Claude plan wired fslex/fsyacc successfully in run-1), Arm B 0/3; **Scala** Arm A 3/3, Arm B 2/3 + 1 PARTIAL; **Rust** both arms 3/3. All 18 honesty gates PASS. Mid-phase, the reused Phase-12 canonical detector was found to mis-score (heredoc first-match false-FAILs + null F# cells that would have blocked the gate); the detector was fixed and re-run (user-approved, `b7a74b9`) so canonical now reproduces the JSONL-event-cited RUN-NOTES outcomes exactly with zero nulls. Arm B self-plans via task_tracker (0 tracker events in Arm A); timing carries a cache/run-order caveat (derived from JSONL). ✓ Complete 2026-06-04.
 
 ---
 
@@ -241,5 +243,5 @@ Plans:
 | 10. Capture the 35B Scala Calculator Run | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 11. 7부 Chapter + Publish | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 12. Harness + Rust Pilot | v1.4 | 3/3 | ✓ Complete | 2026-06-02 |
-| 13. Full Study (F# + Scala) + Analysis | v1.4 | 0/? | Not started | — |
+| 13. Full Study (F# + Scala) + Analysis | v1.4 | 4/4 | ✓ Complete | 2026-06-04 |
 | 14. 부록 D Chapter + Publish | v1.4 | 0/? | Not started | — |

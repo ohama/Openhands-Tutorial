@@ -75,6 +75,8 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - **TD-3**: 부록 C "events 9–30 (21 events)" should be 22 (inclusive count). Trivial.
 - **TD-4**: cosmetic mdbook WARN on `<char>` HTML tag inside a code span (부록 C). The one accepted build warning.
 - **TD-5**: 부록 C Sources bibliography paths not clickable.
+- **TD-11** (v1.4): the 13-04 gate-closing assertion checks `canonical_tests` on the *aggregate* metrics.json, where canonical lives under `canonical_tests_aggregate` (so the null-check ran over `{}` and passed vacuously). Underlying data is sound — all 18 per-run files have canonical fully populated (0/56 null) and match RUN-NOTES — but the aggregate-level assertion is a no-op. If the gate is re-used, point it at `canonical_tests_aggregate` (or the per-run files). Cosmetic; gate substantively correct.
+- **TD-12** (v1.4): `__pycache__/` is not in `.gitignore`; running metrics_extractor.py creates `.planning/phases/*/__pycache__/`. Add `__pycache__/` to `.gitignore`. Trivial.
 - (v1.2 TD-6/7/8 and v1.3 TD-9/10 were fixed during their respective milestone audits.)
 
 ### Candidate next milestones (no commitment)

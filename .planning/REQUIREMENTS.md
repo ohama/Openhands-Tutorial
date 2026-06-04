@@ -57,11 +57,11 @@ Deferred to later milestones: EXT-07 (cross-language "calculator in 3 languages"
 | METH-01 | Phase 12 | Complete |
 | METH-02 | Phase 12 | Complete |
 | METH-03 | Phase 12 | Complete |
-| PCAP-01 | Phase 13 | Pending |
-| PCAP-02 | Phase 13 | Pending |
-| PCAP-03 | Phase 13 | Pending |
-| ANAL-01 | Phase 13 | Pending |
-| ANAL-02 | Phase 13 | Pending |
+| PCAP-01 | Phase 13 | Complete |
+| PCAP-02 | Phase 13 | Complete |
+| PCAP-03 | Phase 13 | Complete |
+| ANAL-01 | Phase 13 | Complete |
+| ANAL-02 | Phase 13 | Complete |
 | DCHAP-01 | Phase 14 | Pending |
 | DCHAP-02 | Phase 14 | Pending |
 | DPUB-01 | Phase 14 | Pending |
