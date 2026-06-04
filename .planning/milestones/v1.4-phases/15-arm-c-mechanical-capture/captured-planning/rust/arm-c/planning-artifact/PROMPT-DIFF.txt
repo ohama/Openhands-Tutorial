@@ -1,0 +1,22 @@
+# Arm C (mechanical) — CONTROL-BLOCK SYMMETRY EVIDENCE
+# Generated: 2026-06-04
+#
+# Purpose: prove the Arm C (code-free mechanical) OH prompt shares a BYTE-IDENTICAL
+# control block with the study's canonical control block (same as Arm A / Arm B).
+# This is the METH-01 / Pitfall-1 symmetry gate applied to the candidate Arm C.
+#
+# What was masked before diffing:
+#   - The arm-specific working directory (/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-c/rust) was reverted to the __WORKDIR__ token,
+#     so the path substitution is not counted as an asymmetry.
+#   - The variable block (everything from "Complete the following numbered steps..."
+#     to EOF) was removed, leaving only the control block.
+#
+# Command:
+#   awk '/^Complete the following numbered steps in order/{exit} {print}' oh-prompt.txt \
+#     | (strip trailing blank lines) | sed 's|<WD>|__WORKDIR__|' > normalized
+#   diff -u .planning/milestones/v1.4-phases/12-harness-rust-pilot/task-prompts/CONTROL-BLOCK-rust.txt normalized
+#
+# Result:
+#   (no differences — diff produced no output)
+
+CONTROL-BLOCK SYMMETRY: PASS

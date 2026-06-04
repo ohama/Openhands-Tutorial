@@ -1,0 +1,4 @@
+Fresh host re-run of agent-written arm-c server (2026-06-04):
+request1: body=[hello] exit=0
+request2: body=[hello] exit=0
+CANONICAL TEST: PASS (both requests hello, exit 0, loop survives)

@@ -1,0 +1,112 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "arm": "arm-a",
+  "run_date": "2026-06-04",
+  "model": "openai/qwen-35b",
+  "prompt_file": ".planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/captured-planning/rust/arm-c/planning-artifact/oh-prompt.txt",
+  "event_counts": {
+    "total_events": 36,
+    "MessageEvent": 2,
+    "ActionEvent": 17,
+    "ObservationEvent": 17
+  },
+  "terminal_actions": {
+    "count": 17,
+    "commands": [
+      "cargo init --name rust-server .",
+      "cat Cargo.toml",
+      "ls -la src/main.rs",
+      "cat > src/main.rs << 'RUSTEOF'\nuse std::io::{Read, Write, BufRead, BufReader};\nuse std::net::{TcpListener, TcpStream};\n\n",
+      "cat -A src/main.rs",
+      "cat src/main.rs",
+      "cargo build 2>&1",
+      "cat > src/main.rs << 'RUSTEOF'\nuse std::io::Write;\nuse std::net::{TcpListener, TcpStream};\n\nfn handle_client(mut stream:",
+      "cat src/main.rs",
+      "cargo build 2>&1",
+      "cat > src/main.rs << 'RUSTEOF'\nuse std::io::{Read, Write};\nuse std::net::{TcpListener, TcpStream};\n\nfn handle_client(mut",
+      "cargo build 2>&1",
+      "pkill -f \"target/debug/rust-server\" 2>/dev/null; sleep 1; cargo run &\nsleep 2\necho \"--- First request ---\"\ncurl -s http:",
+      "pkill -f \"target/debug/rust-server\" 2>/dev/null; sleep 1; cargo run > /tmp/server.log 2>&1 &",
+      "sleep 2 && curl -s http://localhost:8080/ && echo \"exit_code: $?\"",
+      "curl -s http://localhost:8080/ && echo \"exit_code: $?\"",
+      "kill %1 2>/dev/null; wait %1 2>/dev/null; echo \"Server stopped\""
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-04T13:22:03.950014",
+    "last_event_ts": "2026-06-04T13:23:10.044670",
+    "wall_clock_seconds": 66.09,
+    "llm_call_gaps_seconds": [
+      1.242,
+      1.166,
+      6.235,
+      2.588,
+      1.137,
+      2.267,
+      6.346,
+      1.722,
+      1.777,
+      5.783,
+      1.959,
+      3.083,
+      1.881,
+      1.638,
+      2.001,
+      1.576
+    ],
+    "avg_llm_call_gap_seconds": 2.65,
+    "min_llm_call_gap_seconds": 1.14,
+    "max_llm_call_gap_seconds": 6.35
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 3,
+    "cycle_count": 3,
+    "cycles": [
+      {
+        "error_event_index": 11,
+        "error_exit_code": 1,
+        "error_command_excerpt": "cat: illegal option -- A\nusage: cat [-belnstuv] [file ...]",
+        "fix_event_index": 12,
+        "fix_command_excerpt": "cat src/main.rs"
+      },
+      {
+        "error_event_index": 15,
+        "error_exit_code": 101,
+        "error_command_excerpt": "Compiling rust-server v0.1.0 (/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-c/rust)\nwarning: unused import: ",
+        "fix_event_index": 16,
+        "fix_command_excerpt": "cat > src/main.rs << 'RUSTEOF'\nuse std::io::Write;\nuse std::net::{TcpListener, TcpStream};\n\nfn handle_client(mut stream:"
+      },
+      {
+        "error_event_index": 21,
+        "error_exit_code": 101,
+        "error_command_excerpt": "Compiling rust-server v0.1.0 (/Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-c/rust)\nerror[E0599]: no method ",
+        "fix_event_index": 22,
+        "fix_command_excerpt": "cat > src/main.rs << 'RUSTEOF'\nuse std::io::{Read, Write};\nuse std::net::{TcpListener, TcpStream};\n\nfn handle_client(mut"
+      }
+    ]
+  },
+  "canonical_tests": {
+    "curl_hello": {
+      "expected": "hello",
+      "actual": "hello",
+      "pass": true,
+      "event_index": 31
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 17,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 0,
+  "task_tracker_action_count": 0
+}
