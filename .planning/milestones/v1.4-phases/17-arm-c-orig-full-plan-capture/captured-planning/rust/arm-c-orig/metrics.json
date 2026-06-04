@@ -1,0 +1,65 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "rust",
+  "arm": "arm-a",
+  "run_date": "2026-06-04",
+  "model": "openai/qwen-35b",
+  "prompt_file": ".planning/milestones/v1.4-phases/17-arm-c-orig-full-plan-capture/captured-planning/rust/arm-c-orig/planning-artifact/oh-prompt.txt",
+  "event_counts": {
+    "total_events": 11,
+    "MessageEvent": 1,
+    "ActionEvent": 5,
+    "AgentErrorEvent": 1,
+    "ObservationEvent": 3,
+    "ConversationErrorEvent": 1
+  },
+  "terminal_actions": {
+    "count": 3,
+    "commands": [
+      "cargo init --name hello-server --vcs none 2>&1",
+      "test -f Cargo.toml && test -f src/main.rs && echo \"FILES OK\" || echo \"FILES MISSING\"",
+      "awk '/^\\[dependencies\\]/{f=1;next} /^\\[/{f=0} f && NF && $1 !~ /^#/' Cargo.toml"
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": true,
+    "settled_by": "ConversationError"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-04T17:41:34.620901",
+    "last_event_ts": "2026-06-04T17:41:59.637586",
+    "wall_clock_seconds": 25.02,
+    "llm_call_gaps_seconds": [
+      1.517,
+      1.551,
+      1.583
+    ],
+    "avg_llm_call_gap_seconds": 1.55,
+    "min_llm_call_gap_seconds": 1.52,
+    "max_llm_call_gap_seconds": 1.58
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 0,
+    "cycle_count": 0,
+    "cycles": []
+  },
+  "canonical_tests": {
+    "curl_hello": {
+      "expected": "hello",
+      "actual": null,
+      "pass": null,
+      "event_index": null
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 5,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 1,
+  "task_tracker_action_count": 2
+}

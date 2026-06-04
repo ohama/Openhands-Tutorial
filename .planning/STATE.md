@@ -59,7 +59,8 @@ v1.4 (Planning Comparison) shipped; its phase-specific decisions are archived. T
 ### Roadmap Evolution
 
 - Phase 15 added (post-v1.4 follow-up): Arm C (GSD mechanical) — Rust capture. ✅ Complete 2026-06-04; published 부록 D §6.
-- Phase 16 added (post-v1.4 follow-up): Arm C (GSD mechanical) — F# + Scala capture + comparison with Phase 13 Arm A/B. Not planned yet (`/gsd:plan-phase 16`).
+- Phase 16 added (post-v1.4 follow-up): Arm C (GSD mechanical) — F# + Scala capture + comparison with Phase 13 Arm A/B. ✅ Complete 2026-06-04 (Scala PASS, F# FAIL); 부록 D §6.8.
+- Phase 17 added (post-v1.4 follow-up): Arm C-orig (full GSD plan WITH code) — capture + diagnostic. ✅ Complete 2026-06-04: **F# flips FAIL→PASS** when code handed over (Scala PASS; Rust incomplete — OpenHands MissingStyle CLI bug). Confirms OOD bottleneck = DSL-syntax authorship, not planning.
 
 ### Candidate next milestones (no commitment)
 

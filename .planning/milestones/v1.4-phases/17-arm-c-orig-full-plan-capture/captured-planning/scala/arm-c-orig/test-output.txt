@@ -1,0 +1,3 @@
+Fresh host run of agent-written Scala (Arm C-orig, code handed over) 2026-06-04:
+  scala-cli run Calc.scala -- "2+3*4"/"(2+3)*4"/"10-3-2" → 14/20/5
+CANONICAL: PASS 3/3

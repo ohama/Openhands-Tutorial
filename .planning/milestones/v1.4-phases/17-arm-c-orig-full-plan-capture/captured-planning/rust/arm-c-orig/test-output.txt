@@ -1,0 +1,12 @@
+Rust Arm C-orig — INCOMPLETE (2026-06-04).
+Two capture attempts both terminated early with OpenHands
+ConversationErrorEvent code=MissingStyle ('failed to get style dependencies\\;
+unable to parse as color') — an out-of-band OpenHands CLI color-parsing bug
+triggered while rendering the embedded GSD verify command
+  awk '/^\[dependencies\]/{f=1;next} /^\[/{f=0} f && NF ...' Cargo.toml
+The agent never progressed past cargo-init scaffolding (main.rs left at the
+3-line cargo default; server never written or tested).
+NOT scored PASS/FAIL — this is a harness rendering bug, not a task/model outcome.
+Honesty gate PASS on the events that ran (all source=agent).
+Rust Arm C-orig is the least informative cell (Rust passes code-free in Arm C-mech
+already); the key Arm C-orig result is the F# FAIL->PASS flip.

@@ -158,6 +158,13 @@ Plans:
 **Details:**
 [To be added during planning]
 
+### Phase 17: Arm C-orig (full GSD plan WITH code) — capture + diagnostic
+
+**Goal:** Convert the GSD plans AS-IS (reference code embedded, the opposite of the Arm C-mech strip) into OpenHands prompts and capture the 35B for F#/Rust/Scala (n=1 each). Diagnostic question: when the answer code is handed over, does F# flip FAIL→PASS (proving the OOD bottleneck is *writing the DSL syntax*, not following a plan)? Compare Arm C-orig vs Arm C-mech vs Arm A/B. This is explicitly NOT a capability measurement (it spoon-feeds the answer) — it is a diagnostic + demonstration of why Arm C-orig is study-invalid.
+**Depends on:** Phase 16 (Arm C-mech results), Phase 15 (Rust method)
+**Status:** in progress (2026-06-04)
+**Plans:** 0 plans (direct capture, plan already exists as the GSD 01-PLAN.md)
+
 ---
 
 ## Progress

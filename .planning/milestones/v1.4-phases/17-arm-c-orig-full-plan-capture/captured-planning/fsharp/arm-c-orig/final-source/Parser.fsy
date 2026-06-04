@@ -1,0 +1,27 @@
+%{
+%}
+
+%token <int> INT
+%token PLUS MINUS TIMES DIV LPAREN RPAREN EOF
+
+%start start
+%type <int> start
+
+%%
+
+start:
+    | Expr EOF                 { $1 }
+
+Expr:
+    | Expr PLUS  Term          { $1 + $3 }
+    | Expr MINUS Term          { $1 - $3 }
+    | Term                     { $1 }
+
+Term:
+    | Term TIMES Factor        { $1 * $3 }
+    | Term DIV   Factor        { $1 / $3 }
+    | Factor                   { $1 }
+
+Factor:
+    | INT                      { $1 }
+    | LPAREN Expr RPAREN       { $2 }
