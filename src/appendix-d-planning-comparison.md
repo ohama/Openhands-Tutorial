@@ -8,6 +8,8 @@
 
 세 예제(F# FsLex/FsYacc 계산기, Rust HTTP 서버, Scala 3 계산기)에서 각각 두 Arm을 n=3 반복 실행했다. 모든 수치와 주장은 커밋된 `captured-planning/` 아티팩트에서 직접 인용한 것이다.
 
+> **후속 실험 (§6):** 본 2-Arm 연구가 끝난 뒤, GSD 다중 에이전트 파이프라인으로 생성한 **코드 없는** 전문가 계획을 세 번째 조건 **Arm C**로 캡처했다(2026-06-04, Rust, n=1 단독). 이는 본 n=3 연구와 카운터밸런스되지 않은 별개 보충 실험이므로 타이밍을 직접 비교하지 않는다 — 자세한 내용은 §6 참조.
+
 ---
 
 ## 1. 실험 설계
@@ -270,7 +272,101 @@ Rust (분포 내)에서 두 Arm 모두 3/3 PASS, 오류 수정 사이클 0회. �
 
 ---
 
-## 6. 출처 (Sources)
+## 6. 후속 실험: Arm C — GSD 계획의 코드 없는 버전 (2026-06-04)
+
+위 §1–5의 2-Arm 연구(Arm A 전문가 계획 vs Arm B 자체 계획)가 완료된 후 한 가지 후속 질문이 제기됐다: **전문가 계획을 "사람이 손으로" 작성하는 대신, 구조화된 다중 에이전트 파이프라인(research → plan → verify)으로 생성하면 어떻게 되는가?** 이를 위해 GSD(Get-Shit-Done) 워크플로의 실제 계획 에이전트를 돌려 세 번째 계획을 만들었고, 이를 **Arm C**라 부른다.
+
+이 절은 **단일 예제(Rust HTTP 서버)에 대한 n=1 단독 보충 캡처**다. §1–5의 본 연구(2026-06-02 캡처, n=3)와는 별개이며, 캐시 온도·실행 순서가 통제되지 않았으므로 **타이밍을 Arm A/B와 직접 비교할 수 없다**. 이 캡처가 답하는 질문은 타이밍 경쟁이 아니라 **"실패 모드를 알려주되 코드를 주지 않는 전문가 계획으로 35B가 std-only Rust 서버를 스스로 작성해 통과시킬 수 있는가?"** 라는 feasibility 질문이다.
+
+### 6.1 동기 — GSD 원본 계획은 정답 코드를 포함한다
+
+GSD 파이프라인(gsd-phase-researcher → gsd-planner → gsd-plan-checker)을 Rust 과제에 돌린 결과, 계획(`01-PLAN.md`)의 구현 단계에 **검증된 ~25줄 Rust 레퍼런스 구현 전체가 그대로 임베드**됐다. 이 원본 계획(이하 **Arm C-orig**)을 그대로 35B에 주면 모델은 코드를 복붙만 하게 되어, "전문가 계획이 35B의 *작성·실행*을 돕는가"라는 독립 변수가 무너진다 — 즉 **본 연구의 측정 도구로 부적합**하다.
+
+따라서 GSD 계획을 **코드 없는 mechanical 버전(이하 Arm C-mech)**으로 변환했다. 이것이 본 절의 Arm C다. 정보량 그라디언트는 다음과 같이 정렬된다:
+
+| 조건 | 전문가 계획 | 실패 모드 가이드 | 정답 코드 | study 사용 가능 |
+|------|:---:|:---:|:---:|:---:|
+| Arm B (자체 계획) | ✗ | ✗ | ✗ | ✓ (baseline) |
+| Arm A (구조만) | ✓ | ✗ | ✗ | ✓ |
+| **Arm C-mech** | ✓ | **✓** | ✗ | ✓ |
+| Arm C-orig (GSD 원본) | ✓ | ✓ | **✓** | ✗ (복붙) |
+
+→ **Arm A vs Arm C-mech**은 "코드 없음"을 고정한 채, 전문가 계획에 **실패 모드 사전 경고**를 더하는 것의 가치만 분리해 보는 깔끔한 대조다.
+
+### 6.2 GSD 파이프라인 (research → plan → verify)
+
+실제 GSD 에이전트를 순서대로 실행했다:
+
+1. **Research** (gsd-phase-researcher) → `RESEARCH.md` (confidence HIGH). std-only HTTP 서버 관용구와 5가지 함정을 카탈로그화: (1) Content-Length / Connection: close 누락 시 `curl` 행(hang), (2) 요청을 EOF까지 읽으면 데드락, (3) 재시작 시 EADDRINUSE, (4) 헤더에 CRLF 대신 `\n` 사용 시 curl 거부, (5) 연결당 I/O 패닉이 accept 루프를 죽임.
+2. **Plan** (gsd-planner) → `01-PLAN.md` (3 태스크: scaffold / implement / test; frontmatter·must_haves 포함).
+3. **Verify** (gsd-plan-checker) → **VERIFICATION PASSED** (1회 통과; 비-blocking 관찰 2건 지적: curl 출력의 trailing newline 엄격 미검증, IPv6-localhost 엣지케이스).
+
+### 6.3 코드 없는 변환 (mechanical strip)
+
+GSD `01-PLAN.md`를 다음 규칙으로 변환했다 (전체 기록: `gsd-mechanical-plan.md`):
+
+| 처리 | 내용 |
+|------|------|
+| **제거** | Rust 소스 전체; 정답 응답 바이트열(`HTTP/1.1 200 OK\r\nContent-Length: 6\r\n…`); std API 이름(`TcpListener::bind`, `read_line`, `write_all` 등); 리터럴 `Content-Length: 6` → "본문 바이트 길이와 일치하는 값" |
+| **보존** | GSD의 3-태스크 구조; 범위 통찰("모든 요청에 동일 응답 → 파싱·라우팅·스레딩 만들지 마라"); 5가지 함정을 **HTTP 프로토콜 요구사항·실패 모드 prose**로 |
+| **변환** | "이 코드를 써라" → "이 동작을 만족시켜라" (예: `write_all("HTTP/1.1…")` → "올바른 HTTP/1.1 메시지: 상태줄·헤더·빈 줄·본문; 헤더는 CRLF로 종료") |
+
+제어 블록은 본 연구의 캐노니컬 블록과 **byte-identical**임을 diff로 증명했다 (`PROMPT-DIFF.txt` → `CONTROL-BLOCK SYMMETRY: PASS`) — Arm A/B와 동일한 METH-01 대칭 게이트.
+
+### 6.4 Arm C 계획 요약
+
+> **Arm C 계획 요약 (출처: `arm-c/planning-artifact/oh-prompt.txt`, `gsd-mechanical-plan.md`)**
+>
+> - Step 1: Scaffold — `cargo init` (디렉토리가 이미 존재); Cargo.toml/src/main.rs 생성 확인; **[dependencies] 비어 있음** 확인
+> - Step 2: 서버 작성 — *모든 코드를 직접 작성* (요구사항만 제시, 소스 없음). 범위: 모든 요청에 동일 응답, 파싱·라우팅·스레딩 만들지 말 것. HTTP 요구사항: well-formed HTTP/1.1, 헤더는 CRLF, 본문 끝을 알 수 있게(Content-Length=본문 길이 / Connection: close). 루프: 포트는 루프 전 1회 바인드, accept 루프는 스스로 종료하지 않고 단일 불량 연결에서 살아남을 것, 요청을 EOF까지 읽지 말 것(데드락)
+> - Step 3: 빌드 및 테스트 — `cargo build`; 오류 시 컴파일러 메시지 읽고 수정·재빌드 반복; 서버 실행 후 `curl` 2회(루프 확인); 정확한 출력·exit code 보고
+
+### 6.5 35B 캡처 결과 (Phase 15)
+
+단일 OpenHands 호출, 격리된 빈 워크스페이스, 본 연구와 동일한 절차·플래그로 실행했다 (2026-06-04, 13:21:59 → 13:23:10 settle).
+
+| 지표 | Arm C (mechanical), n=1 |
+|------|--------------------------|
+| TerminalActions 수 | 17 |
+| 총 이벤트 수 | 36 (MessageEvent:2, ActionEvent:17, ObservationEvent:17) |
+| 벽시계 시간 (초) | 66.09 *(Arm A/B와 비교 불가 — §6.7 caveat)* |
+| 평균 LLM 호출 간격 (초) | 2.65 (1.14–6.35) |
+| 오류 수정 사이클 수 | 3 |
+| TaskTracker 관찰/액션 이벤트 수 | 0 / 0 (제공된 계획 실행 — 자체 계획 안 함) |
+| 정규 테스트 (curl_hello) | **PASS** (이벤트 #31, exit 0); 2번째 요청도 통과 (루프 생존) |
+| Honesty gate (source=agent) | **PASS** (17/17 ActionEvent, 위반 0) |
+| Cargo.toml [dependencies] | 비어 있음 (std-only ✓) |
+
+**오류 수정 3건 (모두 실제 self-correction):**
+
+- #11→#12: `cat -A` 잘못된 플래그(macOS) → 평범한 `cat`으로 복구. 코드 오류 아님.
+- #15→#16 (exit 101): 미사용 import 컴파일 오류 → `main.rs` 재작성으로 제거.
+- #21→#22 (exit 101): `error[E0599]: no method` — `Read` 트레이트 미import 상태로 `.read()` 호출 → `use std::io::{Read, Write}` 추가로 수정.
+
+### 6.6 에이전트가 작성한 소스 — unaided 작성 확인
+
+35B가 작성한 최종 `src/main.rs`는 코드 없는 프롬프트가 **의도적으로 숨긴 GSD 레퍼런스와 다르다**:
+
+| 측면 | GSD 레퍼런스 (숨김) | 35B 작성 (Arm C-mech) |
+|------|---------------------|------------------------|
+| 요청 읽기 | `BufReader::read_line` | `stream.read(&mut [0u8; 1024])` (고정 버퍼) |
+| 바인드 주소 | `127.0.0.1:8080` | `0.0.0.0:8080` |
+| 오류 처리 | `main -> io::Result<()>` + `?` | `.expect(...)` |
+| 응답 프레이밍 | CRLF + Content-Length + Connection: close | **동일 — 정확히 적용** |
+
+→ 35B는 prose 함정 가이드를 자신만의 std-only Rust로 번역했다. 프레이밍 가이드는 정확히 적용되어(curl 행·데드락 없음) 통과했고, 막힌 곳은 평범한 Rust 컴파일 오류 2건뿐이었으며 스스로 수정했다. **복붙이 아닌 자체 작성**이다.
+
+### 6.7 해석 및 주의사항
+
+- **무엇을 보여주는가:** 정답 코드를 주지 않고 *실패 모드만* 알려주는 전문가 계획으로도, 35B가 std-only Rust HTTP 서버를 스스로 작성해 정규 테스트를 통과했다. Rust가 35B의 분포 내(in-distribution) 도메인이라는 §5(Rust) 관찰과 일관된다.
+- **무엇을 보여주지 않는가 (caveat):** 이것은 **n=1 단독 캡처**다. Arm A/B(2026-06-02, n=3)와 카운터밸런스되지 않았고 프록시 캐시 상태가 다르므로 **벽시계·LLM 간격을 Arm A/B와 비교해서는 안 된다**. "Arm C가 더 낫다/나쁘다"는 결론을 내릴 수 없으며, feasibility 관찰일 뿐이다. 정량 비교에는 n>1과 카운터밸런스된 실행 순서가 필요하다.
+- first run이 곧 the run이다 — 재실행·cherry-pick·에이전트 소스 수동 수정 없음. honesty gate PASS로 확인.
+
+(출처: `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md`)
+
+---
+
+## 7. 출처 (Sources)
 
 아래는 이 부록의 모든 수치와 주장이 직접 인용한 커밋된 아티팩트 목록이다:
 
@@ -285,3 +381,14 @@ Rust (분포 내)에서 두 Arm 모두 3/3 PASS, 오류 수정 사이클 0회. �
 - `.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/scala/arm-b/planning-artifact/oh-self-plan.md` — Scala Arm B 자체 계획 (이벤트 #6)
 - `.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/rust/arm-a/planning-artifact/claude-plan.md` — Rust Arm A Claude 계획 (3단계)
 - `.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/rust/arm-b/planning-artifact/oh-self-plan.md` — Rust Arm B 자체 계획 (이벤트 #4)
+
+**§6 Arm C (GSD mechanical) 후속 실험:**
+
+- `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md` — Arm C 캡처 정본 (실행 조건, honesty gate, 오류 수정 상세, unaided 작성 확인, caveat)
+- `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-SUMMARY.md` — Phase 15 요약
+- `.../15-arm-c-mechanical-capture/captured-planning/rust/arm-c/metrics.json` — Arm C P1/P2 지표 (n=1; curl_hello PASS 이벤트 #31, honesty PASS)
+- `.../arm-c/planning-artifact/gsd-mechanical-plan.md` — 코드 없는 변환 기록 (제거/보존/변환 규칙)
+- `.../arm-c/planning-artifact/oh-prompt.txt` — Arm C 단일 세션 프롬프트 (제어 블록 + 코드 없는 단계)
+- `.../arm-c/planning-artifact/PROMPT-DIFF.txt` — 제어 블록 대칭 증거 (CONTROL-BLOCK SYMMETRY: PASS)
+- `.../arm-c/planning-artifact/RESEARCH.md` · `gsd-01-PLAN.md` — GSD 파이프라인 원본 산출물 (리서치·계획)
+- `.../arm-c/final-source/src/main.rs` — 35B가 직접 작성한 Rust 서버 소스
