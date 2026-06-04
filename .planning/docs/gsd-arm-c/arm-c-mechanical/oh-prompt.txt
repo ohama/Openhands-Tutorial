@@ -1,0 +1,88 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-c/rust
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+Goal: Build a Rust HTTP server that listens on TCP port 8080 and responds to any
+HTTP request with the text `hello` followed by a newline, then loops (does not
+exit after the first request).
+
+Constraints:
+- Use ONLY the Rust standard library — no external crates. Cargo.toml [dependencies]
+  must remain empty.
+- Bind to port 8080 (0.0.0.0:8080 or 127.0.0.1:8080 — either is fine).
+- The server must continue accepting connections in a loop; it must not exit after
+  the first request.
+
+Canonical test (must pass):
+  curl -s http://localhost:8080/
+Expected output: the literal text `hello` followed by a newline (so the shell
+prompt appears on the next line). curl must exit 0.
+
+Run everything in this one session. Do not stop until the canonical test passes or
+you have documented why it cannot be fixed. Report the EXACT curl output and exit
+code; an honest failure is more valuable than a fabricated success.
+
+Complete the following numbered steps in order, in this one session:
+
+Step 1 — Scaffold:
+Create a new Rust binary crate in the working directory (use `cargo init`, since the
+directory already exists — do NOT use `cargo new` on a non-empty directory). Confirm that
+Cargo.toml and src/main.rs were created, and confirm the [dependencies] section is EMPTY.
+It must stay empty for the whole task — do not add any crate. Do not modify the source yet.
+Success criterion: Cargo.toml and src/main.rs exist; Cargo.toml [dependencies] is empty.
+
+Step 2 — Write the server:
+After Step 1, rewrite src/main.rs (bash-only) so the program binds port 8080 and serves the
+canonical response in a loop. You write ALL of the code yourself — the notes below are
+requirements and known failure modes, NOT source code to copy.
+
+  Scope — what to build and what to skip:
+  - Respond to ANY request identically. Do NOT build request parsing, URL routing, or
+    threading — the spec returns the same response to every request, so those are pure bug
+    surface. The whole program is: bind the port, an accept loop, and one fixed response.
+  - The only "protocol" you must construct by hand (no crates) is the HTTP response itself.
+
+  Requirements your response must satisfy (these are HTTP facts, not Rust API hints):
+  - It must be a well-formed HTTP/1.1 message: a status line, then header lines, then a
+    blank line, then the body. The body is the literal text `hello` followed by a newline.
+  - The lines in the HEADER section (status line, each header, and the blank line that
+    terminates the headers) must end with CRLF, not a bare newline — a bare newline there
+    makes curl reject the response.
+  - The client must be able to tell when the body has ended, or `curl -s` will hang waiting
+    for more: send a Content-Length header whose value equals the body's byte length, and/or
+    a Connection: close header (sending both is safest).
+
+  Loop & robustness requirements:
+  - Bind the port ONCE, before the accept loop — never inside it (re-binding fails with
+    "address already in use").
+  - The accept loop must never exit on its own, and must survive a single bad connection
+    (one client/IO error must not kill the server).
+  - When reading the incoming request, do NOT read it to end-of-stream. The client sends its
+    request and then waits for YOUR response — it never closes its side — so reading to EOF
+    deadlocks. Read only enough to proceed (e.g. one line or one chunk), then respond.
+
+After writing, show the file contents (`cat src/main.rs`). Do not build yet.
+Success criterion: src/main.rs is written bash-only, standard-library only, and implements
+bind-once + loop-accept + a fixed, correctly-framed `hello` + newline response.
+
+Step 3 — Build and test:
+After Step 2, build with `cargo build 2>&1`. If the build fails, read the compiler error,
+fix it (bash heredoc/printf/tee only — NOT file_editor), and rebuild. Repeat until the build
+succeeds. Report each error encountered and what you changed to fix it.
+Then run the server and the canonical test:
+  cargo run &
+  sleep 2
+  curl -s http://localhost:8080/
+  echo "exit_code: $?"
+  curl -s http://localhost:8080/   # second request proves the loop survives
+  kill %1
+  wait %1 2>/dev/null
+Report the EXACT curl output and exit code verbatim. If curl hangs, your response framing is
+wrong (revisit Content-Length / Connection: close / CRLF line endings). If the server dies
+after the first request, the accept loop is wrong.
+Success criterion: curl prints `hello` and a newline and exits 0; the second request also
+succeeds. If it cannot be made to pass, state that clearly — an honest failure is more
+valuable than a fabricated success.
