@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-06-04 — v1.4 shipped; between milestones)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** BETWEEN MILESTONES. v1.4 Planning Comparison SHIPPED + archived 2026-06-04 (tag `milestone-v1.4`). Next: run `/gsd:new-milestone` to scope the next version (open candidates in "Candidate next milestones" below + MILESTONES.md "What's next").
+**Current focus:** BETWEEN MILESTONES. v1.5 Arm C (GSD-Planned Third Arm) SHIPPED + archived 2026-06-04 (tag `milestone-v1.5`); v1.4 shipped before it. Next: run `/gsd:new-milestone` to scope the next version (open candidates in "Candidate next milestones" below + MILESTONES.md "What's next").
 
 ## Current Position
 
-Milestone: v1.4 (Planning Comparison) — ✅ SHIPPED + ARCHIVED 2026-06-04. Between milestones; ready to plan the next one.
-Phase: none active (Phases 12–14 archived to `milestones/v1.4-phases/`). `/gsd:new-milestone` starts the next cycle (questioning → research → requirements → roadmap).
+Milestone: v1.5 (Arm C — GSD-Planned Third Arm) — ✅ SHIPPED + ARCHIVED 2026-06-04. Between milestones; ready to plan the next one.
+Phase: none active (Phases 12–14 archived to `milestones/v1.4-phases/`; Phases 15–17 archived to `milestones/v1.5-phases/`). `/gsd:new-milestone` starts the next cycle (questioning → research → requirements → roadmap).
 Status: v1.4 live (부록 D, HTTP 200). Milestone audit PASSED (12/12 requirements, integration 6/6) → archived `milestones/v1.4-MILESTONE-AUDIT.md`. ROADMAP collapsed; REQUIREMENTS archived + reset; phases archived.
 v1.4 RESULT (one-liner; full detail in milestones/v1.4-ROADMAP.md + MILESTONES.md): an expert-authored plan helps the 35B mainly on the OOD task (F# Arm A 1/3 vs Arm B 0/3); in-distribution it self-plans just as well (Scala 3/3 vs 2/3+PARTIAL; Rust 3/3 tie). Distribution, not size — now on the planning axis.
 Last activity: 2026-06-04 — v1.4 milestone completed and archived (MILESTONES/ROADMAP/REQUIREMENTS/PROJECT/STATE updated; tag milestone-v1.4).
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 + v1.4 shipped (14 phases, 38 plans complete). Between milestones.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 + v1.4 + v1.5 shipped (17 phases). Between milestones.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison · 부록 D planning comparison)
 
 ## Cumulative History
@@ -25,6 +25,7 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server (6부) — unaided. See `milestones/v1.2-ROADMAP.md`.
 - **v1.3 Scala Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Scala 3 calculator (7부) — unaided, one self-corrected compile error. Completes the calculator trilogy; confirms capability is domain-distribution, not model size. See `milestones/v1.3-ROADMAP.md`.
 - **v1.4 Planning Comparison** (shipped 2026-06-04): 3 phases (12/13/14), 10 plans. Arm A (Claude-authored plan → 35B executes) vs. Arm B (35B self-plans + executes) across F#/Rust/Scala; published as 부록 D. Key findings: F# OOD both arms fail mostly; Rust/Scala in-distribution both arms succeed. See `milestones/v1.4-ROADMAP.md`.
+- **v1.5 Arm C (GSD-Planned Third Arm)** (shipped 2026-06-04): 3 phases (15/16/17), direct captures. Added Arm C via the GSD pipeline in two variants — Arm C-mech (code stripped) and Arm C-orig (code handed over) — completing the 4-condition matrix in 부록 D §6. Key finding: F# FAILs code-free (even GSD-grade) but flips to PASS when code is handed over → OOD bottleneck = DSL-syntax authorship, not planning. n=1 exploratory follow-up. See `milestones/v1.5-ROADMAP.md`.
 
 ## Accumulated Context
 
@@ -58,9 +59,7 @@ v1.4 (Planning Comparison) shipped; its phase-specific decisions are archived. T
 
 ### Roadmap Evolution
 
-- Phase 15 added (post-v1.4 follow-up): Arm C (GSD mechanical) — Rust capture. ✅ Complete 2026-06-04; published 부록 D §6.
-- Phase 16 added (post-v1.4 follow-up): Arm C (GSD mechanical) — F# + Scala capture + comparison with Phase 13 Arm A/B. ✅ Complete 2026-06-04 (Scala PASS, F# FAIL); 부록 D §6.8.
-- Phase 17 added (post-v1.4 follow-up): Arm C-orig (full GSD plan WITH code) — capture + diagnostic. ✅ Complete 2026-06-04: **F# flips FAIL→PASS** when code handed over (Scala PASS; Rust incomplete — OpenHands MissingStyle CLI bug). Confirms OOD bottleneck = DSL-syntax authorship, not planning.
+- Phases 15–17 (post-v1.4 follow-up: Arm C) were **bundled into milestone v1.5 and archived** 2026-06-04 (moved to `milestones/v1.5-phases/`, archive `milestones/v1.5-ROADMAP.md`, tag `milestone-v1.5`). They completed the Arm A/B/C-mech/C-orig matrix in 부록 D §6: Rust C-mech PASS (15); Scala C-mech PASS / F# C-mech FAIL (16); F# C-orig FAIL→PASS flip, Scala PASS, Rust incomplete (17).
 
 ### Candidate next milestones (no commitment)
 
@@ -77,6 +76,6 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: v1.4 milestone COMPLETED + ARCHIVED. ROADMAP collapsed (v1.4 → `<details>` + archive link); REQUIREMENTS archived to milestones/v1.4-REQUIREMENTS.md and reset; audit moved to milestones/v1.4-MILESTONE-AUDIT.md; phases 12–14 moved to milestones/v1.4-phases/; MILESTONES.md + PROJECT.md updated; tag `milestone-v1.4`.
+Stopped at: v1.5 (Arm C) milestone COMPLETED + ARCHIVED — Phases 15–17 moved to `milestones/v1.5-phases/`, archive `milestones/v1.5-ROADMAP.md`, ROADMAP collapsed to `<details>`, MILESTONES.md updated, tag `milestone-v1.5`, 부록 D §6 live. Previously: v1.4 milestone COMPLETED + ARCHIVED. ROADMAP collapsed (v1.4 → `<details>` + archive link); REQUIREMENTS archived to milestones/v1.4-REQUIREMENTS.md and reset; audit moved to milestones/v1.4-MILESTONE-AUDIT.md; phases 12–14 moved to milestones/v1.4-phases/; MILESTONES.md + PROJECT.md updated; tag `milestone-v1.4`.
 Resume file: None — between milestones. Next: `/gsd:new-milestone` (questioning → research → requirements → roadmap). Open candidates in "Candidate next milestones" + MILESTONES.md "What's next".
 Note: local branch is ahead of origin/main by the planning-doc commits since `7d5783a` (the live deploy); push when convenient — the live site does not depend on them.

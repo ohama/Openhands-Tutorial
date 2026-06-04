@@ -362,7 +362,7 @@ GSD `01-PLAN.md`를 다음 규칙으로 변환했다 (전체 기록: `gsd-mechan
 - **무엇을 보여주지 않는가 (caveat):** 이것은 **n=1 단독 캡처**다. Arm A/B(2026-06-02, n=3)와 카운터밸런스되지 않았고 프록시 캐시 상태가 다르므로 **벽시계·LLM 간격을 Arm A/B와 비교해서는 안 된다**. "Arm C가 더 낫다/나쁘다"는 결론을 내릴 수 없으며, feasibility 관찰일 뿐이다. 정량 비교에는 n>1과 카운터밸런스된 실행 순서가 필요하다.
 - first run이 곧 the run이다 — 재실행·cherry-pick·에이전트 소스 수동 수정 없음. honesty gate PASS로 확인.
 
-(출처: `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md`)
+(출처: `.planning/milestones/v1.5-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md`)
 
 ### 6.8 F# + Scala 확장 (Phase 16) — Arm C 3-언어 비교
 
@@ -383,7 +383,7 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 > **주의 (필독):** Arm C 캡처는 모두 **n=1 단독**이며 Phase 13(n=3, 2026-06-02)과 카운터밸런스되지 않았다 — **타이밍/풋프린트를 arm 간 정량 비교해서는 안 되며** PASS/FAIL feasibility 관찰로만 읽어야 한다. 측정 도구(canonical detector)는 Phase 12 버전이 Scala를 오채점하여 **수정된 Phase 13 extractor로 재채점**했고, 두 결과 모두 호스트에서 ground-truth 검증했다.
 
-(출처: `.planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md`)
+(출처: `.planning/milestones/v1.5-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md`)
 
 ### 6.9 대조 실험: Arm C-orig — GSD 플랜을 코드까지 그대로 넘기면? (Phase 17)
 
@@ -415,7 +415,7 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 > **주의:** Arm C-orig는 **정답 코드를 제공**하는 진단용 캡처이지 능력 측정이 아니다. n=1 단독, Phase 13과 카운터밸런스되지 않음 — 타이밍 비교 불가. 모든 캡처 honesty gate PASS, ground-truth 호스트 검증.
 
-(출처: `.planning/milestones/v1.4-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md`)
+(출처: `.planning/milestones/v1.5-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md`)
 
 ---
 
@@ -437,8 +437,8 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 **§6 Arm C (GSD mechanical) 후속 실험:**
 
-- `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md` — Arm C 캡처 정본 (실행 조건, honesty gate, 오류 수정 상세, unaided 작성 확인, caveat)
-- `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-SUMMARY.md` — Phase 15 요약
+- `.planning/milestones/v1.5-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md` — Arm C 캡처 정본 (실행 조건, honesty gate, 오류 수정 상세, unaided 작성 확인, caveat)
+- `.planning/milestones/v1.5-phases/15-arm-c-mechanical-capture/15-SUMMARY.md` — Phase 15 요약
 - `.../15-arm-c-mechanical-capture/captured-planning/rust/arm-c/metrics.json` — Arm C P1/P2 지표 (n=1; curl_hello PASS 이벤트 #31, honesty PASS)
 - `.../arm-c/planning-artifact/gsd-mechanical-plan.md` — 코드 없는 변환 기록 (제거/보존/변환 규칙)
 - `.../arm-c/planning-artifact/oh-prompt.txt` — Arm C 단일 세션 프롬프트 (제어 블록 + 코드 없는 단계)
@@ -448,7 +448,7 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 **§6.8 Arm C — F# + Scala 확장 (Phase 16):**
 
-- `.planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md` — F#/Scala Arm C 캡처 정본 (3-arm 비교표, 오채점→수정 detector 재채점, ground-truth 검증, caveat)
+- `.planning/milestones/v1.5-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md` — F#/Scala Arm C 캡처 정본 (3-arm 비교표, 오채점→수정 detector 재채점, ground-truth 검증, caveat)
 - `.../16-.../16-SUMMARY.md` — Phase 16 요약
 - `.../16-.../captured-planning/{fsharp,scala}/arm-c/metrics.json` — 재채점 지표 (Scala PASS 3/3; F# FAIL)
 - `.../{fsharp,scala}/arm-c/planning-artifact/{RESEARCH.md, 01-PLAN.md, oh-prompt.txt, PROMPT-DIFF.txt}` — GSD 원본 산출물 + 코드 없는 프롬프트 + 대칭 증거
@@ -457,6 +457,6 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 **§6.9 Arm C-orig — GSD 플랜 코드 포함 (Phase 17):**
 
-- `.planning/milestones/v1.4-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md` — Arm C-orig 정본 (F# FAIL→PASS flip, 4-조건 매트릭스, Rust 하니스 버그 disclosure)
+- `.planning/milestones/v1.5-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md` — Arm C-orig 정본 (F# FAIL→PASS flip, 4-조건 매트릭스, Rust 하니스 버그 disclosure)
 - `.../17-.../17-SUMMARY.md` — Phase 17 요약
 - `.../17-.../captured-planning/{fsharp,scala,rust}/arm-c-orig/{metrics.json, planning-artifact/oh-prompt.txt, final-source/, test-output.txt}` — 코드 포함 프롬프트 + 재채점 지표 + 35B 산출물 + ground-truth (F#/Scala PASS; Rust incomplete)

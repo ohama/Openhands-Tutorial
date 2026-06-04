@@ -1,5 +1,30 @@
 # Project Milestones: OpenHands Agentic AI 튜토리얼
 
+## v1.5 Arm C — GSD-Planned Third Arm (Shipped: 2026-06-04)
+
+**Delivered:** A **third planning arm, Arm C** — an expert plan produced by the **GSD multi-agent pipeline** (research → plan → verify) — added to the v1.4 study in two variants and captured on the local 35B (n=1), completing a 4-condition planning matrix published as **부록 D §6**. **Arm C-mech** strips the GSD plan to failure-mode guidance with no code (respects the unaided discipline); **Arm C-orig** hands the GSD plan over AS-IS with the reference code (a diagnostic, not a capability measure).
+
+🌐 **Live:** https://ohama.github.io/Openhands-Tutorial/appendix-d-planning-comparison.html (부록 D §6.1–6.9)
+
+**Phases completed:** 15–17 (direct captures; the GSD `01-PLAN.md` artifacts are the plans)
+
+**Key accomplishments:**
+
+- **Phase 15 — Arm C-mech Rust:** GSD pipeline (real gsd agents) → code-free mechanical prompt (symmetry PASS) → 35B wrote its **own** std-only server and **passed** curl→hello (self-corrected 2 compile errors). Honesty gate 17/17.
+- **Phase 16 — Arm C-mech F# + Scala:** Scala **PASS 3/3**; F# **FAIL** (could not author FsLex `.fsl` DSL syntax even with prose guidance). Detector mis-score caught → re-scored with the fixed extractor; ground-truth host-verified.
+- **Phase 17 — Arm C-orig (code handed over):** **F# flips FAIL→PASS** (4 error-fix cycles vs 37) — isolating **DSL-syntax authorship**, not planning, as the OOD bottleneck. Scala PASS; Rust incomplete (OpenHands `MissingStyle` CLI bug — harness, not model; disclosed).
+- **Finding — "distribution, not size" sharpened:** in-distribution (Rust/Scala) every condition passes, even code-free self-plan; for the OOD DSL (F#) the line is **code, not plan quality** — only handing over the literal `.fsl`/`.fsy` passes, which is transcription not capability. Concretely shows why Arm C-orig is study-invalid as a measurement.
+
+**4-condition matrix (canonical pass):** F# — A 1/3, B 0/3, C-mech FAIL, C-orig PASS · Scala — A 3/3, B 2/3+P, C-mech PASS, C-orig PASS · Rust — A 3/3, B 3/3, C-mech PASS, C-orig n/a(harness bug).
+
+**Stats:** 3 phases (15/16/17); GSD pipeline run 3× (all PASS); 6 arm-c captures (3 mech + 3 orig); all honesty gates PASS; 부록 D extended §6.1–6.9. Exploratory follow-up — n=1, not counterbalanced (timing not comparable); no separate REQUIREMENTS/AUDIT (disclosed).
+
+**Git tag:** `milestone-v1.5`
+
+**What's next:** EXT-08 (extend to 122B or add the SDK `PlanningAgent` as a real fourth arm), EXT-07 cross-language calculator appendix, EXT-01 Go/Python examples, EXT-02 English translation.
+
+---
+
 ## v1.4 Planning Comparison (Shipped: 2026-06-04)
 
 **Delivered:** An honest, captured **A/B study of task planning** on the local Qwen **35B** — **Arm A** (Claude-authored plan → 35B executes) vs **Arm B** (35B self-plans via its task tracker + executes) — across all three existing worked examples (F# FsLex/FsYacc calculator, Rust HTTP server, Scala 3 calculator), published as **부록 D "계획 방식 비교 — Claude 계획 vs OpenHands 자체 계획"**. The research question was framed honestly as *"does an expert-authored plan help the 35B execute?"* — not "Claude plans better."

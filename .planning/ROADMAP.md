@@ -7,6 +7,7 @@
 - ✅ **v1.2 Rust Example** — Phases 8–9 (shipped 2026-06-01) — [archive](milestones/v1.2-ROADMAP.md)
 - ✅ **v1.3 Scala Example** — Phases 10–11 (shipped 2026-06-01) — [archive](milestones/v1.3-ROADMAP.md)
 - ✅ **v1.4 Planning Comparison** — Phases 12–14 (shipped 2026-06-04) — [archive](milestones/v1.4-ROADMAP.md)
+- ✅ **v1.5 Arm C (GSD-Planned Third Arm)** — Phases 15–17 (shipped 2026-06-04) — [archive](milestones/v1.5-ROADMAP.md)
 
 ## Phases
 
@@ -136,34 +137,21 @@ Audit: [milestones/v1.4-MILESTONE-AUDIT.md](milestones/v1.4-MILESTONE-AUDIT.md)
 
 ---
 
-## Post-v1.4 Follow-up: GSD Planning Arm (Arm C)
+<details>
+<summary>✅ v1.5 Arm C — GSD-Planned Third Arm (Phases 15–17) — SHIPPED 2026-06-04</summary>
 
-Extends the v1.4 Planning Comparison with a **third arm, Arm C** — an expert plan produced by the GSD multi-agent pipeline (research → plan → verify), then stripped to a **code-free mechanical** prompt so it respects the unaided discipline. Probes: *does an expert plan that names the failure modes but withholds code help the 35B?* These phases are post-ship extensions of the v1.4 line (registered retroactively), captured at n=1 and explicitly NOT counterbalanced against the n=3 v1.4 runs.
+**Goal:** Add a **third arm, Arm C** — an expert plan produced by the GSD multi-agent pipeline (research → plan → verify) — in two variants: **Arm C-mech** (code stripped, failure-mode guidance only) and **Arm C-orig** (GSD plan handed over AS-IS, with code). Capture the 35B across F#/Rust/Scala (n=1) and complete the 4-condition planning matrix. Exploratory post-v1.4 follow-up (n=1, not counterbalanced).
 
-### Phase 15: Arm C (mechanical) — Rust capture
+**Outcome:** Completes the Arm A/B/C-mech/C-orig matrix and **sharpens "distribution, not size."** In-distribution (Rust, Scala) every condition passes — even code-free self-plan. For the OOD DSL (F#) the dividing line is **code, not plan quality**: Arm C-mech (GSD-grade, failure-mode-aware, code-free) still **FAILS** F# (`Lexer.fsl` parse error, 37 error-fix cycles), but Arm C-orig **flips it to PASS** when the literal `.fsl`/`.fsy` is handed over (4 cycles) — pinpointing **DSL-syntax authorship**, not planning, as the bottleneck, and demonstrating why Arm C-orig is study-invalid as a measurement (transcription, not capability). Rust C-orig incomplete (OpenHands `MissingStyle` CLI bug — harness, not model; disclosed). Detector mis-score caught and re-scored with the fixed extractor; all PASS/FAIL ground-truth host-verified; honesty gates PASS. Published as 부록 D §6 (§6.1–6.9).
 
-**Goal:** Capture the 35B on the code-free GSD Rust plan; compare structurally with Rust Arm A/B.
-**Status:** ✅ Complete (2026-06-04)
-**Outcome:** canonical curl PASS (event #31), honesty PASS (17/17 source=agent), unaided authorship (35B wrote its own `stream.read`+buffer server, self-corrected 2 Rust compile errors). Published to 부록 D §6. Artifacts in `milestones/v1.4-phases/15-arm-c-mechanical-capture/`.
+- [x] Phase 15: Arm C (mechanical) — Rust capture (PASS) — completed 2026-06-04
+- [x] Phase 16: Arm C (mechanical) — F# + Scala (Scala PASS, F# FAIL) — completed 2026-06-04
+- [x] Phase 17: Arm C-orig (full GSD plan WITH code) — F# FAIL→PASS flip; Scala PASS; Rust incomplete — completed 2026-06-04
 
-### Phase 16: Arm C (mechanical) — F# + Scala capture + comparison
+Full archive: [milestones/v1.5-ROADMAP.md](milestones/v1.5-ROADMAP.md)
+(Exploratory follow-up — no separate REQUIREMENTS/AUDIT docs; honesty discipline held throughout.)
 
-**Goal:** Run the GSD pipeline for the F# (FsLex/FsYacc) and Scala 3 calculator tasks, produce code-free mechanical Arm C prompts (control-block symmetry PASS), capture the 35B (n=1 each), and compare with the existing Phase 13 Arm A/B results — testing whether the OOD(F#)/in-distribution(Scala) split from v1.4 holds on the Arm C axis.
-**Depends on:** Phase 15 (Rust Arm C method), Phase 13 (Arm A/B baseline)
-**Plans:** 0 plans
-
-Plans:
-- [ ] TBD (run /gsd:plan-phase 16 to break down)
-
-**Details:**
-[To be added during planning]
-
-### Phase 17: Arm C-orig (full GSD plan WITH code) — capture + diagnostic
-
-**Goal:** Convert the GSD plans AS-IS (reference code embedded, the opposite of the Arm C-mech strip) into OpenHands prompts and capture the 35B for F#/Rust/Scala (n=1 each). Diagnostic question: when the answer code is handed over, does F# flip FAIL→PASS (proving the OOD bottleneck is *writing the DSL syntax*, not following a plan)? Compare Arm C-orig vs Arm C-mech vs Arm A/B. This is explicitly NOT a capability measurement (it spoon-feeds the answer) — it is a diagnostic + demonstration of why Arm C-orig is study-invalid.
-**Depends on:** Phase 16 (Arm C-mech results), Phase 15 (Rust method)
-**Status:** in progress (2026-06-04)
-**Plans:** 0 plans (direct capture, plan already exists as the GSD 01-PLAN.md)
+</details>
 
 ---
 
@@ -185,3 +173,6 @@ Plans:
 | 12. Harness + Rust Pilot | v1.4 | 3/3 | ✓ Complete | 2026-06-02 |
 | 13. Full Study (F# + Scala) + Analysis | v1.4 | 4/4 | ✓ Complete | 2026-06-04 |
 | 14. 부록 D Chapter + Publish | v1.4 | 3/3 | ✓ Complete | 2026-06-04 |
+| 15. Arm C (mechanical) — Rust capture | v1.5 | — | ✓ Complete | 2026-06-04 |
+| 16. Arm C (mechanical) — F# + Scala | v1.5 | — | ✓ Complete | 2026-06-04 |
+| 17. Arm C-orig (full GSD plan WITH code) | v1.5 | — | ✓ Complete | 2026-06-04 |
