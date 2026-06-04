@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 13 (F#+Scala full study). 13-03 COMPLETE (metrics + analysis). Next: 13-04 (부록 D chapter assembly).
+**Current focus:** v1.4 Planning Comparison — Phase 13 COMPLETE (4/4 plans). Capture gate CLOSED (641f7ea). Next: Phase 14 (부록 D chapter assembly).
 
 ## Current Position
 
 Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phases 13–14 remain.
-Phase: 13 — Full Study F#+Scala + Analysis — IN PROGRESS (3/4 plans complete).
-Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 COMPLETE. 13-04 (부록 D) next.
-Status: All 18 JSONL runs extracted + honesty gate PASS (18/18). ANAL-01/ANAL-02/PCAP-02/METH-03 complete. 6 per-arm metrics.json + 3 comparison.json + 3 oh-self-plan.md + PLAN-COMPARISON-QUALITATIVE.md produced. Ready for 13-04.
-KEY v1.4 FINDINGS (updated from 13-03): (1) F# OOD: arm-b 0/3 PASS, arm-a 1/3 PASS (extractor shows 0/3 due to first-match limitation; 13-02-RUN-NOTES authoritative). (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 + 1 PARTIAL. (3) Rust both arms 3/3 PASS. (4) Task tracker: arm-b all examples (Rust 7 obs, Scala 9 obs, F# 4-8 obs); arm-a none. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order caveat — not a clean planning-quality signal.
-Last activity: 2026-06-02 — Phase 13 plan 03 executed; metrics extraction + analysis artifacts complete.
+Phase: 13 — Full Study F#+Scala + Analysis — COMPLETE (4/4 plans).
+Plan: 13-01 COMPLETE. 13-02 COMPLETE. 13-03 COMPLETE. 13-04 COMPLETE.
+Status: PHASE 13 CAPTURE GATE CLOSED (641f7ea — 2026-06-04). All 18 JSONL runs extracted + honesty gate PASS (18/18). CAPTURE-MANIFEST.md committed. Phase 14 (부록 D chapter) UNBLOCKED.
+KEY v1.4 FINDINGS (authoritative — post detector fix b7a74b9): (1) F# OOD confirmed: arm-a 1/3 PASS (single run), arm-b 0/3 PASS. (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 PASS + 1 PARTIAL. (3) Rust both arms 3/3 PASS, zero error-fix cycles. (4) Task tracker arm-b all examples (Rust: median 7 obs, Scala: 5 obs, F#: median 7 obs); arm-a 0 in all. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order confound — not a planning-quality signal.
+Last activity: 2026-06-04 — Phase 13 plan 04 executed; CAPTURE-MANIFEST.md committed; capture gate CLOSED; Phase 14 unblocked.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13: 3/4 plans ✓; Phase 14 next.
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4) — capture gate CLOSED; Phase 14 next.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison)
 
 ## Cumulative History
@@ -66,6 +66,8 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
     - [13-03 canonical_tests authoritative source]: For 부록 D, cite 13-02-RUN-NOTES.md pass/fail matrix, NOT comparison.json canonical_test_pass_counts (which reflect extractor first-match). comparison.json IS authoritative for P1/P2 numeric metrics.
     - [13-03 task_tracker metrics]: arm-b shows task_tracker_observation_count across all 3 examples (Rust: median 7, Scala: 9, F#: 4–8); arm-a shows 0 in all examples. Confirms Arm B self-planned via tracker in every run.
     - [13-03 timing caveat]: Rust arm-a wall_clock median 48.3s vs arm-b 66.8s; Scala arm-b wall_clock median ~936s vs arm-a ~345s (arm-b ran first = colder cache). F# arm-a much higher wall_clock (OOD task, more attempts). All timing deltas carry cache/run-order confound — not planning-quality signals.
+    - [13-04 capture gate]: PHASE 13 CAPTURE GATE CLOSED at 641f7ea (2026-06-04). Gate assertion: 6/6 metrics.json honesty_gate=PASS, all canonical_tests populated (no null). Canonical FAILs (F# OOD) are valid data and do NOT block the gate. CAPTURE-MANIFEST.md is THE gate artifact; Phase 14 (부록 D) is unblocked.
+    - [13-04 canonical authoritative source]: After canonical-detector fix (b7a74b9), metrics.json/comparison.json canonical_tests now agree with 13-02-RUN-NOTES.md for all reps. Either source may be cited in 부록 D; comparison.json is authoritative for P1/P2 numeric metrics.
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -89,6 +91,6 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 
 ## Session Continuity
 
-Last session: 2026-06-02
-Stopped at: Completed 13-03-PLAN.md (metrics extraction + honesty gate + aggregate + planning artifacts + ANAL-02).
-Resume file: None — next: run 13-04 (부록 D chapter assembly; reads comparison.json + PLAN-COMPARISON-QUALITATIVE.md + oh-self-plan.md).
+Last session: 2026-06-04
+Stopped at: Completed 13-04-PLAN.md (CAPTURE-MANIFEST.md committed; Phase 13 capture gate CLOSED; Phase 14 unblocked).
+Resume file: None — next: run Phase 14 (부록 D chapter assembly; reads CAPTURE-MANIFEST + comparison.json + PLAN-COMPARISON-QUALITATIVE.md + oh-self-plan.md).
