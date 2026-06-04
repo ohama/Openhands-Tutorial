@@ -56,3 +56,4 @@
 [부록 B: 트러블슈팅](appendix-b-troubleshooting.md)
 [부록 C: 모델 비교 — 35B vs 122B](appendix-c-comparison.md)
 [부록 D: 계획 방식 비교 — Claude 계획 vs OpenHands 자체 계획](appendix-d-planning-comparison.md)
+[부록 E: 자체 계획 vs GSD 계획(코드 포함) — 계획 내용·정확도·시간](appendix-e-selfplan-vs-gsd.md)
