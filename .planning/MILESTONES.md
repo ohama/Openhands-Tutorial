@@ -1,5 +1,36 @@
 # Project Milestones: OpenHands Agentic AI 튜토리얼
 
+## v1.4 Planning Comparison (Shipped: 2026-06-04)
+
+**Delivered:** An honest, captured **A/B study of task planning** on the local Qwen **35B** — **Arm A** (Claude-authored plan → 35B executes) vs **Arm B** (35B self-plans via its task tracker + executes) — across all three existing worked examples (F# FsLex/FsYacc calculator, Rust HTTP server, Scala 3 calculator), published as **부록 D "계획 방식 비교 — Claude 계획 vs OpenHands 자체 계획"**. The research question was framed honestly as *"does an expert-authored plan help the 35B execute?"* — not "Claude plans better."
+
+🌐 **Live:** https://ohama.github.io/Openhands-Tutorial/appendix-d-planning-comparison.html
+
+**Phases completed:** 12–14 (10 plans total)
+
+**Key accomplishments:**
+
+- **Phase 12 — harness proven on a Rust pilot:** two prompt templates sharing an identical control block (only the planning input differs), enforced by a literal `CONTROL-BLOCK SYMMETRY: PASS` diff; `metrics_extractor.py` (1-based, self-validated) + a mechanical `source=agent` honesty gate; arm-isolated gitignored workspaces; one CodeActAgent invocation per arm. Both arms passed curl→hello. **Resolved both open unknowns:** the 35B self-plans via TaskTracker at the Arm B phrasing (no prompt change needed), and there is **no token `usage` in the JSONL** → P3 token metrics dropped.
+- **Phase 13 — the full study, captured honestly at n=3:** F# + Scala both arms n=3, Rust topped to n=3 — **18 real JSONL captures**, counterbalanced run order, one invocation per run, judged from the JSONL (never the CLI exit code). 18/18 `source=agent` honesty gates PASS. Honest outcomes preserved including F# OOD failures; both planning artifacts saved per example (`claude-plan.md` + verbatim `oh-self-plan.md` from the TaskTracker), plus the ANAL-02 qualitative plan comparison and a CAPTURE-MANIFEST gate.
+- **Phase 13 — caught and fixed a measurement-tool bug (honesty save):** the reused Phase-12 canonical detector mis-scored — heredoc first-match produced false-negative Scala FAILs and **null** F# cells that would have blocked the capture gate. The detector was fixed deterministically (genuine run-command match + "any successful run" semantics + build-never-ran ⇒ FAIL-not-null) and **all 18 runs re-extracted** (user-approved, `b7a74b9`), reproducing the JSONL-event-cited RUN-NOTES outcomes exactly with zero nulls.
+- **Phase 14 — 부록 D written verbatim + published:** a 287-line Korean appendix built entirely from the committed `captured-planning/` artifacts (every number traces to `comparison.json`/CAPTURE-MANIFEST; 1-based event numbers; `~14–32s/call` never cited as a measurement; mixed/inconclusive results reported, not softened). Wired after 부록 C, clean `mdbook build`, deployed live (Actions run 26924773565); existing 1부–7부 + 부록 A/B/C byte-unchanged; `deploy.yml` untouched.
+- **The finding (mixed/inconclusive — itself the result):** an expert-authored plan helps the 35B mainly when the task is **out-of-distribution** — F# Arm A 1/3 reps PASS vs Arm B 0/3 (the lone F# success came from the Claude plan navigating FsLex/FsYacc wiring). For **in-distribution** work the 35B self-plans just as well — Scala Arm A 3/3 vs Arm B 2/3 + 1 PARTIAL; Rust both arms 3/3 with zero error-fix cycles. This extends the standing **"capability is domain-distribution, not model size"** thesis onto the *planning* axis. Timing carried a cache/run-order confound and was explicitly not read as a planning-quality signal.
+- **Milestone audit — PASSED (12/12 requirements, integration 6/6):** the recurring 1-based event-numbering tech debt did **not** recur this time. Six non-blocking cosmetic TDs carried forward (TD-11 vacuous gate assertion; TD-12 `__pycache__` gitignore; TD-13 batch-vs-individual event citation; plus 부록 C TD-2/TD-3/TD-5).
+
+**Stats:**
+
+- 부록 D: 1 new chapter (`src/appendix-d-planning-comparison.md`, 287 lines) + 1-line SUMMARY.md wiring; `captured-planning/` under the Phase-13 archive: 18 run JSONLs + 18 per-run metrics + 6 per-arm metrics.json + 3 comparison.json + 6 planning artifacts + PLAN-COMPARISON-QUALITATIVE.md + CAPTURE-MANIFEST.md + metrics_extractor.py (patched) + aggregate_metrics.py
+- 3 phases, 10 plans, ~14 task commits (30 commits total incl. docs) over 2026-06-02 → 2026-06-04
+- Study scale: 18 captured runs (6 example×arm cells × n=3). Single-model (35B). No token metrics (no `usage` in JSONL).
+
+**Git range:** `milestone-v1.3` tag → `milestone-v1.4` tag
+
+**Process note:** This was the first milestone whose object of study was the **planning step itself**, not a new program — every prior milestone used Claude-authored task decomposition without testing whether it helped. The one genuine wrinkle (a buggy reused measurement tool) was caught before the gate and fixed by patching the tool + re-running all captures, never by hand-editing outputs.
+
+**What's next:** Open candidates (no commitment): **EXT-08** extend the planning comparison to the 122B or add the SDK `PlanningAgent` as a third arm; **EXT-07** cross-language "calculator in 3 languages" appendix; **EXT-01** more-language examples (Go/Python); **EXT-06** 35B-vs-122B on Rust/Scala; **EXT-02** English translation; or sweep the carried 부록 C debt (TD-2/TD-3/TD-5) + v1.4 cosmetics (TD-11/TD-12/TD-13).
+
+---
+
 ## v1.3 Scala Example (Shipped: 2026-06-01)
 
 **Delivered:** A third worked example — the same local Qwen **35B** built a minimal **Scala 3 arithmetic calculator** (`scala-cli`, hand-rolled recursive-descent parser, std-only), captured honestly and published as **7부 "다른 워킹 예제 - Scala 계산기"**. This **completes the "calculator trilogy"**: the model that needed a scaffolded FsLex lexer for the *F# calculator* in v1 wrote the *same calculator* in Scala **unaided on attempt 1**.

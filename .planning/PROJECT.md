@@ -15,7 +15,9 @@ A reader can finish the tutorial understanding what agentic AI is — and, by fo
 watch OpenHands (on a local Qwen server) autonomously plan, build, test, and run a real F#
 FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 
-## Current Milestone: v1.4 — Planning Comparison (Claude-led vs OpenHands-native task planning)
+## Last Milestone: v1.4 — Planning Comparison (SHIPPED 2026-06-04 · Claude-led vs OpenHands-native task planning)
+
+> ✅ Shipped 2026-06-04 — 부록 D live. **Result (mixed/inconclusive — itself the finding):** an expert-authored plan helps the 35B mainly when the task is **out-of-distribution** (F# Arm A 1/3 vs Arm B 0/3); for in-distribution work the 35B self-plans just as well (Scala 3/3 vs 2/3+PARTIAL; Rust 3/3 tie). Extends "distribution, not size" onto the planning axis. The goal/target detail below is retained for history. Next milestone: run `/gsd:new-milestone`.
 
 **Goal:** For the three existing worked examples — F# FsLex/FsYacc calculator, Rust HTTP server, Scala 3 calculator — capture and compare two task-planning regimes on the local **35B**, then publish the findings as a new 부록 D. **Arm A (Claude-led):** Claude authors the task decomposition, it is converted into an OpenHands-consumable plan, and OpenHands executes it. **Arm B (OpenHands-native):** OpenHands is given the whole goal in a single prompt and plans + decomposes + executes it itself. Research question: **does who plans (Claude vs OpenHands itself) change execution efficiency?**
 
@@ -68,14 +70,18 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 - ✓ Re-published the updated book (live on GitHub Pages; 7부 reachable from sidebar) — v1.3
 - ✓ Completed the "calculator trilogy" (F# scaffolded / Rust unaided / Scala unaided) — confirms the 35B's limit is domain-distribution, not model size — v1.3
 
+<!-- Shipped in v1.4 (2026-06-04). Live: https://ohama.github.io/Openhands-Tutorial/appendix-d-planning-comparison.html -->
+
+- ✓ Captured, per example (F# / Rust / Scala) on the 35B, two planning arms — Arm A (Claude-authored numbered plan → executed) and Arm B (bare goal → 35B self-plans via its task tracker → executes) — at **n=3** per cell (18 real JSONL runs), both planning artifacts saved (`claude-plan.md` + verbatim `oh-self-plan.md`), 18/18 `source=agent` honesty gates PASS — v1.4
+- ✓ Extracted per-arm metrics from the captured JSONL (TerminalAction & event counts, wall-clock + per-call gap, error-fix cycles, canonical-test pass/fail) into per-arm `metrics.json` (median/min–max) + per-example `comparison.json`; P3 token metrics dropped (no `usage` in JSONL) — v1.4
+- ✓ Added 부록 D "계획 방식 비교 — Claude 계획 vs OpenHands 자체 계획", written verbatim from the committed capture, honest about the mixed/inconclusive result (an expert plan helps mainly on the OOD F# task; in-distribution Scala/Rust self-plan just as well) — v1.4
+- ✓ Re-published live on GitHub Pages (HTTP 200 root + 부록 D + sidebar; `deploy.yml` unmodified) — v1.4
+
 ### Active
 
-<!-- v1.4 Planning Comparison — started 2026-06-01. Phases 12+. Claude-led vs OpenHands-native task planning, on 35B, across F#/Rust/Scala, published as 부록 D. -->
+<!-- No active milestone. v1.4 shipped 2026-06-04. Start the next milestone with /gsd:new-milestone (which defines fresh requirements). Open candidates are tracked in STATE.md "Candidate next milestones" + MILESTONES.md "What's next". -->
 
-- [ ] Capture, per example (F# / Rust / Scala) on 35B, two planning arms: Arm A (Claude-authored task plan → converted to an OpenHands-consumable plan → executed) and Arm B (OpenHands given the whole goal in one prompt → self-plans + executes), with both planning artifacts saved
-- [ ] Extract per-arm metrics from the captured JSONL: retries/error-fix cycles, wall-clock + per-call time, LLM-call & TerminalAction counts, final canonical-test pass/fail
-- [ ] Add a new 부록 D "계획 방식 비교: Claude 계획 vs OpenHands 자체 계획" chapter, written verbatim from the captured comparison data (honest about mixed/inconclusive results)
-- [ ] Re-publish the updated book (live on GitHub Pages)
+(None — between milestones. Run `/gsd:new-milestone` to scope the next one.)
 
 <!-- Deferred to later milestones (carried forward):
      - EXT-01 expansion: Go / Python / other-language worked examples following the Rust precedent
@@ -145,6 +151,9 @@ FsLex/FsYacc calculator. The OpenHands run is the proof that agentic AI works.
 | v1.2: per-call timing must cite real measurements, never the v1 `~14–32s/call` pre-run prediction | Honesty core value — predictions never presented as measurements (the same correction v1.1 made for 부록 C) | ⚠️ Caught in audit — 6부 had re-introduced the prediction; fixed to derived ~5.3s/call before close-out (TD-6) |
 | v1.3: third example = the *same calculator goal* as v1, but in Scala (hand-rolled recursive descent, std-only) | Closes the "calculator trilogy" and isolates the distribution axis — same goal that needed a scaffolded FsLex lexer in F# | ✓ Good — 35B wrote it unaided in Scala 3; capability is domain-distribution, not size |
 | v1.3: document what the agent actually wrote, not the assumed design | The pre-run scope assumed a `sealed trait Expr` ADT; the agent used direct recursive descent (no ADT) | ✓ Good — caught at plan time; chapter honestly notes the no-ADT reality instead of claiming the assumed ADT |
+| v1.4: make the *planning step itself* the object of study — a fair A/B (Arm A Claude plan vs Arm B 35B self-plan) on the same model + goals, symmetric prompts enforced by a literal diff | Every prior milestone used Claude-authored task decomposition without testing whether it helped | ✓ Good — mixed/inconclusive result reported honestly; an expert plan helps mainly on the OOD F# task, not in-distribution Scala/Rust |
+| v1.4: both arms use the default headless CodeActAgent (Arm B self-plans via its TaskTracker); no SDK PlanningAgent | Single-session headless constraint; keeps the only difference "who planned," not "how the plan is delivered" | ✓ Good — 35B emitted TaskTracker steps unaided in Arm B; clean qualitative contrast (Arm A 0 tracker events) |
+| v1.4: when a reused measurement tool is found wrong, fix the tool deterministically + re-run all inputs, never hand-edit outputs | Honesty core value — the canonical detector mis-scored (false-FAILs + nulls); reconciling outputs by hand would be unverifiable | ✓ Good — patched detector reproduced the JSONL-event-cited RUN-NOTES exactly (commit `b7a74b9`), zero nulls |
 
 ---
-*Last updated: 2026-06-01 — started v1.4 milestone (Planning Comparison: Claude-led vs OpenHands-native task planning, 35B, across F#/Rust/Scala)*
+*Last updated: 2026-06-04 after v1.4 milestone (Planning Comparison) shipped. Between milestones — next: `/gsd:new-milestone`.*

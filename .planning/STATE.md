@@ -2,21 +2,20 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
+See: .planning/PROJECT.md (updated 2026-06-04 — v1.4 shipped; between milestones)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — COMPLETE. Phase 14 DONE (3/3 plans). 부록 D live at https://ohama.github.io/Openhands-Tutorial/appendix-d-planning-comparison.html (Actions run 26924773565 green, live HTTP 200, sidebar confirmed). v1.4 milestone shipped.
+**Current focus:** BETWEEN MILESTONES. v1.4 Planning Comparison SHIPPED + archived 2026-06-04 (tag `milestone-v1.4`). Next: run `/gsd:new-milestone` to scope the next version (open candidates in "Candidate next milestones" below + MILESTONES.md "What's next").
 
 ## Current Position
 
-Milestone: v1.4 (Planning Comparison) — COMPLETE (shipped 2026-06-04). Phase 12 done; Phase 13 done; Phase 14 done (3/3 plans).
-Phase: 14 — 부록 D Chapter + Publish — COMPLETE (3/3 plans).
-Plan: 14-01 COMPLETE. 14-02 COMPLETE. 14-03 COMPLETE.
-Status: 부록 D live (2026-06-04). Pushed to origin/main (616bb45); Actions run 26924773565 succeeded (build 6s + deploy 9s); live root HTTP 200; appendix-d-planning-comparison.html HTTP 200; live toc-7239dd3a.js confirms sidebar entry. v1.4 COMPLETE.
-KEY v1.4 FINDINGS (authoritative — post detector fix b7a74b9): (1) F# OOD confirmed: arm-a 1/3 PASS (single run), arm-b 0/3 PASS. (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 PASS + 1 PARTIAL. (3) Rust both arms 3/3 PASS, zero error-fix cycles. (4) Task tracker arm-b all examples (Rust: median 7 obs, Scala: 5 obs, F#: median 7 obs); arm-a 0 in all. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order confound — not a planning-quality signal.
-Last activity: 2026-06-04 — Phase 14 plan 03 executed; pushed to main; Actions deploy green; 부록 D live and in sidebar.
+Milestone: v1.4 (Planning Comparison) — ✅ SHIPPED + ARCHIVED 2026-06-04. Between milestones; ready to plan the next one.
+Phase: none active (Phases 12–14 archived to `milestones/v1.4-phases/`). `/gsd:new-milestone` starts the next cycle (questioning → research → requirements → roadmap).
+Status: v1.4 live (부록 D, HTTP 200). Milestone audit PASSED (12/12 requirements, integration 6/6) → archived `milestones/v1.4-MILESTONE-AUDIT.md`. ROADMAP collapsed; REQUIREMENTS archived + reset; phases archived.
+v1.4 RESULT (one-liner; full detail in milestones/v1.4-ROADMAP.md + MILESTONES.md): an expert-authored plan helps the 35B mainly on the OOD task (F# Arm A 1/3 vs Arm B 0/3); in-distribution it self-plans just as well (Scala 3/3 vs 2/3+PARTIAL; Rust 3/3 tie). Distribution, not size — now on the planning axis.
+Last activity: 2026-06-04 — v1.4 milestone completed and archived (MILESTONES/ROADMAP/REQUIREMENTS/PROJECT/STATE updated; tag milestone-v1.4).
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 + v1.4 shipped (14 phases, 38 plans complete). v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4); Phase 14 ✓ (3/3).
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 + v1.4 shipped (14 phases, 38 plans complete). Between milestones.
 Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison · 부록 D planning comparison)
 
 ## Cumulative History
@@ -39,35 +38,12 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - [35B capability]: domain-distribution, not size — fails OOD DSLs (FsLex) but writes in-distribution languages (Rust std, Scala 3) unaided; errors it makes are teachable in-distribution mistakes (borrow-checker, access modifiers).
 - [publish]: book deploys to GitHub Pages via `.github/workflows/deploy.yml` on push to `main` (do NOT modify); mdbook sidebar nav is JS-rendered from `toc-{hash}.js` — verify live sidebar there. One accepted build warning: the `<char>` tag in 부록 C (TD-4).
 
-### v1.4 decisions (new this milestone)
+### v1.4 decisions (archived — full detail in milestones/v1.4-phases/ + milestones/v1.4-ROADMAP.md)
 
-- [v1.4 study design]: One OpenHands invocation per arm per example (single-session constraint); BOTH arms use the default CodeActAgent via established headless CLI (no SDK PlanningAgent); Arm A uses `-f plan.txt` or pre-written `.agents_tmp/PLAN.md`; Arm B prompt: control block + "Plan your own implementation steps using the task tracker, then execute each step."
-- [v1.4 prompt symmetry]: Arm A and Arm B prompts share an identical control block (goal wording, constraints, canonical tests); the ONLY difference is whether a numbered task plan is supplied (Arm A) or withheld (Arm B). A literal diff is mandatory before any invocation.
-- [v1.4 workspace isolation]: `oh-workdir-planning/` is gitignored; each arm gets its own empty directory; workspace empty verified before each run.
-- [v1.4 run order counterbalancing]: litellm proxy restarted between arms OR run order counterbalanced (e.g., Arm B first for F#, Arm A first for Rust, Arm B first for Scala) to mitigate KV-cache prefix warmth.
-- [v1.4 repetition policy]: n=3 preferred (median + min–max); n=1 acceptable floor with explicit `(단일 실행)` label on every metric. Never use "significantly," "consistently," or "reliably" at n=1.
-- [v1.4 metrics]: P1 (auto from JSONL): TerminalAction count, total event count, wall-clock active time, error-fix cycle count, AgentErrorEvent count, canonical-test pass/fail. P2: avg/min/max LLM-call gap, time-to-first-correct, qualitative plan comparison. P3 (only if `usage` in JSONL): token counts — confirm in Phase 12 pilot before committing to P3.
-- [v1.4 framing rule]: 부록 D frames the study as "does an expert-authored plan help the 35B execute?" — NOT "Claude plans better." Inconclusive/mixed results are valid findings, reported honestly.
-- [v1.4 artifact layout]: `captured-planning/` under `.planning/milestones/v1.4-phases/12-planning-comparison-harness/`; structure per example: `arm-a/` and `arm-b/` each with `logs/run.jsonl`, `planning-artifact/`, `final-source/`, `test-output.txt`, `metrics.json`; plus `comparison.json` per example; plus top-level `CAPTURE-MANIFEST.md`.
-- [v1.4 open unknowns — to resolve in Phase 12 pilot]: (1) Does the Qwen 35B emit `TaskTrackerObservation` events at the chosen Arm B prompt phrasing? (2) Is `usage` data (prompt/completion tokens) present in the JSONL ObservationEvents? — metrics_extractor.py now emits task_tracker_observation_count and usage_present to answer both automatically.
-- [12-01 symmetry evidence]: PROMPT-DIFF-rust.txt records control-block diff with CONTROL-BLOCK SYMMETRY: PASS. Literal diff saved before any live run.
-- [12-01 Arm A conversion]: Mechanical — v1.2 task1/2/3 → 3 numbered single-session steps. No new planning detail. No scaffolded source.
-- [12-01 extractor 1-based]: metrics_extractor.py uses enumerate(events, start=1) throughout; ARCHITECTURE.md 0-based snippet explicitly converted. Self-validated with clean+dirty fixtures.
-- [13-01 F# canonical command]: `dotnet run -- "<expr>"` — frozen; do not change before any arm is run.
-- [13-01 Scala canonical command]: `scala-cli run Calc.scala -- "<expr>"` — frozen; do not change before any arm is run.
-- [13-01 F# fairness rule]: Arm A claude-plan DESCRIBES fslex/fsyacc build wiring (FixLineDirectives, compile order) as required steps but embeds NO .fsproj XML, NO Lexer.fsl, NO Parser.fsy, NO Program.fs source. Both arms write all source themselves. F# may FAIL in both arms (OOD) — valid data.
-- [13-01 symmetry evidence]: PROMPT-DIFF-fsharp.txt + PROMPT-DIFF-scala.txt both end with CONTROL-BLOCK SYMMETRY: PASS. Literal diffs saved before any live run.
-    - [13-02 idle-settle]: Idle-settle (3 consecutive polls with same last_ts) is reliable but runs CAN continue after apparent settle; final event count in committed JSONL is authoritative.
-    - [13-02 Rust prompt tokens]: Phase-12 Rust prompts use hardcoded workspace paths, NOT `__WORKDIR__` tokens. Top-up runs must use `sed "s#$OLD_PATH#$NEW_PATH#g"`.
-    - [13-02 F# result]: arm-a 1/3 PASS, arm-b 0/3 PASS. OOD confirmed at n=3. For 부록 D: Arm A run-1 PASS shows claude plan CAN help navigate OOD task; but 5/6 runs overall failed on FsLex/FsYacc.
-    - [13-02 Scala result]: arm-a 3/3 PASS, arm-b ~3/3 PASS (2 PASS + 1 PARTIAL-PASS). In-distribution; both arms broadly succeed.
-    - [13-02 Rust result]: both arms 3/3 PASS. In-distribution; highly reliable.
-    - [13-03 extractor first-match]: metrics_extractor.py (REUSED AS-IS) matches the FIRST ObservationEvent whose command contains the test expression. Multi-line heredoc writes (cat <<'EOF'...) embed the expression in the command string, causing false-negative FAILs. Extractor results document this via extractor_note; authoritative outcomes are in 13-02-RUN-NOTES.md. Do NOT fix the extractor retroactively.
-    - [13-03 canonical_tests authoritative source]: For 부록 D, cite 13-02-RUN-NOTES.md pass/fail matrix, NOT comparison.json canonical_test_pass_counts (which reflect extractor first-match). comparison.json IS authoritative for P1/P2 numeric metrics.
-    - [13-03 task_tracker metrics]: arm-b shows task_tracker_observation_count across all 3 examples (Rust: median 7, Scala: 9, F#: 4–8); arm-a shows 0 in all examples. Confirms Arm B self-planned via tracker in every run.
-    - [13-03 timing caveat]: Rust arm-a wall_clock median 48.3s vs arm-b 66.8s; Scala arm-b wall_clock median ~936s vs arm-a ~345s (arm-b ran first = colder cache). F# arm-a much higher wall_clock (OOD task, more attempts). All timing deltas carry cache/run-order confound — not planning-quality signals.
-    - [13-04 capture gate]: PHASE 13 CAPTURE GATE CLOSED at 641f7ea (2026-06-04). Gate assertion: 6/6 metrics.json honesty_gate=PASS, all canonical_tests populated (no null). Canonical FAILs (F# OOD) are valid data and do NOT block the gate. CAPTURE-MANIFEST.md is THE gate artifact; Phase 14 (부록 D) is unblocked.
-    - [13-04 canonical authoritative source]: After canonical-detector fix (b7a74b9), metrics.json/comparison.json canonical_tests now agree with 13-02-RUN-NOTES.md for all reps. Either source may be cited in 부록 D; comparison.json is authoritative for P1/P2 numeric metrics.
+v1.4 (Planning Comparison) shipped; its phase-specific decisions are archived. The reusable distillation that carries forward:
+- [v1.4 method, reusable]: A/B planning capture = identical control block + literal symmetry diff (`CONTROL-BLOCK SYMMETRY: PASS`) before any run; one headless CodeActAgent invocation per arm; arm-isolated gitignored workspaces; counterbalanced run order; n=3 (median + min–max), `(단일 실행)` only for single-run prose; judge from JSONL never the exit code. Framing: "does an expert plan help the 35B execute?" — not "Claude plans better."
+- [v1.4 result, carry-forward]: distribution-not-size holds on the **planning axis** — an expert plan helps mainly on the OOD task (F#); in-distribution (Rust/Scala) the 35B self-plans just as well via its TaskTracker (Arm B emits tracker steps; Arm A 0). No token `usage` in the JSONL → no token metrics. Timing has a cache/run-order confound — never a planning-quality signal.
+- [v1.4 tooling note]: the canonical-test detector in `metrics_extractor.py` needs genuine run-command matching ("any successful run" semantics), NOT first-substring-match — the first-match version produced false-FAILs/nulls and was fixed mid-milestone (`b7a74b9`). The patched copy + `aggregate_metrics.py` live in `milestones/v1.4-phases/13-full-study-fsharp-scala-analysis/`. (Superintends/replaces the earlier "do not fix the extractor" note, which was pre-fix.)
 
 ### Open tech debt (deferrable; carried forward — not yet addressed)
 
@@ -94,6 +70,7 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 
 ## Session Continuity
 
-Last session: 2026-06-04T01:43–01:44Z
-Stopped at: Completed 14-03-PLAN.md (pushed to origin/main; Actions run 26924773565 green; 부록 D live HTTP 200; sidebar confirmed; 14-03-SUMMARY.md + STATE.md updated). Phase 14 complete. v1.4 milestone complete.
-Resume file: None — no active plan. Next milestone: see Candidate next milestones section.
+Last session: 2026-06-04
+Stopped at: v1.4 milestone COMPLETED + ARCHIVED. ROADMAP collapsed (v1.4 → `<details>` + archive link); REQUIREMENTS archived to milestones/v1.4-REQUIREMENTS.md and reset; audit moved to milestones/v1.4-MILESTONE-AUDIT.md; phases 12–14 moved to milestones/v1.4-phases/; MILESTONES.md + PROJECT.md updated; tag `milestone-v1.4`.
+Resume file: None — between milestones. Next: `/gsd:new-milestone` (questioning → research → requirements → roadmap). Open candidates in "Candidate next milestones" + MILESTONES.md "What's next".
+Note: local branch is ahead of origin/main by the planning-doc commits since `7d5783a` (the live deploy); push when convenient — the live site does not depend on them.
