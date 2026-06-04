@@ -8,7 +8,7 @@
 
 세 예제(F# FsLex/FsYacc 계산기, Rust HTTP 서버, Scala 3 계산기)에서 각각 두 Arm을 n=3 반복 실행했다. 모든 수치와 주장은 커밋된 `captured-planning/` 아티팩트에서 직접 인용한 것이다.
 
-> **후속 실험 (§6):** 본 2-Arm 연구가 끝난 뒤, GSD 다중 에이전트 파이프라인으로 생성한 **코드 없는** 전문가 계획을 세 번째 조건 **Arm C**로 캡처했다(2026-06-04, Rust, n=1 단독). 이는 본 n=3 연구와 카운터밸런스되지 않은 별개 보충 실험이므로 타이밍을 직접 비교하지 않는다 — 자세한 내용은 §6 참조.
+> **후속 실험 (§6):** 본 2-Arm 연구가 끝난 뒤, GSD 다중 에이전트 파이프라인으로 생성한 **코드 없는** 전문가 계획을 세 번째 조건 **Arm C**로 세 예제 모두(Rust·F#·Scala) 캡처했다(2026-06-04, 각 n=1 단독). 결과는 Arm A 패턴과 일치 — in-distribution(Rust·Scala) PASS, OOD(F#) FAIL. 본 n=3 연구와 카운터밸런스되지 않은 별개 보충 실험이므로 타이밍은 직접 비교하지 않는다 — 자세한 내용은 §6 참조.
 
 ---
 
@@ -276,7 +276,7 @@ Rust (분포 내)에서 두 Arm 모두 3/3 PASS, 오류 수정 사이클 0회. �
 
 위 §1–5의 2-Arm 연구(Arm A 전문가 계획 vs Arm B 자체 계획)가 완료된 후 한 가지 후속 질문이 제기됐다: **전문가 계획을 "사람이 손으로" 작성하는 대신, 구조화된 다중 에이전트 파이프라인(research → plan → verify)으로 생성하면 어떻게 되는가?** 이를 위해 GSD(Get-Shit-Done) 워크플로의 실제 계획 에이전트를 돌려 세 번째 계획을 만들었고, 이를 **Arm C**라 부른다.
 
-이 절은 **단일 예제(Rust HTTP 서버)에 대한 n=1 단독 보충 캡처**다. §1–5의 본 연구(2026-06-02 캡처, n=3)와는 별개이며, 캐시 온도·실행 순서가 통제되지 않았으므로 **타이밍을 Arm A/B와 직접 비교할 수 없다**. 이 캡처가 답하는 질문은 타이밍 경쟁이 아니라 **"실패 모드를 알려주되 코드를 주지 않는 전문가 계획으로 35B가 std-only Rust 서버를 스스로 작성해 통과시킬 수 있는가?"** 라는 feasibility 질문이다.
+이 절은 세 예제 모두(Rust=§6.1–6.7, F#·Scala=§6.8)에 대한 **n=1 단독 보충 캡처**다. §1–5의 본 연구(2026-06-02 캡처, n=3)와는 별개이며, 캐시 온도·실행 순서가 통제되지 않았으므로 **타이밍을 Arm A/B와 직접 비교할 수 없다**. 이 캡처가 답하는 질문은 타이밍 경쟁이 아니라 **"실패 모드를 알려주되 코드를 주지 않는 전문가 계획으로 35B가 과제를 스스로 작성해 통과시킬 수 있는가?"** 라는 feasibility 질문이다. (§6.1–6.7은 Rust 사례로 방법을 상술하고, §6.8이 F#·Scala로 확장해 3-arm 비교를 마무리한다.)
 
 ### 6.1 동기 — GSD 원본 계획은 정답 코드를 포함한다
 
@@ -364,6 +364,27 @@ GSD `01-PLAN.md`를 다음 규칙으로 변환했다 (전체 기록: `gsd-mechan
 
 (출처: `.planning/milestones/v1.4-phases/15-arm-c-mechanical-capture/15-CAPTURE-MANIFEST.md`)
 
+### 6.8 F# + Scala 확장 (Phase 16) — Arm C 3-언어 비교
+
+Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다: GSD 파이프라인(research→plan→verify, 둘 다 PASS) → 코드 없는 mechanical 변환(control-block symmetry 둘 다 PASS) → 35B 캡처(각 n=1, 2026-06-04).
+
+**정규 테스트 결과 — Arm A/B/C 3-arm 비교:**
+
+| 예제 | Arm A (Claude 계획, n=3) | Arm B (자체 계획, n=3) | **Arm C-mech (GSD 코드없음, n=1)** |
+|------|--------------------------|------------------------|------------------------------------|
+| F# (OOD) | 1/3 PASS | 0/3 PASS | **FAIL** |
+| Scala (in-dist) | 3/3 PASS | 2/3 + 1 PARTIAL | **PASS** (14/20/5) |
+| Rust (in-dist) | 3/3 PASS | 3/3 PASS | **PASS** (§6.5) |
+
+- **F# (OOD): FAIL.** 빌드가 `Lexer.fsl(6): parse error`로 실패 — 35B가 FsLex `.fsl` DSL 문법을 유효하게 작성하지 못했다. 실패 모드를 prose로 상세히 알려줘도 소용없었고, 오히려 두 Phase 13 arm보다 **더 헤맸다**(TerminalActions 213, 오류 수정 37회 vs Arm A 중앙값 80/21). 세션 내 37회 자가 수정으로도 복구하지 못함.
+- **Scala (in-dist): PASS.** 35B가 관용적 재귀 하향 계산기(while-loop 좌측 폴드)를 직접 작성, 3/3 통과; 풋프린트는 Arm A와 유사(TerminalActions 37, 오류 수정 2회). 호스트 재실행으로 14/20/5 확인.
+
+**해석:** 실패 모드를 알려주되 코드를 숨기는 전문가 계획(Arm C-mech)은 Arm A와 같은 패턴을 보인다 — **in-distribution(Rust·Scala)에서는 35B를 성공시키지만 OOD(F# FsLex/FsYacc)는 끝내 넘기지 못한다.** 병목은 계획 품질이 아니라 모델이 DSL 문법 자체를 쓸 수 없다는 점이다. **"크기가 아니라 분포"** 명제가 Arm C(코드 없는 전문가 계획) 축에서도 확인된다.
+
+> **주의 (필독):** Arm C 캡처는 모두 **n=1 단독**이며 Phase 13(n=3, 2026-06-02)과 카운터밸런스되지 않았다 — **타이밍/풋프린트를 arm 간 정량 비교해서는 안 되며** PASS/FAIL feasibility 관찰로만 읽어야 한다. 측정 도구(canonical detector)는 Phase 12 버전이 Scala를 오채점하여 **수정된 Phase 13 extractor로 재채점**했고, 두 결과 모두 호스트에서 ground-truth 검증했다.
+
+(출처: `.planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md`)
+
 ---
 
 ## 7. 출처 (Sources)
@@ -392,3 +413,12 @@ GSD `01-PLAN.md`를 다음 규칙으로 변환했다 (전체 기록: `gsd-mechan
 - `.../arm-c/planning-artifact/PROMPT-DIFF.txt` — 제어 블록 대칭 증거 (CONTROL-BLOCK SYMMETRY: PASS)
 - `.../arm-c/planning-artifact/RESEARCH.md` · `gsd-01-PLAN.md` — GSD 파이프라인 원본 산출물 (리서치·계획)
 - `.../arm-c/final-source/src/main.rs` — 35B가 직접 작성한 Rust 서버 소스
+
+**§6.8 Arm C — F# + Scala 확장 (Phase 16):**
+
+- `.planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md` — F#/Scala Arm C 캡처 정본 (3-arm 비교표, 오채점→수정 detector 재채점, ground-truth 검증, caveat)
+- `.../16-.../16-SUMMARY.md` — Phase 16 요약
+- `.../16-.../captured-planning/{fsharp,scala}/arm-c/metrics.json` — 재채점 지표 (Scala PASS 3/3; F# FAIL)
+- `.../{fsharp,scala}/arm-c/planning-artifact/{RESEARCH.md, 01-PLAN.md, oh-prompt.txt, PROMPT-DIFF.txt}` — GSD 원본 산출물 + 코드 없는 프롬프트 + 대칭 증거
+- `.../{fsharp,scala}/arm-c/final-source/` — 35B가 직접 작성한 소스 (Scala Calc.scala PASS; F# Lexer.fsl/Parser.fsy 등 — 빌드 실패)
+- `.../{fsharp,scala}/arm-c/test-output.txt` — fresh host ground-truth (Scala 14/20/5 PASS; F# build FAIL)
