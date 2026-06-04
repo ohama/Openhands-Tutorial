@@ -62,10 +62,10 @@ Deferred to later milestones: EXT-07 (cross-language "calculator in 3 languages"
 | PCAP-03 | Phase 13 | Complete |
 | ANAL-01 | Phase 13 | Complete |
 | ANAL-02 | Phase 13 | Complete |
-| DCHAP-01 | Phase 14 | Pending |
-| DCHAP-02 | Phase 14 | Pending |
-| DPUB-01 | Phase 14 | Pending |
-| DPUB-02 | Phase 14 | Pending |
+| DCHAP-01 | Phase 14 | Complete |
+| DCHAP-02 | Phase 14 | Complete |
+| DPUB-01 | Phase 14 | Complete |
+| DPUB-02 | Phase 14 | Complete |
 
 **Coverage:**
 - v1.4 requirements: 12 total

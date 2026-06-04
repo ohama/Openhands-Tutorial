@@ -6,7 +6,7 @@
 - ✅ **v1.1 Model Comparison (35B vs 122B)** — Phases 6–7 (shipped 2026-05-28) — [archive](milestones/v1.1-ROADMAP.md)
 - ✅ **v1.2 Rust Example** — Phases 8–9 (shipped 2026-06-01) — [archive](milestones/v1.2-ROADMAP.md)
 - ✅ **v1.3 Scala Example** — Phases 10–11 (shipped 2026-06-01) — [archive](milestones/v1.3-ROADMAP.md)
-- 🚧 **v1.4 Planning Comparison** — Phases 12–14 (in progress)
+- 🚧 **v1.4 Planning Comparison** — Phases 12–14 (all phases ✓; pending milestone audit/archive)
 
 ## Phases
 
@@ -210,9 +210,11 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 14-01-PLAN.md — Write src/appendix-d-planning-comparison.md from committed captured-planning/ artifacts + inline honesty audit
-- [ ] 14-02-PLAN.md — Wire 부록 D into SUMMARY.md, clean mdbook build (DPUB-01), commit chapter + SUMMARY
-- [ ] 14-03-PLAN.md — Push to main, watch Actions deploy, verify live HTTP 200 + sidebar (DPUB-02)
+- [x] 14-01-PLAN.md — Write src/appendix-d-planning-comparison.md from committed captured-planning/ artifacts + inline honesty audit
+- [x] 14-02-PLAN.md — Wire 부록 D into SUMMARY.md, clean mdbook build (DPUB-01), commit chapter + SUMMARY
+- [x] 14-03-PLAN.md — Push to main, watch Actions deploy, verify live HTTP 200 + sidebar (DPUB-02)
+
+**Outcome:** 부록 D "계획 방식 비교 — Claude 계획 vs OpenHands 자체 계획" (287 lines) written verbatim from the committed Phase-13 capture, wired after 부록 C, built clean (only the accepted TD-4 `<char>` warning), and deployed live (Actions run 26924773565). All numbers trace to comparison.json/CAPTURE-MANIFEST (n=3 median(min–max); 1-based event #s); framing is "does an expert plan help the 35B execute?"; mixed/inconclusive results reported honestly (F# 1/3 vs 0/3; Scala 3/3 vs 2/3+PARTIAL; Rust 3/3 tie). `~14–32s/call` absent. Existing 1부–7부 + 부록 A/B/C byte-unchanged; deploy.yml untouched. Live HTTP 200 root + 부록 D + sidebar. Verified 4/4. ✓ Complete 2026-06-04.
 
 **Requirements:** DCHAP-01, DCHAP-02, DPUB-01, DPUB-02
 
@@ -251,4 +253,4 @@ Plans:
 | 11. 7부 Chapter + Publish | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 12. Harness + Rust Pilot | v1.4 | 3/3 | ✓ Complete | 2026-06-02 |
 | 13. Full Study (F# + Scala) + Analysis | v1.4 | 4/4 | ✓ Complete | 2026-06-04 |
-| 14. 부록 D Chapter + Publish | v1.4 | 0/3 | Planned | — |
+| 14. 부록 D Chapter + Publish | v1.4 | 3/3 | ✓ Complete | 2026-06-04 |
