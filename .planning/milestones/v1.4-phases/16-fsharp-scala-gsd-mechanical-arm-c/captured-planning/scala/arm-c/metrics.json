@@ -1,0 +1,159 @@
+{
+  "study": "v1.4-planning-comparison",
+  "example": "scala",
+  "arm": "arm-a",
+  "run_date": "2026-06-04",
+  "model": "openai/qwen-35b",
+  "prompt_file": ".planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/captured-planning/scala/arm-c/planning-artifact/oh-prompt.txt",
+  "event_counts": {
+    "total_events": 80,
+    "MessageEvent": 2,
+    "ActionEvent": 39,
+    "ObservationEvent": 39
+  },
+  "terminal_actions": {
+    "count": 37,
+    "commands": [
+      "scala-cli version",
+      "cat > Calc.scala << 'EOF'\nimport scala.annotation.tailrec\n\nobject Calc:\n  @main def main(): Unit =\n    val args = scala.",
+      "cat Calc.scala",
+      "rm -f Calc.scala",
+      "python3 -c \"\ncontent = '''import scala.annotation.tailrec\n\nobject Calc:\n  @main def main(): Unit =\n    val args = scala.",
+      "wc -l Calc.scala && head -5 Calc.scala && echo \"---\" && tail -5 Calc.scala",
+      "sed -n '40,50p' Calc.scala",
+      "rm -f Calc.scala",
+      "cat > /tmp/write_calc.py << 'PYEOF'\nimport os\n\nlines = [\n    \"import scala.annotation.tailrec\",\n    \"\",\n    \"object Calc",
+      "rm -f /tmp/write_calc.py Calc.scala",
+      "base64 -d << 'B64EOF' > /tmp/write_calc.py\naW1wb3J0IG9zCgpzY2FsYV9jb2RlID0gJycnaW1wb3J0IHNjYWxhLmFubm90YXRpb24udGFpbHJlY",
+      "C-c",
+      "rm -f /tmp/write_calc.py Calc.scala",
+      "printf '%s\\n' 'import scala.annotation.tailrec' '' 'object Calc:' '  @main def main(): Unit =' '    val args = scala.uti",
+      "printf '%s\\n' '' '  def evaluate(expr: String): Int =' '    val tokens = tokenize(expr)' '    val parser = new Parser(to",
+      "printf '%s\\n' '' '  sealed trait Token' '  case class Num(value: Int) extends Token' '  case class Op(ch: Char) extends ",
+      "printf '%s\\n' '' '  def tokenize(input: String): List[Token] =' '    @tailrec' '    def go(chars: List[Char], acc: List[",
+      "printf '%s\\n' '' '  class Parser(tokens: List[Token]):' '    private var remaining: List[Token] = tokens' '' '    privat",
+      "printf '%s\\n' '' '  def expression(parser: Parser): Int =' '    var acc = term(parser)' '    while parser.hasMore && (pa",
+      "printf '%s\\n' '' '  def term(parser: Parser): Int =' '    var acc = factor(parser)' '    while parser.hasMore && (parser",
+      "printf '%s\\n' '' '  def factor(parser: Parser): Int =' '    parser.current match' '      case Op('\"'\"'('\"'\"') =>' '     ",
+      "cat Calc.scala",
+      "scala-cli run Calc.scala -- \"2+3*4\" 2>&1; echo \"EXIT_CODE: $?\"",
+      "rm -f Calc.scala",
+      "printf '%s\\n' 'object Calc:' '  @main def main(expr: String): Unit =' '    val result = evaluate(expr)' '    println(res",
+      "printf '%s\\n' '' '  class Parser(tokens: List[Token]):' '    private var remaining: List[Token] = tokens' '' '    def ha",
+      "printf '%s\\n' '' '    def term(): Int =' '      var acc = factor()' '      while hasMore && (current == Op('\"'\"'*'\"'\"') ",
+      "cat Calc.scala",
+      "scala-cli run Calc.scala -- \"2+3*4\" 2>&1; echo \"EXIT_CODE: $?\"",
+      "rm -f Calc.scala",
+      "printf '%s\\n' 'object Calc:' '  @main def main(expr: String): Unit =' '    val result = evaluate(expr)' '    println(res",
+      "printf '%s\\n' '' '  class Parser(tokens: List[Token]):' '    private var remaining: List[Token] = tokens' '' '    def ha",
+      "printf '%s\\n' '' '    def term(): Int =' '      var acc = factor()' '      while hasMore do' '        current match' '  ",
+      "cat Calc.scala",
+      "scala-cli run Calc.scala -- \"2+3*4\" 2>&1; echo \"EXIT_CODE: $?\"",
+      "scala-cli run Calc.scala -- \"(2+3)*4\" 2>&1; echo \"EXIT_CODE: $?\"",
+      "scala-cli run Calc.scala -- \"10-3-2\" 2>&1; echo \"EXIT_CODE: $?\""
+    ]
+  },
+  "finish": {
+    "has_finish_action": false,
+    "has_conversation_error": false,
+    "settled_by": "idle-timeout"
+  },
+  "timing": {
+    "first_event_ts": "2026-06-04T15:42:21.691524",
+    "last_event_ts": "2026-06-04T15:46:29.836856",
+    "wall_clock_seconds": 248.15,
+    "llm_call_gaps_seconds": [
+      10.308,
+      3.664,
+      2.12,
+      10.709,
+      4.244,
+      1.735,
+      2.075,
+      14.847,
+      4.076,
+      37.683,
+      5.567,
+      1.409,
+      2.875,
+      2.172,
+      1.852,
+      3.373,
+      2.474,
+      2.858,
+      2.942,
+      3.009,
+      1.345,
+      2.759,
+      3.767,
+      3.413,
+      5.548,
+      4.102,
+      4.522,
+      1.385,
+      2.557,
+      5.353,
+      8.569,
+      5.655,
+      3.957,
+      4.386,
+      1.276,
+      2.584,
+      2.293,
+      2.271
+    ],
+    "avg_llm_call_gap_seconds": 4.89,
+    "min_llm_call_gap_seconds": 1.28,
+    "max_llm_call_gap_seconds": 37.68
+  },
+  "error_fix_cycles": {
+    "nonzero_exit_count": 2,
+    "cycle_count": 2,
+    "cycles": [
+      {
+        "error_event_index": 19,
+        "error_exit_code": 1,
+        "error_command_excerpt": "cat > /tmp/write_calc.py << 'PYEOF'\nimport os\n\nlines = [\n    \"import scala.annotation.tailrec\",\n    \"\",\n    \"object Calc",
+        "fix_event_index": 20,
+        "fix_command_excerpt": "rm -f /tmp/write_calc.py Calc.scala"
+      },
+      {
+        "error_event_index": 23,
+        "error_exit_code": -1,
+        "error_command_excerpt": "base64 -d << 'B64EOF' > /tmp/write_calc.py\naW1wb3J0IG9zCgpzY2FsYV9jb2RlID0gJycnaW1wb3J0IHNjYWxhLmFubm90YXRpb24udGFpbHJlY",
+        "fix_event_index": 24,
+        "fix_command_excerpt": "C-c"
+      }
+    ]
+  },
+  "canonical_tests": {
+    "2+3*4": {
+      "expected": "14",
+      "actual": "14",
+      "pass": true,
+      "event_index": 75
+    },
+    "(2+3)*4": {
+      "expected": "20",
+      "actual": "20",
+      "pass": true,
+      "event_index": 77
+    },
+    "10-3-2": {
+      "expected": "5",
+      "actual": "5",
+      "pass": true,
+      "event_index": 79
+    }
+  },
+  "honesty_gate": {
+    "result": "PASS",
+    "total_action_events_checked": 39,
+    "offending_events": []
+  },
+  "source_agent_ratio": 1.0,
+  "usage_present": false,
+  "usage_sample": null,
+  "task_tracker_observation_count": 0,
+  "task_tracker_action_count": 0
+}

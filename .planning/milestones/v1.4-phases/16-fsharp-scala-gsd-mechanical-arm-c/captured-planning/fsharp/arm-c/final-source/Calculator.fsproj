@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FsLexYacc" Version="11.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <FsYacc Include="Parser.fsy">
+      <Module>Parser</Module>
+    </FsYacc>
+    <FsLex Include="Lexer.fsl">
+      <Module>Lexer</Module>
+      <UnicodeMode>true</UnicodeMode>
+    </FsLex>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Parser.fs" />
+    <Compile Include="Lexer.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+Fresh host re-run of agent-written Scala Calc.scala (2026-06-04):
+  scala-cli run Calc.scala -- "2+3*4" → 14 (exit 0)
+  scala-cli run Calc.scala -- "(2+3)*4" → 20 (exit 0)
+  scala-cli run Calc.scala -- "10-3-2" → 5 (exit 0)
+CANONICAL: PASS 3/3 (14/20/5)

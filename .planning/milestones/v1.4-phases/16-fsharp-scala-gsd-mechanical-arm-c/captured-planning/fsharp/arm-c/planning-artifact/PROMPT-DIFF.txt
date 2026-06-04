@@ -1,0 +1,5 @@
+# Arm C (mechanical) fsharp — CONTROL-BLOCK SYMMETRY EVIDENCE (2026-06-04)
+# Masked: workdir → __WORKDIR__ token; variable block (steps) removed.
+# diff canonical-control-block vs normalized arm-c control portion:
+
+CONTROL-BLOCK SYMMETRY: PASS

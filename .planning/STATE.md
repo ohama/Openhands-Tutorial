@@ -56,6 +56,11 @@ v1.4 (Planning Comparison) shipped; its phase-specific decisions are archived. T
 - **TD-13** (v1.4, cosmetic): in 3 Scala cells the chapter/CAPTURE-MANIFEST cite the final batch-test event (#39 / #31 / #129) while the extractor's `metrics-run-N.json` `event_index` recorded the earlier individual-PASS event (#31 / #23,#25 / #57). Both are valid exit-0 PASS events; PASS/FAIL identical; chapter↔manifest self-consistent (chapter cites the manifest per convention). No data error. If reconciled, align the extractor to record the last/batch run. Found in v1.4 milestone audit.
 - (v1.2 TD-6/7/8 and v1.3 TD-9/10 were fixed during their respective milestone audits.)
 
+### Roadmap Evolution
+
+- Phase 15 added (post-v1.4 follow-up): Arm C (GSD mechanical) — Rust capture. ✅ Complete 2026-06-04; published 부록 D §6.
+- Phase 16 added (post-v1.4 follow-up): Arm C (GSD mechanical) — F# + Scala capture + comparison with Phase 13 Arm A/B. Not planned yet (`/gsd:plan-phase 16`).
+
 ### Candidate next milestones (no commitment)
 
 - EXT-07: cross-language "calculator in 3 languages" comparison appendix (F# / Scala / + future) — now natural since the trilogy is complete.

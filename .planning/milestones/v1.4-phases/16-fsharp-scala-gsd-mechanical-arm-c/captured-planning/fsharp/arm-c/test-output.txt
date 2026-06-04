@@ -1,0 +1,5 @@
+Fresh host build of agent-written F# project (2026-06-04):
+  dotnet build → FAILED: Lexer.fsl(6): parse error (fslex.dll exited code 1)
+  The 35B's hand-written FsLex .fsl lexer-definition has invalid DSL syntax;
+  fslex cannot parse it, so no binary is produced and no canonical test runs.
+CANONICAL: FAIL 0/3 (build never succeeded; 37 error-fix cycles in-session did not recover)

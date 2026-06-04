@@ -136,6 +136,30 @@ Audit: [milestones/v1.4-MILESTONE-AUDIT.md](milestones/v1.4-MILESTONE-AUDIT.md)
 
 ---
 
+## Post-v1.4 Follow-up: GSD Planning Arm (Arm C)
+
+Extends the v1.4 Planning Comparison with a **third arm, Arm C** — an expert plan produced by the GSD multi-agent pipeline (research → plan → verify), then stripped to a **code-free mechanical** prompt so it respects the unaided discipline. Probes: *does an expert plan that names the failure modes but withholds code help the 35B?* These phases are post-ship extensions of the v1.4 line (registered retroactively), captured at n=1 and explicitly NOT counterbalanced against the n=3 v1.4 runs.
+
+### Phase 15: Arm C (mechanical) — Rust capture
+
+**Goal:** Capture the 35B on the code-free GSD Rust plan; compare structurally with Rust Arm A/B.
+**Status:** ✅ Complete (2026-06-04)
+**Outcome:** canonical curl PASS (event #31), honesty PASS (17/17 source=agent), unaided authorship (35B wrote its own `stream.read`+buffer server, self-corrected 2 Rust compile errors). Published to 부록 D §6. Artifacts in `milestones/v1.4-phases/15-arm-c-mechanical-capture/`.
+
+### Phase 16: Arm C (mechanical) — F# + Scala capture + comparison
+
+**Goal:** Run the GSD pipeline for the F# (FsLex/FsYacc) and Scala 3 calculator tasks, produce code-free mechanical Arm C prompts (control-block symmetry PASS), capture the 35B (n=1 each), and compare with the existing Phase 13 Arm A/B results — testing whether the OOD(F#)/in-distribution(Scala) split from v1.4 holds on the Arm C axis.
+**Depends on:** Phase 15 (Rust Arm C method), Phase 13 (Arm A/B baseline)
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 16 to break down)
+
+**Details:**
+[To be added during planning]
+
+---
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |

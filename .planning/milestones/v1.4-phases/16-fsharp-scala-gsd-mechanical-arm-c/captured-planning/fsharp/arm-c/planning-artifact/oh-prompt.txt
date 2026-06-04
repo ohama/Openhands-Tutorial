@@ -1,0 +1,69 @@
+Working directory: /Users/ohama/projs/OpenHandsTests/oh-workdir-planning/arm-c/fsharp
+
+IMPORTANT: Create and edit ALL files using ONLY bash shell commands (printf, tee,
+or `cat > FILE <<'EOF' ... EOF` with a quoted heredoc). Do NOT use the file_editor
+/ str_replace tool — it errors in this setup (it requires a security_risk field
+that fails validation).
+
+Goal: Build an F# calculator using FsLex (Lexer.fsl) and FsYacc (Parser.fsy) that
+evaluates an integer arithmetic expression passed as a command-line argument and
+prints the integer result. Operators: + - * / where * and / bind more tightly than
++ and -; parentheses override precedence; integer arithmetic only.
+
+Constraints:
+- Use FsLexYacc 11.3.0 (already in the local NuGet cache — no network needed).
+- All file creation and editing must use bash commands only (heredoc/printf/tee).
+- The calculator must read exactly one command-line argument (the expression string).
+
+Canonical tests (must pass):
+  dotnet run -- "2+3*4"    → 14   (precedence: * binds tighter than +)
+  dotnet run -- "(2+3)*4"  → 20   (parentheses override)
+  dotnet run -- "10-3-2"   → 5    (left-associative subtraction)
+
+Run everything in this one session. Do not stop until all three canonical tests pass
+or you have documented why they cannot be fixed. Report the EXACT output and exit
+code for each test; an honest failure is more valuable than a fabricated success.
+
+Complete the following numbered steps in order, in this one session:
+
+Step 1 — Scaffold and wire the project:
+Create an F# console project that builds an FsLex lexer and an FsYacc parser as part
+of its build. You write ALL files yourself (bash heredoc/printf only) — the notes
+below are requirements and known failure modes, NOT source code to copy.
+
+  Project-wiring requirements / known gotchas:
+  - Use the FsLexYacc 11.3.0 package (already in the local NuGet cache — no network).
+  - The project file must run FsYacc on your parser-definition file and FsLex on your
+    lexer-definition file as part of `dotnet build`.
+  - Declare the FsYacc build item BEFORE the FsLex build item.
+  - Give each generated module an explicit module name; the lexer must be generated in
+    unicode mode because the driver feeds it a character buffer.
+  - The COMPILE ORDER matters and is a common failure: the generated parser-interface,
+    then the generated parser, then the generated lexer, then your driver program. The
+    wrong order produces "type/namespace not defined" errors.
+
+Step 2 — Lexer, parser, and driver:
+After Step 1, write the three sources (bash only):
+  - Lexer: recognize integer literals and the tokens + - * / ( ) and end-of-input.
+    The token names you emit MUST exactly match the token names the parser declares —
+    any mismatch is a build failure.
+  - Parser: an integer-arithmetic grammar. Precedence/associativity gotcha — instead of
+    relying on operator-precedence declarations (unreliable in this toolchain), structure
+    the grammar in precedence TIERS: an expression level for + and -, a term level for
+    * and /, and a factor level for integer literals and parenthesized expressions. Make
+    the +/- and */ rules left-recursive so subtraction is LEFT-associative
+    (10-3-2 must evaluate to 5, not 9). * and / must bind tighter than + and -.
+  - Driver: read exactly ONE command-line argument, build a character lex-buffer from the
+    string, run the parser entry point over the lexer, and print the integer result.
+
+Step 3 — Build and test:
+After Step 2, run `dotnet build` (offline — do not fetch from the network). If it fails,
+read the error, fix it (bash heredoc/printf/tee only — NOT file_editor), and rebuild.
+Repeat until it builds. (If the build cannot find the generated lexer/parser files, check
+where they were generated and adjust.) Report each error and what you changed.
+Then run the three canonical tests and report the EXACT output and exit code for each:
+  dotnet run -- "2+3*4"     (expect 14)
+  dotnet run -- "(2+3)*4"   (expect 20)
+  dotnet run -- "10-3-2"    (expect 5)
+Success criterion: all three print 14 / 20 / 5 respectively. If they cannot be made to
+pass, state that clearly — an honest failure is more valuable than a fabricated success.
