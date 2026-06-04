@@ -207,6 +207,13 @@ Plans:
 
 **Goal:** A new 부록 D "계획 방식 비교: Claude 계획 vs OpenHands 자체 계획" chapter is written verbatim from the committed `captured-planning/` data, wired into the book after 부록 C, and deployed live to GitHub Pages — with all existing 1부–7부 and 부록 A/B/C chapters not regressed.
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Write src/appendix-d-planning-comparison.md from committed captured-planning/ artifacts + inline honesty audit
+- [ ] 14-02-PLAN.md — Wire 부록 D into SUMMARY.md, clean mdbook build (DPUB-01), commit chapter + SUMMARY
+- [ ] 14-03-PLAN.md — Push to main, watch Actions deploy, verify live HTTP 200 + sidebar (DPUB-02)
+
 **Requirements:** DCHAP-01, DCHAP-02, DPUB-01, DPUB-02
 
 **Dependencies:** Phase 13 capture gate (CAPTURE-MANIFEST.md committed; all six `metrics.json` with `honesty_gate = "PASS"` and all `canonical_tests` populated)
@@ -244,4 +251,4 @@ Plans:
 | 11. 7부 Chapter + Publish | v1.3 | 3/3 | ✓ Complete | 2026-06-01 |
 | 12. Harness + Rust Pilot | v1.4 | 3/3 | ✓ Complete | 2026-06-02 |
 | 13. Full Study (F# + Scala) + Analysis | v1.4 | 4/4 | ✓ Complete | 2026-06-04 |
-| 14. 부록 D Chapter + Publish | v1.4 | 0/? | Not started | — |
+| 14. 부록 D Chapter + Publish | v1.4 | 0/3 | Planned | — |
