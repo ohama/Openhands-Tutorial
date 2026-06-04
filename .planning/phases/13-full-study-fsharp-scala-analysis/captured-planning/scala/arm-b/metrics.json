@@ -68,20 +68,20 @@
   },
   "canonical_tests_aggregate": {
     "2+3*4": {
-      "pass_count": 0,
+      "pass_count": 2,
       "n": 3,
-      "pass_fraction_label": "0/3 reps PASS"
+      "pass_fraction_label": "2/3 reps PASS"
     },
     "(2+3)*4": {
-      "pass_count": 0,
+      "pass_count": 3,
       "n": 3,
-      "pass_fraction_label": "0/3 reps PASS"
+      "pass_fraction_label": "3/3 reps PASS"
     },
     "10-3-2": {
-      "pass_count": 0,
+      "pass_count": 3,
       "n": 3,
-      "pass_fraction_label": "0/3 reps PASS"
+      "pass_fraction_label": "3/3 reps PASS"
     }
   },
-  "extractor_note": "canonical_tests reflect the first matching ObservationEvent per test (metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may cause false-first-match FAILs. Authoritative final outcomes are in 13-02-RUN-NOTES.md."
+  "extractor_note": "canonical_tests use the Phase-13 patched metrics_extractor.py: a test PASSES iff a genuine run-command (dotnet run / scala-cli run, not a heredoc write) exits 0 and emits the expected integer as a standalone output line. Verified to reproduce the JSONL-event-cited PASS/FAIL/PARTIAL outcomes in 13-02-RUN-NOTES.md for all six F#/Scala cells; no null cells remain."
 }

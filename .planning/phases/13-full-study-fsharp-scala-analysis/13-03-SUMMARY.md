@@ -74,6 +74,9 @@ completed: 2026-06-02
 
 **All 18 JSONL runs extracted with reused metrics_extractor.py (honesty gate PASS on all), 6 per-arm median/range metrics.json + 3 comparison.json + verbatim oh-self-plan.md + 144-line PLAN-COMPARISON-QUALITATIVE.md — ANAL-01/ANAL-02/PCAP-02/METH-03 complete.**
 
+> **POST-EXECUTION CORRECTION (2026-06-04, user-approved — supersedes the "first-match limitation / RUN-NOTES-authoritative" narrative below).**
+> The "REUSE AS-IS" of the Phase-12 extractor left the canonical_tests in metrics.json/comparison.json wrong (false-negative Scala FAILs) and **null** for F# runs that never built — and a null canonical cell would have blocked the 13-04 gate. On the user's instruction ("Fix detector + re-run"), the extractor was copied into this phase dir as `metrics_extractor.py` and its canonical detector was fixed: a test PASSES iff a genuine run-command (`dotnet run`/`scala-cli run`, heredoc writes excluded) exits 0 and emits the expected integer as a standalone output line; build-never-ran ⇒ FAIL, never null. All 18 runs were re-extracted and re-aggregated. The result now **reproduces the JSONL-event-cited outcomes in 13-02-RUN-NOTES.md exactly**: F# arm-a 1/3 reps PASS, arm-b 0/3; Scala arm-a 3/3, arm-b 2/3 on `2+3*4` (the PARTIAL) + 3/3 on the other two; Rust 6/6. **Zero null cells; all honesty gates PASS.** The historical "limitation" notes below record what was found before the fix.
+
 ## Performance
 
 - **Duration:** ~10 min (2026-06-02T04:51:24Z → 2026-06-02T05:01:39Z)
@@ -141,7 +144,7 @@ completed: 2026-06-02
 ## Next Phase Readiness
 
 - ANAL-01 + ANAL-02 + PCAP-02 + METH-03 all complete. Ready for 13-04 (부록 D chapter assembly).
-- 13-04 should cite 13-02-RUN-NOTES.md as the authoritative pass/fail source, not comparison.json canonical_tests (which reflect extractor first-match). The comparison.json is authoritative for P1/P2 numeric metrics.
+- ~~13-04 should cite 13-02-RUN-NOTES.md as the authoritative pass/fail source, not comparison.json canonical_tests (which reflect extractor first-match).~~ **CORRECTED 2026-06-04:** after the detector fix, comparison.json/metrics.json canonical_tests now agree with 13-02-RUN-NOTES.md (verified per-rep). 13-04 may cite either; both are consistent. comparison.json remains authoritative for P1/P2 numeric metrics.
 - Key numeric metrics for 부록 D: Rust arm-a median terminal_actions=12, arm-b=13 (essentially same). Scala arm-a median terminal_actions=37, arm-b=13 (arm-a more iterations). F# arm-a median terminal_actions=80, arm-b=74. Task tracker present in arm-b all examples (Rust: 7 obs, Scala: 9 obs, F#: 4-8 obs) and absent in arm-a all examples.
 - Timing deltas carry the cache/run-order caveat — F# arm-a wall_clock median much higher than arm-b (OOD: arm-a tried longer), Scala arm-b wall_clock higher than arm-a (arm-b ran first, colder cache). Do NOT present these as planning-quality signals.
 

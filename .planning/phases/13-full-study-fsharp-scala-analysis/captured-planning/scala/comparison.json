@@ -142,42 +142,42 @@
   "canonical_test_pass_counts": {
     "arm_a": {
       "2+3*4": {
-        "pass_count": 0,
+        "pass_count": 3,
         "n": 3,
-        "pass_fraction_label": "0/3 reps PASS"
+        "pass_fraction_label": "3/3 reps PASS"
       },
       "(2+3)*4": {
-        "pass_count": 2,
+        "pass_count": 3,
         "n": 3,
-        "pass_fraction_label": "2/3 reps PASS"
+        "pass_fraction_label": "3/3 reps PASS"
       },
       "10-3-2": {
-        "pass_count": 2,
+        "pass_count": 3,
         "n": 3,
-        "pass_fraction_label": "2/3 reps PASS"
+        "pass_fraction_label": "3/3 reps PASS"
       }
     },
     "arm_b": {
       "2+3*4": {
-        "pass_count": 0,
+        "pass_count": 2,
         "n": 3,
-        "pass_fraction_label": "0/3 reps PASS"
+        "pass_fraction_label": "2/3 reps PASS"
       },
       "(2+3)*4": {
-        "pass_count": 0,
+        "pass_count": 3,
         "n": 3,
-        "pass_fraction_label": "0/3 reps PASS"
+        "pass_fraction_label": "3/3 reps PASS"
       },
       "10-3-2": {
-        "pass_count": 0,
+        "pass_count": 3,
         "n": 3,
-        "pass_fraction_label": "0/3 reps PASS"
+        "pass_fraction_label": "3/3 reps PASS"
       }
     }
   },
   "caveats": [
     "Timing metrics (wall_clock_seconds, avg_llm_call_gap_seconds, etc.) are derived from JSONL timestamps. They carry a cache-warmth / run-order confound: the litellm proxy KV-cache may warm across reps, and arm order was counterbalanced across examples (Arm B first for F# and Scala; Arm A first for Rust). Do NOT interpret timing deltas as clean planning-quality signals.",
-    "canonical_tests reflect the first matching ObservationEvent per test (metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may cause false-first-match FAILs for tests the agent ultimately passed. Authoritative final outcomes per rep are in 13-02-RUN-NOTES.md.",
+    "canonical_tests use the Phase-13 patched metrics_extractor.py: a test PASSES iff a genuine run-command (dotnet run / scala-cli run, not a heredoc write) exits 0 and emits the expected integer as a standalone output line. Verified to reproduce the JSONL-event-cited PASS/FAIL/PARTIAL outcomes per rep in 13-02-RUN-NOTES.md; no null cells remain.",
     "Run order: Arm B ran first (reps 1–3), then Arm A (reps 1–3). Arm A may have benefited from warmer proxy cache."
   ]
 }

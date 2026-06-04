@@ -2,7 +2,7 @@
   "study": "v1.4-planning-comparison",
   "example": "fsharp",
   "arm": "arm-a",
-  "run_date": "2026-06-02",
+  "run_date": "2026-06-04",
   "model": "openai/qwen-35b",
   "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/13-full-study-fsharp-scala-analysis/captured-planning/fsharp/arm-a/planning-artifact/oh-prompt.txt",
   "event_counts": {
@@ -662,18 +662,18 @@
       "expected": "14",
       "actual": "",
       "pass": false,
-      "event_index": 17
+      "event_index": null
     },
     "(2+3)*4": {
       "expected": "20",
-      "actual": null,
-      "pass": null,
+      "actual": "",
+      "pass": false,
       "event_index": null
     },
     "10-3-2": {
       "expected": "5",
-      "actual": null,
-      "pass": null,
+      "actual": "",
+      "pass": false,
       "event_index": null
     }
   },

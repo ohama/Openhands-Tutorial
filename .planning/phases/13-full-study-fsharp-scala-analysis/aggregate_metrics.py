@@ -26,16 +26,15 @@ Run for all three examples:
   (repeat for scala, rust)
 
 NOTE on canonical_tests and extractor behavior:
-  The reused metrics_extractor.py (REUSE AS-IS per v1.4 plan) matches the FIRST
-  ObservationEvent whose command string contains the test expression. When agents
-  write source code via heredocs (cat <<'EOF'...EOF), the multi-line command field
-  may contain the expression, causing a false-first-match that records the file-
-  write observation (empty/wrong content) instead of the actual test run. This
-  produces false-negative FAILs for tests where the agent ultimately succeeded.
-  All canonical_tests fields are populated (PASS, FAIL, or None→treated as FAIL).
-  The aggregate pass counts reflect extractor results; per-run discrepancies are
-  documented via cross-reference to 13-02-RUN-NOTES.md (the authoritative source
-  for final canonical outcomes).
+  Reads the Phase-13 patched metrics_extractor.py (canonical detector fixed,
+  user-approved 2026-06-04). A test PASSES iff a genuine run-command (dotnet run /
+  scala-cli run — heredoc source-writes excluded) exits 0 and emits the expected
+  integer as a standalone output line. This replaced the Phase-12 first-match
+  detector, which mis-matched heredoc writes / early failed attempts and produced
+  false-negative FAILs and null cells. The patched detector was verified to
+  reproduce the JSONL-event-cited PASS/FAIL/PARTIAL outcomes per rep in
+  13-02-RUN-NOTES.md for all six F#/Scala cells; all canonical_tests are populated
+  (PASS or FAIL, never null).
 
 Timing caveat:
   All timing metrics are derived from JSONL timestamps. They carry a cache-warmth
@@ -168,10 +167,11 @@ def build_arm_metrics(base_dir, arm, example):
     out["metrics"] = agg_numerics
     out["canonical_tests_aggregate"] = canonical
     out["extractor_note"] = (
-        "canonical_tests reflect the first matching ObservationEvent per test "
-        "(metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may "
-        "cause false-first-match FAILs. Authoritative final outcomes are in "
-        "13-02-RUN-NOTES.md."
+        "canonical_tests use the Phase-13 patched metrics_extractor.py: a test PASSES "
+        "iff a genuine run-command (dotnet run / scala-cli run, not a heredoc write) "
+        "exits 0 and emits the expected integer as a standalone output line. Verified "
+        "to reproduce the JSONL-event-cited PASS/FAIL/PARTIAL outcomes in "
+        "13-02-RUN-NOTES.md for all six F#/Scala cells; no null cells remain."
     )
     return out
 
@@ -213,10 +213,11 @@ def build_comparison(arm_a_metrics_list, arm_b_metrics_list, example, run_order_
             "planning-quality signals."
         ),
         (
-            "canonical_tests reflect the first matching ObservationEvent per test "
-            "(metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may "
-            "cause false-first-match FAILs for tests the agent ultimately passed. "
-            "Authoritative final outcomes per rep are in 13-02-RUN-NOTES.md."
+            "canonical_tests use the Phase-13 patched metrics_extractor.py: a test "
+            "PASSES iff a genuine run-command (dotnet run / scala-cli run, not a "
+            "heredoc write) exits 0 and emits the expected integer as a standalone "
+            "output line. Verified to reproduce the JSONL-event-cited PASS/FAIL/"
+            "PARTIAL outcomes per rep in 13-02-RUN-NOTES.md; no null cells remain."
         ),
         run_order_note,
     ]

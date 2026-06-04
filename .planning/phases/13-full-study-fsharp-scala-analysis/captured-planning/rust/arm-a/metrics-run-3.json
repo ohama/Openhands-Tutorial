@@ -2,7 +2,7 @@
   "study": "v1.4-planning-comparison",
   "example": "rust",
   "arm": "arm-a",
-  "run_date": "2026-06-02",
+  "run_date": "2026-06-04",
   "model": "openai/qwen-35b",
   "prompt_file": "/Users/ohama/projs/OpenHandsTests/.planning/phases/12-harness-rust-pilot/captured-planning/rust/arm-a/planning-artifact/oh-prompt.txt",
   "event_counts": {

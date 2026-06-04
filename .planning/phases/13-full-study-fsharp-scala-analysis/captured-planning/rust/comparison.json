@@ -157,7 +157,7 @@
   },
   "caveats": [
     "Timing metrics (wall_clock_seconds, avg_llm_call_gap_seconds, etc.) are derived from JSONL timestamps. They carry a cache-warmth / run-order confound: the litellm proxy KV-cache may warm across reps, and arm order was counterbalanced across examples (Arm B first for F# and Scala; Arm A first for Rust). Do NOT interpret timing deltas as clean planning-quality signals.",
-    "canonical_tests reflect the first matching ObservationEvent per test (metrics_extractor.py REUSED AS-IS). Multi-line heredoc commands may cause false-first-match FAILs for tests the agent ultimately passed. Authoritative final outcomes per rep are in 13-02-RUN-NOTES.md.",
+    "canonical_tests use the Phase-13 patched metrics_extractor.py: a test PASSES iff a genuine run-command (dotnet run / scala-cli run, not a heredoc write) exits 0 and emits the expected integer as a standalone output line. Verified to reproduce the JSONL-event-cited PASS/FAIL/PARTIAL outcomes per rep in 13-02-RUN-NOTES.md; no null cells remain.",
     "Run order: Arm A ran first (reps 2–3; rep 1 is Phase-12 pilot), then Arm B (reps 2–3; rep 1 is Phase-12 pilot). Run-1 JSONLs are from the Phase-12 pilot (separate session)."
   ]
 }
