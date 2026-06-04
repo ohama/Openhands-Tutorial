@@ -77,6 +77,7 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - **TD-5**: 부록 C Sources bibliography paths not clickable.
 - **TD-11** (v1.4): the 13-04 gate-closing assertion checks `canonical_tests` on the *aggregate* metrics.json, where canonical lives under `canonical_tests_aggregate` (so the null-check ran over `{}` and passed vacuously). Underlying data is sound — all 18 per-run files have canonical fully populated (0/56 null) and match RUN-NOTES — but the aggregate-level assertion is a no-op. If the gate is re-used, point it at `canonical_tests_aggregate` (or the per-run files). Cosmetic; gate substantively correct.
 - **TD-12** (v1.4): `__pycache__/` is not in `.gitignore`; running metrics_extractor.py creates `.planning/phases/*/__pycache__/`. Add `__pycache__/` to `.gitignore`. Trivial.
+- **TD-13** (v1.4, cosmetic): in 3 Scala cells the chapter/CAPTURE-MANIFEST cite the final batch-test event (#39 / #31 / #129) while the extractor's `metrics-run-N.json` `event_index` recorded the earlier individual-PASS event (#31 / #23,#25 / #57). Both are valid exit-0 PASS events; PASS/FAIL identical; chapter↔manifest self-consistent (chapter cites the manifest per convention). No data error. If reconciled, align the extractor to record the last/batch run. Found in v1.4 milestone audit.
 - (v1.2 TD-6/7/8 and v1.3 TD-9/10 were fixed during their respective milestone audits.)
 
 ### Candidate next milestones (no commitment)
