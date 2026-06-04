@@ -276,7 +276,7 @@ Rust (분포 내)에서 두 Arm 모두 3/3 PASS, 오류 수정 사이클 0회. �
 
 위 §1–5의 2-Arm 연구(Arm A 전문가 계획 vs Arm B 자체 계획)가 완료된 후 한 가지 후속 질문이 제기됐다: **전문가 계획을 "사람이 손으로" 작성하는 대신, 구조화된 다중 에이전트 파이프라인(research → plan → verify)으로 생성하면 어떻게 되는가?** 이를 위해 GSD(Get-Shit-Done) 워크플로의 실제 계획 에이전트를 돌려 세 번째 계획을 만들었고, 이를 **Arm C**라 부른다.
 
-이 절은 세 예제 모두(Rust=§6.1–6.7, F#·Scala=§6.8)에 대한 **n=1 단독 보충 캡처**다. §1–5의 본 연구(2026-06-02 캡처, n=3)와는 별개이며, 캐시 온도·실행 순서가 통제되지 않았으므로 **타이밍을 Arm A/B와 직접 비교할 수 없다**. 이 캡처가 답하는 질문은 타이밍 경쟁이 아니라 **"실패 모드를 알려주되 코드를 주지 않는 전문가 계획으로 35B가 과제를 스스로 작성해 통과시킬 수 있는가?"** 라는 feasibility 질문이다. (§6.1–6.7은 Rust 사례로 방법을 상술하고, §6.8이 F#·Scala로 확장해 3-arm 비교를 마무리한다.)
+이 절은 세 예제 모두(Rust=§6.1–6.7, F#·Scala=§6.8)에 대한 **n=1 단독 보충 캡처**다. §1–5의 본 연구(2026-06-02 캡처, n=3)와는 별개이며, 캐시 온도·실행 순서가 통제되지 않았으므로 **타이밍을 Arm A/B와 직접 비교할 수 없다**. 이 캡처가 답하는 질문은 타이밍 경쟁이 아니라 **"실패 모드를 알려주되 코드를 주지 않는 전문가 계획으로 35B가 과제를 스스로 작성해 통과시킬 수 있는가?"** 라는 feasibility 질문이다. (§6.1–6.7은 Rust 사례로 방법을 상술하고, §6.8이 F#·Scala로 확장하며, §6.9는 정반대 대조 — GSD 플랜을 **코드까지 그대로** 넘기는 Arm C-orig — 로 4-조건 매트릭스를 완성한다.)
 
 ### 6.1 동기 — GSD 원본 계획은 정답 코드를 포함한다
 
@@ -385,6 +385,38 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 
 (출처: `.planning/milestones/v1.4-phases/16-fsharp-scala-gsd-mechanical-arm-c/16-CAPTURE-MANIFEST.md`)
 
+### 6.9 대조 실험: Arm C-orig — GSD 플랜을 코드까지 그대로 넘기면? (Phase 17)
+
+§6.1–6.8의 Arm C-mech는 GSD 플랜에서 **코드를 지운** 버전이었다. 그 정반대로, GSD 플랜을 **레퍼런스 코드까지 그대로** OpenHands 프롬프트로 변환해(`.fsl`/`.fsy`/`.fsproj`/`main.rs`/`Calc.scala` 전부 포함) 35B에 넘기면 어떻게 되는지 캡처했다(2026-06-04, n=1). 진단 질문: **코드를 떠먹이면 F#이 FAIL→PASS로 뒤집히는가?** (= OOD 병목이 "계획 못 따름"인지 "DSL 문법을 못 씀"인지 판별)
+
+**핵심 결과 — F#이 뒤집힌다:**
+
+| F# 조건 | 코드 제공 | 결과 | 오류 수정 사이클 |
+|---------|:---------:|------|:----------------:|
+| Arm C-mech (§6.8) | ✗ (실패모드 가이드만) | **FAIL** (빌드 실패) | 37 (헛돔) |
+| **Arm C-orig (§6.9)** | ✓ (`.fsl`/`.fsy` 전체) | **PASS 3/3** (14/20/5) | 4 (사소한 전사 수정) |
+
+→ 35B가 F#에서 실패한 이유는 **계획을 못 따라서가 아니라 FsLex/FsYacc DSL 문법 자체를 쓸 수 없어서**다. 정확한 `.fsl`/`.fsy` 텍스트를 받아 옮기게 하니 4번의 작은 heredoc 수정만으로 빌드·통과했다(직접 써야 했을 땐 37번 헛돌고 실패).
+
+**전체 4-조건 비교 (정규 테스트 통과):**
+
+| 예제 | Arm A (n=3) | Arm B (n=3) | Arm C-mech 코드없음 (n=1) | Arm C-orig 코드포함 (n=1) |
+|------|-------------|-------------|---------------------------|---------------------------|
+| F# (OOD) | 1/3 | 0/3 | **FAIL** | **PASS** |
+| Scala (in-dist) | 3/3 | 2/3+P | PASS | PASS (오류 수정 0) |
+| Rust (in-dist) | 3/3 | 3/3 | PASS | 미완(하니스 버그)\* |
+
+\* **Rust = INCOMPLETE (모델 결과 아님):** 두 번의 시도 모두 OpenHands `ConversationErrorEvent code=MissingStyle`로 중단됐다 — 프롬프트에 박힌 GSD verify 명령 `awk '/^\[dependencies\]/...'`의 백슬래시를 OpenHands CLI가 색상 코드로 잘못 파싱하는 렌더링 버그다. 에이전트가 scaffold 단계를 못 벗어남. **task/모델 실패가 아니므로 PASS/FAIL 미채점.** (Rust는 어차피 코드 없이도(§6.5) 통과하는 가장 덜 흥미로운 cell.)
+
+**해석 — "분포가 아니라 크기" 명제의 첨예화:**
+- **in-distribution(Rust·Scala):** 모든 조건이 성공 — 코드 없는 자체 계획(Arm B)조차. 전문가 계획·코드가 추가하는 관찰 가능 이점이 없다(이미 능력이 있음).
+- **OOD(F#):** 가르는 선은 **계획 품질이 아니라 코드**다. 코드 없는 모든 조건(Arm B 0/3, Arm C-mech FAIL)은 실패하고, 리터럴 DSL 소스를 떠먹이는 Arm C-orig만 통과한다.
+- → OOD DSL에서는 *아무리 좋은 계획*(GSD급·실패모드 인지·코드 없음)으로도 격차를 못 메우고, **오직 코드를 넘길 때만** 통과한다 — 그런데 그건 능력이 아니라 **전사(transcription)**다. 이것이 곧 **Arm C-orig가 측정 도구로 무효한 이유**를 실증한다(정답을 떠먹이므로 능력이 아니라 베껴쓰기를 측정).
+
+> **주의:** Arm C-orig는 **정답 코드를 제공**하는 진단용 캡처이지 능력 측정이 아니다. n=1 단독, Phase 13과 카운터밸런스되지 않음 — 타이밍 비교 불가. 모든 캡처 honesty gate PASS, ground-truth 호스트 검증.
+
+(출처: `.planning/milestones/v1.4-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md`)
+
 ---
 
 ## 7. 출처 (Sources)
@@ -422,3 +454,9 @@ Rust(§6.1–6.7)에 이어 **F#과 Scala**에도 같은 절차를 적용했다:
 - `.../{fsharp,scala}/arm-c/planning-artifact/{RESEARCH.md, 01-PLAN.md, oh-prompt.txt, PROMPT-DIFF.txt}` — GSD 원본 산출물 + 코드 없는 프롬프트 + 대칭 증거
 - `.../{fsharp,scala}/arm-c/final-source/` — 35B가 직접 작성한 소스 (Scala Calc.scala PASS; F# Lexer.fsl/Parser.fsy 등 — 빌드 실패)
 - `.../{fsharp,scala}/arm-c/test-output.txt` — fresh host ground-truth (Scala 14/20/5 PASS; F# build FAIL)
+
+**§6.9 Arm C-orig — GSD 플랜 코드 포함 (Phase 17):**
+
+- `.planning/milestones/v1.4-phases/17-arm-c-orig-full-plan-capture/17-CAPTURE-MANIFEST.md` — Arm C-orig 정본 (F# FAIL→PASS flip, 4-조건 매트릭스, Rust 하니스 버그 disclosure)
+- `.../17-.../17-SUMMARY.md` — Phase 17 요약
+- `.../17-.../captured-planning/{fsharp,scala,rust}/arm-c-orig/{metrics.json, planning-artifact/oh-prompt.txt, final-source/, test-output.txt}` — 코드 포함 프롬프트 + 재채점 지표 + 35B 산출물 + ground-truth (F#/Scala PASS; Rust incomplete)
