@@ -5,19 +5,19 @@
 See: .planning/PROJECT.md (updated 2026-06-01 — v1.4 Planning Comparison started)
 
 **Core value:** A reader finishes understanding what agentic AI is — and, by following along, watches OpenHands (on a local Qwen server) autonomously plan, build, test, and run real programs. The book teaches via REAL captured runs: v1 F# calculator (35B), v1.1 122B comparison (부록 C), v1.2 Rust HTTP server (6부), v1.3 Scala calculator (7부), v1.4 planning comparison A/B (부록 D).
-**Current focus:** v1.4 Planning Comparison — Phase 14 IN PROGRESS (2/3 plans). 부록 D wired into SUMMARY.md + mdbook build clean (bb2de66). Next: 14-03 (push to main + deploy + live verify).
+**Current focus:** v1.4 Planning Comparison — COMPLETE. Phase 14 DONE (3/3 plans). 부록 D live at https://ohama.github.io/Openhands-Tutorial/appendix-d-planning-comparison.html (Actions run 26924773565 green, live HTTP 200, sidebar confirmed). v1.4 milestone shipped.
 
 ## Current Position
 
-Milestone: v1.4 (Planning Comparison) — IN PROGRESS. Phase 12 done; Phase 13 done; Phase 14 in progress (2/3 plans complete).
-Phase: 14 — 부록 D Chapter + Publish — IN PROGRESS (2/3 plans).
-Plan: 14-01 COMPLETE. 14-02 COMPLETE. 14-03 next (push to main + deploy + live verify).
-Status: src/SUMMARY.md wired with 부록 D entry after 부록 C (bb2de66 — 2026-06-04). mdbook build exit 0, only TD-4 warning, book/appendix-d-planning-comparison.html rendered, sidebar TOC updated (toc-7239dd3a.js). All existing chapters un-regressed. Next: 14-03 (push to main + verify GitHub Pages deploy + confirm live sidebar).
+Milestone: v1.4 (Planning Comparison) — COMPLETE (shipped 2026-06-04). Phase 12 done; Phase 13 done; Phase 14 done (3/3 plans).
+Phase: 14 — 부록 D Chapter + Publish — COMPLETE (3/3 plans).
+Plan: 14-01 COMPLETE. 14-02 COMPLETE. 14-03 COMPLETE.
+Status: 부록 D live (2026-06-04). Pushed to origin/main (616bb45); Actions run 26924773565 succeeded (build 6s + deploy 9s); live root HTTP 200; appendix-d-planning-comparison.html HTTP 200; live toc-7239dd3a.js confirms sidebar entry. v1.4 COMPLETE.
 KEY v1.4 FINDINGS (authoritative — post detector fix b7a74b9): (1) F# OOD confirmed: arm-a 1/3 PASS (single run), arm-b 0/3 PASS. (2) Scala in-distribution: arm-a 3/3 PASS, arm-b 2/3 PASS + 1 PARTIAL. (3) Rust both arms 3/3 PASS, zero error-fix cycles. (4) Task tracker arm-b all examples (Rust: median 7 obs, Scala: 5 obs, F#: median 7 obs); arm-a 0 in all. (5) Key numeric: Rust arm-a TA_median=12 arm-b=13; Scala arm-a TA_median=37 arm-b=13; F# arm-a TA_median=80 arm-b=74. (6) Timing carries cache/run-order confound — not a planning-quality signal.
-Last activity: 2026-06-04 — Phase 14 plan 02 executed; src/SUMMARY.md wired with 부록 D; mdbook build clean (exit 0, TD-4 only, book/appendix-d-planning-comparison.html present).
+Last activity: 2026-06-04 — Phase 14 plan 03 executed; pushed to main; Actions deploy green; 부록 D live and in sidebar.
 
-Progress: ✅ v1 + v1.1 + v1.2 + v1.3 shipped (11 phases, 35 plans). 🚧 v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4); Phase 14 🔄 (2/3 — chapter written + SUMMARY.md wired + local build clean, deploy pending).
-Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison) — 부록 D NOT YET live (pending 14-03 push)
+Progress: ✅ v1 + v1.1 + v1.2 + v1.3 + v1.4 shipped (14 phases, 38 plans complete). v1.4: Phase 12 ✓ (3/3); Phase 13 ✓ (4/4); Phase 14 ✓ (3/3).
+Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc · 6부 Rust server · 7부 Scala calc · 부록 C model comparison · 부록 D planning comparison)
 
 ## Cumulative History
 
@@ -25,7 +25,7 @@ Live: https://ohama.github.io/Openhands-Tutorial/ (worked examples: 4부 F# calc
 - **v1.1 Model Comparison** (shipped 2026-05-28): 2 phases, 6 plans, 122B capture + 부록 C 35B-vs-122B comparison + UX callouts. See `milestones/v1.1-ROADMAP.md`.
 - **v1.2 Rust Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Rust HTTP server (6부) — unaided. See `milestones/v1.2-ROADMAP.md`.
 - **v1.3 Scala Example** (shipped 2026-06-01): 2 phases, 6 plans, 35B Scala 3 calculator (7부) — unaided, one self-corrected compile error. Completes the calculator trilogy; confirms capability is domain-distribution, not model size. See `milestones/v1.3-ROADMAP.md`.
-- **v1.4 Planning Comparison** (in progress — started 2026-06-01): 3 phases planned (12/13/14), 0 plans complete. Arm A (Claude-authored plan → 35B executes) vs. Arm B (35B self-plans + executes) across F#/Rust/Scala; published as 부록 D.
+- **v1.4 Planning Comparison** (shipped 2026-06-04): 3 phases (12/13/14), 10 plans. Arm A (Claude-authored plan → 35B executes) vs. Arm B (35B self-plans + executes) across F#/Rust/Scala; published as 부록 D. Key findings: F# OOD both arms fail mostly; Rust/Scala in-distribution both arms succeed. See `milestones/v1.4-ROADMAP.md`.
 
 ## Accumulated Context
 
@@ -93,6 +93,6 @@ None. Host toolchains verified (.NET 10, rustc/cargo 1.95.0, scala-cli 1.14.0 + 
 
 ## Session Continuity
 
-Last session: 2026-06-04
-Stopped at: Completed 14-02-PLAN.md (src/SUMMARY.md wired with 부록 D; mdbook build exit 0; only TD-4 warning; book/appendix-d-planning-comparison.html present; bb2de66 committed).
-Resume file: None — next: run 14-03-PLAN.md (push main to remote + verify GitHub Actions deploy succeeds + confirm live sidebar shows 부록 D at https://ohama.github.io/Openhands-Tutorial/).
+Last session: 2026-06-04T01:43–01:44Z
+Stopped at: Completed 14-03-PLAN.md (pushed to origin/main; Actions run 26924773565 green; 부록 D live HTTP 200; sidebar confirmed; 14-03-SUMMARY.md + STATE.md updated). Phase 14 complete. v1.4 milestone complete.
+Resume file: None — no active plan. Next milestone: see Candidate next milestones section.
